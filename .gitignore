@@ -1,0 +1,9 @@
+/build
+/coverage
+/docs
+/node_modules
+/resources/compiled/index.html
+/vendor
+composer.lock
+.php_cs.cache
+.phpunit.result.cache

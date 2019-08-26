@@ -1,0 +1,25 @@
+@charset 'UTF-8';
+
+@import './bootstrap.css';
+
+@import './utilities/alert.css';
+@import './utilities/button.css';
+@import './utilities/card.css';
+@import './utilities/checkbox.css';
+@import './utilities/code.css';
+@import './utilities/definition-list.css';
+@import './utilities/dropdown.css';
+@import './utilities/layout.css';
+@import './utilities/link.css';
+@import './utilities/grid.css';
+@import './utilities/scrollbar.css';
+@import './utilities/stack.css';
+@import './utilities/solution.css';
+@import './utilities/tab.css';
+@import './utilities/ui.css';
+@import './utilities/variant.css';
+
+@import './vendor/hljs.css';
+@import './vendor/sf-dump.css';
+
+@tailwind utilities;

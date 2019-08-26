@@ -1,0 +1,93 @@
+.card {
+    @apply relative;
+    @apply grid;
+    @apply items-stretch;
+    @apply border;
+    @apply border-tint-300;
+    @apply bg-white;
+    @apply shadow-sm;
+    @apply rounded-sm;
+}
+
+.card-selected .card {
+    @apply bg-purple-100;
+}
+
+.card-clickable {
+    @apply cursor-pointer;
+}
+
+.card-clickable:hover {
+    @apply bg-tint-50;
+}
+
+.card-properties {
+    @apply grid;
+    align-content: center;
+    @apply p-6;
+    order: 1;
+    @apply border-t;
+    @apply border-dashed;
+    @apply border-tint-300;
+}
+
+.card-details {
+    @apply overflow-hidden;
+}
+
+.card-details-overflow {
+    @apply grid;
+    @apply gap-4;
+    @apply p-6;
+    @apply overflow-x-auto;
+}
+
+@screen md {
+    .card {
+        grid-template-columns: 16rem 1fr;
+    }
+
+    .card-has-header {
+        grid-template-rows: auto 1fr;
+    }
+
+    .card.card-no-props {
+        @apply block;
+    }
+
+    .card-header {
+        @apply span-2;
+    }
+
+    .card-properties {
+        @apply p-8;
+        order: 0;
+        @apply border-t-0;
+        @apply border-r;
+    }
+
+    .card-details-overflow {
+        @apply p-8;
+    }
+}
+
+.card-stacked {
+    padding-bottom: 6px;
+}
+
+.card-stacked .card {
+    @apply shadow-stack;
+}
+
+.card-solution {
+    @apply absolute;
+    @apply right-0;
+    bottom: 0.75rem;
+    @apply pointer-events-none;
+    @apply pr-4;
+    @apply pl-2;
+    @apply bg-green-300;
+    @apply text-gray-700;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 9px 100%, 0 calc(100% - 5px));
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 9px 100%, 0 calc(100% - 5px));
+}

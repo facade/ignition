@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "lib": ["dom", "es2017"],
+        "noEmit": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "preserveConstEnums": true,
+        "removeComments": false,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "esnext",
+        "baseUrl": ".",
+        "paths": {
+            "*": ["*", "resources/js/*"]
+        }
+    },
+    "include": ["resources/**/*"]
+}

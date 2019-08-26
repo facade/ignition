@@ -1,0 +1,93 @@
+/* 
+    Dumps are hidden asap in errorPage.blade 
+    What follows is !important
+*/
+
+.tabs pre.sf-dump {
+    display: block !important;
+}
+
+.sf-dump-public.sf-dump-highlight,
+.sf-dump-protected.sf-dump-highlight,
+.sf-dump-private.sf-dump-highlight,
+.sf-dump-str.sf-dump-highlight,
+.sf-dump-key.sf-dump-highlight {
+    @apply bg-purple-100 !important;
+    @apply border-purple-200 !important;
+}
+.sf-dump-public.sf-dump-highlight-active,
+.sf-dump-protected.sf-dump-highlight-active,
+.sf-dump-private.sf-dump-highlight-active,
+.sf-dump-str.sf-dump-highlight-active,
+.sf-dump-key.sf-dump-highlight-active {
+    @apply bg-yellow-100 !important;
+    @apply border-yellow-200 !important;
+}
+
+pre.sf-dump .sf-dump-search-wrapper > * {
+    @apply border-gray-300 !important;
+}
+
+pre.sf-dump .sf-dump-search-wrapper > input.sf-dump-search-input {
+    @apply text-xs !important;
+    @apply bg-gray-800 !important;
+}
+
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next,
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-previous {
+    @apply bg-tint-100 !important;
+}
+
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-count {
+    @apply text-sm !important;
+}
+
+pre.sf-dump,
+pre.sf-dump .sf-dump-default {
+    @apply font-mono !important;
+    @apply bg-gray-100 !important;
+    @apply text-gray-800 !important;
+}
+
+pre.sf-dump .sf-dump-num {
+    @apply text-red-300 !important;
+}
+
+pre.sf-dump .sf-dump-const {
+    @apply font-normal !important;
+}
+
+pre.sf-dump .sf-dump-str {
+    @apply font-normal !important;
+    @apply text-gray-600 !important;
+}
+
+pre.sf-dump .sf-dump-note {
+    @apply text-blue-400 !important;
+}
+
+pre.sf-dump .sf-dump-ref {
+    @apply text-gray-600 !important;
+}
+
+pre.sf-dump .sf-dump-public,
+pre.sf-dump .sf-dump-protected,
+pre.sf-dump .sf-dump-private {
+    @apply text-purple-500 !important;
+}
+
+pre.sf-dump .sf-dump-meta {
+    @apply text-purple-500 !important;
+}
+
+pre.sf-dump .sf-dump-key {
+    @apply text-purple-600 !important;
+}
+
+pre.sf-dump .sf-dump-index {
+    @apply text-blue-400 !important;
+}
+
+pre.sf-dump .sf-dump-ellipsis {
+    @apply text-purple-600 !important;
+}

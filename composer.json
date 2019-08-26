@@ -1,0 +1,77 @@
+{
+    "name": "facade/ignition",
+    "description": "A beautiful error page for Laravel apps",
+    "keywords": [
+        "error",
+        "page",
+        "laravel",
+        "flare"
+    ],
+    "homepage": "https://github.com/facade/ignition",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:facade/flare-client-php.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:facade/ignition-contracts.git"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "filp/whoops": "^2.1.4",
+        "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0",
+        "scrivo/highlight.php": "^9.15",
+        "symfony/var-dumper": "^3.4|~4.0",
+        "symfony/console": "^3.4|~4.0",
+        "monolog/monolog": "~1.12",
+        "facade/flare-client-php": "~1.0",
+        "facade/ignition-contracts": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "mockery/mockery": "^1.2",
+        "orchestra/testbench": "^3.5|^3.6|^3.7|^3.8"
+    },
+    "suggest": {
+        "laravel/telescope": "^2.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Facade\\Ignition\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Facade\\Ignition\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "format": [
+            "vendor/bin/php-cs-fixer fix"
+        ],
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Facade\\Ignition\\IgnitionServiceProvider"
+            ],
+            "aliases": {
+                "Flare": "Facade\\Ignition\\Facades\\Flare"
+            }
+        }
+    }
+}

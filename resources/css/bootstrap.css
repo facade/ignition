@@ -1,0 +1,111 @@
+@tailwind base;
+
+:root {
+    --white: #fff;
+    --black: rgb(27, 22, 37);
+
+    --blue-100: #e6ebff;
+    --blue-200: #d9dfff;
+    --blue-300: #bdc1ff;
+    --blue-400: #7a7aff;
+    --blue-500: #5233ff;
+    --blue-600: #5500ff;
+    --blue-700: #3f00bf;
+    --blue-800: #140066;
+    --blue-900: #0d0040;
+
+    --green-100: #e3fff2;
+    --green-200: #c7ffe6;
+    --green-300: #94f2c8;
+    --green-400: #72e0af;
+    --green-500: #22d492;
+    --green-600: #00b075;
+    --green-700: #00996b;
+    --green-800: #007054;
+    --green-900: #004035;
+
+    --purple-100: #fbf5ff;
+    --purple-200: #ecd3fd;
+    --purple-300: #d6bcfa;
+    --purple-400: #b794f4;
+    --purple-500: #7900f5;
+    --purple-600: #7107dc;
+    --purple-700: #6001bf;
+    --purple-800: #4f0f8f;
+    --purple-900: #24006b;
+
+    --red-100: #ffebf3;
+    --red-200: #fab6c8;
+    --red-300: #fa85a2;
+    --red-400: #fa4e79;
+    --red-500: #e6003a;
+    --red-600: #c70032;
+    --red-700: #990036;
+    --red-800: #630023;
+    --red-900: #3d0016;
+
+    --yellow-100: #fffdeb;
+    --yellow-200: #fff8c4;
+    --yellow-300: #fff394;
+    --yellow-400: #ffea4f;
+    --yellow-500: #ffe100;
+    --yellow-600: #e6bc00;
+    --yellow-700: #c49300;
+    --yellow-800: #916100;
+    --yellow-900: #403000;
+
+    --tint-50: rgba(0, 0, 150, 0.015);
+    --tint-100: rgba(0, 0, 150, 0.025);
+    --tint-200: rgba(0, 0, 100, 0.07);
+    --tint-300: rgba(25, 0, 100, 0.1);
+    --tint-400: rgba(20, 0, 100, 0.2);
+    --tint-500: rgba(30, 20, 90, 0.35);
+    --tint-600: rgba(30, 20, 70, 0.5);
+    --tint-700: rgba(15, 10, 60, 0.75);
+    --tint-800: rgba(15, 10, 50, 0.85);
+    --tint-900: rgba(15, 10, 25, 0.95);
+    --tint-purple: rgba(121, 0, 245, 0.05);
+
+    --gray-50: rgb(252, 252, 253);
+    --gray-100: rgb(247, 247, 252);
+    --gray-200: rgb(238, 238, 245);
+    --gray-300: rgb(232, 229, 239);
+    --gray-400: rgb(209, 204, 224);
+    --gray-500: rgb(176, 173, 197);
+    --gray-600: rgb(142, 137, 162);
+    --gray-700: rgb(75, 71, 109);
+    --gray-800: rgb(51, 47, 81);
+    --gray-900: rgb(27, 22, 37);
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 14px;
+    @apply bg-gray-200;
+    @apply overflow-x-hidden;
+    @apply overflow-y-scroll;
+}
+
+@screen lg {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Exclude iframes like 1Password save modals */
+*:not(iframe),
+*:after,
+*:before {
+    position: relative;
+}
+
+*:focus {
+    outline: 0 !important;
+}
+
+body {
+    @apply font-sans;
+    @apply text-gray-800;
+    @apply leading-normal;
+    @apply w-full;
+}

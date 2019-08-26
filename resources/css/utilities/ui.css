@@ -1,0 +1,114 @@
+.ui-count {
+    @apply inline-flex;
+    @apply place-center;
+    @apply px-1;
+    @apply rounded-full;
+    @apply border;
+    @apply border-tint-200;
+    @apply bg-white;
+    @apply text-gray-600;
+    @apply text-xs;
+    height: 1.5em;
+    min-width: 1.5em;
+}
+
+.ui-url {
+    @apply inline-block;
+    @apply leading-tight;
+    @apply text-sm;
+    @apply link-dimmed;
+}
+
+.ui-url:hover {
+    @apply link-dimmed-hover;
+}
+
+.ui-path {
+    @apply inline-block;
+    @apply leading-tight;
+}
+
+.ui-exception-message {
+    @apply font-semibold;
+    @apply leading-tight;
+    @apply break-words;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.ui-exception-message-full {
+    -webkit-line-clamp: unset;
+}
+
+.ui-exception-class {
+    @apply inline-block;
+    @apply leading-tight;
+    @apply text-gray-600;
+}
+
+.ui-exception-method {
+    @apply text-gray-500;
+}
+
+.ui-line-number {
+    @apply inline-block;
+    @apply px-1;
+    @apply rounded-sm;
+    @apply bg-tint-50;
+    @apply text-tint-500;
+    @apply text-xs;
+    top: 0.15rem;
+}
+
+.ui-capitalize-first::first-letter {
+    text-transform: capitalize;
+}
+
+.ui-trial {
+    @apply -my-1;
+    @apply px-2;
+    @apply py-1;
+    @apply bg-green-500;
+    @apply text-white !important;
+}
+
+.ui-corner {
+    @apply overflow-hidden;
+    @apply inline-block;
+    clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 5px), calc(100% - 9px) 100%, 0 100%);
+    -webkit-clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        100% calc(100% - 5px),
+        calc(100% - 9px) 100%,
+        0 100%
+    );
+}
+
+.ui-skew {
+    @apply overflow-x-hidden;
+}
+
+.ui-skew-before,
+.ui-skew:before {
+    content: '';
+    @apply absolute;
+    @apply block;
+    @apply w-full;
+    @apply h-full;
+    @apply left-full;
+    @apply top-0;
+    background-color: rgba(30, 20, 90, 0.06);
+    transform: translateX(-45%) skewX(-63deg);
+    transform-origin: 0 100%;
+}
+
+.ui-bg-gradient {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(252, 252, 253, 1) 6rem,
+        rgba(252, 252, 253, 0) 24rem
+    );
+}

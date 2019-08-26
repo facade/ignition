@@ -1,0 +1,95 @@
+.button {
+    @apply inline-flex;
+    @apply place-center;
+    @apply px-4;
+    @apply min-h-10;
+    @apply border-0;
+    @apply bg-purple-500;
+    @apply overflow-hidden;
+    @apply rounded-sm;
+    @apply text-white;
+    @apply leading-none;
+    @apply no-underline;
+}
+
+.button:after {
+    content: '';
+    @apply block;
+    @apply absolute;
+    @apply left-full;
+    @apply bottom-0;
+    width: 200%;
+    height: 100vh;
+    @apply bg-tint-500;
+    transform: translateX(-1rem) skewX(-65deg);
+    transform-origin: 0% 100%;
+    transition: transform 0.75s ease-out;
+}
+
+.button:hover:after {
+    transform: translateX(-1.5rem) skewX(-65deg);
+    transition-duration: 0.3s;
+}
+
+.button:not(:disabled):active:after,
+.button.button-submitting:after {
+    transition-delay: 0.2s;
+    transition-duration: 0.3s;
+    transform: translateX(-100%) skewX(-65deg);
+}
+
+.button-secondary {
+    @apply button;
+    @apply bg-tint-200;
+    @apply text-tint-700;
+}
+
+.button-secondary:hover {
+    @apply bg-tint-300;
+}
+
+.button-secondary:not(:disabled):active,
+.button-secondary.button-submitting:after {
+    @apply bg-tint-500;
+    @apply opacity-50;
+}
+
+.button:focus,
+.button-secondary:focus {
+    @apply outline-none;
+}
+
+.button:disabled,
+.button-secondary:disabled {
+    @apply cursor-not-allowed;
+    @apply opacity-25;
+}
+
+.button-sm {
+    @apply text-sm;
+}
+
+.button.button-sm,
+.button-secondary.button-sm {
+    @apply px-2;
+    @apply min-h-6;
+    @apply rounded-sm;
+}
+
+.button-lg {
+    @apply text-lg;
+}
+
+.button.button-lg,
+.button-secondary.button-lg {
+    @apply px-6;
+    @apply min-h-12;
+}
+
+.button-lg.button:after {
+    transform: translateX(-2rem) skewX(-65deg);
+}
+
+.button-lg.button:hover:after {
+    transform: translateX(-3rem) skewX(-65deg);
+}

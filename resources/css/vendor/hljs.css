@@ -1,0 +1,71 @@
+/* Base16 Atelier Sulphurpool Light - Theme */
+/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/sulphurpool) */
+/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
+
+/* Atelier-Sulphurpool Comment */
+.hljs-comment,
+.hljs-quote {
+    color: var(--gray-500);
+    font-style: italic;
+}
+
+/* Atelier-Sulphurpool Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-name,
+.hljs-regexp,
+.hljs-link,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+    color: var(--blue-400);
+}
+
+/* Atelier-Sulphurpool Orange */
+.hljs-meta,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params {
+    color: var(--purple-500);
+}
+
+.hljs-number {
+    color: var(--red-300);
+}
+
+/* Atelier-Sulphurpool Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet {
+    color: var(--gray-700);
+}
+
+/* Atelier-Sulphurpool Blue */
+.hljs-title,
+.hljs-section {
+    color: var(--blue-400);
+}
+
+/* Atelier-Sulphurpool Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+    color: var(--purple-600);
+}
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    color: var(--gray-600);
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}

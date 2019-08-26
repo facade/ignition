@@ -1,0 +1,79 @@
+.alert {
+    @apply px-4;
+    @apply py-2;
+    @apply text-gray-700;
+    @apply border-0;
+    @apply border-l-2;
+    @apply border-tint-100;
+}
+
+.alert-card {
+    @apply py-8;
+    @apply px-6;
+    @apply border-0;
+}
+
+.alert-card:before {
+    content: '';
+    background-color: inherit;
+    border-color: inherit;
+    @apply w-16;
+    @apply h-16;
+    @apply absolute;
+    @apply bottom-0;
+    @apply right-0;
+    transform-origin: 0 0;
+    transform: translateX(-4rem) skewY(25deg);
+}
+
+.alert-flash {
+    @apply z-50;
+    @apply cursor-pointer;
+    @apply fixed;
+    @apply right-0;
+    @apply grid;
+    @apply justify-start;
+    @apply -mt-4;
+    @apply ml-6;
+    @apply bg-white;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: opacity ease 0.8s, transform ease 0.6s;
+}
+
+.alert-flash-visible {
+    transform: translateX(0);
+    transition-duration: 0.3s;
+    opacity: 100;
+}
+
+.alert-flash .alert {
+    @apply border-l-3;
+}
+
+.alert-success {
+    @apply bg-green-100;
+    @apply border-green-400;
+}
+
+.alert-info {
+    @apply bg-purple-100;
+    @apply border-purple-400;
+}
+
+.alert-warning {
+    @apply bg-yellow-100;
+    @apply border-yellow-400;
+}
+
+.alert-danger,
+.alert-error {
+    @apply bg-red-100;
+    @apply border-red-400;
+}
+
+.alert-empty {
+    @apply text-tint-500;
+    @apply py-8;
+    @apply text-center;
+}

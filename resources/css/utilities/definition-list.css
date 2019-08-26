@@ -1,0 +1,88 @@
+.definition-list {
+    @apply grid;
+    @apply gapx-6;
+    @apply gapy-2;
+}
+
+.definition-list .definition-list {
+    @apply border-l-2;
+    @apply border-gray-300;
+    @apply pl-4;
+}
+
+@screen sm {
+    .definition-list {
+        grid-template-columns: 8rem 1fr;
+    }
+
+    .definition-list .definition-list {
+        grid-template-columns: auto 1fr;
+    }
+}
+
+@screen lg {
+    .definition-list {
+        grid-template-columns: 14rem 1fr;
+    }
+}
+
+.definition-list-title {
+    @apply font-semibold;
+    @apply text-gray-900;
+    @apply mb-3;
+}
+
+@screen sm {
+    .definition-list-title {
+        @apply start-2;
+    }
+}
+
+.definition-list-items {
+    @apply contents;
+}
+
+.definition-label {
+    @apply text-tint-600;
+    @apply break-words;
+    @apply leading-tight;
+}
+
+@screen sm {
+    .definition-label {
+        @apply text-right;
+    }
+}
+
+.definition-value {
+    @apply text-tint-800;
+    @apply break-all;
+    @apply mb-4;
+    @apply leading-tight;
+}
+
+@screen sm {
+    .definition-value {
+        @apply mb-0;
+    }
+}
+
+.definition-label:empty:after,
+.definition-value:empty:after {
+    content: '—';
+    @apply text-gray-300;
+}
+
+.definition-list-empty {
+    @apply text-gray-300;
+}
+
+@screen sm {
+    .definition-list-empty {
+        @apply start-2;
+    }
+
+    .definition-list .definition-list .definition-list-empty {
+        @apply start-1;
+    }
+}
