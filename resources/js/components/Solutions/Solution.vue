@@ -13,7 +13,7 @@
             <div>
                 <h3 class="font-semibold uppercase text-sm opacity-50">Learn more</h3>
                 <ul class="mt-3 text-sm">
-                    <li class="contents" v-for="(url, title) in solution.documentation">
+                    <li :key="title" v-for="(url, title) in solution.documentation">
                         <a :href="url" target="_blank">
                             <span class="font-semibold underline">{{ title }}</span>
                             ({{ getUrlLabel(url) }})

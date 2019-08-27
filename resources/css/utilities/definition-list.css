@@ -34,12 +34,14 @@
 
 @screen sm {
     .definition-list-title {
-        @apply start-2;
+        margin-left: 9.5rem;
     }
 }
 
-.definition-list-items {
-    @apply contents;
+@screen lg {
+    .definition-list-title {
+        margin-left: 15.5rem;
+    }
 }
 
 .definition-label {

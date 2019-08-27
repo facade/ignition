@@ -1,7 +1,7 @@
 <template>
     <nav class="tab-nav">
         <ul class="tab-bar">
-            <li class="contents" v-for="tab in tabs" :key="tab.component">
+            <li v-for="tab in tabs" :key="tab.component">
                 <button
                     class="tab"
                     :class="value.component === tab.component ? 'tab-active' : ''"
