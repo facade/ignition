@@ -29,7 +29,7 @@
                         </a>
                         <FilePath
                             pathClass="font-normal text-gray-600"
-                            :file="report.application_path + '/'"
+                            :file="report.application_path + config.directorySeparator"
                             :relative="false"
                         />
                     </div>
@@ -57,7 +57,7 @@ import OccurrenceDetails from './OccurrenceDetails';
 import FilePath from './FilePath.vue';
 
 export default {
-    inject: ['report', 'telescopeUrl'],
+    inject: ['report', 'telescopeUrl', 'config'],
 
     components: {
         OccurrenceDetails,
