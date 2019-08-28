@@ -1,10 +1,12 @@
 <template>
-    <div :class="className" class="definition-list">
+    <div :class="className">
         <h3 v-if="title" class="definition-list-title">{{ title }}</h3>
-        <dl v-if="this.$slots.default" class="definition-list-items">
+        <dl v-if="this.$slots.default" class="definition-list">
             <slot></slot>
         </dl>
-        <div v-if="!this.$slots.default" class="definition-list-empty">—</div>
+        <div v-if="!this.$slots.default" class="definition-list">
+            <div className="definition-list-empty">—</div>
+        </div>
     </div>
 </template>
 

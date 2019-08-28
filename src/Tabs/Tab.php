@@ -26,7 +26,7 @@ abstract class Tab implements JsonSerializable
 
     public function name(): string
     {
-        return Str::studly(class_basename(get_called_class()), '-');
+        return Str::studly(class_basename(get_called_class()));
     }
 
     public function component(): string

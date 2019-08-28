@@ -1,9 +1,6 @@
 <template>
     <div>
-        <DefinitionList>
-            <h3 class="definition-list-title flex justify-start">
-                Dump
-            </h3>
+        <DefinitionList title="Dump">
             <DefinitionListRow label="Content"
                 ><code class="code-block mb-3" v-html="event.label"></code>
             </DefinitionListRow>
