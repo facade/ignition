@@ -11,7 +11,9 @@ export default function editorUrl(editor, file, lineNumber) {
     };
 
     if (!Object.keys(editors).includes(editor)) {
-        console.error(`'${editor}' is not supported. Support editors are: ${editors.join(', ')}`);
+        console.error(
+            `'${editor}' is not supported. Support editors are: ${Object.keys(editors).join(', ')}`,
+        );
 
         return null;
     }
