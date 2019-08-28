@@ -51,8 +51,6 @@ class ShareReportAction
 
         $report['context'] = $this->filterContextItems($report['context']);
 
-        $report['context']['context']['shared'] = true;
-
         return $report;
     }
 
