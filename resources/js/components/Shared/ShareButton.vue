@@ -29,7 +29,7 @@
                     :ownerUrl="sharedErrorUrls.owner_url"
                 />
             </div>
-            <ShareForm v-else @share="shareError" />
+            <ShareForm v-else @share="shareError" :error="shareHadError" />
         </div>
     </div>
 </template>
@@ -44,6 +44,7 @@ export default {
 
     data() {
         return {
+            shareHadError: false,
             sharedErrorUrls: null,
             menuVisible: false,
         };
@@ -82,10 +83,11 @@ export default {
 
                 if (response.ok) {
                     this.sharedErrorUrls = responseData;
+                } else {
+                    this.shareHadError = true;
                 }
             } catch (error) {
-                console.error(error);
-                this.executionSuccessful = false;
+                this.shareHadError = true;
             }
         },
     },
