@@ -16,7 +16,6 @@
 import Summary from './Summary.vue';
 import Tabs from './Tabs.vue';
 import Details from './Details.vue';
-import Solutions from './Solutions.vue';
 
 export default {
     props: {
