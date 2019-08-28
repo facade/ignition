@@ -30,6 +30,7 @@ class IgnitionConfig implements Arrayable
         return [
             'editor' => $this->getEditor(),
             'theme' => $this->getTheme(),
+            'directorySeparator' => DIRECTORY_SEPARATOR,
         ];
     }
 

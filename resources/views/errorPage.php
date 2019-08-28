@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
 <head>
-    <!-- Hide dumps asap -->		
-    <style>		
-        pre.sf-dump {		
-            display: none !important;		
-        }		
+    <!-- Hide dumps asap -->
+    <style>
+        pre.sf-dump {
+            display: none !important;
+        }
     </style>
 
     <meta charset="UTF-8">

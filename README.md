@@ -8,6 +8,8 @@
 Ignition offers you a beautiful, customizable error screen. It also allows you to share your errors to Flare publicly. 
 If configured with a valid Flare API key, it will send errors to a project in your Flare account.
 
+![Screenshot of ignition](https://facade.github.io/ignition/screenshot.png)
+
 ## Official Documentation
 
 The official documentation for Ignition can be found on the [Flare website](http://flareapp.io.test/docs/ignition-for-facade/installation).
