@@ -77,7 +77,7 @@ class TestCommand extends Command
             app('flare.client')->sendTestReport($testException);
             $this->info(PHP_EOL);
         } catch (Exception $exception) {
-            $this->warn('❌ We were unable to send an exception to Flare. Make sure that your key is correct and that you have a valid subscription.  For more info visit the docs on installing Flare in a Laravel project: http://flareapp.io/docs/flare-for-laravel/installation');
+            $this->warn('❌ We were unable to send an exception to Flare. Make sure that your key is correct and that you have a valid subscription. ' . PHP_EOL . PHP_EOL . 'For more info visit the docs on installing Flare in a Laravel project: http://flareapp.io/docs/flare-for-laravel/installation');
 
             return;
         }
