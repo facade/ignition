@@ -58,10 +58,6 @@ class IgnitionServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../config/flare.php' => config_path('flare.php'),
             ], 'config');
-
-            $this->publishes([
-                __DIR__ . '/../config/ignition.php' => config_path('ignition.php'),
-            ], 'config');
         }
 
         $this->setupQueue($this->app->queue);
@@ -70,7 +66,6 @@ class IgnitionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/flare.php', 'flare');
-        $this->mergeConfigFrom(__DIR__ . '/../config/ignition.php', 'ignition');
 
         $this
             ->registerViewEngines()
