@@ -12,9 +12,10 @@
             />
         </div>
 
-        <div class="mt-3">
+        <div class="mt-4">
             <div class="mb-3" v-if="error">
-                We were unable to share your error. Please try again later.
+                We were unable to share your error.<br />
+                Please try again later.
             </div>
 
             <button @click="shareError" class="button-secondary button-sm bg-tint-600 text-white">

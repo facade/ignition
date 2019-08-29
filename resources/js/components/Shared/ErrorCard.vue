@@ -7,23 +7,27 @@
             >
                 <div class="grid cols-auto justify-start gap-2 px-4 py-2">
                     <div class="flex items-center">
-                        <a href="https://flareapp.io" target="_blank">
-                            <svg class="w-4 h-5 mr-4" viewBox="0 0 682 1024">
+                        <a
+                            href="http://flareapp.io/docs/ignition-for-laravel/introduction"
+                            target="_blank"
+                            title="Ignition docs"
+                        >
+                            <svg class="w-4 h-5 mr-4" viewBox="0 0 428 988">
                                 <polygon
-                                    style="fill:#51DB9E"
-                                    points="235.3,510.5 21.5,387 21.5,140.2 236.5,264.1 "
+                                    style="fill:#FA4E79;"
+                                    points="428,247.1 428,494.1 214,617.5 214,369.3 		"
                                 />
                                 <polygon
-                                    style="fill:#7900F5"
-                                    points="235.3,1004.8 21.5,881.4 21.5,634.5 234.8,757.9 "
+                                    style="fill:#FFF082;"
+                                    points="0,988 0,741 214,617.5 214,864.1 		"
                                 />
                                 <polygon
-                                    style="fill:#94F2C8"
-                                    points="448.9,386.9 21.5,140.2 235.3,16.7 663.2,263.4 "
+                                    style="fill:#E6003A;"
+                                    points="214,123.9 214,617.5 0,494.1 0,0 		"
                                 />
                                 <polygon
-                                    style="fill:#A475F4"
-                                    points="234.8,757.9 21.5,634.5 235.3,511 449.1,634.5 "
+                                    style="fill:#FFE100;"
+                                    points="214,864.1 214,617.5 428,741 428,988 		"
                                 />
                             </svg>
                         </a>

@@ -1,5 +1,5 @@
 <template>
-    <div class="card-details-overflow scrollbar p-12">
+    <div class="card-details-overflow scrollbar p-12 pt-10">
         <div class="text-2xl">
             <ExceptionClass :name="report.exception_class" />
             <ExceptionMessage :name="report.message" />
