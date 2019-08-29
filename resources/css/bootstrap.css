@@ -191,7 +191,12 @@ body {
     }
 
     html.theme-auto .checkbox:before {
-        background-color: var(--gray-800) !important;
+        background-color: var(--gray-800);
+    }
+
+    html.theme-auto .tab-nav,
+    html.theme-auto .dropdown {
+        background-color: var(--gray-400);
     }
 }
 
@@ -253,5 +258,10 @@ html.theme-dark {
 }
 
 html.theme-dark .checkbox:before {
-    background-color: var(--gray-800) !important;
+    background-color: var(--gray-800);
+}
+
+html.theme-dark .tab-nav,
+html.theme-dark .dropdown {
+    background-color: var(--gray-300);
 }

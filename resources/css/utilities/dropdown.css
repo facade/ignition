@@ -2,12 +2,12 @@
     @apply absolute;
     @apply px-2;
     @apply py-2;
-    @apply bg-gray-50;
     @apply shadow-xl;
     @apply overflow-y-auto;
     max-height: '66vh';
     @apply border;
     @apply border-t-0;
     @apply border-tint-200;
-    @apply bg-white;
+    @apply text-white;
+    @apply bg-gray-700;
 }
