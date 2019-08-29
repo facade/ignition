@@ -90,13 +90,12 @@
 .stack-frame {
     @apply grid;
     @apply items-end;
-    @apply gapx-2;
-    grid-template-columns: 2rem auto 4rem;
+    grid-template-columns: 2rem auto auto;
 }
 
 @screen sm {
     .stack-frame {
-        grid-template-columns: 2rem 13rem 4rem;
+        grid-template-columns: 3rem 1fr auto;
     }
 }
 
@@ -112,15 +111,15 @@
 
 .stack-frame-group-vendor .stack-frame-selected,
 .stack-frame-group-vendor .stack-frame-selected .stack-frame-header {
-    @apply bg-gray-100;
+    /* @apply bg-gray-100; */
 }
 
 .stack-frame-number {
-    @apply w-8;
-    @apply px-3;
+    @apply px-2;
     @apply py-4;
     @apply text-purple-400;
     @apply variant-tabular;
+    @apply text-center;
 }
 
 .stack-frame-group-vendor .stack-frame-number {
@@ -128,7 +127,7 @@
 }
 
 .stack-frame-header {
-    @apply -mr-12;
+    @apply -mr-10;
 }
 
 .stack-frame-text {
@@ -136,7 +135,7 @@
     @apply items-center;
     @apply gap-2;
     @apply border-l-2;
-    @apply px-3;
+    @apply pl-3;
     @apply py-4;
     @apply border-purple-300;
     @apply text-gray-700;
@@ -155,7 +154,8 @@
 }
 
 .stack-frame-line {
-    @apply px-3;
+    @apply pl-2;
+    @apply pr-1;
     @apply py-4;
     @apply text-right;
 }

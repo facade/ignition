@@ -9,28 +9,6 @@
     @apply rounded-sm;
 }
 
-.card-selected .card {
-    @apply bg-purple-100;
-}
-
-.card-clickable {
-    @apply cursor-pointer;
-}
-
-.card-clickable:hover {
-    @apply bg-tint-50;
-}
-
-.card-properties {
-    @apply grid;
-    align-content: center;
-    @apply p-6;
-    order: 1;
-    @apply border-t;
-    @apply border-dashed;
-    @apply border-tint-300;
-}
-
 .card-details {
     @apply overflow-hidden;
 }
@@ -59,35 +37,7 @@
         @apply span-2;
     }
 
-    .card-properties {
-        @apply p-8;
-        order: 0;
-        @apply border-t-0;
-        @apply border-r;
-    }
-
     .card-details-overflow {
         @apply p-8;
     }
-}
-
-.card-stacked {
-    padding-bottom: 6px;
-}
-
-.card-stacked .card {
-    @apply shadow-stack;
-}
-
-.card-solution {
-    @apply absolute;
-    @apply right-0;
-    bottom: 0.75rem;
-    @apply pointer-events-none;
-    @apply pr-4;
-    @apply pl-2;
-    @apply bg-green-300;
-    @apply text-gray-700;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 9px 100%, 0 calc(100% - 5px));
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 9px 100%, 0 calc(100% - 5px));
 }

@@ -1,15 +1,3 @@
-.checkbox-group {
-    @apply grid;
-    @apply gap-2;
-    justify-items: start;
-}
-
-@screen sm {
-    .checkbox-group {
-        @apply mt-2;
-    }
-}
-
 .checkbox-label {
     @apply grid;
     @apply justify-start;
@@ -25,10 +13,6 @@
     height: 1.5em;
     @apply border-none;
     @apply appearance-none;
-}
-
-.checkbox-white:before {
-    background-color: var(--white) !important;
 }
 
 .checkbox:before {
@@ -67,7 +51,6 @@
 .checkbox:focus:before {
     @apply border-tint-300;
     @apply bg-white;
-    @apply shadow-focus;
 }
 
 .checkbox:hover:before {

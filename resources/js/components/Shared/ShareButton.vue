@@ -32,12 +32,12 @@
                     </svg>
                 </a>
                 <h5
-                    class="text-left text-gray-500 font-semibold uppercase tracking-wider whitespace-no-wrap"
+                    class="text-left text-gray-400 font-semibold uppercase tracking-wider whitespace-no-wrap"
                 >
                     {{ sharedErrorUrls ? 'Shared' : 'Share' }} on Flare
                 </h5>
                 <a
-                    class="ml-auto link-dimmed-invers underline"
+                    class="ml-auto link-dimmed-invers underline text-gray-400"
                     target="_blank"
                     href="http://flareapp.io/docs/ignition-for-laravel/sharing-errors"
                     title="Flare documentation"

@@ -20,54 +20,6 @@
     @apply link-hover;
 }
 
-.link-invers {
-    @apply font-normal;
-    @apply underline;
-    @apply text-white;
-    text-decoration-color: rgba(255, 255, 255, 0.65);
-}
-
-.link-invers-hover {
-    @apply text-gray-200;
-    text-decoration-color: rgba(255, 255, 255, 1);
-}
-
-.link-invers:hover {
-    @apply link-invers-hover;
-}
-
-.links-invers a {
-    @apply link-invers;
-}
-
-.links-invers a:hover {
-    @apply link-invers-hover;
-}
-
-.link-accent {
-    @apply font-normal;
-    @apply underline;
-    @apply text-purple-500;
-    text-decoration-color: var(--purple-400);
-}
-
-.link-accent-hover {
-    @apply text-purple-600;
-    text-decoration-color: var(--purple-500);
-}
-
-.link-accent:hover {
-    @apply link-accent-hover;
-}
-
-.links-accent a {
-    @apply link-accent;
-}
-
-.links-accent a:hover {
-    @apply link-accent-hover;
-}
-
 .link-dimmed {
     @apply font-normal;
     @apply underline;
@@ -114,15 +66,6 @@
 
 .links-dimmed-invers a:hover {
     @apply link-dimmed-invers-hover;
-}
-
-.links-no-underline a {
-    @apply no-underline;
-}
-
-.link-table {
-    @apply no-underline;
-    @apply font-semibold;
 }
 
 .link-solution {

@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="theme-<?=$config['theme']?>">
 <head>
     <!-- Hide dumps asap -->
     <style>
