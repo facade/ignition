@@ -5,7 +5,7 @@
             <slot></slot>
         </dl>
         <div v-if="!this.$slots.default" class="definition-list">
-            <div className="definition-list-empty">—</div>
+            <div class="definition-list-empty">—</div>
         </div>
     </div>
 </template>

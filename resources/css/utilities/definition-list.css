@@ -28,7 +28,6 @@
 
 .definition-list-title {
     @apply font-semibold;
-    @apply text-gray-900;
     @apply mb-3;
 }
 
@@ -57,7 +56,6 @@
 }
 
 .definition-value {
-    @apply text-tint-800;
     @apply break-all;
     @apply mb-4;
     @apply leading-tight;

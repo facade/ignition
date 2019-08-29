@@ -19,7 +19,7 @@ return [
     | Theme
     |--------------------------------------------------------------------------
     |
-    | Specify which theme should be used. You can choose between 'light' and 'dark'.
+    | Specify which theme should be used. You can choose between 'light', 'dark' and 'auto'.
     |
     */
 

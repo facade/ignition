@@ -27,13 +27,13 @@
                         y="0px"
                         viewBox="0 0 299 452"
                     >
-                        <g style="opacity: 0.06">
+                        <g style="opacity: 0.075">
                             <polygon
-                                style="fill:#7900F5"
+                                style="fill:rgb(63,63,63)"
                                 points="298.1,451.9 150.9,451.9 21,226.9 298.1,227.1"
                             />
                             <polygon
-                                style="fill:#A475F4"
+                                style="fill:rgb(151,151,151)"
                                 points="298.1,227.1 21,226.9 150.9,1.9 298.1,1.9"
                             />
                         </g>

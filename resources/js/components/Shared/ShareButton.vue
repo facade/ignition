@@ -5,7 +5,7 @@
             <i class="ml-2 fas fa-share"></i>
         </button>
         <div
-            class="dropdown z-10 right-0 top-full bg-gray-700 text-white p-4 overflow-visible"
+            class="dropdown z-10 right-0 top-full p-4 overflow-visible"
             :class="{ hidden: !menuVisible }"
             @click.stop
             style="min-width: 18rem; margin-right: -1px"
@@ -31,13 +31,11 @@
                         />
                     </svg>
                 </a>
-                <h5
-                    class="text-left text-gray-500 font-semibold uppercase tracking-wider whitespace-no-wrap"
-                >
+                <h5 class="text-left font-semibold uppercase tracking-wider whitespace-no-wrap">
                     {{ sharedErrorUrls ? 'Shared' : 'Share' }} on Flare
                 </h5>
                 <a
-                    class="ml-auto link-dimmed-invers underline"
+                    class="ml-auto underline"
                     target="_blank"
                     href="http://flareapp.io/docs/ignition-for-laravel/sharing-errors"
                     title="Flare documentation"

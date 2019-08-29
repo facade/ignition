@@ -2,7 +2,7 @@
     <div class="mt-12 card card-has-header card-no-props">
         <div class="card-header">
             <div
-                class="grid items-center rounded-t border-b border-tint-200 text-xs text-tint-500  "
+                class="grid items-center rounded-t border-b border-tint-300 text-xs text-tint-600  "
                 style="grid-template-columns: 1fr 1fr;"
             >
                 <div class="grid cols-auto justify-start gap-2 px-4 py-2">
@@ -32,7 +32,7 @@
                             </svg>
                         </a>
                         <FilePath
-                            pathClass="font-normal text-gray-600"
+                            pathClass="font-normal"
                             :file="report.application_path + config.directorySeparator"
                             :relative="false"
                         />
