@@ -12,7 +12,7 @@ return [
     | Possible values are 'phpstorm', 'vscode', 'sublime' and 'atom'.
     */
 
-    'editor' => 'phpstorm',
+    'editor' => env('IGNITION_EDITOR', 'phpstorm'),
 
     /*
     |--------------------------------------------------------------------------
@@ -23,5 +23,5 @@ return [
     |
     */
 
-    'theme' => 'light',
+    'theme' => env('IGNITION_THEME', 'light'),
 ];
