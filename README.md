@@ -12,7 +12,7 @@ If configured with a valid Flare API key, it will send errors to a project in yo
 
 ## Official Documentation
 
-The official documentation for Ignition can be found on the [Flare website](http://flareapp.io.test/docs/ignition-for-facade/installation).
+The official documentation for Ignition can be found on the [Flare website](https://flareapp.io/docs/ignition-for-laravel/installation).
 
 ### Changelog
 
