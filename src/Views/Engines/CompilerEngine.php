@@ -4,11 +4,11 @@ namespace Facade\Ignition\Views\Engines;
 
 use Exception;
 use ReflectionProperty;
+use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Facade\Ignition\Exceptions\ViewException;
-use Facade\Ignition\Views\Compilers\BladeSourceMapCompiler;
 use Facade\Ignition\Views\Concerns\CollectsViewExceptions;
-use Illuminate\Support\Collection;
+use Facade\Ignition\Views\Compilers\BladeSourceMapCompiler;
 
 class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
 {

@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\Tests;
 
-use Facade\FlareClient\Flare;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Route;
+use Facade\FlareClient\Flare;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use Facade\Ignition\Tests\Mocks\FakeClient;
 
 class FlareTest extends TestCase
@@ -21,7 +21,7 @@ class FlareTest extends TestCase
         Artisan::call('view:clear');
 
         $this->app['config']['logging.channels.flare'] = [
-            'driver' => 'flare'
+            'driver' => 'flare',
         ];
 
         $this->app['config']['logging.default'] = 'flare';

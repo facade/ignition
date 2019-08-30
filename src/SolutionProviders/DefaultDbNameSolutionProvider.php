@@ -2,11 +2,10 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Illuminate\Support\Facades\DB;
-use Facade\Ignition\Solutions\SuggestUsingCorrectDbNameSolution;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Facade\IgnitionContracts\Solution;
 use Throwable;
+use Illuminate\Support\Facades\DB;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Facade\Ignition\Solutions\SuggestUsingCorrectDbNameSolution;
 
 class DefaultDbNameSolutionProvider implements HasSolutionsForThrowable
 {
@@ -26,4 +25,3 @@ class DefaultDbNameSolutionProvider implements HasSolutionsForThrowable
         return [new SuggestUsingCorrectDbNameSolution()];
     }
 }
-

@@ -2,14 +2,13 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
+use Throwable;
 use Illuminate\Support\Str;
+use UnexpectedValueException;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\Ignition\Support\ComposerClassMap;
 use Facade\Ignition\Support\StringComparator;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Facade\IgnitionContracts\Solution;
-use Throwable;
-use UnexpectedValueException;
 
 class InvalidRouteActionSolutionProvider implements HasSolutionsForThrowable
 {
@@ -17,11 +16,11 @@ class InvalidRouteActionSolutionProvider implements HasSolutionsForThrowable
 
     public function canSolve(Throwable $throwable): bool
     {
-        if (!$throwable instanceof UnexpectedValueException) {
+        if (! $throwable instanceof UnexpectedValueException) {
             return false;
         }
 
-        if (!preg_match(self::REGEX, $throwable->getMessage(), $matches)) {
+        if (! preg_match(self::REGEX, $throwable->getMessage(), $matches)) {
             return false;
         }
 
@@ -39,20 +38,20 @@ class InvalidRouteActionSolutionProvider implements HasSolutionsForThrowable
         if ($suggestedController === $invalidController) {
             return [
                 BaseSolution::create("`{$invalidController}` is not invokable.")
-                    ->setSolutionDescription("The controller class `{$invalidController}` is not invokable. Did you forget to add the `__invokable` method or is the controller's method missing in your routes file?")
+                    ->setSolutionDescription("The controller class `{$invalidController}` is not invokable. Did you forget to add the `__invokable` method or is the controller's method missing in your routes file?"),
             ];
         }
 
         if ($suggestedController) {
             return [
                 BaseSolution::create("`{$invalidController}` was not found.")
-                    ->setSolutionDescription("Controller class `{$invalidController}` for one of your routes was not found. Did you mean `{$suggestedController}`?")
+                    ->setSolutionDescription("Controller class `{$invalidController}` for one of your routes was not found. Did you mean `{$suggestedController}`?"),
             ];
         }
 
         return [
             BaseSolution::create("`{$invalidController}` was not found.")
-                ->setSolutionDescription("Controller class `{$invalidController}` for one of your routes was not found. Are you sure this controller exists and is imported correctly?")
+                ->setSolutionDescription("Controller class `{$invalidController}` for one of your routes was not found. Are you sure this controller exists and is imported correctly?"),
         ];
     }
 

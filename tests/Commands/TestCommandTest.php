@@ -16,4 +16,3 @@ class TestCommandTest extends TestCase
             : $testResult->assertExitCode(0);
     }
 }
-

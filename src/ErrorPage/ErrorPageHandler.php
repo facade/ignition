@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\ErrorPage;
 
-use Illuminate\Foundation\Application;
-use Facade\Ignition\IgnitionConfig;
-use Facade\IgnitionContracts\SolutionProviderRepository;
 use Throwable;
+use Facade\Ignition\IgnitionConfig;
+use Illuminate\Foundation\Application;
+use Facade\IgnitionContracts\SolutionProviderRepository;
 
 class ErrorPageHandler
 {

@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Http\Controllers;
 
-use Facade\Ignition\Ignition;
 use Illuminate\Http\Request;
+use Facade\Ignition\Ignition;
 
 class StyleController
 {

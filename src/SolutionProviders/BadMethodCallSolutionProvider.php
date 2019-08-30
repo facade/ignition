@@ -2,13 +2,13 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
+use Throwable;
+use ReflectionClass;
+use ReflectionMethod;
 use BadMethodCallException;
 use Illuminate\Support\Collection;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use ReflectionClass;
-use ReflectionMethod;
-use Throwable;
 
 class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
 {
@@ -16,7 +16,7 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
 
     public function canSolve(Throwable $throwable): bool
     {
-        if (!$throwable instanceof BadMethodCallException) {
+        if (! $throwable instanceof BadMethodCallException) {
             return false;
         }
 
@@ -31,13 +31,13 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
     {
         return [
             BaseSolution::create('Bad Method Call')
-            ->setSolutionDescription($this->getSolutionDescription($throwable))
+            ->setSolutionDescription($this->getSolutionDescription($throwable)),
         ];
     }
 
     public function getSolutionDescription(Throwable $throwable): string
     {
-        if (!$this->canSolve($throwable)) {
+        if (! $this->canSolve($throwable)) {
             return '';
         }
 
@@ -50,7 +50,7 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
 
     protected function getClassAndMethodFromExceptionMessage(string $message): ?array
     {
-        if (!preg_match(self::REGEX, $message, $matches)) {
+        if (! preg_match(self::REGEX, $message, $matches)) {
             return null;
         }
 

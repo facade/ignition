@@ -5,9 +5,9 @@ namespace Facade\Ignition\Actions;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Facade\Ignition\Exceptions\UnableToShareErrorException;
 use Facade\FlareClient\Http\Client;
 use Facade\FlareClient\Truncation\ReportTrimmer;
+use Facade\Ignition\Exceptions\UnableToShareErrorException;
 
 class ShareReportAction
 {
@@ -41,11 +41,11 @@ class ShareReportAction
 
     public function filterReport(array $report): array
     {
-        if (!$this->hasTab('stackTraceTab')) {
+        if (! $this->hasTab('stackTraceTab')) {
             $report['stacktrace'] = array_slice($report['stacktrace'], 0, 1);
         }
 
-        if (!$this->hasTab('debugTab')) {
+        if (! $this->hasTab('debugTab')) {
             $report['glows'] = [];
         }
 
@@ -61,23 +61,23 @@ class ShareReportAction
 
     protected function filterContextItems(array $contextItems): array
     {
-        if (!$this->hasTab('requestTab')) {
+        if (! $this->hasTab('requestTab')) {
             $contextItems = $this->removeRequestInformation($contextItems);
         }
 
-        if (!$this->hasTab('appTab')) {
+        if (! $this->hasTab('appTab')) {
             $contextItems = $this->removeAppInformation($contextItems);
         }
 
-        if (!$this->hasTab('userTab')) {
+        if (! $this->hasTab('userTab')) {
             $contextItems = $this->removeUserInformation($contextItems);
         }
 
-        if (!$this->hasTab('contextTab')) {
+        if (! $this->hasTab('contextTab')) {
             $contextItems = $this->removeContextInformation($contextItems);
         }
 
-        if (!$this->hasTab('debugTab')) {
+        if (! $this->hasTab('debugTab')) {
             $contextItems = $this->removeDebugInformation($contextItems);
         }
 

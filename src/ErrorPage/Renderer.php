@@ -22,7 +22,7 @@ class Renderer
         $viewFile = "{$this->viewPath}/{$viewName}.php";
 
         try {
-            extract((array)$_data, EXTR_OVERWRITE);
+            extract((array) $_data, EXTR_OVERWRITE);
 
             include $viewFile;
         } catch (Exception $exception) {
@@ -38,6 +38,6 @@ class Renderer
 
     protected function formatPath(string $path): string
     {
-        return preg_replace('/(?:\/)+$/u', '', $path) . '/';
+        return preg_replace('/(?:\/)+$/u', '', $path).'/';
     }
 }

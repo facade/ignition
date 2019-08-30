@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition;
 
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
+use Illuminate\Contracts\Support\Arrayable;
 
 class IgnitionConfig implements Arrayable
 {

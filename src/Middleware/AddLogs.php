@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Middleware;
 
-use Facade\Ignition\LogRecorder\LogRecorder;
 use Facade\FlareClient\Report;
+use Facade\Ignition\LogRecorder\LogRecorder;
 
 class AddLogs
 {

@@ -3,7 +3,6 @@
 namespace Facade\Ignition\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Facade\Ignition\Rules\AtLeastOneTabIsSelectedRule;
 
 class ShareReportRequest extends FormRequest
 {

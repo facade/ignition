@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\Tests;
 
+use Facade\FlareClient\Flare;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Facade\Ignition\Tests\Mocks\FakeClient;
-use Facade\FlareClient\Flare;
 
 class LogTest extends TestCase
 {
@@ -17,7 +17,7 @@ class LogTest extends TestCase
         parent::setUp();
 
         $this->app['config']['logging.channels.flare'] = [
-            'driver' => 'flare'
+            'driver' => 'flare',
         ];
 
         $this->app['config']['logging.default'] = 'flare';
@@ -31,7 +31,6 @@ class LogTest extends TestCase
         $middleware = $currentClient->getMiddleware();
 
         $this->app->singleton('flare.client', function () use ($middleware) {
-
             $flare = new Flare($this->fakeClient, null, null);
 
             foreach ($middleware as $singleMiddleware) {

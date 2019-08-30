@@ -11,7 +11,7 @@ class BladeSourceMapCompiler extends BladeCompiler
         $map = $this->compileString(file_get_contents($filename));
         $map = explode("\n", $map);
 
-        $line = $map[$exceptionLineNumber-$this->getExceptionLineOffset()];
+        $line = $map[$exceptionLineNumber - $this->getExceptionLineOffset()];
         $pattern = '/\|---LINE:([0-9]+)---\|/m';
 
         if (preg_match($pattern, $line, $matches)) {
@@ -83,7 +83,7 @@ class BladeSourceMapCompiler extends BladeCompiler
         $before = mb_substr($value, 0, $position);
         $lineNumber = count(explode("\n", $before));
 
-        return mb_substr($value, 0, $position) . "|---LINE:{$lineNumber}---|" . mb_substr($value, $position);
+        return mb_substr($value, 0, $position)."|---LINE:{$lineNumber}---|".mb_substr($value, $position);
     }
 
     protected function trimEmptyLines(string $value)

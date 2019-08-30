@@ -3,7 +3,6 @@
 namespace Facade\Ignition\SolutionProviders;
 
 use Throwable;
-use Facade\IgnitionContracts\Solution;
 use Illuminate\Database\QueryException;
 use Facade\Ignition\Solutions\RunMigrationsSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
@@ -11,7 +10,7 @@ use Facade\IgnitionContracts\HasSolutionsForThrowable;
 class TableNotFoundSolutionProvider implements HasSolutionsForThrowable
 {
     /**
-     * See https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html#error_er_bad_table_error
+     * See https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html#error_er_bad_table_error.
      */
     const MYSQL_BAD_TABLE_CODE = '42S02';
 

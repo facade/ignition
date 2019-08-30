@@ -2,12 +2,10 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Illuminate\Database\QueryException;
-use Facade\Ignition\Solutions\GenerateAppKeySolution;
-use Facade\Ignition\Solutions\UseDefaultValetDbCredentialsSolution;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Facade\IgnitionContracts\Solution;
 use Throwable;
+use Illuminate\Database\QueryException;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Facade\Ignition\Solutions\UseDefaultValetDbCredentialsSolution;
 
 class IncorrectValetDbCredentialsSolutionProvider implements HasSolutionsForThrowable
 {
@@ -33,7 +31,7 @@ class IncorrectValetDbCredentialsSolutionProvider implements HasSolutionsForThro
 
         if (! $this->isValetInstalled()) {
             return false;
-        };
+        }
 
         if ($this->usingCorrectDefaultCredentials()) {
             return false;

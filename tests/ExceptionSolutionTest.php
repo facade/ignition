@@ -2,15 +2,14 @@
 
 namespace Facade\Ignition\Tests;
 
-use Facade\IgnitionContracts\BaseSolution;
+use RuntimeException;
 use Illuminate\Foundation\Auth\User;
+use Facade\IgnitionContracts\BaseSolution;
+use Facade\Ignition\Tests\Exceptions\AlwaysTrueSolutionProvider;
 use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
 use Facade\Ignition\Tests\Exceptions\AlwaysFalseSolutionProvider;
-use Facade\Ignition\Tests\Exceptions\AlwaysTrueSolutionProvider;
-use Facade\Ignition\SolutionProviders\SolutionRepository;
-use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
-use RuntimeException;
+use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 
 class ExceptionSolutionTest extends TestCase
 {

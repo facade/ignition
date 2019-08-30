@@ -2,17 +2,16 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Facade\Ignition\Exceptions\ViewException;
-use Facade\IgnitionContracts\BaseSolution;
+use Throwable;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\View;
 use InvalidArgumentException;
-use Facade\Ignition\Support\StringComparator;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Facade\IgnitionContracts\Solution;
+use Illuminate\Support\Facades\View;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
-use Throwable;
+use Facade\IgnitionContracts\BaseSolution;
+use Facade\Ignition\Exceptions\ViewException;
+use Facade\Ignition\Support\StringComparator;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
 {
@@ -20,7 +19,7 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
 
     public function canSolve(Throwable $throwable): bool
     {
-        if (!$throwable instanceof InvalidArgumentException && !$throwable instanceof ViewException) {
+        if (! $throwable instanceof InvalidArgumentException && ! $throwable instanceof ViewException) {
             return false;
         }
 
@@ -38,13 +37,13 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
         if ($suggestedView) {
             return [
                 BaseSolution::create("{$missingView} was not found.")
-                    ->setSolutionDescription("Did you mean `{$suggestedView}`?")
+                    ->setSolutionDescription("Did you mean `{$suggestedView}`?"),
             ];
         }
 
         return [
             BaseSolution::create("{$missingView} was not found.")
-                ->setSolutionDescription("Are you sure the view exist and is a `.blade.php` file?")
+                ->setSolutionDescription('Are you sure the view exist and is a `.blade.php` file?'),
         ];
     }
 
@@ -80,7 +79,6 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
             ->flatMap(function (string $path) use ($extensions) {
                 return $this->getViewsInPath($path, $extensions);
             });
-
 
         return $viewsForHints->merge($viewsForViewPaths)->toArray();
     }

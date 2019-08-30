@@ -25,4 +25,3 @@ class SuggestUsingCorrectDbNameSolution implements Solution
         ];
     }
 }
-

@@ -2,13 +2,12 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Facade\Ignition\Support\Packagist\Package;
-use Facade\Ignition\Support\Packagist\Packagist;
 use Throwable;
 use Illuminate\Support\Str;
+use Facade\Ignition\Support\Packagist\Package;
+use Facade\Ignition\Support\Packagist\Packagist;
 use Facade\Ignition\Solutions\MissingPackageSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Facade\IgnitionContracts\Solution;
 
 class MissingPackageSolutionProvider implements HasSolutionsForThrowable
 {
@@ -19,7 +18,7 @@ class MissingPackageSolutionProvider implements HasSolutionsForThrowable
     {
         $pattern = '/Class \'([^\s]+)\' not found/m';
 
-        if (!preg_match($pattern, $throwable->getMessage(), $matches)) {
+        if (! preg_match($pattern, $throwable->getMessage(), $matches)) {
             return false;
         }
 
@@ -31,7 +30,7 @@ class MissingPackageSolutionProvider implements HasSolutionsForThrowable
 
         $this->package = $this->findPackageFromClassName($class);
 
-        return !is_null($this->package);
+        return ! is_null($this->package);
     }
 
     public function getSolutions(Throwable $throwable): array
@@ -41,7 +40,7 @@ class MissingPackageSolutionProvider implements HasSolutionsForThrowable
 
     protected function findPackageFromClassName(string $missingClassName): ?Package
     {
-        if (!$package = $this->findComposerPackageForClassName($missingClassName)) {
+        if (! $package = $this->findComposerPackageForClassName($missingClassName)) {
             return null;
         }
 
