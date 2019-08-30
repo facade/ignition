@@ -22,7 +22,7 @@ module.exports = {
                           extensions: ['js', 'php', 'vue'],
                       },
                   ],
-                  whitelistPatterns: [/hljs/, /sf-dump/],
+                  whitelistPatterns: [/hljs/, /sf-dump/, /theme-dark/, /theme-auto/],
               })
             : '',
     ],
