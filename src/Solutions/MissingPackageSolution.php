@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Solutions;
 
-use Facade\Ignition\Support\Packagist\Package;
 use Facade\IgnitionContracts\Solution;
+use Facade\Ignition\Support\Packagist\Package;
 
 class MissingPackageSolution implements Solution
 {
@@ -26,7 +26,7 @@ class MissingPackageSolution implements Solution
             'You might be missing a composer dependency.',
             'A possible package that was found is `'.$this->possiblePackage->name.'`.',
             '',
-            'See if this is the package that you need and install it via `composer require '.$this->possiblePackage->name.'`.'
+            'See if this is the package that you need and install it via `composer require '.$this->possiblePackage->name.'`.',
         ];
 
         return implode(PHP_EOL, $output);

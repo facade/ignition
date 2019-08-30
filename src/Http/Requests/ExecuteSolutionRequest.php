@@ -2,9 +2,9 @@
 
 namespace Facade\Ignition\Http\Requests;
 
-use Facade\IgnitionContracts\RunnableSolution;
 use Facade\IgnitionContracts\Solution;
 use Illuminate\Foundation\Http\FormRequest;
+use Facade\IgnitionContracts\RunnableSolution;
 use Facade\IgnitionContracts\SolutionProviderRepository;
 
 class ExecuteSolutionRequest extends FormRequest

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Facade\Ignition\Solutions;
 
 use Illuminate\Support\Facades\Artisan;

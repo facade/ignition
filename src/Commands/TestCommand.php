@@ -3,11 +3,9 @@
 namespace Facade\Ignition\Commands;
 
 use Exception;
-use Illuminate\Config\Repository;
 use Illuminate\Log\LogManager;
 use Illuminate\Console\Command;
-use Facade\Ignition\Facades\Flare;
-use Facade\FlareClient\Api;
+use Illuminate\Config\Repository;
 
 class TestCommand extends Command
 {
@@ -52,7 +50,7 @@ class TestCommand extends Command
             $this->info("❌ The default logging channel `{$defaultLogChannel}` is not configured in the `logging` config file");
         }
 
-        if (!in_array('flare', $activeStack['channels'])) {
+        if (! in_array('flare', $activeStack['channels'])) {
             $this->info("❌ The logging channel `{$defaultLogChannel}` does not contain the 'flare' channel");
         }
 
@@ -71,13 +69,13 @@ class TestCommand extends Command
 
     protected function sendTestException()
     {
-        $testException = new Exception("This is an exception to test if the integration with Flare works.");
+        $testException = new Exception('This is an exception to test if the integration with Flare works.');
 
         try {
             app('flare.client')->sendTestReport($testException);
             $this->info(PHP_EOL);
         } catch (Exception $exception) {
-            $this->warn('❌ We were unable to send an exception to Flare. Make sure that your key is correct and that you have a valid subscription. ' . PHP_EOL . PHP_EOL . 'For more info visit the docs on installing Flare in a Laravel project: http://flareapp.io/docs/flare-for-laravel/installation');
+            $this->warn('❌ We were unable to send an exception to Flare. Make sure that your key is correct and that you have a valid subscription. '.PHP_EOL.PHP_EOL.'For more info visit the docs on installing Flare in a Laravel project: http://flareapp.io/docs/flare-for-laravel/installation');
 
             return;
         }
@@ -85,4 +83,3 @@ class TestCommand extends Command
         $this->info('We tried to send an exception to Flare. Please check if it arrived!');
     }
 }
-

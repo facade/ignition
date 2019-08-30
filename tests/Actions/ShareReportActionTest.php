@@ -2,13 +2,13 @@
 
 namespace Facade\Ignition\Tests\Actions;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Arr;
-use Facade\Ignition\Actions\ShareReportAction;
-use Facade\Ignition\Tests\Mocks\FakeClient;
-use Facade\Ignition\Tests\TestCase;
 use Facade\FlareClient\Glows\Glow;
+use Facade\Ignition\Tests\TestCase;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Database\Eloquent\Model;
+use Facade\Ignition\Tests\Mocks\FakeClient;
+use Facade\Ignition\Actions\ShareReportAction;
 
 class ShareReportActionTest extends TestCase
 {
@@ -183,7 +183,7 @@ class ShareReportActionTest extends TestCase
         $userData = (new User([
             'id' => 1,
             'name' => 'Marcel',
-            'email' => 'marcel@beyondco.de'
+            'email' => 'marcel@beyondco.de',
         ]))->toArray();
 
         $report->addGlow(new Glow('Example Glow Data 1'));
@@ -212,7 +212,7 @@ class ShareReportActionTest extends TestCase
             'logs',
             'dumps',
 
-            'custom_context'
+            'custom_context',
         ];
 
         foreach ($dummyGroups as $group) {

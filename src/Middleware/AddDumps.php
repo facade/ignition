@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Middleware;
 
-use Facade\Ignition\DumpRecorder\DumpRecorder;
 use Facade\FlareClient\Report;
+use Facade\Ignition\DumpRecorder\DumpRecorder;
 
 class AddDumps
 {

@@ -2,10 +2,9 @@
 
 namespace Facade\Ignition\Tests\Exceptions;
 
+use Throwable;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Facade\IgnitionContracts\Solution;
-use Throwable;
 
 class AlwaysTrueSolutionProvider implements HasSolutionsForThrowable
 {

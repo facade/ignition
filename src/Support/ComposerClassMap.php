@@ -53,7 +53,6 @@ class ComposerClassMap
 
         foreach ($prefixes as $namespace => $directories) {
             foreach ($directories as $directory) {
-
                 $files = (new Finder)
                     ->in($directory)
                     ->files()
@@ -81,7 +80,6 @@ class ComposerClassMap
 
         foreach ($prefixes as $namespace => $directories) {
             foreach ($directories as $directory) {
-
                 $files = (new Finder)
                     ->in($directory)
                     ->files()
@@ -92,7 +90,7 @@ class ComposerClassMap
                         $basename = basename($file->getRelativePathname(), '.php');
 
                         if ($basename === $missingClass) {
-                            return $namespace . basename($file->getRelativePathname(), '.php');
+                            return $namespace.basename($file->getRelativePathname(), '.php');
                         }
                     }
                 }

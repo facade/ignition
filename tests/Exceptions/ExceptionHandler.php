@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Tests\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler;
 use Whoops\Handler\HandlerInterface;
+use Illuminate\Foundation\Exceptions\Handler;
 
 class ExceptionHandler extends Handler
 {

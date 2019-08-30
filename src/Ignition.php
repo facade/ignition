@@ -10,7 +10,7 @@ class Ignition
     /** @var Closure[] */
     public static $callBeforeShowingErrorPage = [];
 
-    /** @var array  */
+    /** @var array */
     public static $tabs = [];
 
     public static function tab(Tab $tab)

@@ -3,9 +3,9 @@
 namespace Facade\Ignition\Tests\Mocks;
 
 use Illuminate\Support\Arr;
+use PHPUnit\Framework\Assert;
 use Facade\FlareClient\Http\Client;
 use Facade\FlareClient\Http\Response;
-use PHPUnit\Framework\Assert;
 
 class FakeClient extends Client
 {

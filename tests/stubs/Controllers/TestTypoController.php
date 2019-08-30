@@ -6,6 +6,5 @@ class TestTypoController
 {
     public function __invoke()
     {
-
     }
 }

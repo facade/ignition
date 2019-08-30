@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\Tests;
 
+use Facade\FlareClient\Api;
+use Facade\FlareClient\Report;
+use Facade\FlareClient\Glows\Glow;
 use Facade\Ignition\Facades\Flare;
 use Facade\Ignition\IgnitionServiceProvider;
 use Facade\Ignition\Tests\TestClasses\FakeTime;
-use Facade\FlareClient\Api;
-use Facade\FlareClient\Glows\Glow;
-use Facade\FlareClient\Report;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -26,7 +26,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Flare' => Flare::class
+            'Flare' => Flare::class,
         ];
     }
 

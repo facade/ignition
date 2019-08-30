@@ -21,8 +21,6 @@ class Query
     /** @var float */
     protected $microtime;
 
-
-
     public static function fromQueryExecutedEvent(QueryExecuted $queryExecuted, bool $reportBindings = false)
     {
         return new static(

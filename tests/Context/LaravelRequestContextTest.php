@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\Tests\Context;
 
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Facade\Ignition\Tests\TestCase;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Route;
 use Facade\Ignition\Context\LaravelRequestContext;
-use Facade\Ignition\Tests\TestCase;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 class LaravelRequestContextTest extends TestCase
@@ -69,7 +69,7 @@ class LaravelRequestContextTest extends TestCase
 
         $this->assertSame([
             'parameter' => 'value',
-            'otherParameter' => 'second'
+            'otherParameter' => 'second',
         ], $contextData['route']['routeParameters']);
     }
 
@@ -101,7 +101,7 @@ class LaravelRequestContextTest extends TestCase
         $user = new User();
         $user->forceFill([
             'id' => 1,
-            'email' => 'marcel@beyondco.de'
+            'email' => 'marcel@beyondco.de',
         ]);
 
         $request = $this->createRequest('GET', '/route', [], ['cookie' => 'noms']);
@@ -119,14 +119,15 @@ class LaravelRequestContextTest extends TestCase
     public function it_the_authenticated_user_model_has_a_toFlare_method_it_will_be_used_to_collect_user_data()
     {
         $user = new class extends User {
-            public function toFlare() {
+            public function toFlare()
+            {
                 return ['id' => $this->id];
             }
         };
 
         $user->forceFill([
             'id' => 1,
-            'email' => 'marcel@beyondco.de'
+            'email' => 'marcel@beyondco.de',
         ]);
 
         $request = $this->createRequest('GET', '/route', [], ['cookie' => 'noms']);

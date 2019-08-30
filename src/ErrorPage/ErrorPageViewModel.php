@@ -4,18 +4,15 @@ namespace Facade\Ignition\ErrorPage;
 
 use Closure;
 use Exception;
-use Facade\Ignition\Ignition;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use InvalidArgumentException;
-use Facade\Ignition\IgnitionConfig;
-use Facade\Ignition\Http\Controllers\ShareReportController;
-use Facade\Ignition\Solutions\SolutionTransformer;
-use Facade\FlareClient\Report;
-use Laravel\Telescope\Http\Controllers\HomeController;
-use Laravel\Telescope\Telescope;
 use Throwable;
+use Facade\Ignition\Ignition;
+use Facade\FlareClient\Report;
+use Laravel\Telescope\Telescope;
+use Facade\Ignition\IgnitionConfig;
+use Illuminate\Contracts\Support\Arrayable;
+use Facade\Ignition\Solutions\SolutionTransformer;
+use Laravel\Telescope\Http\Controllers\HomeController;
+use Facade\Ignition\Http\Controllers\ShareReportController;
 
 class ErrorPageViewModel implements Arrayable
 {
@@ -65,9 +62,9 @@ class ErrorPageViewModel implements Arrayable
                 return '';
             }
 
-            $telescopeEntryId = (string)Telescope::$entriesQueue[0]->uuid;
+            $telescopeEntryId = (string) Telescope::$entriesQueue[0]->uuid;
 
-            return url(action([HomeController::class, 'index']) . "/exceptions/{$telescopeEntryId}");
+            return url(action([HomeController::class, 'index'])."/exceptions/{$telescopeEntryId}");
         } catch (Exception $exception) {
             return '';
         }
@@ -111,7 +108,7 @@ class ErrorPageViewModel implements Arrayable
 
     public function getAssetContents(string $asset): string
     {
-        $assetPath = __DIR__ . "/../../resources/compiled/{$asset}";
+        $assetPath = __DIR__."/../../resources/compiled/{$asset}";
 
         return file_get_contents($assetPath);
     }

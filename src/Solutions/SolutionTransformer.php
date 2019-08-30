@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\Solutions;
 
-use Illuminate\Contracts\Support\Arrayable;
-use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
-use Facade\IgnitionContracts\RunnableSolution;
 use Facade\IgnitionContracts\Solution;
+use Illuminate\Contracts\Support\Arrayable;
+use Facade\IgnitionContracts\RunnableSolution;
+use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
 
 class SolutionTransformer implements Arrayable
 {

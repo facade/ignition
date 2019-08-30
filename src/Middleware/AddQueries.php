@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Middleware;
 
-use Facade\Ignition\QueryRecorder\QueryRecorder;
 use Facade\FlareClient\Report;
+use Facade\Ignition\QueryRecorder\QueryRecorder;
 
 class AddQueries
 {

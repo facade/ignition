@@ -32,12 +32,12 @@ class AddGitInformation
 
     public function tag(): ?string
     {
-        return $this->command("git describe --tags --abbrev=0");
+        return $this->command('git describe --tags --abbrev=0');
     }
 
     public function remote(): ?string
     {
-        return $this->command("git config --get remote.origin.url");
+        return $this->command('git config --get remote.origin.url');
     }
 
     public function isClean(): bool

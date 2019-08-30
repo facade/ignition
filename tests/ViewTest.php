@@ -39,7 +39,7 @@ class ViewTest extends TestCase
         $viewData = [
             'app' => 'foo',
             'data' => true,
-            'user' => new User()
+            'user' => new User(),
         ];
 
         try {

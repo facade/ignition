@@ -38,7 +38,7 @@ class UseDefaultValetDbCredentialsSolution implements RunnableSolution
 
         $envLines = array_map(function (string $envLine) use ($value, $key) {
             return Str::startsWith($envLine, $key)
-                ? "{$key}={$value}" . PHP_EOL
+                ? "{$key}={$value}".PHP_EOL
                 : $envLine;
         }, file($envPath));
 
@@ -53,7 +53,7 @@ class UseDefaultValetDbCredentialsSolution implements RunnableSolution
     public function getRunParameters(): array
     {
         return [
-            'Valet documentation' => 'https://laravel.com/docs/master/valet'
+            'Valet documentation' => 'https://laravel.com/docs/master/valet',
         ];
     }
 

@@ -23,7 +23,7 @@ class Packagist
         }
 
         return array_map(function ($packageProperties) {
-            return new Package((array)$packageProperties);
+            return new Package((array) $packageProperties);
         }, $packages->results);
     }
 }

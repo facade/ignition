@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Views\Concerns;
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
+use Illuminate\Foundation\Application;
 use Illuminate\View\Engines\CompilerEngine;
 
 trait CollectsViewExceptions
@@ -51,7 +51,8 @@ trait CollectsViewExceptions
         return Collection::make($this->lastCompiledData)
             ->first(function ($compiledData) use ($compiledPath) {
                 $comparePath = $compiledData['compiledPath'];
-                return realpath(dirname($comparePath)) . '/' .basename($comparePath) === $compiledPath;
+
+                return realpath(dirname($comparePath)).'/'.basename($comparePath) === $compiledPath;
             });
     }
 

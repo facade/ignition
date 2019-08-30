@@ -2,14 +2,10 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Composer\Autoload\ClassLoader;
-use Facade\Ignition\Solutions\SuggestImportSolution;
-use Facade\Ignition\Support\ComposerClassMap;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Facade\IgnitionContracts\Solution;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 use Throwable;
+use Facade\Ignition\Support\ComposerClassMap;
+use Facade\Ignition\Solutions\SuggestImportSolution;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 class MissingImportSolutionProvider implements HasSolutionsForThrowable
 {
@@ -23,7 +19,7 @@ class MissingImportSolutionProvider implements HasSolutionsForThrowable
     {
         $pattern = '/Class \'([^\s]+)\' not found/m';
 
-        if (!preg_match($pattern, $throwable->getMessage(), $matches)) {
+        if (! preg_match($pattern, $throwable->getMessage(), $matches)) {
             return false;
         }
 

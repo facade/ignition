@@ -2,53 +2,53 @@
 
 namespace Facade\Ignition;
 
+use Monolog\Logger;
+use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
-use Illuminate\Foundation\Application;
-use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Log\LogManager;
 use Illuminate\Queue\QueueManager;
-use Illuminate\Support\Arr;
+use Facade\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Log;
+use Whoops\Handler\HandlerInterface;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
-use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
-use Facade\Ignition\Commands\TestCommand;
-use Facade\Ignition\Context\LaravelContextDetector;
-use Facade\Ignition\DumpRecorder\DumpRecorder;
-use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
+use Illuminate\Foundation\Application;
 use Facade\Ignition\ErrorPage\Renderer;
-use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
-use Facade\Ignition\Http\Controllers\HealthCheckController;
-use Facade\Ignition\Http\Controllers\ShareReportController;
-use Facade\Ignition\Http\Controllers\ScriptController;
-use Facade\Ignition\Http\Controllers\StyleController;
-use Facade\Ignition\LogRecorder\LogRecorder;
+use Facade\Ignition\Middleware\AddLogs;
+use Illuminate\Support\ServiceProvider;
 use Facade\Ignition\Logger\FlareHandler;
 use Facade\Ignition\Middleware\AddDumps;
-use Facade\Ignition\Middleware\AddEnvironmentInformation;
-use Facade\Ignition\Middleware\AddGitInformation;
-use Facade\Ignition\Middleware\AddLogs;
+use Illuminate\Log\Events\MessageLogged;
+use Facade\Ignition\Commands\TestCommand;
 use Facade\Ignition\Middleware\AddQueries;
+use Facade\Ignition\LogRecorder\LogRecorder;
 use Facade\Ignition\Middleware\AddSolutions;
+use Facade\Ignition\Views\Engines\PhpEngine;
+use Facade\Ignition\DumpRecorder\DumpRecorder;
 use Facade\Ignition\Middleware\SetNotifierName;
 use Facade\Ignition\QueryRecorder\QueryRecorder;
+use Facade\Ignition\Middleware\AddGitInformation;
+use Facade\Ignition\Views\Engines\CompilerEngine;
+use Facade\Ignition\Context\LaravelContextDetector;
+use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
+use Facade\Ignition\Http\Controllers\StyleController;
+use Facade\Ignition\Http\Controllers\ScriptController;
+use Facade\Ignition\Middleware\AddEnvironmentInformation;
+use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
+use Facade\Ignition\Http\Controllers\HealthCheckController;
+use Facade\Ignition\Http\Controllers\ShareReportController;
+use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
+use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
+use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
-use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
-use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
-use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
-use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
-use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
-use Facade\Ignition\Views\Engines\CompilerEngine;
-use Facade\Ignition\Views\Engines\PhpEngine;
-use Facade\FlareClient\Http\Client;
+use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
+use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
+use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
-use Monolog\Logger;
-use Whoops\Handler\HandlerInterface;
 
 class IgnitionServiceProvider extends ServiceProvider
 {
@@ -56,11 +56,11 @@ class IgnitionServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/flare.php' => config_path('flare.php'),
+                __DIR__.'/../config/flare.php' => config_path('flare.php'),
             ], 'config');
 
             $this->publishes([
-                __DIR__ . '/../config/ignition.php' => config_path('ignition.php'),
+                __DIR__.'/../config/ignition.php' => config_path('ignition.php'),
             ], 'config');
         }
 
@@ -69,8 +69,8 @@ class IgnitionServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/flare.php', 'flare');
-        $this->mergeConfigFrom(__DIR__ . '/../config/ignition.php', 'ignition');
+        $this->mergeConfigFrom(__DIR__.'/../config/flare.php', 'flare');
+        $this->mergeConfigFrom(__DIR__.'/../config/ignition.php', 'ignition');
 
         $this
             ->registerViewEngines()
@@ -98,7 +98,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerViewEngines()
     {
-        if (!$this->hasCustomViewEnginesRegistered()) {
+        if (! $this->hasCustomViewEnginesRegistered()) {
             return $this;
         }
 
@@ -115,7 +115,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerHousekeepingRoutes()
     {
-        if (!config('app.debug')) {
+        if (! config('app.debug')) {
             return $this;
         }
 
@@ -146,7 +146,7 @@ class IgnitionServiceProvider extends ServiceProvider
     protected function registerExceptionRenderer()
     {
         $this->app->bind(Renderer::class, function () {
-            return new Renderer(__DIR__ . '/../resources/views/');
+            return new Renderer(__DIR__.'/../resources/views/');
         });
 
         return $this;
@@ -206,6 +206,7 @@ class IgnitionServiceProvider extends ServiceProvider
         $this->app->singleton('flare.logger', function ($app) {
             $logger = new Logger('Flare');
             $logger->pushHandler(new FlareHandler($app->make('flare.client')));
+
             return $logger;
         });
 
@@ -310,7 +311,7 @@ class IgnitionServiceProvider extends ServiceProvider
             return false;
         }
 
-        if (!$resolver->resolve('blade') instanceof LaravelCompilerEngine) {
+        if (! $resolver->resolve('blade') instanceof LaravelCompilerEngine) {
             return false;
         }
 

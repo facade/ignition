@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
+use UnexpectedValueException;
+use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Route;
-use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 use Facade\Ignition\Support\ComposerClassMap;
 use Facade\Ignition\Tests\stubs\Controllers\TestTypoController;
-use Facade\Ignition\Tests\TestCase;
-use UnexpectedValueException;
+use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 
 class InvalidRouteActionSolutionProviderTest extends TestCase
 {
@@ -18,7 +18,7 @@ class InvalidRouteActionSolutionProviderTest extends TestCase
         $this->app->bind(
             ComposerClassMap::class,
             function () {
-                return new ComposerClassMap(__DIR__ . '/../../vendor/autoload.php');
+                return new ComposerClassMap(__DIR__.'/../../vendor/autoload.php');
             }
         );
     }

@@ -2,14 +2,10 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
 use InvalidArgumentException;
-use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
-use Facade\Ignition\Support\ComposerClassMap;
-use Facade\Ignition\Tests\stubs\Controllers\TestTypoController;
 use Facade\Ignition\Tests\TestCase;
-use UnexpectedValueException;
+use Illuminate\Support\Facades\View;
+use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 
 class ViewNotFoundSolutionProviderTest extends TestCase
 {
