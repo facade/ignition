@@ -24,4 +24,20 @@ return [
     */
 
     'theme' => 'light',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Masked request parameters
+    |--------------------------------------------------------------------------
+    |
+    | Here you can optionally specify which HTTP request parameters should be
+    | be sanitized.
+    |
+    | Use this to specify any sensitive parameters your application uses such
+    | as passwords, credit card numbers, email addresses...
+    */
+
+    'masked_request_parameters' => [
+
+    ],
 ];

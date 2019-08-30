@@ -32,6 +32,7 @@ use Facade\Ignition\Middleware\AddLogs;
 use Facade\Ignition\Middleware\AddQueries;
 use Facade\Ignition\Middleware\AddSolutions;
 use Facade\Ignition\Middleware\SetNotifierName;
+use Facade\Ignition\Middleware\UpdateMaskedRequestParameters;
 use Facade\Ignition\QueryRecorder\QueryRecorder;
 use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
@@ -278,6 +279,9 @@ class IgnitionServiceProvider extends ServiceProvider
 
         if (config('flare.reporting.collect_git_information')) {
             $middleware[] = (new AddGitInformation());
+        }
+        if (config('ignition.masked_request_parameters')) {
+            $middleware[] = (new UpdateMaskedRequestParameters());
         }
 
         foreach ($middleware as $singleMiddleware) {
