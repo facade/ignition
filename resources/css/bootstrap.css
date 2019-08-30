@@ -263,5 +263,5 @@ html.theme-dark .checkbox:before {
 
 html.theme-dark .tab-nav,
 html.theme-dark .dropdown {
-    background-color: var(--gray-300);
+    background-color: var(--gray-400);
 }
