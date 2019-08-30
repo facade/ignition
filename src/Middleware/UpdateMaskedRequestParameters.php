@@ -56,7 +56,7 @@ class UpdateMaskedRequestParameters
 
         $initial_value = $value;
 
-        switch (gettype($value)) {
+        switch (gettype($this->cast($value))) {
             case "boolean":
                 $value = $this->randomiseValueFromArray([true, false]);
 
@@ -135,5 +135,18 @@ class UpdateMaskedRequestParameters
     protected function randomInteger($length): int
     {
         return rand(1, (int) str_pad('', $length, 9));
+    }
+
+    protected function cast($value)
+    {
+        if (is_numeric($value)) {
+            if ((int) $value == $value) {
+                return (int) $value;
+            }
+
+            return (float) $value;
+        }
+
+        return $value;
     }
 }
