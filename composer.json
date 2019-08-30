@@ -9,16 +9,6 @@
     ],
     "homepage": "https://github.com/facade/ignition",
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:facade/flare-client-php.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:facade/ignition-contracts.git"
-        }
-    ],
     "require": {
         "php": "^7.1",
         "filp/whoops": "^2.1.4",
@@ -28,7 +18,7 @@
         "symfony/console": "^3.4|~4.0",
         "monolog/monolog": "~1.12",
         "facade/flare-client-php": "~1.0",
-        "facade/ignition-contracts": "*",
+        "facade/ignition-contracts": "~1.0",
         "ext-json": "*"
     },
     "require-dev": {
