@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Tests\Middleware;
 
-use Facade\Ignition\Middleware\UpdateMaskedRequestParameters as TestSubject;
 use PHPUnit\Framework\TestCase;
+use Facade\Ignition\Middleware\UpdateMaskedRequestParameters as TestSubject;
 
 class UpdateMaskedRequestParametersTest extends TestCase
 {
