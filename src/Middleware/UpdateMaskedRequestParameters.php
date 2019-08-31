@@ -6,7 +6,6 @@ use Facade\FlareClient\Report;
 
 class UpdateMaskedRequestParameters
 {
-
     public function handle(Report $report, $next)
     {
         if ($fields_to_mask = $this->getFieldsToMask()) {
@@ -38,7 +37,6 @@ class UpdateMaskedRequestParameters
                 continue;
             }
 
-
             if (isset($fields_to_mask[$key])) {
                 $this->maskProperty($value, $changed);
             }
@@ -58,30 +56,30 @@ class UpdateMaskedRequestParameters
         $initial_value = $value;
 
         switch (gettype($this->cast($value))) {
-            case "boolean":
+            case 'boolean':
                 $value = $this->randomiseValueFromArray([true, false]);
 
                 break;
 
-            case "integer":
+            case 'integer':
                 $value = $this->randomInteger(strlen($value));
 
                 break;
 
-            case "double":
+            case 'double':
                 $value = $this->randomFloat(strlen($value));
 
                 break;
 
-            case "string":
+            case 'string':
                 if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    /*if (class_exists(\Faker\Factory::class)) {
+                    if (class_exists(\Faker\Factory::class)) {
                         $value = (\Faker\Factory::create())->safeEmail;
 
                         break;
-                    }*/
+                    }
 
-                    $value = strtolower($this->randomString(30)) . '@example.com';
+                    $value = strtolower($this->randomString(30)).'@example.com';
 
                     break;
                 }
@@ -90,8 +88,8 @@ class UpdateMaskedRequestParameters
 
                 break;
 
-            case "NULL":
-            case "unknown type":
+            case 'NULL':
+            case 'unknown type':
                 $value = null;
 
                 break;
@@ -118,7 +116,7 @@ class UpdateMaskedRequestParameters
                 }
 
                 if ($changes) {
-                    $url = $url_parts['scheme'] . '://' . $url_parts['host'] . $url_parts['path'] . '?' . http_build_query($query_strings);
+                    $url = $url_parts['scheme'].'://'.$url_parts['host'].$url_parts['path'].'?'.http_build_query($query_strings);
                 }
             }
         }
@@ -144,10 +142,10 @@ class UpdateMaskedRequestParameters
 
     public function randomFloat($length): float
     {
-        $decimal = rand (0, 100) / 100;
-        $decimal_places = strlen($decimal)-1;
+        $decimal = rand(0, 100) / 100;
+        $decimal_places = strlen($decimal) - 1;
 
-        return (float) substr($this->randomInteger($length), 0, -$decimal_places) . $decimal;
+        return (float) substr($this->randomInteger($length), 0, -$decimal_places).$decimal;
     }
 
     public function randomInteger($length): int

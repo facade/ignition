@@ -7,7 +7,6 @@ use \PHPUnit\Framework\TestCase;
 
 class UpdateMaskedRequestParametersTest extends TestCase
 {
-
     /**
      * @var \Facade\Ignition\Middleware\UpdateMaskedRequestParameters
      */
@@ -59,8 +58,8 @@ class UpdateMaskedRequestParametersTest extends TestCase
             'request' => [
                 'first_name' => $this->faker->firstName,
                 'last_name' => $this->faker->lastName,
-                'email' => $this->faker->email,
-            ]
+                'email' => $this->faker->email
+            ],
         ];
 
         $this->subject->maskProperties($this->getFieldsToMask(), $before);
@@ -81,8 +80,8 @@ class UpdateMaskedRequestParametersTest extends TestCase
                 'first_name' => $this->faker->firstName,
                 'last_name' => $this->faker->lastName,
                 'email_address' => $this->faker->email,
-                'password' => $this->faker->email,
-            ]
+                'password' => $this->faker->password(15),
+            ],
         ];
 
         $this->subject->maskProperties($this->getFieldsToMask(), $before);
@@ -104,19 +103,19 @@ class UpdateMaskedRequestParametersTest extends TestCase
     /** @test */
     public function it_correctly_types_properties()
     {
-        $actual = $this->subject->cast("123456789");
+        $actual = $this->subject->cast('123456789');
 
         $this->assertEquals(123456789, $actual);
         $this->assertIsInt($actual);
 
-        $actual = $this->subject->cast("123456789.5");
+        $actual = $this->subject->cast('123456789.5');
 
         $this->assertEquals(123456789.5, $actual);
         $this->assertIsFloat($actual);
 
-        $actual = $this->subject->cast("testing");
+        $actual = $this->subject->cast('testing');
 
-        $this->assertEquals("testing", $actual);
+        $this->assertEquals('testing', $actual);
         $this->assertIsString($actual);
     }
 
@@ -152,7 +151,7 @@ class UpdateMaskedRequestParametersTest extends TestCase
 
         $this->assertEquals($before_url, $url);
 
-        $url = $before_url = $this->faker->url  . '?' . http_build_query(['password' => $this->faker->password(10)]);
+        $url = $before_url = $this->faker->url.'?'.http_build_query(['password' => $this->faker->password(10)]);
         $this->subject->maskQueryString($this->getFieldsToMask(), $url);
 
         $this->assertNotEquals($before_url, $url);
@@ -167,7 +166,7 @@ class UpdateMaskedRequestParametersTest extends TestCase
         for ($i = 0; $i < 30; $i++) {
             $random_selection = $this->subject->randomiseValueFromArray($tests);
 
-            if (!isset($random_selections[$random_selection])) {
+            if (! isset($random_selections[$random_selection])) {
                 $random_selections[$random_selection] = 0;
             }
             $random_selections[$random_selection]++;
