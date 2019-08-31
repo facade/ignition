@@ -93,10 +93,7 @@ class ErrorPageViewModel implements Arrayable
 
     protected function shareEndpoint()
     {
-        // In L5.5 and 5.6 `action` doesn't accept callable syntax, so we crash.
-        // Swap back to the uglier syntax until 5.5 & 5.6 support is removed.
-        // The same change is not needed for telescope action call above as telescope
-        // min version is 5.7, so it's not an issue there.
+        // use string notation as L5.5 and L5.6 don't support array notation yet
         return action('\Facade\Ignition\Http\Controllers\ShareReportController');
     }
 
