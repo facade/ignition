@@ -22,14 +22,14 @@ class UpdateMaskedRequestParameters
         return $next($report);
     }
 
-    protected function getFieldsToMask(): array
+    public function getFieldsToMask(): array
     {
         return config('ignition.masked_request_parameters');
     }
 
-    protected function maskProperties(array $fields_to_mask, array &$context)
+    public function maskProperties(array $fields_to_mask, array &$context, &$changes = null)
     {
-        $fields_to_mask = array_flip($fields_to_mask);
+        $fields_to_mask = array_combine($fields_to_mask, $fields_to_mask);
 
         foreach ($context as $key => &$value) {
             if (is_iterable($value)) {
@@ -38,13 +38,14 @@ class UpdateMaskedRequestParameters
                 continue;
             }
 
+
             if (isset($fields_to_mask[$key])) {
-                $this->maskProperty($value);
+                $this->maskProperty($value, $changes);
             }
         }
     }
 
-    protected function maskProperty(&$value, &$changed = null)
+    public function maskProperty(&$value, &$changed = null)
     {
         if (is_iterable($value)) {
             foreach ($value as &$_value) {
@@ -90,31 +91,33 @@ class UpdateMaskedRequestParameters
         }
     }
 
-    protected function maskQueryString(array $fields_to_mask, string &$url)
+    public function maskQueryString(array $fields_to_mask, string &$url)
     {
         $url_parts = parse_url($url);
-        parse_str($url_parts['query'], $query_strings);
+        if (isset($url_parts['query'])) {
+            parse_str($url_parts['query'], $query_strings);
 
-        if ($url_parts['query']) {
-            $changes = false;
-            foreach ($fields_to_mask as $field) {
-                if (isset($query_strings[$field])) {
-                    $this->maskProperty($query_strings[$field], $changes);
+            if ($url_parts['query']) {
+                $changes = false;
+                foreach ($fields_to_mask as $field) {
+                    if (isset($query_strings[$field])) {
+                        $this->maskProperty($query_strings[$field], $changes);
+                    }
                 }
-            }
 
-            if ($changes) {
-                $url = $url_parts['scheme'] . '://' . $url_parts['host'] . '?' . http_build_query($query_strings);
+                if ($changes) {
+                    $url = $url_parts['scheme'] . '://' . $url_parts['host'] . $url_parts['path'] . '?' . http_build_query($query_strings);
+                }
             }
         }
     }
 
-    protected function randomiseValueFromArray(array $possible_values)
+    public function randomiseValueFromArray(array $possible_values)
     {
         return $possible_values[array_rand($possible_values)];
     }
 
-    protected function randomString($length): string
+    public function randomString($length): string
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -127,17 +130,17 @@ class UpdateMaskedRequestParameters
         return $randomString;
     }
 
-    protected function randomFloat($length): string
+    public function randomFloat($length): float
     {
         return $this->randomInteger($length - 2) - rand (0, 100) / 100;
     }
 
-    protected function randomInteger($length): int
+    public function randomInteger($length): int
     {
         return rand(1, (int) str_pad('', $length, 9));
     }
 
-    protected function cast($value)
+    public function cast($value)
     {
         if (is_numeric($value)) {
             if ((int) $value == $value) {
