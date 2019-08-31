@@ -33,6 +33,7 @@ use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
 use Facade\Ignition\Http\Controllers\StyleController;
 use Facade\Ignition\Http\Controllers\ScriptController;
 use Facade\Ignition\Middleware\AddEnvironmentInformation;
+use Facade\Ignition\Middleware\UpdateMaskedRequestParameters;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
 use Facade\Ignition\Http\Controllers\HealthCheckController;
 use Facade\Ignition\Http\Controllers\ShareReportController;
@@ -279,6 +280,9 @@ class IgnitionServiceProvider extends ServiceProvider
 
         if (config('flare.reporting.collect_git_information')) {
             $middleware[] = (new AddGitInformation());
+        }
+        if (config('ignition.masked_request_parameters')) {
+            $middleware[] = (new UpdateMaskedRequestParameters());
         }
 
         foreach ($middleware as $singleMiddleware) {
