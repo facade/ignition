@@ -12,7 +12,6 @@ use Facade\Ignition\IgnitionConfig;
 use Illuminate\Contracts\Support\Arrayable;
 use Facade\Ignition\Solutions\SolutionTransformer;
 use Laravel\Telescope\Http\Controllers\HomeController;
-use Facade\Ignition\Http\Controllers\ShareReportController;
 
 class ErrorPageViewModel implements Arrayable
 {
