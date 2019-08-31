@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Tests\Middleware;
 
-use \Facade\Ignition\Middleware\UpdateMaskedRequestParameters as TestSubject;
-use \PHPUnit\Framework\TestCase;
+use Facade\Ignition\Middleware\UpdateMaskedRequestParameters as TestSubject;
+use PHPUnit\Framework\TestCase;
 
 class UpdateMaskedRequestParametersTest extends TestCase
 {
@@ -16,7 +16,8 @@ class UpdateMaskedRequestParametersTest extends TestCase
      */
     private $faker;
 
-    public function __construct($name = null, array $data = [], $dataName = '') {
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
         parent::__construct($name, $data, $dataName);
 
         $this->subject = new TestSubject();
@@ -58,7 +59,7 @@ class UpdateMaskedRequestParametersTest extends TestCase
             'request' => [
                 'first_name' => $this->faker->firstName,
                 'last_name' => $this->faker->lastName,
-                'email' => $this->faker->email
+                'email' => $this->faker->email,
             ],
         ];
 
