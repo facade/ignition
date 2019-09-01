@@ -46,7 +46,10 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function getRunParameters(): array
     {
-        return ['view' => ''];
+        return [
+            'variableName' => $this->variableName,
+            'viewFile' => $this->viewFile
+        ];
     }
 
     public function run(array $parameters = [])
