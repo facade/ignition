@@ -49,6 +49,8 @@ class ComposerClassMap
                 'basename' => $basename,
                 'match' => $match,
             ];
+        })->filter(function ($class) {
+            return $class['match'] > 30;
         })->sortByDesc('match')->first();
         if (isset($matches['fqcn'])) {
             return $matches['fqcn'];
