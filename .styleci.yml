@@ -1,4 +1,8 @@
 preset: laravel
 
+enabled:
+    - ordered_imports
+
 disabled:
   - single_class_element_per_statement
+  - length_ordered_imports
