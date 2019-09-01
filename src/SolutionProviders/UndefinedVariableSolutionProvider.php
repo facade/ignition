@@ -47,7 +47,13 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
             }
         })->toArray();
 
-        $solutions[] = new MakeViewVariableOptionalSolution($variableName, $viewFile);
+        $optionalSolution = new MakeViewVariableOptionalSolution($variableName, $viewFile);
+        if ($optionalSolution->isRunnable()) {
+            $solutions[] = $optionalSolution;
+        } else {
+            $solutions[] = BaseSolution::create($optionalSolution->getSolutionTitle())
+                ->setSolutionDescription($optionalSolution->getSolutionActionDescription());
+        }
         return $solutions;
     }
 

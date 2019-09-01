@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\Solutions;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Artisan;
 use Facade\IgnitionContracts\RunnableSolution;
 
@@ -55,10 +56,42 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
         ];
     }
 
+    public function isRunnable(array $parameters = [])
+    {
+        return $this->makeOptional($this->getRunParameters()) !== false;
+    }
+
     public function run(array $parameters = [])
     {
+        $output = $this->makeOptional($parameters);
+        if ($output !== false) {
+            file_put_contents($parameters['viewFile'], $output);
+        }
+    }
+
+    public function makeOptional(array $parameters = [])
+    {
         $originalContents = file_get_contents($parameters['viewFile']);
-        $contents = str_replace('$' . $parameters['variableName'], '$' . $parameters['variableName'] . " ?? ''", $originalContents);
-        file_put_contents($parameters['viewFile'], $contents);
+        $newContents = str_replace('$' . $parameters['variableName'], '$' . $parameters['variableName'] . " ?? ''", $originalContents);
+
+        // Compile blade, tokenize
+        $originalTokens = token_get_all(Blade::compileString($originalContents));
+        $newTokens = token_get_all(Blade::compileString($newContents));
+        // Generate what we expect the tokens to be after we change the blade file
+        $expectedTokens = [];
+        foreach ($originalTokens as $key => $token) {
+            $expectedTokens[] = $token;
+            if ($token[0] === T_VARIABLE && $token[1] === '$' . $parameters['variableName']) {
+                $expectedTokens[] = [T_WHITESPACE, ' ', 1];
+                $expectedTokens[] = [T_COALESCE, '??', 1];
+                $expectedTokens[] = [T_WHITESPACE, ' ', 1];
+                $expectedTokens[] = [T_CONSTANT_ENCAPSED_STRING, "''", 1];
+            }
+        }
+        if ($expectedTokens !== $newTokens) {
+            return false;
+        }
+
+        return $newContents;
     }
 }
