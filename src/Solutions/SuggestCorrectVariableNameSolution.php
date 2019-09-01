@@ -2,13 +2,11 @@
 
 namespace Facade\Ignition\Solutions;
 
-use Illuminate\Support\Facades\Artisan;
-use Facade\IgnitionContracts\RunnableSolution;
 use Illuminate\Support\Facades\Blade;
+use Facade\IgnitionContracts\RunnableSolution;
 
 class SuggestCorrectVariableNameSolution implements RunnableSolution
 {
-
     private $variableName;
     private $viewFile;
 
@@ -21,7 +19,7 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
 
     public function getSolutionTitle(): string
     {
-        return 'Possible typo $' . $this->variableName;
+        return 'Possible typo $'.$this->variableName;
     }
 
     public function getDocumentationLinks(): array
@@ -31,10 +29,11 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
 
     public function getSolutionActionDescription(): string
     {
-        $path = str_replace(base_path() . '/', '', $this->viewFile);
+        $path = str_replace(base_path().'/', '', $this->viewFile);
         $output = [
-            'Did you mean `$' . $this->suggested . '`?',
+            'Did you mean `$'.$this->suggested.'`?',
         ];
+
         return implode(PHP_EOL, $output);
     }
 
@@ -53,7 +52,7 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
         return [
             'variableName' => $this->variableName,
             'viewFile' => $this->viewFile,
-            'suggested' => $this->suggested
+            'suggested' => $this->suggested,
         ];
     }
 
@@ -73,7 +72,7 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
     public function fixTypo(array $parameters = [])
     {
         $originalContents = file_get_contents($parameters['viewFile']);
-        $newContents = str_replace('$' . $parameters['variableName'], '$' . $parameters['suggested'], $originalContents);
+        $newContents = str_replace('$'.$parameters['variableName'], '$'.$parameters['suggested'], $originalContents);
 
         // Compile blade, tokenize
         $originalTokens = token_get_all(Blade::compileString($originalContents));
@@ -82,8 +81,8 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
         // Generate what we expect the tokens to be after we change the blade file
         $expectedTokens = $originalTokens;
         foreach ($expectedTokens as $key => $token) {
-            if ($token[0] === T_VARIABLE && $token[1] === '$' . $parameters['variableName']) {
-                $expectedTokens[$key][1] = '$' . $parameters['suggested'];
+            if ($token[0] === T_VARIABLE && $token[1] === '$'.$parameters['variableName']) {
+                $expectedTokens[$key][1] = '$'.$parameters['suggested'];
             }
         }
         if ($expectedTokens !== $newTokens) {
@@ -92,5 +91,4 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
 
         return $newContents;
     }
-
 }

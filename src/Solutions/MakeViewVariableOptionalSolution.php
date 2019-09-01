@@ -3,12 +3,10 @@
 namespace Facade\Ignition\Solutions;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Artisan;
 use Facade\IgnitionContracts\RunnableSolution;
 
 class MakeViewVariableOptionalSolution implements RunnableSolution
 {
-
     private $variableName;
     private $viewFile;
 
@@ -20,7 +18,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function getSolutionTitle(): string
     {
-        return '$' . $this->variableName . ' is undefined';
+        return '$'.$this->variableName.' is undefined';
     }
 
     public function getDocumentationLinks(): array
@@ -30,11 +28,12 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function getSolutionActionDescription(): string
     {
-        $path = str_replace(base_path() . '/', '', $this->viewFile);
+        $path = str_replace(base_path().'/', '', $this->viewFile);
         $output = [
             'Make the variable optional in the blade template.',
-            'Replace `{{ $' . $this->variableName . ' }}` with `{{ $' . $this->variableName . ' ?? \'\' }}`',
+            'Replace `{{ $'.$this->variableName.' }}` with `{{ $'.$this->variableName.' ?? \'\' }}`',
         ];
+
         return implode(PHP_EOL, $output);
     }
 
@@ -52,7 +51,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
     {
         return [
             'variableName' => $this->variableName,
-            'viewFile' => $this->viewFile
+            'viewFile' => $this->viewFile,
         ];
     }
 
@@ -72,7 +71,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
     public function makeOptional(array $parameters = [])
     {
         $originalContents = file_get_contents($parameters['viewFile']);
-        $newContents = str_replace('$' . $parameters['variableName'], '$' . $parameters['variableName'] . " ?? ''", $originalContents);
+        $newContents = str_replace('$'.$parameters['variableName'], '$'.$parameters['variableName']." ?? ''", $originalContents);
         // Compile blade, tokenize
         $originalTokens = token_get_all(Blade::compileString($originalContents));
         $newTokens = token_get_all(Blade::compileString($newContents));
@@ -80,7 +79,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
         $expectedTokens = [];
         foreach ($originalTokens as $key => $token) {
             $expectedTokens[] = $token;
-            if ($token[0] === T_VARIABLE && $token[1] === '$' . $parameters['variableName']) {
+            if ($token[0] === T_VARIABLE && $token[1] === '$'.$parameters['variableName']) {
                 $expectedTokens[] = [T_WHITESPACE, ' ', $token[2]];
                 $expectedTokens[] = [T_COALESCE, '??', $token[2]];
                 $expectedTokens[] = [T_WHITESPACE, ' ', $token[2]];

@@ -3,7 +3,6 @@
 namespace Facade\Ignition\SolutionProviders;
 
 use Throwable;
-use RuntimeException;
 use Facade\IgnitionContracts\Solution;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\Ignition\Exceptions\ViewException;
@@ -22,6 +21,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         if (! $throwable instanceof ViewException) {
             return false;
         }
+
         return $this->getNameAndView($throwable) !== null;
     }
 
@@ -32,12 +32,13 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         extract($this->getNameAndView($throwable));
         $solutions = collect($throwable->getViewData())->map(function ($value, $key) use ($variableName) {
             similar_text($variableName, $key, $percentage);
-            return ['match' => $percentage, 'value' => $value ];
-        })->sortByDesc('match')->filter(function($var, $key) {
+
+            return ['match' => $percentage, 'value' => $value];
+        })->sortByDesc('match')->filter(function ($var, $key) {
             return $var['match'] > 40;
-        })->keys()->map(function($suggestion) use ($variableName, $viewFile) {
+        })->keys()->map(function ($suggestion) use ($variableName, $viewFile) {
             return new SuggestCorrectVariableNameSolution($variableName, $viewFile, $suggestion);
-        })->map(function($solution) {
+        })->map(function ($solution) {
             // If the solution isn't runnable, then just return the suggestions without the fix
             if ($solution->isRunnable()) {
                 return $solution;
@@ -54,6 +55,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
             $solutions[] = BaseSolution::create($optionalSolution->getSolutionTitle())
                 ->setSolutionDescription($optionalSolution->getSolutionActionDescription());
         }
+
         return $solutions;
     }
 
@@ -63,9 +65,9 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 
         preg_match($pattern, $throwable->getMessage(), $matches);
         if (count($matches) === 3) {
-            list($string, $variableName, $viewFile) = $matches;
+            [$string, $variableName, $viewFile] = $matches;
+
             return compact('variableName', 'viewFile');
         }
-        return null;
     }
 }

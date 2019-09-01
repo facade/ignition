@@ -2,13 +2,10 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use UnexpectedValueException;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Route;
 use Facade\Ignition\Exceptions\ViewException;
 use Facade\Ignition\Support\ComposerClassMap;
-use Facade\Ignition\Tests\stubs\Controllers\TestTypoController;
 use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
 
 class UndefinedVariableSolutionProviderTest extends TestCase
@@ -39,7 +36,7 @@ class UndefinedVariableSolutionProviderTest extends TestCase
     public function it_can_recommend_fixing_a_variable_name_typo()
     {
         $viewData = [
-            'footerDescription' => 'foo'
+            'footerDescription' => 'foo',
         ];
 
         try {
@@ -61,7 +58,7 @@ class UndefinedVariableSolutionProviderTest extends TestCase
     public function it_can_fix_a_variable_name_typo()
     {
         $viewData = [
-            'footerDescription' => 'foo'
+            'footerDescription' => 'foo',
         ];
 
         try {
@@ -81,6 +78,6 @@ class UndefinedVariableSolutionProviderTest extends TestCase
 
     protected function getUndefinedVariableException(): ViewException
     {
-        return new ViewException("Undefined variable: notSet (View: ./views/welcome.blade.php)");
+        return new ViewException('Undefined variable: notSet (View: ./views/welcome.blade.php)');
     }
 }

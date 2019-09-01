@@ -301,7 +301,7 @@ class IgnitionServiceProvider extends ServiceProvider
             MissingPackageSolutionProvider::class,
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
-            UndefinedVariableSolutionProvider::class
+            UndefinedVariableSolutionProvider::class,
         ];
     }
 
