@@ -7,7 +7,7 @@ use Facade\Ignition\LogRecorder\LogRecorder;
 
 class AddLogs
 {
-    /** @var \Facade\Flare\LogRecorder\LogRecorder */
+    /** @var \Facade\Ignition\LogRecorder\LogRecorder */
     protected $logRecorder;
 
     public function __construct(LogRecorder $logRecorder)

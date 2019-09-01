@@ -21,7 +21,7 @@ class ErrorPageViewModel implements Arrayable
     /** @var array */
     protected $solutions;
 
-    /** @var \Facade\Flare\IgnitionConfig */
+    /** @var \Facade\Ignition\IgnitionConfig */
     protected $ignitionConfig;
 
     /** @var \Facade\FlareClient\Report */

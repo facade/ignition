@@ -9,13 +9,13 @@ use Facade\IgnitionContracts\SolutionProviderRepository;
 
 class ErrorPageHandler
 {
-    /** @var \Facade\Flare\IgnitionConfig */
+    /** @var \Facade\Ignition\IgnitionConfig */
     protected $ignitionConfig;
 
-    /** @var \Facade\Flare\Flare */
+    /** @var \Facade\Ignition\Facades\Flare */
     protected $flareClient;
 
-    /** @var \Facade\Flare\ErrorPage\Renderer */
+    /** @var \Facade\Ignition\ErrorPage\Renderer */
     protected $renderer;
 
     /** @var \Facade\IgnitionContracts\SolutionProviderRepository */
