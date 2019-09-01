@@ -31,8 +31,6 @@ class ShareReportActionTest extends TestCase
     {
         $report = $this->getTestReport();
 
-        $report['context']['context']['shared'] = true;
-
         $this->shareAction->handle($report, [
             'stackTraceTab',
             'debugTab',
