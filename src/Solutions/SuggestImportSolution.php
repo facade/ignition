@@ -27,11 +27,13 @@ class SuggestImportSolution implements RunnableSolution
     public function getSolutionActionDescription(): string
     {
         $output = [
-            'You have a missing class import. Try importing this class: `'.$this->class.'`.'
+            'You have a missing class import. Try importing this class: `'.$this->class.'`.',
         ];
-         return implode(PHP_EOL, $output);
+
+        return implode(PHP_EOL, $output);
     }
-     public function getRunButtonText(): string
+
+    public function getRunButtonText(): string
     {
         return 'Import class';
     }
