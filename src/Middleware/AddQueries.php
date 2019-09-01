@@ -7,7 +7,7 @@ use Facade\Ignition\QueryRecorder\QueryRecorder;
 
 class AddQueries
 {
-    /** @var \Facade\Flare\QueryRecorder\QueryRecorder */
+    /** @var \Facade\Ignition\QueryRecorder\QueryRecorder */
     protected $queryRecorder;
 
     public function __construct(QueryRecorder $queryRecorder)

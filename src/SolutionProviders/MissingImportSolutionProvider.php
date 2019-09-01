@@ -12,7 +12,7 @@ class MissingImportSolutionProvider implements HasSolutionsForThrowable
     /** @var string */
     protected $foundClass;
 
-    /** @var \Facade\Flare\Support\ComposerClassMap */
+    /** @var \Facade\Ignition\Support\ComposerClassMap */
     protected $composerClassMap;
 
     public function canSolve(Throwable $throwable): bool
