@@ -2,14 +2,10 @@
 
 This is some contents
 
-<footer>{{ $footerDescriptin['hi'] }}</footer>
+<footer>{{ $footerDescription }}</footer>
 
 @isset($something)
     {{ $something }}
-
-    @if ($something)
-        <!-- $footerDescriptin -->
-    @endif
 @endisset
 
 Test

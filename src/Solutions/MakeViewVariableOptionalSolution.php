@@ -73,7 +73,6 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
     {
         $originalContents = file_get_contents($parameters['viewFile']);
         $newContents = str_replace('$' . $parameters['variableName'], '$' . $parameters['variableName'] . " ?? ''", $originalContents);
-
         // Compile blade, tokenize
         $originalTokens = token_get_all(Blade::compileString($originalContents));
         $newTokens = token_get_all(Blade::compileString($newContents));
@@ -82,10 +81,10 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
         foreach ($originalTokens as $key => $token) {
             $expectedTokens[] = $token;
             if ($token[0] === T_VARIABLE && $token[1] === '$' . $parameters['variableName']) {
-                $expectedTokens[] = [T_WHITESPACE, ' ', 1];
-                $expectedTokens[] = [T_COALESCE, '??', 1];
-                $expectedTokens[] = [T_WHITESPACE, ' ', 1];
-                $expectedTokens[] = [T_CONSTANT_ENCAPSED_STRING, "''", 1];
+                $expectedTokens[] = [T_WHITESPACE, ' ', $token[2]];
+                $expectedTokens[] = [T_COALESCE, '??', $token[2]];
+                $expectedTokens[] = [T_WHITESPACE, ' ', $token[2]];
+                $expectedTokens[] = [T_CONSTANT_ENCAPSED_STRING, "''", $token[2]];
             }
         }
         if ($expectedTokens !== $newTokens) {
