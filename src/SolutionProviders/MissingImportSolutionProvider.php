@@ -2,17 +2,17 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use Facade\Ignition\Support\ComposerClassMap;
 use Facade\Ignition\Solutions\SuggestImportSolution;
+use Facade\Ignition\Support\ComposerClassMap;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Throwable;
 
 class MissingImportSolutionProvider implements HasSolutionsForThrowable
 {
     /** @var string */
     protected $foundClass;
 
-    /** @var \Facade\Flare\Support\ComposerClassMap */
+    /** @var \Facade\Ignition\Support\ComposerClassMap */
     protected $composerClassMap;
 
     public function canSolve(Throwable $throwable): bool

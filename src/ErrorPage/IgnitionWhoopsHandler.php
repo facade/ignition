@@ -8,7 +8,7 @@ use Whoops\Handler\Handler;
 
 class IgnitionWhoopsHandler extends Handler
 {
-    /** @var \Facade\Flare\ErrorPage\ErrorPageHandler */
+    /** @var \Facade\Ignition\ErrorPage\ErrorPageHandler */
     protected $errorPageHandler;
 
     /** @var \Throwable */

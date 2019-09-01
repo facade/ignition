@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use Illuminate\Database\QueryException;
 use Facade\Ignition\Solutions\RunMigrationsSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Illuminate\Database\QueryException;
+use Throwable;
 
 class TableNotFoundSolutionProvider implements HasSolutionsForThrowable
 {

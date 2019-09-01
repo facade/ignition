@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\QueryRecorder;
 
-use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Events\QueryExecuted;
 
 class QueryRecorder
 {
-    /** @var \Facade\Flare\QueryRecorder\Query[] */
+    /** @var \Facade\Ignition\QueryRecorder\Query|[] */
     protected $queries = [];
 
     /** @var \Illuminate\Contracts\Foundation\Application */

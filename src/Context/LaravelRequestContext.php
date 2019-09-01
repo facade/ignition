@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Context;
 
-use Illuminate\Http\Request;
 use Facade\FlareClient\Context\RequestContext;
+use Illuminate\Http\Request;
 
 class LaravelRequestContext extends RequestContext
 {
@@ -12,6 +12,7 @@ class LaravelRequestContext extends RequestContext
 
     public function __construct(Request $request)
     {
+        parent::__construct($request);
         $this->request = $request;
     }
 

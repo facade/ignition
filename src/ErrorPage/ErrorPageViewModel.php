@@ -4,14 +4,13 @@ namespace Facade\Ignition\ErrorPage;
 
 use Closure;
 use Exception;
-use Throwable;
-use Facade\Ignition\Ignition;
 use Facade\FlareClient\Report;
-use Laravel\Telescope\Telescope;
+use Facade\Ignition\Ignition;
 use Facade\Ignition\IgnitionConfig;
-use Illuminate\Contracts\Support\Arrayable;
 use Facade\Ignition\Solutions\SolutionTransformer;
+use Illuminate\Contracts\Support\Arrayable;
 use Laravel\Telescope\Http\Controllers\HomeController;
+use Laravel\Telescope\Telescope;
 
 class ErrorPageViewModel implements Arrayable
 {
@@ -21,20 +20,21 @@ class ErrorPageViewModel implements Arrayable
     /** @var array */
     protected $solutions;
 
-    /** @var \Facade\Flare\IgnitionConfig */
+    /** @var \Facade\Ignition\IgnitionConfig */
     protected $ignitionConfig;
 
     /** @var \Facade\FlareClient\Report */
     protected $report;
 
-    public function __construct(Throwable $throwable, IgnitionConfig $ignitionConfig, Report $report, array $solutions)
-    {
+    public function __construct(
+        \Throwable $throwable,
+        IgnitionConfig $ignitionConfig,
+        Report $report,
+        array $solutions
+    ) {
         $this->throwable = $throwable;
-
         $this->ignitionConfig = $ignitionConfig;
-
         $this->report = $report;
-
         $this->solutions = $solutions;
     }
 

@@ -2,16 +2,16 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use Illuminate\Support\Str;
+use Facade\Ignition\Solutions\MissingPackageSolution;
 use Facade\Ignition\Support\Packagist\Package;
 use Facade\Ignition\Support\Packagist\Packagist;
-use Facade\Ignition\Solutions\MissingPackageSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Illuminate\Support\Str;
+use Throwable;
 
 class MissingPackageSolutionProvider implements HasSolutionsForThrowable
 {
-    /** @var \Facade\Flare\Support\Packagist\Package|null */
+    /** @var \Facade\Ignition\Support\Packagist\Package|null */
     protected $package;
 
     public function canSolve(Throwable $throwable): bool

@@ -7,7 +7,7 @@ use Facade\Ignition\DumpRecorder\DumpRecorder;
 
 class AddDumps
 {
-    /** @var \Facade\Flare\DumpRecorder\DumpRecorder */
+    /** @var \Facade\Ignition\DumpRecorder\DumpRecorder */
     protected $dumpRecorder;
 
     public function __construct(DumpRecorder $dumpRecorder)

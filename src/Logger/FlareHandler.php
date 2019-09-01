@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\Logger;
 
-use Throwable;
-use Monolog\Logger;
 use Facade\FlareClient\Flare;
 use Facade\Ignition\Ignition;
 use Facade\Ignition\Tabs\Tab;
 use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Logger;
+use Throwable;
 
 class FlareHandler extends AbstractProcessingHandler
 {

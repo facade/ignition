@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\Tabs;
 
-use Throwable;
-use JsonSerializable;
-use Illuminate\Support\Str;
 use Facade\FlareClient\Flare;
+use Illuminate\Support\Str;
+use JsonSerializable;
+use Throwable;
 
 abstract class Tab implements JsonSerializable
 {
@@ -13,7 +13,7 @@ abstract class Tab implements JsonSerializable
 
     public $styles = [];
 
-    /** @var \Facade\Flare\Flare */
+    /** @var \Facade\Ignition\Facades\Flare */
     protected $flare;
 
     /** @var Throwable */
