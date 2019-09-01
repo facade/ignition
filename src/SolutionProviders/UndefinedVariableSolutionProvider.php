@@ -5,6 +5,7 @@ namespace Facade\Ignition\SolutionProviders;
 use Throwable;
 use RuntimeException;
 use Facade\IgnitionContracts\Solution;
+use Facade\IgnitionContracts\BaseSolution;
 use Facade\Ignition\Exceptions\ViewException;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Facade\Ignition\Solutions\MakeViewVariableOptionalSolution;
@@ -36,6 +37,14 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
             return $var['match'] > 40;
         })->keys()->map(function($suggestion) use ($variableName, $viewFile) {
             return new SuggestCorrectVariableNameSolution($variableName, $viewFile, $suggestion);
+        })->map(function($solution) {
+            // If the solution isn't runnable, then just return the suggestions without the fix
+            if ($solution->isRunnable()) {
+                return $solution;
+            } else {
+                return BaseSolution::create($solution->getSolutionTitle())
+                    ->setSolutionDescription($solution->getSolutionActionDescription());
+            }
         })->toArray();
 
         $solutions[] = new MakeViewVariableOptionalSolution($variableName, $viewFile);

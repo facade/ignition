@@ -4,6 +4,7 @@ namespace Facade\Ignition\Solutions;
 
 use Illuminate\Support\Facades\Artisan;
 use Facade\IgnitionContracts\RunnableSolution;
+use Illuminate\Support\Facades\Blade;
 
 class SuggestCorrectVariableNameSolution implements RunnableSolution
 {
@@ -56,10 +57,40 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
         ];
     }
 
+    public function isRunnable(array $parameters = [])
+    {
+        return $this->fixTypo($this->getRunParameters()) !== false;
+    }
+
     public function run(array $parameters = [])
     {
-        $originalContents = file_get_contents($parameters['viewFile']);
-        $contents = str_replace('$' . $parameters['variableName'], '$' . $parameters['suggested'], $originalContents);
-        file_put_contents($parameters['viewFile'], $contents);
+        $output = $this->fixTypo($parameters);
+        if ($output !== false) {
+            file_put_contents($parameters['viewFile'], $output);
+        }
     }
+
+    public function fixTypo(array $parameters = [])
+    {
+        $originalContents = file_get_contents($parameters['viewFile']);
+        $newContents = str_replace('$' . $parameters['variableName'], '$' . $parameters['suggested'], $originalContents);
+
+        // Compile blade, tokenize
+        $originalTokens = token_get_all(Blade::compileString($originalContents));
+        $newTokens = token_get_all(Blade::compileString($newContents));
+
+        // Generate what we expect the tokens to be after we change the blade file
+        $expectedTokens = $originalTokens;
+        foreach ($expectedTokens as $key => $token) {
+            if ($token[0] === T_VARIABLE && $token[1] === '$' . $parameters['variableName']) {
+                $expectedTokens[$key][1] = '$' . $parameters['suggested'];
+            }
+        }
+        if ($expectedTokens !== $newTokens) {
+            return false;
+        }
+
+        return $newContents;
+    }
+
 }
