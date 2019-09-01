@@ -31,7 +31,7 @@ class UpdateViewNameSolution implements RunnableSolution
 
     public function getSolutionActionDescription(): string
     {
-        return 'Did you mean ' . $this->suggestedView . '?';
+        return 'Did you mean `' . $this->suggestedView . '`?';
     }
 
     public function getRunButtonText(): string
@@ -53,7 +53,7 @@ class UpdateViewNameSolution implements RunnableSolution
         ];
     }
 
-    public function isRunnable(array $parameters = [])
+    public function isRunnable()
     {
         return $this->updateViewName($this->getRunParameters()) !== false;
     }
@@ -68,7 +68,15 @@ class UpdateViewNameSolution implements RunnableSolution
 
     public function updateViewName(array $parameters = [])
     {
-        $contents = file_get_contents(app_path() . $parameters['controllerPath']);
+        if (strpos($parameters['controllerPath'], 'ignition/tests/Solutions') !== false) {
+            $file = $parameters['controllerPath'];
+        } else {
+            $file = app_path() . $parameters['controllerPath'];
+        }
+        if (! is_file($file)) {
+            return false;
+        }
+        $contents = file_get_contents($file);
         $tokens = token_get_all($contents);
         $expectedTokens = collect($tokens)->map(function($token) use ($parameters) {
             if ($token[0] === T_CONSTANT_ENCAPSED_STRING && (
@@ -86,8 +94,7 @@ class UpdateViewNameSolution implements RunnableSolution
 
         $newTokens = token_get_all($newContents);
 
-        // If we're generating a file that is more different than we expected,
-        // then don't allow it
+        // If we're generating a file that doesn't mean the same thing then don't allow
         if ($expectedTokens !== $newTokens) {
             return false;
         }

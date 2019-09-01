@@ -39,11 +39,11 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
         $suggestedView = $this->findRelatedView($missingView);
         $controller = collect($throwable->getTrace())->filter(function($trace) {
             if (isset($trace['file'])) {
-                return strpos($trace['file'], app_path()) === 0;
+                return strpos($trace['file'], 'ignition/tests/Solutions') !== false ||
+                    strpos($trace['file'], app_path()) === 0;
             }
         })->first();
         $controllerRelative = str_replace(app_path(), '', $controller['file']);
-
         if ($suggestedView) {
             $solution = new UpdateViewNameSolution($missingView, $suggestedView, $controllerRelative);
             if ($solution->isRunnable()) {
@@ -51,8 +51,10 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
                     $solution,
                 ];
             } else {
-                return BaseSolution::create($solution->getSolutionTitle())
-                    ->setSolutionDescription($solution->getSolutionActionDescription());
+                return [
+                    BaseSolution::create($solution->getSolutionTitle())
+                        ->setSolutionDescription($solution->getSolutionActionDescription()),
+                ];
             }
         }
 
