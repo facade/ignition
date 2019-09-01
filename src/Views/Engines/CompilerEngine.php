@@ -3,6 +3,8 @@
 namespace Facade\Ignition\Views\Engines;
 
 use Exception;
+use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
+use Facade\IgnitionContracts\ProvidesSolution;
 use ReflectionProperty;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
@@ -53,7 +55,13 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
             throw $baseException;
         }
 
-        $exception = new ViewException(
+        $viewExceptionClass = ViewException::class;
+
+        if (in_array(ProvidesSolution::class, class_implements($baseException))) {
+            $viewExceptionClass = ViewExceptionWithSolution::class;
+        }
+
+        $exception = new $viewExceptionClass(
             $this->getMessage($baseException),
             0,
             1,
@@ -61,6 +69,10 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
             $this->getBladeLineNumber($baseException->getFile(), $baseException->getLine()),
             $baseException
         );
+
+        if ($viewExceptionClass === ViewExceptionWithSolution::class) {
+            $exception->setSolution($baseException->getSolution());
+        }
 
         $this->modifyViewsInTrace($exception);
 

@@ -31,8 +31,6 @@ class ShareReportActionTest extends TestCase
     {
         $report = $this->getTestReport();
 
-        $report['context']['context']['shared'] = true;
-
         $this->shareAction->handle($report, [
             'stackTraceTab',
             'debugTab',
@@ -146,9 +144,7 @@ class ShareReportActionTest extends TestCase
 
         $this->assertFalse(Arr::has($sharedReport, 'context.env'));
         $this->assertFalse(Arr::has($sharedReport, 'context.git'));
-        $this->assertSame([
-            'shared' => true,
-        ], Arr::get($sharedReport, 'context.context'));
+        $this->assertNull(Arr::get($sharedReport, 'context.context'));
         $this->assertFalse(Arr::has($sharedReport, 'context.custom_context'));
     }
 
