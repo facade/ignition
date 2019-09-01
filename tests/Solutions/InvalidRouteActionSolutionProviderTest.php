@@ -34,7 +34,7 @@ class InvalidRouteActionSolutionProviderTest extends TestCase
     /** @test */
     public function it_can_recommend_changing_the_routes_method()
     {
-        Route::get('/test', TestTypoController::class);
+        Route::get('/test', 'TestTypoController@index');
 
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solution = app(InvalidRouteActionSolutionProvider::class)->getSolutions($this->getInvalidRouteActionException())[0];
@@ -45,7 +45,7 @@ class InvalidRouteActionSolutionProviderTest extends TestCase
     /** @test */
     public function it_wont_recommend_another_controller_class_if_the_names_are_too_different()
     {
-        Route::get('/test', TestTypoController::class);
+        Route::get('/test', 'TestTypoController@index');
 
         $invalidController = 'UnrelatedTestTypoController';
 
