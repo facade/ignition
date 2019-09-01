@@ -20,6 +20,16 @@ class IgnitionConfig implements Arrayable
         return Arr::get($this->options, 'editor');
     }
 
+    public function getHomesteadSitesPath(): ?string
+    {
+        return Arr::get($this->options, 'homestead-sites-path');
+    }
+
+    public function getLocalSitesPath(): ?string
+    {
+        return Arr::get($this->options, 'local-sites-path');
+    }
+
     public function getTheme(): ?string
     {
         return Arr::get($this->options, 'theme');
@@ -29,6 +39,8 @@ class IgnitionConfig implements Arrayable
     {
         return [
             'editor' => $this->getEditor(),
+            'homestead-sites-path' => $this->getHomesteadSitesPath(),
+            'local-sites-path' => $this->getLocalSitesPath(),
             'theme' => $this->getTheme(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
         ];
