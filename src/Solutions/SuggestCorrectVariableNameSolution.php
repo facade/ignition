@@ -71,6 +71,11 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
 
     public function fixTypo(array $parameters = [])
     {
+        // Make sure suggested variable is valid alpha-numeric with underscore, or return false
+        if (! preg_match('/^[a-zA-Z]+[a-zA-Z0-9_]+$/', $parameters['suggested'])) {
+            return false;
+        }
+
         $originalContents = file_get_contents($parameters['viewFile']);
         $newContents = str_replace('$'.$parameters['variableName'], '$'.$parameters['suggested'], $originalContents);
 
