@@ -11,7 +11,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
     private $variableName;
     private $viewFile;
 
-    public function __construct($variableName, $viewFile)
+    public function __construct($variableName = null, $viewFile = null)
     {
         $this->variableName = $variableName;
         $this->viewFile = $viewFile;
@@ -31,7 +31,12 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function getSolutionActionDescription(): string
     {
-        return 'Make the variable optional in the blade template. ```{{ $' . $this->variableName . ' ?? \'\' }}```';
+        $path = str_replace(base_path() . '/', '', $this->viewFile);
+        $output = [
+            'Make the variable optional in the blade template.',
+            'Replace `{{ $' . $this->variableName . ' }}` with `{{ $' . $this->variableName . ' ?? \'\' }}`'
+        ];
+        return implode(PHP_EOL, $output);
     }
 
     public function getRunButtonText(): string
@@ -54,6 +59,8 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function run(array $parameters = [])
     {
-
+        $originalContents = file_get_contents($parameters['viewFile']);
+        $contents = str_replace('$' . $parameters['variableName'], '$' . $parameters['variableName'] . " ?? ''", $originalContents);
+        file_put_contents($parameters['viewFile'], $contents);
     }
 }
