@@ -27,14 +27,15 @@ class ErrorPageViewModel implements Arrayable
     /** @var \Facade\FlareClient\Report */
     protected $report;
 
-    public function __construct(Throwable $throwable, IgnitionConfig $ignitionConfig, Report $report, array $solutions)
-    {
+    public function __construct(
+        \Throwable $throwable,
+        IgnitionConfig $ignitionConfig,
+        Report $report,
+        array $solutions
+    ) {
         $this->throwable = $throwable;
-
         $this->ignitionConfig = $ignitionConfig;
-
         $this->report = $report;
-
         $this->solutions = $solutions;
     }
 

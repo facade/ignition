@@ -44,7 +44,7 @@ class ShareReportAction
                 'lineSelection' => $lineSelection,
             ]);
         } catch (Exception $exception) {
-            throw (new UnableToShareErrorException($exception->getMessage()));
+            throw new UnableToShareErrorException($exception->getMessage());
         }
     }
 
