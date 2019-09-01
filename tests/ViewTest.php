@@ -2,6 +2,10 @@
 
 namespace Facade\Ignition\Tests;
 
+use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
+use Facade\IgnitionContracts\BaseSolution;
+use Facade\IgnitionContracts\ProvidesSolution;
+use Facade\IgnitionContracts\Solution;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\View;
 use Facade\Ignition\Exceptions\ViewException;
@@ -12,7 +16,7 @@ class ViewTest extends TestCase
     {
         parent::setUp();
 
-        View::addLocation(__DIR__.'/stubs/views');
+        View::addLocation(__DIR__ . '/stubs/views');
     }
 
     /** @test */
@@ -50,10 +54,32 @@ class ViewTest extends TestCase
     }
 
     /** @test */
+    public function it_adds_base_exception_solution_to_view_exception()
+    {
+        try {
+            $exception = new ExceptionWithSolution;
+            view('solution-exception', ['exception' => $exception])->render();
+        } catch (ViewException $exception) {
+            $this->assertTrue($exception instanceof ViewExceptionWithSolution);
+            $this->assertInstanceOf(Solution::class, $exception->getSolution());
+            $this->assertSame('This is a solution', $exception->getSolution()->getSolutionTitle());
+        }
+    }
+
+    /** @test */
     public function it_detects_php_view_exceptions()
     {
         $this->expectException(ViewException::class);
 
         view('php-exception')->render();
+    }
+}
+
+class ExceptionWithSolution extends \Exception implements ProvidesSolution
+{
+    public function getSolution(): Solution
+    {
+        return BaseSolution::create('This is a solution')
+            ->setSolutionDescription('With a description');
     }
 }
