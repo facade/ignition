@@ -73,6 +73,7 @@ class UndefinedVariableSolutionProviderTest extends TestCase
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solutions = app(UndefinedVariableSolutionProvider::class)->getSolutions($viewException);
         $parameters = $solutions[0]->getRunParameters();
+        $parameters['viewFile'] = tempnam(sys_get_temp_dir(), 'undefined-variable-blade');
         $solutions[0]->run($parameters);
     }
 
