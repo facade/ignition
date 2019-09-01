@@ -3,12 +3,12 @@
 namespace Facade\Ignition\Views\Engines;
 
 use Exception;
-use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
-use Facade\IgnitionContracts\ProvidesSolution;
 use ReflectionProperty;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Facade\Ignition\Exceptions\ViewException;
+use Facade\IgnitionContracts\ProvidesSolution;
+use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
 use Facade\Ignition\Views\Concerns\CollectsViewExceptions;
 use Facade\Ignition\Views\Compilers\BladeSourceMapCompiler;
 
