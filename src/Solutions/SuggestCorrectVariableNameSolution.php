@@ -20,7 +20,7 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
 
     public function getSolutionTitle(): string
     {
-        return 'Possible typo in $' . $this->variableName;
+        return 'Possible typo $' . $this->variableName;
     }
 
     public function getDocumentationLinks(): array

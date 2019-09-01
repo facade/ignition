@@ -12,28 +12,23 @@ use Facade\Ignition\Solutions\SuggestCorrectVariableNameSolution;
 
 class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 {
+    private $variableName;
+
+    private $viewFile;
+
     public function canSolve(Throwable $throwable): bool
     {
         if (! $throwable instanceof ViewException) {
             return false;
         }
-
-        $pattern = '/Undefined variable: (.*?) \(View: (.*?)\)/';
-
-        preg_match($pattern, $throwable->getMessage(), $matches);
-        if (count($matches) === 3) {
-            list($string, $this->variableName, $this->viewFile) = $matches;
-            return true;
-        }
+        return $this->getNameAndView($throwable) !== null;
     }
 
     public function getSolutions(Throwable $throwable): array
     {
         $solutions = [];
 
-        $variableName = $this->variableName;
-        $viewFile = $this->viewFile;
-
+        extract($this->getNameAndView($throwable));
         $solutions = collect($throwable->getViewData())->map(function ($value, $key) use ($variableName) {
             similar_text($variableName, $key, $percentage);
             return ['match' => $percentage, 'value' => $value ];
@@ -43,7 +38,19 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
             return new SuggestCorrectVariableNameSolution($variableName, $viewFile, $suggestion);
         })->toArray();
 
-        $solutions[] = new MakeViewVariableOptionalSolution($this->variableName, $this->viewFile);
+        $solutions[] = new MakeViewVariableOptionalSolution($variableName, $viewFile);
         return $solutions;
+    }
+
+    private function getNameAndView(Throwable $throwable)
+    {
+        $pattern = '/Undefined variable: (.*?) \(View: (.*?)\)/';
+
+        preg_match($pattern, $throwable->getMessage(), $matches);
+        if (count($matches) === 3) {
+            list($string, $variableName, $viewFile) = $matches;
+            return compact('variableName', 'viewFile');
+        }
+        return null;
     }
 }
