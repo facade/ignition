@@ -5,21 +5,22 @@ namespace Facade\Ignition\Solutions;
 use Illuminate\Support\Facades\Artisan;
 use Facade\IgnitionContracts\RunnableSolution;
 
-class MakeViewVariableOptionalSolution implements RunnableSolution
+class SuggestCorrectVariableNameSolution implements RunnableSolution
 {
 
     private $variableName;
     private $viewFile;
 
-    public function __construct($variableName = null, $viewFile = null)
+    public function __construct($variableName = null, $viewFile = null, $suggested = null)
     {
         $this->variableName = $variableName;
         $this->viewFile = $viewFile;
+        $this->suggested = $suggested;
     }
 
     public function getSolutionTitle(): string
     {
-        return '$' . $this->variableName . ' is undefined';
+        return 'Possible typo in $' . $this->variableName;
     }
 
     public function getDocumentationLinks(): array
@@ -31,15 +32,14 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
     {
         $path = str_replace(base_path() . '/', '', $this->viewFile);
         $output = [
-            'Make the variable optional in the blade template.',
-            'Replace `{{ $' . $this->variableName . ' }}` with `{{ $' . $this->variableName . ' ?? \'\' }}`',
+            'Did you mean `$' . $this->suggested . '`?',
         ];
         return implode(PHP_EOL, $output);
     }
 
     public function getRunButtonText(): string
     {
-        return 'Make variable optional';
+        return 'Fix typo';
     }
 
     public function getSolutionDescription(): string
@@ -51,14 +51,15 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
     {
         return [
             'variableName' => $this->variableName,
-            'viewFile' => $this->viewFile
+            'viewFile' => $this->viewFile,
+            'suggested' => $this->suggested
         ];
     }
 
     public function run(array $parameters = [])
     {
         $originalContents = file_get_contents($parameters['viewFile']);
-        $contents = str_replace('$' . $parameters['variableName'], '$' . $parameters['variableName'] . " ?? ''", $originalContents);
+        $contents = str_replace('$' . $parameters['variableName'], '$' . $parameters['suggested'], $originalContents);
         file_put_contents($parameters['viewFile'], $contents);
     }
 }

@@ -8,6 +8,7 @@ use Facade\IgnitionContracts\Solution;
 use Facade\Ignition\Exceptions\ViewException;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Facade\Ignition\Solutions\MakeViewVariableOptionalSolution;
+use Facade\Ignition\Solutions\SuggestCorrectVariableNameSolution;
 
 class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 {
@@ -28,8 +29,21 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 
     public function getSolutions(Throwable $throwable): array
     {
-        return [
-            new MakeViewVariableOptionalSolution($this->variableName, $this->viewFile)
-        ];
+        $solutions = [];
+
+        $variableName = $this->variableName;
+        $viewFile = $this->viewFile;
+
+        $solutions = collect($throwable->getViewData())->map(function ($value, $key) use ($variableName) {
+            similar_text($variableName, $key, $percentage);
+            return ['match' => $percentage, 'value' => $value ];
+        })->sortByDesc('match')->filter(function($var, $key) {
+            return $var['match'] > 40;
+        })->keys()->map(function($suggestion) use ($variableName, $viewFile) {
+            return new SuggestCorrectVariableNameSolution($variableName, $viewFile, $suggestion);
+        })->toArray();
+
+        $solutions[] = new MakeViewVariableOptionalSolution($this->variableName, $this->viewFile);
+        return $solutions;
     }
 }
