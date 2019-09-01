@@ -27,16 +27,31 @@ class ComposerClassMap
         return array_merge($classes, $this->listClassesInPsrMaps());
     }
 
-    public function searchClassMap(string $missingClass): ?string
+    public function searchClassMap(string $missingClass): string
     {
-        foreach ($this->composer->getClassMap() as $fqcn => $file) {
+        $classParts = explode('\\', $missingClass);
+        $missingClassName = array_pop($classParts);
+        $matches = collect($this->composer->getClassMap())->map(function($file, $fqcn) use ($missingClassName) {
             $basename = basename($file, '.php');
-
-            if ($basename === $missingClass) {
-                return $fqcn;
+            if ($missingClassName == basename($file, '.php')) {
+                $match = 90;
+            } else {
+                $match = similar_text($fqcn, $missingClassName);
             }
+            // Apply a weight towards facades
+            if (strpos($fqcn, 'Illuminate\Support\Facades') === 0) {
+                $match += 10;
+            }
+            return [
+                'fqcn' => $fqcn,
+                'file' => $file,
+                'basename' => $basename,
+                'match' => $match,
+            ];
+        })->sortByDesc('match')->first();
+        if (isset($matches['fqcn'])) {
+            return $matches['fqcn'];
         }
-
         return null;
     }
 
