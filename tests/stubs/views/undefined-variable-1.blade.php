@@ -2,7 +2,7 @@
 
 This is some contents
 
-<footer>{{ $footerDescription }}</footer>
+<footer>{{ $footerDescriptin }}</footer>
 
 @isset($something)
     {{ $something }}
