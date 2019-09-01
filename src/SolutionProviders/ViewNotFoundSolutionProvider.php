@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\View;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Facade\IgnitionContracts\BaseSolution;
+use Symfony\Component\Filesystem\Filesystem;
 use Facade\Ignition\Exceptions\ViewException;
 use Facade\Ignition\Support\StringComparator;
+use Facade\Ignition\Solutions\CreateViewFileSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+
 
 class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
 {
@@ -42,8 +45,7 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
         }
 
         return [
-            BaseSolution::create("{$missingView} was not found.")
-                ->setSolutionDescription('Are you sure the view exist and is a `.blade.php` file?'),
+            new CreateViewFileSolution($missingView)
         ];
     }
 
