@@ -2,10 +2,7 @@
 
 namespace Facade\Ignition\Solutions;
 
-use Illuminate\Support\Facades\Blade;
-use Symfony\Component\Filesystem\Filesystem;
 use Facade\IgnitionContracts\RunnableSolution;
-use Illuminate\Support\Facades\View;
 
 class UpdateViewNameSolution implements RunnableSolution
 {
@@ -21,7 +18,7 @@ class UpdateViewNameSolution implements RunnableSolution
 
     public function getSolutionTitle(): string
     {
-        return $this->missingView . ' was not found.';
+        return $this->missingView.' was not found.';
     }
 
     public function getDocumentationLinks(): array
@@ -31,7 +28,7 @@ class UpdateViewNameSolution implements RunnableSolution
 
     public function getSolutionActionDescription(): string
     {
-        return 'Did you mean `' . $this->suggestedView . '`?';
+        return 'Did you mean `'.$this->suggestedView.'`?';
     }
 
     public function getRunButtonText(): string
@@ -49,7 +46,7 @@ class UpdateViewNameSolution implements RunnableSolution
         return [
             'missingView' => $this->missingView,
             'suggestedView' => $this->suggestedView,
-            'controllerPath' => $this->controllerPath
+            'controllerPath' => $this->controllerPath,
         ];
     }
 
@@ -62,7 +59,7 @@ class UpdateViewNameSolution implements RunnableSolution
     {
         $output = $this->updateViewName($parameters);
         if ($output !== false) {
-            file_put_contents(app_path() . $parameters['controllerPath'], $output);
+            file_put_contents(app_path().$parameters['controllerPath'], $output);
         }
     }
 
@@ -71,24 +68,25 @@ class UpdateViewNameSolution implements RunnableSolution
         if (strpos($parameters['controllerPath'], 'ignition/tests/Solutions') !== false) {
             $file = $parameters['controllerPath'];
         } else {
-            $file = app_path() . $parameters['controllerPath'];
+            $file = app_path().$parameters['controllerPath'];
         }
         if (! is_file($file)) {
             return false;
         }
         $contents = file_get_contents($file);
         $tokens = token_get_all($contents);
-        $expectedTokens = collect($tokens)->map(function($token) use ($parameters) {
+        $expectedTokens = collect($tokens)->map(function ($token) use ($parameters) {
             if ($token[0] === T_CONSTANT_ENCAPSED_STRING && (
-                $token[1] == "'" .  $parameters['missingView'] . "'" ||
-                $token[1] == '"' . $parameters['missingView'] . '"'
+                $token[1] == "'".$parameters['missingView']."'" ||
+                $token[1] == '"'.$parameters['missingView'].'"'
             )) {
-                $token[1] = "'" .  $parameters['suggestedView'] . "'";
+                $token[1] = "'".$parameters['suggestedView']."'";
             }
+
             return $token;
         })->toArray();
 
-        $newContents = collect($expectedTokens)->map(function($token) {
+        $newContents = collect($expectedTokens)->map(function ($token) {
             return is_array($token) ? $token[1] : $token;
         })->implode('');
 
@@ -98,6 +96,7 @@ class UpdateViewNameSolution implements RunnableSolution
         if ($expectedTokens !== $newTokens) {
             return false;
         }
+
         return $newContents;
     }
 }

@@ -9,13 +9,11 @@ use Illuminate\Support\Facades\View;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Facade\IgnitionContracts\BaseSolution;
-use Symfony\Component\Filesystem\Filesystem;
 use Facade\Ignition\Exceptions\ViewException;
 use Facade\Ignition\Support\StringComparator;
 use Facade\Ignition\Solutions\CreateViewFileSolution;
 use Facade\Ignition\Solutions\UpdateViewNameSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-
 
 class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
 {
@@ -37,7 +35,7 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
         $missingView = $matches[1] ?? null;
 
         $suggestedView = $this->findRelatedView($missingView);
-        $controller = collect($throwable->getTrace())->filter(function($trace) {
+        $controller = collect($throwable->getTrace())->filter(function ($trace) {
             if (isset($trace['file'])) {
                 return strpos($trace['file'], 'ignition/tests/Solutions') !== false ||
                     strpos($trace['file'], app_path()) === 0;

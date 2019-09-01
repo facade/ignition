@@ -2,10 +2,9 @@
 
 namespace Facade\Ignition\Solutions;
 
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Symfony\Component\Filesystem\Filesystem;
 use Facade\IgnitionContracts\RunnableSolution;
-use Illuminate\Support\Facades\View;
 
 class CreateViewFileSolution implements RunnableSolution
 {
@@ -18,7 +17,7 @@ class CreateViewFileSolution implements RunnableSolution
 
     public function getSolutionTitle(): string
     {
-        return $this->viewName . ' was not found.';
+        return $this->viewName.' was not found.';
     }
 
     public function getDocumentationLinks(): array
@@ -56,7 +55,7 @@ class CreateViewFileSolution implements RunnableSolution
         $fileViewFinder = View::getFinder();
 
         $filesystem = new Filesystem();
-        $filesystem->mkdir($fileViewFinder->getPaths()[0] . '/' . $path . '/');
-        touch($fileViewFinder->getPaths()[0] . '/' . $path . '/' . $file . '.blade.php');
+        $filesystem->mkdir($fileViewFinder->getPaths()[0].'/'.$path.'/');
+        touch($fileViewFinder->getPaths()[0].'/'.$path.'/'.$file.'.blade.php');
     }
 }

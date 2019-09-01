@@ -6,7 +6,6 @@ use UnexpectedValueException;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Route;
 use Facade\Ignition\Support\ComposerClassMap;
-use Facade\Ignition\Tests\stubs\Controllers\TestTypoController;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 
 class InvalidRouteActionSolutionProviderTest extends TestCase
