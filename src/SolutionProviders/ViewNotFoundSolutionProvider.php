@@ -45,7 +45,7 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
         }
 
         return [
-            new CreateViewFileSolution($missingView)
+            new CreateViewFileSolution($missingView),
         ];
     }
 
