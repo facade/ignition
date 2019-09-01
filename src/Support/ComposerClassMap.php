@@ -53,17 +53,11 @@ class ComposerClassMap
 
         foreach ($prefixes as $namespace => $directories) {
             foreach ($directories as $directory) {
-                $files = (new Finder)
-                    ->in($directory)
-                    ->files()
-                    ->name('*.php');
-
+                $files = $this->getFiles($directory);
                 foreach ($files as $file) {
-                    if ($file instanceof SplFileInfo) {
-                        $fqcn = $this->getFullyQualifiedClassNameFromFile($namespace, $file);
-
-                        $classes[$fqcn] = $file->getRelativePathname();
-                    }
+                    /** @var SplFileInfo $file */
+                    $fqcn = $this->getFullyQualifiedClassNameFromFile($namespace, $file);
+                    $classes[$fqcn] = $file->getRelativePathname();
                 }
             }
         }
@@ -80,18 +74,14 @@ class ComposerClassMap
 
         foreach ($prefixes as $namespace => $directories) {
             foreach ($directories as $directory) {
-                $files = (new Finder)
-                    ->in($directory)
-                    ->files()
-                    ->name('*.php');
+                $files = $this->getFiles($directory);
 
                 foreach ($files as $file) {
-                    if ($file instanceof SplFileInfo) {
-                        $basename = basename($file->getRelativePathname(), '.php');
+                    /** @var SplFileInfo $file */
+                    $basename = basename($file->getRelativePathname(), '.php');
 
-                        if ($basename === $missingClass) {
-                            return $namespace.basename($file->getRelativePathname(), '.php');
-                        }
+                    if ($basename === $missingClass) {
+                        return $namespace.basename($file->getRelativePathname(), '.php');
                     }
                 }
             }
@@ -111,5 +101,16 @@ class ComposerClassMap
         );
 
         return $rootNamespace.$class;
+    }
+
+    private function getFiles($directory, \Closure $closure = null)
+    {
+        return (new Finder)
+            ->in($directory)
+            ->files()
+            ->filter(null !== $closure ? $closure : function ($file) {
+                return $file instanceof SplFileInfo;
+            })
+            ->name('*.php');
     }
 }
