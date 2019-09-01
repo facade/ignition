@@ -26,3 +26,6 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Community Plugins
+[Awesome Ignition Plugins](https://github.com/GeneaLabs/awesome-laravel-ignition-plugins)
