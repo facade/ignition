@@ -17,6 +17,15 @@ class ShareReportAction
     /** @var \Facade\FlareClient\Http\Client */
     protected $client;
 
+    /** @var array */
+    protected $forgeables = [
+        'request',
+        'request_data',
+        'headers',
+        'session',
+        'cookies',
+    ];
+
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -86,11 +95,9 @@ class ShareReportAction
 
     protected function removeRequestInformation(array $contextItems): array
     {
-        Arr::forget($contextItems, 'request');
-        Arr::forget($contextItems, 'request_data');
-        Arr::forget($contextItems, 'headers');
-        Arr::forget($contextItems, 'session');
-        Arr::forget($contextItems, 'cookies');
+        foreach ($this->forgeables as $forgeable) {
+            Arr::forget($contextItems, $forgeable);
+        }
 
         return $contextItems;
     }
