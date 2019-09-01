@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\View;
 
 class CreateViewFileSolution implements RunnableSolution
 {
-    private $viewFile;
+    private $viewName;
 
     public function __construct($viewName = null)
     {

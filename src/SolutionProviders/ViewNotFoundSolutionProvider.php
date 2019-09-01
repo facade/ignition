@@ -13,6 +13,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Facade\Ignition\Exceptions\ViewException;
 use Facade\Ignition\Support\StringComparator;
 use Facade\Ignition\Solutions\CreateViewFileSolution;
+use Facade\Ignition\Solutions\UpdateViewNameSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 
@@ -36,12 +37,23 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
         $missingView = $matches[1] ?? null;
 
         $suggestedView = $this->findRelatedView($missingView);
+        $controller = collect($throwable->getTrace())->filter(function($trace) {
+            if (isset($trace['file'])) {
+                return strpos($trace['file'], app_path()) === 0;
+            }
+        })->first();
+        $controllerRelative = str_replace(app_path(), '', $controller['file']);
 
         if ($suggestedView) {
-            return [
-                BaseSolution::create("{$missingView} was not found.")
-                    ->setSolutionDescription("Did you mean `{$suggestedView}`?"),
-            ];
+            $solution = new UpdateViewNameSolution($missingView, $suggestedView, $controllerRelative);
+            if ($solution->isRunnable()) {
+                return [
+                    $solution,
+                ];
+            } else {
+                return BaseSolution::create($solution->getSolutionTitle())
+                    ->setSolutionDescription($solution->getSolutionActionDescription());
+            }
         }
 
         return [
