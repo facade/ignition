@@ -2,11 +2,8 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use Illuminate\Support\Str;
-use InvalidArgumentException;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
-use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 
 class MergeConflictSolutionProviderTest extends TestCase
