@@ -16,17 +16,21 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
             return false;
         }
 
-        if (Str::startsWith($throwable->getMessage(), 'syntax error, unexpected \'<<\'')) {
-            $file = file_get_contents($throwable->getFile());
-            if (strpos($file, '<<<<<<<') !== false &&
-                strpos($file, '=======') !== false &&
-                strpos($file, '>>>>>>>') !== false
-            ) {
-                return true;
-            }
+        if (! Str::startsWith($throwable->getMessage(), 'syntax error, unexpected \'<<\'')) {
+            return false;
         }
 
-        return false;
+        $file = file_get_contents($throwable->getFile());
+
+        if (strpos($file, '=======') === false) {
+            return false;
+        }
+
+        if (strpos($file, '>>>>>>>') === false) {
+            return false;
+        }
+
+        return true;
     }
 
     public function getSolutions(Throwable $throwable): array
