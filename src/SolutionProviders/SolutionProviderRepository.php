@@ -47,8 +47,15 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
 
         $providerSolutions = $this->solutionProviders
             ->filter(function (string $solutionClass) {
-                return in_array(HasSolutionsForThrowable::class, class_implements($solutionClass)) &&
-                       ! in_array($solutionClass, config('ignition.disabled_solutions'));
+                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass))) {
+                    return false;
+                }
+
+                if (in_array($solutionClass, config('ignition.disabled_solutions'))) {
+                    return false;
+                }
+
+                return true;
             })
             ->map(function (string $solutionClass) {
                 return app($solutionClass);
