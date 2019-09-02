@@ -68,6 +68,18 @@ class LogTest extends TestCase
     }
 
     /** @test */
+    public function it_can_log_null_values()
+    {
+        Log::info(null);
+        Log::debug(null);
+        Log::error(null);
+        Log::emergency(null);
+        Log::critical(null);
+
+        $this->fakeClient->assertRequestsSent(0);
+    }
+
+    /** @test */
     public function it_adds_log_messages_to_the_report()
     {
         Route::get('exception', function () {
