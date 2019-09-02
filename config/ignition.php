@@ -24,4 +24,15 @@ return [
     */
 
     'theme' => env('IGNITION_THEME', 'light'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Disabled solutions
+    |--------------------------------------------------------------------------
+    |
+    | Specify which solutions providers should not be used.
+    |
+    */
+
+    'disabled_solutions' => [],
 ];
