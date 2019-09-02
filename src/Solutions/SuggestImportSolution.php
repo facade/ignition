@@ -67,5 +67,25 @@ class SuggestImportSolution implements RunnableSolution
     public function importClass(array $parameters = [])
     {
         return false;
+        // $originalContents = file_get_contents($parameters['viewFile']);
+        // $newContents = str_replace('$'.$parameters['variableName'], '$'.$parameters['variableName']." ?? ''", $originalContents);
+        // // Compile blade, tokenize
+        // $originalTokens = token_get_all(Blade::compileString($originalContents));
+        // $newTokens = token_get_all(Blade::compileString($newContents));
+        // // Generate what we expect the tokens to be after we change the blade file
+        // $expectedTokens = [];
+        // foreach ($originalTokens as $key => $token) {
+        //     $expectedTokens[] = $token;
+        //     if ($token[0] === T_VARIABLE && $token[1] === '$'.$parameters['variableName']) {
+        //         $expectedTokens[] = [T_WHITESPACE, ' ', $token[2]];
+        //         $expectedTokens[] = [T_COALESCE, '??', $token[2]];
+        //         $expectedTokens[] = [T_WHITESPACE, ' ', $token[2]];
+        //         $expectedTokens[] = [T_CONSTANT_ENCAPSED_STRING, "''", $token[2]];
+        //     }
+        // }
+        // if ($expectedTokens !== $newTokens) {
+        //     return false;
+        // }
+        // return $newContents;
     }
 }

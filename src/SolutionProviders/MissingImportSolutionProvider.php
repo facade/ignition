@@ -34,7 +34,9 @@ class MissingImportSolutionProvider implements HasSolutionsForThrowable
 
     public function getSolutions(Throwable $throwable): array
     {
-        return [new SuggestImportSolution($this->foundClass)];
+        $path = $this->composerClassMap->listClasses()[$throwable->getTrace()[0]['class']];
+        $fileRelative = str_replace(app_path(), '', $path);
+        return [new SuggestImportSolution($this->foundClass, $fileRelative)];
     }
 
     protected function search(string $missingClass)
