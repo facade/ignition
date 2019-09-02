@@ -3,8 +3,8 @@
 namespace Facade\Ignition\Views\Engines;
 
 use Exception;
-use Illuminate\Support\Arr;
 use ReflectionProperty;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Facade\Ignition\Exceptions\ViewException;
@@ -100,7 +100,7 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
     {
         $trace = Collection::make($exception->getTrace())
             ->map(function ($trace) {
-                if ($compiledData = $this->findCompiledView(Arr::get($trace,'file', ''))) {
+                if ($compiledData = $this->findCompiledView(Arr::get($trace, 'file', ''))) {
                     $trace['file'] = $compiledData['path'];
                     $trace['line'] = $this->getBladeLineNumber($trace['file'], $trace['line']);
                 }
