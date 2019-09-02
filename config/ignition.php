@@ -16,12 +16,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Homestead Path Mapping
+    | Remote Path Mapping
     |--------------------------------------------------------------------------
     |
-    | If you are using homestead, it will be necessary to specify your path
-    | mapping, just like in your Homestead.yaml file. Leaving either one, or
-    | both of these empty or null will not trigger the homestead URL changes.
+    | If you are using a remote dev server, like Laravel Homestead, Docker, or
+    | even a remote VPS, it will be necessary to specify your path mapping.
+    | Leaving either one, or both of these, empty or null will not trigger the
+    | remote URL changes, and will treat your editor links as local files.
     |
     | 'remote-sites-path' is the full base path of your sites or projects inside
     |                     homestead, Docker, or remote dev servers, for example
