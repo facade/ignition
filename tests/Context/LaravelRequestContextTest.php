@@ -140,4 +140,21 @@ class LaravelRequestContextTest extends TestCase
 
         $this->assertSame(['id' => $user->id], $contextData['user']);
     }
+
+    /** @test */
+    public function it_the_authenticated_user_model_has_no_matching_method_it_will_return_no_user_data()
+    {
+        $user = new class {
+        };
+
+        $request = $this->createRequest('GET', '/route', [], ['cookie' => 'noms']);
+        $request->setUserResolver(function () use ($user) {
+            return $user;
+        });
+
+        $context = new LaravelRequestContext($request);
+        $contextData = $context->toArray();
+
+        $this->assertSame([], $contextData['user']);
+    }
 }
