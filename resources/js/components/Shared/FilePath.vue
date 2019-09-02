@@ -62,7 +62,7 @@ export default {
         },
 
         editorUrl() {
-            return editorUrl(this.config.editor, this.file, this.lineNumber);
+            return editorUrl(this.config, this.file, this.lineNumber);
         },
     },
 };

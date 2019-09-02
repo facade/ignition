@@ -3,10 +3,10 @@
         <div class="layout-col">
             <section v-if="git" class="tab-content-section border-none">
                 <DefinitionList title="Git">
-                    <DefinitionListRow label="Repository">
+                    <DefinitionListRow v-if="repoUrl" label="Repository">
                         <a class="underline" :href="repoUrl" target="_blank">{{ repoUrl }}</a>
                     </DefinitionListRow>
-                    <DefinitionListRow label="Message">
+                    <DefinitionListRow v-if="git.message" label="Message">
                         <a :href="commitUrl" target="_blank">
                             “{{ git.message }}” –
                             <code class="code underline">{{ git.hash }}</code>
@@ -99,6 +99,10 @@ export default {
         },
 
         repoUrl() {
+            if (!this.git.remote) {
+                return null;
+            }
+
             const git = {
                 ...this.repoInfo,
                 git_suffix: false,

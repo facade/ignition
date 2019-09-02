@@ -11,7 +11,7 @@ use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 class MissingPackageSolutionProvider implements HasSolutionsForThrowable
 {
-    /** @var \Facade\Flare\Support\Packagist\Package|null */
+    /** @var \Facade\Ignition\Support\Packagist\Package|null */
     protected $package;
 
     public function canSolve(Throwable $throwable): bool
