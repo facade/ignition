@@ -4,7 +4,8 @@ All notable changes to `ignition` will be documented in this file
 
 ## Unreleased
 
-- Fixed an error that removed the ability to register custom blade directives. 
+- Fixed an error that removed the ability to register custom blade directives.
+- Fixed an error that prevented solution execution in Laravel 5.5 and 5.6 
 
 ## 1.0.4 - 2019-09-02
 
