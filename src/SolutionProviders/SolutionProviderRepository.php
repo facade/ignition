@@ -45,9 +45,17 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             $solutions[] = $throwable->getSolution();
         }
 
-        $providerSolutions = $this->solutionProviders
+        $providedSolutions = $this->solutionProviders
             ->filter(function (string $solutionClass) {
-                return in_array(HasSolutionsForThrowable::class, class_implements($solutionClass));
+                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass))) {
+                    return false;
+                }
+
+                if (in_array($solutionClass, config('ignition.ignored_solution_providers'))) {
+                    return false;
+                }
+
+                return true;
             })
             ->map(function (string $solutionClass) {
                 return app($solutionClass);
@@ -60,7 +68,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             ->flatten()
             ->toArray();
 
-        return array_merge($solutions, $providerSolutions);
+        return array_merge($solutions, $providedSolutions);
     }
 
     public function getSolutionForClass(string $solutionClass): ?Solution
