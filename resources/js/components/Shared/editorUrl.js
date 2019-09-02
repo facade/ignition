@@ -11,7 +11,7 @@ export default function editorUrl(config, file, lineNumber) {
         'vscode-insiders': 'vscode-insiders://file/%path:%line',
         atom: 'atom://core/open/file?filename=%path&line=%line',
     };
-    console.log(config);
+
     file =
         (config.remoteSitesPath || false).length > 0 && (config.localSitesPath || false).length > 0
             ? file.replace(config.remoteSitesPath, config.localSitesPath)
