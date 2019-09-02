@@ -11,11 +11,10 @@ export default function editorUrl(config, file, lineNumber) {
         'vscode-insiders': 'vscode-insiders://file/%path:%line',
         atom: 'atom://core/open/file?filename=%path&line=%line',
     };
-
+    console.log(config);
     file =
-        (config['homestead-sites-path'] || false).length > 0 &&
-        (config['local-sites-path'] || false).length > 0
-            ? file.replace(config['homestead-sites-path'], config['local-sites-path'])
+        (config.remoteSitesPath || false).length > 0 && (config.localSitesPath || false).length > 0
+            ? file.replace(config.remoteSitesPath, config.localSitesPath)
             : file;
 
     if (!Object.keys(editors).includes(editor)) {

@@ -23,10 +23,15 @@ return [
     | mapping, just like in your Homestead.yaml file. Leaving either one, or
     | both of these empty or null will not trigger the homestead URL changes.
     |
-    | 'homestead-sites-path' is the base path inside homestead, f.e. `/home/vagrant/Code`
-    | 'local-sites-path' is the base path on your host computer, f.e. `/Users/<name>/Code` or `C:\Users\<name>\Documents\Code`
+    | 'remote-sites-path' is the full base path of your sites or projects inside
+    |                     homestead, Docker, or remote dev servers, for example
+    |                     `/home/vagrant/Code`.
+    | 'local-sites-path'  is the full base path of your sites or projects on your
+    |                     local computer that your IDE or editor is running on,
+    |                     for example `/Users/<name>/Code` or
+    |                     `C:\Users\<name>\Documents\Code`.
     */
-    'homestead-sites-path' => env('IGNITION_HOMESTEAD_SITES_PATH', ''),
+    'remote-sites-path' => env('IGNITION_REMOTE_SITES_PATH', ''),
     'local-sites-path' => env('IGNITION_LOCAL_SITES_PATH', ''),
 
     /*
