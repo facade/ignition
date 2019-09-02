@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
+use Illuminate\Support\Str;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
 use Facade\Ignition\Exceptions\ViewException;
@@ -50,8 +51,8 @@ class UndefinedVariableSolutionProviderTest extends TestCase
 
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solutions = app(UndefinedVariableSolutionProvider::class)->getSolutions($viewException);
-        $this->assertTrue(Str::contains('Did you mean `$footerDescription`?', $solutions[0]->getSolutionActionDescription()));
-        $this->assertTrue(Str::contains('Replace `{{ $footerDescriptin }}` with `{{ $footerDescriptin ?? \'\' }}`', $solutions[1]->getSolutionActionDescription()));
+        $this->assertTrue(Str::contains($solutions[0]->getSolutionActionDescription(), 'Did you mean `$footerDescription`?'));
+        $this->assertTrue(Str::contains($solutions[1]->getSolutionActionDescription(), 'Replace `{{ $footerDescriptin }}` with `{{ $footerDescriptin ?? \'\' }}`'));
     }
 
     /** @test */
