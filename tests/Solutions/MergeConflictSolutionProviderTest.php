@@ -6,6 +6,7 @@ use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
 use Facade\Ignition\Tests\stubs\Controllers\GitConflictController;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
+use ParseError;
 
 class MergeConflictSolutionProviderTest extends TestCase
 {
@@ -21,8 +22,8 @@ class MergeConflictSolutionProviderTest extends TestCase
     {
         try {
             app(GitConflictController::class);
-        } catch (\ParseError $e) {
-            $exception = $e;
+        } catch (ParseError $error) {
+            $exception = $error;
         }
         $canSolve = app(MergeConflictSolutionProvider::class)->canSolve($exception);
 
