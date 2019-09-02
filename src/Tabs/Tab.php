@@ -13,7 +13,7 @@ abstract class Tab implements JsonSerializable
 
     public $styles = [];
 
-    /** @var \Facade\Flare\Flare */
+    /** @var \Facade\Ignition\Facades\Flare */
     protected $flare;
 
     /** @var Throwable */

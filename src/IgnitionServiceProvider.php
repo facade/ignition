@@ -65,7 +65,9 @@ class IgnitionServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        $this->setupQueue($this->app->queue);
+        $this
+            ->registerViewEngines()
+            ->setupQueue($this->app->queue);
     }
 
     public function register()
@@ -74,7 +76,6 @@ class IgnitionServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/ignition.php', 'ignition');
 
         $this
-            ->registerViewEngines()
             ->registerHousekeepingRoutes()
             ->registerSolutionProviderRepository()
             ->registerExceptionRenderer()

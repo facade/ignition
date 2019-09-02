@@ -95,8 +95,11 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
 
         $files = (new Finder())
             ->in($path)
-            ->files()
-            ->name($filePatterns);
+            ->files();
+
+        foreach ($filePatterns as $filePattern) {
+            $files->name($filePattern);
+        }
 
         $views = [];
 

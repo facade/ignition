@@ -7,7 +7,7 @@ use Illuminate\Contracts\Foundation\Application;
 
 class QueryRecorder
 {
-    /** @var \Facade\Flare\QueryRecorder\Query[] */
+    /** @var \Facade\Ignition\QueryRecorder\Query|[] */
     protected $queries = [];
 
     /** @var \Illuminate\Contracts\Foundation\Application */

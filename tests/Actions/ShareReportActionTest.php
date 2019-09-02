@@ -144,7 +144,7 @@ class ShareReportActionTest extends TestCase
 
         $this->assertFalse(Arr::has($sharedReport, 'context.env'));
         $this->assertFalse(Arr::has($sharedReport, 'context.git'));
-        $this->assertNull(Arr::get($sharedReport, 'context.context'));
+        $this->assertFalse(Arr::has($sharedReport, 'context.context'));
         $this->assertFalse(Arr::has($sharedReport, 'context.custom_context'));
     }
 

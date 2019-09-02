@@ -2,13 +2,13 @@
 
 namespace Facade\Ignition\Tests;
 
-use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
-use Facade\IgnitionContracts\BaseSolution;
-use Facade\IgnitionContracts\ProvidesSolution;
-use Facade\IgnitionContracts\Solution;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\View;
+use Facade\IgnitionContracts\Solution;
+use Facade\IgnitionContracts\BaseSolution;
 use Facade\Ignition\Exceptions\ViewException;
+use Facade\IgnitionContracts\ProvidesSolution;
+use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
 
 class ViewTest extends TestCase
 {
@@ -16,7 +16,7 @@ class ViewTest extends TestCase
     {
         parent::setUp();
 
-        View::addLocation(__DIR__ . '/stubs/views');
+        View::addLocation(__DIR__.'/stubs/views');
     }
 
     /** @test */
