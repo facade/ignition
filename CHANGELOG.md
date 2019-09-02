@@ -5,7 +5,9 @@ All notable changes to `ignition` will be documented in this file
 ## Unreleased
 
 - Fixed an error that removed the ability to register custom blade directives.
-- Fixed an error that prevented solution execution in Laravel 5.5 and 5.6 
+- Fixed an error that prevented solution execution in Laravel 5.5 and 5.6
+- The "Share" button can now be disabled in the configuration file
+- Fixes an error when trying to log `null` values 
 
 ## 1.0.4 - 2019-09-02
 
