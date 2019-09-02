@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
+use ParseError;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
 use Facade\Ignition\Tests\stubs\Controllers\GitConflictController;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
-use ParseError;
 
 class MergeConflictSolutionProviderTest extends TestCase
 {
