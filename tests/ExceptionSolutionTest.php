@@ -29,6 +29,24 @@ class ExceptionSolutionTest extends TestCase
     }
 
     /** @test */
+    public function it_ignores_disabled_solutions()
+    {
+        $this->app->make('config')->set('ignition.disabled_solutions', [
+            AlwaysTrueSolutionProvider::class,
+        ]);
+
+        $repository = new SolutionProviderRepository();
+
+        $repository->registerSolutionProvider(AlwaysTrueSolutionProvider::class);
+        $repository->registerSolutionProvider(AlwaysFalseSolutionProvider::class);
+
+        $solutions = $repository->getSolutionsForThrowable(new \Exception());
+
+        $this->assertNotNull($solutions);
+        $this->assertCount(0, $solutions);
+    }
+
+    /** @test */
     public function it_can_suggest_bad_method_call_exceptions()
     {
         if (version_compare($this->app->version(), '5.6.3', '<')) {
