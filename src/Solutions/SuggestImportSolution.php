@@ -9,9 +9,13 @@ class SuggestImportSolution implements RunnableSolution
     /** @var string */
     protected $class;
 
-    public function __construct(string $class = null)
+    /** @var string */
+    protected $file;
+
+    public function __construct(string $class = null, string $file = null)
     {
         $this->class = $class;
+        $this->file = $file;
     }
 
     public function getSolutionTitle(): string
@@ -47,12 +51,13 @@ class SuggestImportSolution implements RunnableSolution
     {
         return [
             'class' => $this->class,
+            'file' => $this->file
         ];
     }
 
     public function isRunnable(array $parameters = [])
     {
-        return false;
+        return true;
         //return $this->makeOptional($this->getRunParameters()) !== false;
     }
 
@@ -60,13 +65,15 @@ class SuggestImportSolution implements RunnableSolution
     {
         $output = $this->importClass($parameters);
         if ($output !== false) {
-            file_put_contents($parameters['viewFile'], $output);
+            file_put_contents(app_path() . '/' . $parameters['file'], $output);
         }
     }
 
     public function importClass(array $parameters = [])
     {
-        return false;
+        $originalContents = file_get_contents(app_path() . '/' . $parameters['file']);
+        $newContents = preg_replace('/use /', 'use ' . $parameters['class'] . ";\nuse ", $originalContents, 1);
+        return $newContents;
         // $originalContents = file_get_contents($parameters['viewFile']);
         // $newContents = str_replace('$'.$parameters['variableName'], '$'.$parameters['variableName']." ?? ''", $originalContents);
         // // Compile blade, tokenize
