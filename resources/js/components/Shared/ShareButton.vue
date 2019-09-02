@@ -11,6 +11,24 @@
             style="min-width: 18rem; margin-right: -1px"
         >
             <div class="flex items-center mb-4">
+                <svg class="w-4 h-5 mr-2" viewBox="0 0 682 1024">
+                    <polygon
+                        style="fill:#51DB9E"
+                        points="235.3,510.5 21.5,387 21.5,140.2 236.5,264.1 "
+                    />
+                    <polygon
+                        style="fill:#7900F5"
+                        points="235.3,1004.8 21.5,881.4 21.5,634.5 234.8,757.9 "
+                    />
+                    <polygon
+                        style="fill:#94F2C8"
+                        points="448.9,386.9 21.5,140.2 235.3,16.7 663.2,263.4 "
+                    />
+                    <polygon
+                        style="fill:#A475F4"
+                        points="234.8,757.9 21.5,634.5 235.3,511 449.1,634.5 "
+                    />
+                </svg>
                 <h5 class="text-left font-semibold uppercase tracking-wider whitespace-no-wrap">
                     {{ sharedErrorUrls ? 'Shared' : 'Share' }} on Flare
                 </h5>
