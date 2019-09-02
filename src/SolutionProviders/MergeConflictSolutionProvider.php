@@ -10,8 +10,6 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 
 class MergeConflictSolutionProvider implements HasSolutionsForThrowable
 {
-    protected const REGEX = '/\[([a-zA-Z\\\\]+)\]/m';
-
     public function canSolve(Throwable $throwable): bool
     {
         if (! $throwable instanceof FatalThrowableError) {
