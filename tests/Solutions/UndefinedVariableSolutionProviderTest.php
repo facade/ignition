@@ -50,8 +50,8 @@ class UndefinedVariableSolutionProviderTest extends TestCase
 
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solutions = app(UndefinedVariableSolutionProvider::class)->getSolutions($viewException);
-        $this->assertStringContainsString('Did you mean `$footerDescription`?', $solutions[0]->getSolutionActionDescription());
-        $this->assertStringContainsString('Replace `{{ $footerDescriptin }}` with `{{ $footerDescriptin ?? \'\' }}`', $solutions[1]->getSolutionActionDescription());
+        $this->assertTrue(Str::contains('Did you mean `$footerDescription`?', $solutions[0]->getSolutionActionDescription()));
+        $this->assertTrue(Str::contains('Replace `{{ $footerDescriptin }}` with `{{ $footerDescriptin ?? \'\' }}`', $solutions[1]->getSolutionActionDescription()));
     }
 
     /** @test */
