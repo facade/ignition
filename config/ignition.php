@@ -32,7 +32,7 @@ return [
     | Sharing
     |--------------------------------------------------------------------------
     |
-    | Ignition allows you to share your local errors with colleagues or people around the world.
+    | Ignition allows you to manually share your local errors with colleagues or people around the world.
     | Sharing errors is completely free and does not require an account on Flare.
     | If you do not want to have the ability to share your local errors, you can disable it here.
     |
