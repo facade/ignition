@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.2.0 - 2019-09-02
+
+- add `ignored_solution_providers` key to config file
+
 ## 1.1.1 - 2019-09-02
 
 - Fixed context tab crash when not using git (#24)
