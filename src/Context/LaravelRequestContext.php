@@ -27,7 +27,11 @@ class LaravelRequestContext extends RequestContext
             return $user->toFlare();
         }
 
-        return $user->toArray();
+        if (method_exists($user, 'toArray')) {
+            return $user->toArray();
+        }
+
+        return [];
     }
 
     public function getRoute(): array

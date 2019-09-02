@@ -18,7 +18,7 @@ class LogMessage
     /** @var float */
     protected $microtime;
 
-    public function __construct(string $message, string $level, array $context = [], ?float $microtime = null)
+    public function __construct(?string $message, string $level, array $context = [], ?float $microtime = null)
     {
         $this->message = $message;
         $this->level = $level;
