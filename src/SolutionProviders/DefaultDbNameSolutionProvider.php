@@ -29,6 +29,6 @@ class DefaultDbNameSolutionProvider implements HasSolutionsForThrowable
 
     protected function canTryDatabaseConnection()
     {
-        return version_compare(app()->version(), '5.6.0', '>=');
+        return version_compare(app()->version(), '5.6.28', '>');
     }
 }
