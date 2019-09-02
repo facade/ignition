@@ -3,6 +3,7 @@
 namespace Facade\Ignition\SolutionProviders;
 
 use Throwable;
+use ParseError;
 use Illuminate\Support\Str;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
@@ -12,7 +13,7 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool
     {
-        if (! ($throwable instanceof FatalThrowableError || $throwable instanceof \ParseError)) {
+        if (! ($throwable instanceof FatalThrowableError || $throwable instanceof ParseError)) {
             return false;
         }
 
