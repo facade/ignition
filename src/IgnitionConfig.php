@@ -25,11 +25,17 @@ class IgnitionConfig implements Arrayable
         return Arr::get($this->options, 'theme');
     }
 
+    public function getEnableShareButton(): bool
+    {
+        return Arr::get($this->options, 'enable_share_button', true);
+    }
+
     public function toArray(): array
     {
         return [
             'editor' => $this->getEditor(),
             'theme' => $this->getTheme(),
+            'enableShareButton' => $this->getEnableShareButton(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
         ];
     }
