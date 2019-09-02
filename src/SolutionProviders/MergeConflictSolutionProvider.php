@@ -12,7 +12,7 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool
     {
-        if (! $throwable instanceof FatalThrowableError) {
+        if (! ($throwable instanceof FatalThrowableError || $throwable instanceof \ParseError)) {
             return false;
         }
 
