@@ -18,6 +18,7 @@ class MergeConflictSolutionProviderTest extends TestCase
     /** @test */
     public function it_can_solve_merge_conflict_exception()
     {
+        copy(__DIR__ . '/../stubs/Controllers/GitConflictController.stub', __DIR__ . '/../stubs/Controllers/GitConflictController.php');
         try {
             app(\Facade\Ignition\Tests\stubs\Controllers\GitConflictController::class);
         } catch (\ParseError $e) {
