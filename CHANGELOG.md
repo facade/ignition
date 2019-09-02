@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## Unreleased
+
+- Fixed an error that removed the ability to register custom blade directives. 
+
 ## 1.0.4 - 2019-09-02
 
 - Check if the authenticated user has a `toArray` method available, before collecting user data
