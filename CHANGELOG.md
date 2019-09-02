@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.3.0 - 2019-09-02
+
+- add `MergeConflictSolutionProvider`
+
 ## 1.2.0 - 2019-09-02
 
 - add `ignored_solution_providers` key to config file
