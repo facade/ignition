@@ -41,6 +41,7 @@ use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
 use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
+use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
@@ -301,6 +302,7 @@ class IgnitionServiceProvider extends ServiceProvider
             MissingPackageSolutionProvider::class,
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
+            MergeConflictSolutionProvider::class,
         ];
     }
 
