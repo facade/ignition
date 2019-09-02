@@ -30,6 +30,11 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         $solutions = [];
 
         extract($this->getNameAndView($throwable));
+
+        if (! isset($variableName)) {
+            return [];
+        }
+
         $solutions = collect($throwable->getViewData())->map(function ($value, $key) use ($variableName) {
             similar_text($variableName, $key, $percentage);
 
