@@ -4,10 +4,7 @@ namespace Facade\Ignition\SolutionProviders;
 
 use Throwable;
 use Illuminate\Support\Str;
-use UnexpectedValueException;
 use Facade\IgnitionContracts\BaseSolution;
-use Facade\Ignition\Support\ComposerClassMap;
-use Facade\Ignition\Support\StringComparator;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
@@ -30,6 +27,7 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
                 return true;
             }
         }
+
         return false;
     }
 
@@ -40,9 +38,10 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
         $source = $matches[1];
         $folder = basename($throwable->getFile());
         $target = trim(`cd $folder; git branch | grep \* | cut -d ' ' -f2`);
+
         return [
             BaseSolution::create("Merge conflict from branch '$source' into '$target'")
-                ->setSolutionDescription("You have a Git merge conflict. To undo your merge do `git reset --hard HEAD`"),
+                ->setSolutionDescription('You have a Git merge conflict. To undo your merge do `git reset --hard HEAD`'),
         ];
     }
 }
