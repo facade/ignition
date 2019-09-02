@@ -2,11 +2,8 @@
 
 namespace Facade\Ignition\Exceptions;
 
-use ErrorException;
-use Facade\Ignition\DumpRecorder\HtmlDumper;
-use Facade\FlareClient\Contracts\ProvidesFlareContext;
-use Facade\IgnitionContracts\ProvidesSolution;
 use Facade\IgnitionContracts\Solution;
+use Facade\IgnitionContracts\ProvidesSolution;
 
 class ViewExceptionWithSolution extends ViewException implements ProvidesSolution
 {

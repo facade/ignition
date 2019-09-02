@@ -10,7 +10,7 @@ return [
     | If you want to send your errors to the Flare service, you can specify
     | the API key of your project here.
     |
-    | More info: https://flare.laravel.com/docs/general/creating-a-project
+    | More info: https://flareapp.io/docs/general/projects
     |
     */
 

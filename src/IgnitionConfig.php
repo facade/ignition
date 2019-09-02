@@ -35,6 +35,11 @@ class IgnitionConfig implements Arrayable
         return Arr::get($this->options, 'theme');
     }
 
+    public function getEnableShareButton(): bool
+    {
+        return Arr::get($this->options, 'enable_share_button', true);
+    }
+
     public function toArray(): array
     {
         return [
@@ -42,6 +47,7 @@ class IgnitionConfig implements Arrayable
             'remoteSitesPath' => $this->getRemoteSitesPath(),
             'localSitesPath' => $this->getLocalSitesPath(),
             'theme' => $this->getTheme(),
+            'enableShareButton' => $this->getEnableShareButton(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
         ];
     }
