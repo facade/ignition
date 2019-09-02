@@ -40,6 +40,7 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
         $source = $matches[1];
 
         $target = $this->getCurrentBranch(basename($throwable->getFile()));
+
         return [
             BaseSolution::create("Merge conflict from branch '$source' into $target")
                 ->setSolutionDescription('You have a Git merge conflict. To undo your merge do `git reset --hard HEAD`'),
@@ -48,7 +49,7 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
 
     private function getCurrentBranch($folder)
     {
-        $branch = "'" . trim(`cd $folder; git branch | grep \* | cut -d ' ' -f2`) . "'";
+        $branch = "'".trim(`cd $folder; git branch | grep \* | cut -d ' ' -f2`)."'";
 
         if (! isset($branch) || $branch === "''") {
             $branch = 'current branch';
