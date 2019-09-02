@@ -48,17 +48,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Disabled solutions
+    | Ignore solution providers
     |--------------------------------------------------------------------------
     |
-    | Specify which solutions providers should not be used.
+    | Here you can specify the fully qualified class names of solution providers
+    | that should not be used.
     |
     */
-
-    'disabled_solutions' => [
+    'ignored_solution_providers' => [
        //
     ],
-  
+
     /*
     |--------------------------------------------------------------------------
     | Sharing

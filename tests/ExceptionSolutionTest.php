@@ -29,9 +29,9 @@ class ExceptionSolutionTest extends TestCase
     }
 
     /** @test */
-    public function it_ignores_disabled_solutions()
+    public function it_can_ignore_solution_providers()
     {
-        $this->app->make('config')->set('ignition.disabled_solutions', [
+        $this->app->make('config')->set('ignition.ignored_solution_providers', [
             AlwaysTrueSolutionProvider::class,
         ]);
 
