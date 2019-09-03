@@ -212,7 +212,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
             $client = $app->make('flare.client');
 
-            Str::startsWith(phpversion(), '7.1')
+            version_compare(phpversion(), '7.1', '<=')
                 ? $logger->pushHandler(new FlareHandlerPhp71($client))
                 : $logger->pushHandler(new FlareHandler($client));
 
