@@ -44,27 +44,22 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         })->keys()->map(function ($suggestion) use ($variableName, $viewFile) {
             return new SuggestCorrectVariableNameSolution($variableName, $viewFile, $suggestion);
         })->map(function ($solution) {
-            // If the solution isn't runnable, then just return the suggestions without the fix
-            if ($solution->isRunnable()) {
-                return $solution;
-            } else {
-                return BaseSolution::create($solution->getSolutionTitle())
+            return $solution->isRunnable()
+                ? $solution
+                : BaseSolution::create($solution->getSolutionTitle())
                     ->setSolutionDescription($solution->getSolutionActionDescription());
-            }
         })->toArray();
 
         $optionalSolution = new MakeViewVariableOptionalSolution($variableName, $viewFile);
-        if ($optionalSolution->isRunnable()) {
-            $solutions[] = $optionalSolution;
-        } else {
-            $solutions[] = BaseSolution::create($optionalSolution->getSolutionTitle())
+        $solutions[] = $optionalSolution->isRunnable()
+            ? $optionalSolution
+            : BaseSolution::create($optionalSolution->getSolutionTitle())
                 ->setSolutionDescription($optionalSolution->getSolutionActionDescription());
-        }
 
         return $solutions;
     }
 
-    private function getNameAndView(Throwable $throwable)
+    protected function getNameAndView(Throwable $throwable): ?array
     {
         $pattern = '/Undefined variable: (.*?) \(View: (.*?)\)/';
 

@@ -69,7 +69,7 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
         }
     }
 
-    public function fixTypo(array $parameters = [])
+    protected function fixTypo(array $parameters = [])
     {
         // Make sure suggested variable is valid alpha-numeric with underscore, or return false
         if (! preg_match('/^[a-zA-Z]+[a-zA-Z0-9_]+$/', $parameters['suggested'])) {
@@ -79,21 +79,22 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
         $originalContents = file_get_contents($parameters['viewFile']);
         $newContents = str_replace('$'.$parameters['variableName'], '$'.$parameters['suggested'], $originalContents);
 
-        // Compile blade, tokenize
         $originalTokens = token_get_all(Blade::compileString($originalContents));
         $newTokens = token_get_all(Blade::compileString($newContents));
 
-        // Generate what we expect the tokens to be after we change the blade file
-        $expectedTokens = $originalTokens;
-        foreach ($expectedTokens as $key => $token) {
-            if ($token[0] === T_VARIABLE && $token[1] === '$'.$parameters['variableName']) {
-                $expectedTokens[$key][1] = '$'.$parameters['suggested'];
-            }
-        }
-        if ($expectedTokens !== $newTokens) {
-            return false;
-        }
+        $expectedTokens = $this->generateExpectedTokens($originalTokens, $parameters['variableName'], $parameters['suggested']);
 
         return $newContents;
+    }
+
+    protected function generateExpectedTokens(array $originalTokens, string $variableName, string $suggested): array
+    {
+        $expectedTokens = $originalTokens;
+        foreach ($expectedTokens as $key => $token) {
+            if ($token[0] === T_VARIABLE && $token[1] === '$'.$variableName) {
+                $expectedTokens[$key][1] = '$'.$suggested;
+            }
+        }
+        return $expectedTokens;
     }
 }
