@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.2 - 2019-09-03
+
+- style fixes
+
 ## 1.4.1 - 2019-09-03
 
 - Change `remote-sites-path` and `local-sites-path` config keys to us snake case
