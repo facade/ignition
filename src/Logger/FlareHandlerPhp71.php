@@ -11,7 +11,7 @@ use Monolog\Handler\AbstractProcessingHandler;
 
 class FlareHandlerPhp71 extends BaseFlareHandler
 {
-    protected function write(array $report): void
+    protected function write(array $report)
     {
         if ($this->shouldReport($report)) {
 
