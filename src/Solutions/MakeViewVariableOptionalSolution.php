@@ -97,6 +97,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
                 $expectedTokens[] = [T_CONSTANT_ENCAPSED_STRING, "''", $token[2]];
             }
         }
+
         return $expectedTokens;
     }
 }

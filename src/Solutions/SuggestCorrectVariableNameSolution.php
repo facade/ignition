@@ -95,6 +95,7 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
                 $expectedTokens[$key][1] = '$'.$suggested;
             }
         }
+
         return $expectedTokens;
     }
 }
