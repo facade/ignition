@@ -22,12 +22,12 @@ class IgnitionConfig implements Arrayable
 
     public function getRemoteSitesPath(): ?string
     {
-        return Arr::get($this->options, 'remote-sites-path');
+        return Arr::get($this->options, 'remote_sites_path');
     }
 
     public function getLocalSitesPath(): ?string
     {
-        return Arr::get($this->options, 'local-sites-path');
+        return Arr::get($this->options, 'local_sites_path');
     }
 
     public function getTheme(): ?string
