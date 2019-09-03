@@ -30,12 +30,24 @@ class IgnitionConfig implements Arrayable
         return Arr::get($this->options, 'enable_share_button', true);
     }
 
+    public function getEnableRunnableSolutions(): bool
+    {
+        $enabled = Arr::get($this->options, 'enable_runnable_solutions', null);
+
+        if ($enabled === null) {
+            $enabled = config('app.debug');
+        }
+
+        return $enabled ?? false;
+    }
+
     public function toArray(): array
     {
         return [
             'editor' => $this->getEditor(),
             'theme' => $this->getTheme(),
             'enableShareButton' => $this->getEnableShareButton(),
+            'enableRunnableSolutions' => $this->getEnableRunnableSolutions(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
         ];
     }

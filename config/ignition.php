@@ -25,8 +25,6 @@ return [
 
     'theme' => env('IGNITION_THEME', 'light'),
 
-
-
     /*
     |--------------------------------------------------------------------------
     | Sharing
@@ -39,4 +37,18 @@ return [
     */
 
     'enable_share_button' => env('IGNITION_SHARING_ENABLED', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Runnable solutions
+    |--------------------------------------------------------------------------
+    |
+    | Some of the solutions that Ignition presents to you are runnable and can perform various
+    | tasks. By default this is only enabled if your application is running in debug mode.
+    | If you would rather disable this feature completely, you can do so using the
+    | enable_solution_execution configuration key.
+    |
+    */
+
+    'enable_runnable_solutions' => env('IGNITION_ENABLE_RUNNABLE_SOLUTIONS', null),
 ];
