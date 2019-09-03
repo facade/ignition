@@ -2,6 +2,11 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.4 - 2019-09-03
+
+- Suggest default database name in Laravel 6
+- Add void return type to FlareHandler::write()
+
 ## 1.4.3 - 2019-09-03
 
 - allow monolog v2
