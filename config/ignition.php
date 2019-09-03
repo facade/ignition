@@ -77,16 +77,16 @@ return [
     | Leaving either one, or both of these, empty or null will not trigger the
     | remote URL changes, and will treat your editor links as local files.
     |
-    | 'remote-sites-path' is the full base path of your sites or projects inside
+    | 'remote_sites_path' is the full base path of your sites or projects inside
     |                     homestead, Docker, or remote dev servers, for example
     |                     `/home/vagrant/Code`.
-    | 'local-sites-path'  is the full base path of your sites or projects on your
+    | 'local_sites_path'  is the full base path of your sites or projects on your
     |                     local computer that your IDE or editor is running on,
     |                     for example `/Users/<name>/Code` or
     |                     `C:\Users\<name>\Documents\Code`.
     */
 
-    'remote-sites-path' => env('IGNITION_REMOTE_SITES_PATH', ''),
-    'local-sites-path' => env('IGNITION_LOCAL_SITES_PATH', ''),
+    'remote_sites_path' => env('IGNITION_REMOTE_SITES_PATH', ''),
+    'local_sites_path' => env('IGNITION_LOCAL_SITES_PATH', ''),
 
 ];
