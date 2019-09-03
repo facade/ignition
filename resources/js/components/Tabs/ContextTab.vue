@@ -1,21 +1,18 @@
 <template>
     <div class="tab-content">
         <div class="layout-col">
-            <section v-if="git" class="tab-content-section border-none">
-                <DefinitionList
-                    v-for="(contextGroup, groupTitle) in customContextGroups"
-                    :key="groupTitle"
-                    :title="groupTitle"
-                    class="tab-content-section"
-                >
-                    <DefinitionListRow
-                        v-for="(value, key) in contextGroup"
-                        :key="key"
-                        :label="key"
-                        >{{ value }}</DefinitionListRow
-                    >
-                </DefinitionList>
+            <DefinitionList
+                v-for="(contextGroup, groupTitle) in customContextGroups"
+                :key="groupTitle"
+                :title="groupTitle"
+                class="tab-content-section"
+            >
+                <DefinitionListRow v-for="(value, key) in contextGroup" :key="key" :label="key">{{
+                    value
+                }}</DefinitionListRow>
+            </DefinitionList>
 
+            <section v-if="git" class="tab-content-section border-none">
                 <DefinitionList title="Git">
                     <DefinitionListRow v-if="repoUrl" label="Repository">
                         <a class="underline" :href="repoUrl" target="_blank">{{ repoUrl }}</a>
