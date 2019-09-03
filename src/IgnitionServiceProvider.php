@@ -2,6 +2,8 @@
 
 namespace Facade\Ignition;
 
+use Facade\Ignition\Logger\FlareHandlerPhp71;
+use Illuminate\Support\Str;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -207,7 +209,12 @@ class IgnitionServiceProvider extends ServiceProvider
     {
         $this->app->singleton('flare.logger', function ($app) {
             $logger = new Logger('Flare');
-            $logger->pushHandler(new FlareHandler($app->make('flare.client')));
+
+            $client = $app->make('flare.client');
+
+            Str::startsWith(phpversion(), '7.1')
+                ? $logger->pushHandler(new FlareHandlerPhp71($client))
+                : $logger->pushHandler(new FlareHandler($client));
 
             return $logger;
         });

@@ -9,7 +9,7 @@ use Facade\Ignition\Ignition;
 use Facade\Ignition\Tabs\Tab;
 use Monolog\Handler\AbstractProcessingHandler;
 
-class FlareHandler extends BaseFlareHandler
+class FlareHandlerPhp71 extends BaseFlareHandler
 {
     protected function write(array $report): void
     {
