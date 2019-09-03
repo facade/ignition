@@ -96,7 +96,7 @@ export default {
             return lineNumber >= this.selectedRange[0] && lineNumber <= this.selectedRange[1];
         },
         editorUrl(lineNumber) {
-            return editorUrl(this.config.editor, this.selectedFrame.file, lineNumber);
+            return editorUrl(this.config, this.selectedFrame.file, lineNumber);
         },
     },
 };

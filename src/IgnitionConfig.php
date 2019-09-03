@@ -20,6 +20,16 @@ class IgnitionConfig implements Arrayable
         return Arr::get($this->options, 'editor');
     }
 
+    public function getRemoteSitesPath(): ?string
+    {
+        return Arr::get($this->options, 'remote-sites-path');
+    }
+
+    public function getLocalSitesPath(): ?string
+    {
+        return Arr::get($this->options, 'local-sites-path');
+    }
+
     public function getTheme(): ?string
     {
         return Arr::get($this->options, 'theme');
@@ -45,6 +55,8 @@ class IgnitionConfig implements Arrayable
     {
         return [
             'editor' => $this->getEditor(),
+            'remoteSitesPath' => $this->getRemoteSitesPath(),
+            'localSitesPath' => $this->getLocalSitesPath(),
             'theme' => $this->getTheme(),
             'enableShareButton' => $this->getEnableShareButton(),
             'enableRunnableSolutions' => $this->getEnableRunnableSolutions(),
