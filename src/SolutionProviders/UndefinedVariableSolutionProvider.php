@@ -3,7 +3,6 @@
 namespace Facade\Ignition\SolutionProviders;
 
 use Throwable;
-use Facade\IgnitionContracts\Solution;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\Ignition\Exceptions\ViewException;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
