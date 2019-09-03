@@ -1,6 +1,17 @@
 <template>
     <div class="tab-content">
         <div class="layout-col">
+            <DefinitionList
+                v-for="(contextGroup, groupTitle) in customContextGroups"
+                :key="groupTitle"
+                :title="groupTitle"
+                class="tab-content-section"
+            >
+                <DefinitionListRow v-for="(value, key) in contextGroup" :key="key" :label="key">{{
+                    value | upperFirst
+                }}</DefinitionListRow>
+            </DefinitionList>
+
             <section v-if="git" class="tab-content-section border-none">
                 <DefinitionList title="Git">
                     <DefinitionListRow v-if="repoUrl" label="Repository">
@@ -33,17 +44,6 @@
                     value
                 }}</DefinitionListRow>
             </DefinitionList>
-
-            <DefinitionList
-                v-for="(contextGroup, groupTitle) in customContextGroups"
-                :key="groupTitle"
-                :title="groupTitle"
-                class="tab-content-section"
-            >
-                <DefinitionListRow v-for="(value, key) in contextGroup" :key="key" :label="key">{{
-                    value
-                }}</DefinitionListRow>
-            </DefinitionList>
         </div>
     </div>
 </template>
@@ -51,6 +51,7 @@
 import gitUrlParse from 'git-url-parse';
 import DefinitionList from '../Shared/DefinitionList';
 import DefinitionListRow from '../Shared/DefinitionListRow.js';
+import upperFirst from 'lodash/upperFirst';
 
 const predefinedKeys = {
     laravel_version: 'Laravel version',
@@ -80,6 +81,10 @@ export default {
     inject: ['report'],
 
     components: { DefinitionListRow, DefinitionList },
+
+    filters: {
+        upperFirst,
+    },
 
     computed: {
         git() {

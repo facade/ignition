@@ -112,6 +112,8 @@ const cookieName = 'hide_solutions';
 let animationTimeout = null;
 
 export default {
+    inject: ['config'],
+
     props: {
         solution: { required: true },
     },
@@ -131,7 +133,7 @@ export default {
     },
 
     created() {
-        this.checkExecutionEndpoint();
+        this.configureRunnableSolutions();
     },
 
     mounted() {
@@ -141,6 +143,16 @@ export default {
     },
 
     methods: {
+        configureRunnableSolutions() {
+            if (!this.config.enableRunnableSolutions) {
+                this.canExecuteSolutions = false;
+
+                return;
+            }
+
+            this.checkExecutionEndpoint();
+        },
+
         markdown(string) {
             return MarkdownIt.render(string);
         },

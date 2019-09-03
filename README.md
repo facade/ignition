@@ -1,4 +1,4 @@
-# Ignition
+# Ignition: a beautiful error page for Laravel apps
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/facade/ignition.svg?style=flat-square)](https://packagist.org/packages/facade/ignition)
 [![Build Status](https://img.shields.io/travis/facade/ignition/master.svg?style=flat-square)](https://travis-ci.org/facade/ignition)
@@ -6,7 +6,7 @@
 [![StyleCI](https://github.styleci.io/repos/204472210/shield?branch=master)](https://github.styleci.io/repos/204472210)
 [![Total Downloads](https://img.shields.io/packagist/dt/facade/ignition.svg?style=flat-square)](https://packagist.org/packages/facade/ignition)
 
-Ignition offers you a beautiful, customizable error screen. It also allows you to share your errors to Flare publicly. 
+Ignition offers you a beautiful, customizable error page. It also allows you to share your errors to Flare publicly. 
 If configured with a valid Flare API key, it will send errors to a project in your Flare account.
 
 ![Screenshot of ignition](https://facade.github.io/ignition/screenshot.png)
