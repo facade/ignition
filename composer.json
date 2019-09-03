@@ -16,7 +16,7 @@
         "scrivo/highlight.php": "^9.15",
         "symfony/var-dumper": "^3.4|^4.0",
         "symfony/console": "^3.4|^4.0",
-        "monolog/monolog": "^1.12",
+        "monolog/monolog": "^1.12|^2.0",
         "facade/flare-client-php": "^1.0",
         "facade/ignition-contracts": "^1.0",
         "ext-json": "*",
