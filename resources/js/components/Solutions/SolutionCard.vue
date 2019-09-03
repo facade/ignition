@@ -144,7 +144,7 @@ export default {
 
     methods: {
         configureRunnableSolutions() {
-            if (! this.config.enableRunnableSolutions) {
+            if (!this.config.enableRunnableSolutions) {
                 this.canExecuteSolutions = false;
 
                 return;
