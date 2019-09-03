@@ -1,4 +1,4 @@
-# Ignition
+# Ignition: a beautiful error page for Laravel apps
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/facade/ignition.svg?style=flat-square)](https://packagist.org/packages/facade/ignition)
 [![Build Status](https://img.shields.io/travis/facade/ignition/master.svg?style=flat-square)](https://travis-ci.org/facade/ignition)
