@@ -21,7 +21,7 @@ class FlareHandler extends AbstractProcessingHandler
         parent::__construct($level, $bubble);
     }
 
-    protected function write(array $report)
+    protected function write(array $report): void
     {
         if ($this->shouldReport($report)) {
 
