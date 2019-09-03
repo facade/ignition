@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.3 - 2019-09-03
+
+- allow monolog v2
+
 ## 1.4.2 - 2019-09-03
 
 - style fixes
