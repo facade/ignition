@@ -133,11 +133,7 @@ export default {
     },
 
     created() {
-        if (this.config.enableRunnableSolutions) {
-            this.checkExecutionEndpoint();
-        } else {
-            this.canExecuteSolutions = false;
-        }
+        this.configureRunnableSolutions();
     },
 
     mounted() {
@@ -147,6 +143,16 @@ export default {
     },
 
     methods: {
+        configureRunnableSolutions() {
+            if (! this.config.enableRunnableSolutions) {
+                this.canExecuteSolutions = false;
+
+                return;
+            }
+
+            this.checkExecutionEndpoint();
+        },
+
         markdown(string) {
             return MarkdownIt.render(string);
         },
