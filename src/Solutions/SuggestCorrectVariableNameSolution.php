@@ -84,6 +84,10 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
 
         $expectedTokens = $this->generateExpectedTokens($originalTokens, $parameters['variableName'], $parameters['suggested']);
 
+        if ($expectedTokens !== $newTokens) {
+            return false;
+        }
+
         return $newContents;
     }
 
