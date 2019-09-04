@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.7 - 2019-09-04
+
+- Match whoops minimum version constraint with Laravel 6
+
 ## 1.4.6 - 2019-09-04
 
 - Use empty array for default ignored solution providers 
