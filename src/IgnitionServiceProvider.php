@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition;
 
+use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -117,19 +118,17 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerHousekeepingRoutes()
     {
-        if (! config('app.debug')) {
-            return $this;
-        }
+        Route::group([
+            'prefix' => config('ignition.housekeeping_endpoint_prefix', '_ignition'),
+            'middleware' => [IgnitionEnabled::class],
+        ], function () {
+            Route::get('health-check', HealthCheckController::class);
+            Route::post('execute-solution', ExecuteSolutionController::class);
+            Route::post('share-report', ShareReportController::class);
 
-        Route::prefix(config('flare.housekeeping_endpoint_prefix', 'flare'))
-            ->group(function () {
-                Route::get('health-check', HealthCheckController::class);
-                Route::post('execute-solution', ExecuteSolutionController::class);
-                Route::post('share-report', ShareReportController::class);
-
-                Route::get('scripts/{script}', ScriptController::class);
-                Route::get('styles/{style}', StyleController::class);
-            });
+            Route::get('scripts/{script}', ScriptController::class);
+            Route::get('styles/{style}', StyleController::class);
+        });
 
         return $this;
     }

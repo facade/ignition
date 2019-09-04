@@ -147,7 +147,7 @@ class ErrorPageViewModel implements Arrayable
             'config' => $this->config(),
             'solutions' => $this->solutions(),
             'report' => $this->report(),
-            'housekeepingEndpoint' => config('flare.housekeeping_endpoint_prefix', 'flare'),
+            'housekeepingEndpoint' => config('ignition.housekeeping_endpoint_prefix', '_ignition'),
             'styles' => $this->styles(),
             'scripts' => $this->scripts(),
             'tabs' => $this->tabs(),
