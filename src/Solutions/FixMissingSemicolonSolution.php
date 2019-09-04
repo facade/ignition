@@ -48,7 +48,7 @@ class FixMissingSemicolonSolution implements RunnableSolution
         return [
             'filePath' => $this->filePath,
             'lineNumber' => $this->lineNumber,
-            'unexpected' => $this->unexpected,
+            'unexpected' => $this->unexpected
         ];
     }
 
@@ -85,22 +85,22 @@ class FixMissingSemicolonSolution implements RunnableSolution
         $insertSemicolon = false;
         $line = 0;
         foreach ($reverseTokens as $token) {
+            $char = isset($token[1]) ? $token[1] : $token;
+
+            $output[] = $char;
+
             if (isset($token[2])) {
                 $line = $token[2];
             }
-            $char = isset($token[1]) ? $token[1] : $token;
             if (is_string($token) && $line == $parameters['lineNumber'] && $char == $parameters['unexpected']) {
                 $insertSemicolon = true;
             }
             if ($insertSemicolon && isset($token[0]) && $token[0] == T_WHITESPACE) {
                 $insertSemicolon = false;
-                $output[] = $char;
                 $output[] = ';';
-            } else {
-                $output[] = $char;
             }
         }
-        $proposedFix = implode('', array_reverse($output));
+        $proposedFix = join('', array_reverse($output));
 
         $result = exec(sprintf('echo %s | php -l', escapeshellarg($proposedFix)), $output, $exit);
 
