@@ -30,6 +30,6 @@ class TableNotFoundSolutionProvider implements HasSolutionsForThrowable
 
     public function getSolutions(Throwable $throwable): array
     {
-        return [new RunMigrationsSolution()];
+        return [new RunMigrationsSolution('A table was not found')];
     }
 }

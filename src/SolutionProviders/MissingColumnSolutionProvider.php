@@ -30,8 +30,6 @@ class MissingColumnSolutionProvider implements HasSolutionsForThrowable
 
     public function getSolutions(Throwable $throwable): array
     {
-        $solution = new RunMigrationsSolution('A column was not found');
-
-        return [$solution];
+        return [new RunMigrationsSolution('A column was not found')];
     }
 }
