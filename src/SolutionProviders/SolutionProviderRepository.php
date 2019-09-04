@@ -60,10 +60,19 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             ->map(function (string $solutionClass) {
                 return app($solutionClass);
             })
-            ->filter
-            ->canSolve($throwable)
+            ->filter(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
+                try {
+                    return $solutionProvider->canSolve($throwable);
+                } catch (Throwable $e) {
+                    return false;
+                }
+            })
             ->map(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
-                return $solutionProvider->getSolutions($throwable);
+                try {
+                    return $solutionProvider->getSolutions($throwable);
+                } catch (Throwable $e) {
+                    return [];
+                }
             })
             ->flatten()
             ->toArray();
