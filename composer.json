@@ -11,7 +11,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.1",
-        "filp/whoops": "^2.1.4",
+        "filp/whoops": "^2.4",
         "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0",
         "scrivo/highlight.php": "^9.15",
         "symfony/var-dumper": "^3.4|^4.0",
