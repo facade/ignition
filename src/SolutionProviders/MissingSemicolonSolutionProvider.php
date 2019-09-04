@@ -3,7 +3,6 @@
 namespace Facade\Ignition\SolutionProviders;
 
 use Throwable;
-use Illuminate\Support\Str;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Facade\Ignition\Solutions\FixMissingSemicolonSolution;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
@@ -22,6 +21,7 @@ class MissingSemicolonSolutionProvider implements HasSolutionsForThrowable
         if (isset($matches[1])) {
             return true;
         }
+
         return false;
     }
 
