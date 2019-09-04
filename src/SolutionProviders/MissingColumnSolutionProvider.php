@@ -7,7 +7,7 @@ use Illuminate\Database\QueryException;
 use Facade\Ignition\Solutions\RunMigrationsSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
-class MissingColumnsSolutionProvider implements HasSolutionsForThrowable
+class MissingColumnSolutionProvider implements HasSolutionsForThrowable
 {
     /**
      * See https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html#error_er_bad_field_error.

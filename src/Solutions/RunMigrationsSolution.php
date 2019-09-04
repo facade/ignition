@@ -7,7 +7,6 @@ use Facade\IgnitionContracts\RunnableSolution;
 
 class RunMigrationsSolution implements RunnableSolution
 {
-
     private $customTitle;
 
     public function __construct($customTitle = null)
