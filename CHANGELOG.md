@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.6 - 2019-09-04
+
+- Use empty array for default ignored solution providers 
+
 ## 1.4.5 - 2019-09-03
 
 - fix for new Laravel 6 installs
