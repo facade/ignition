@@ -55,11 +55,11 @@ class ErrorPageViewModel implements Arrayable
     {
         try {
             if (! class_exists(Telescope::class)) {
-                return '';
+                return null;
             }
 
             if (! count(Telescope::$entriesQueue)) {
-                return '';
+                return null;
             }
 
             $telescopeEntry = collect(Telescope::$entriesQueue)->first(function ($entry) {
@@ -67,14 +67,14 @@ class ErrorPageViewModel implements Arrayable
             });
 
             if (is_null($telescopeEntry)) {
-                return '';
+                return null;
             }
 
             $telescopeEntryId = (string) $telescopeEntry->uuid;
 
             return url(action([HomeController::class, 'index'])."/exceptions/{$telescopeEntryId}");
         } catch (Exception $exception) {
-            return '';
+            return null;
         }
     }
 
