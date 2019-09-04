@@ -23,7 +23,7 @@ class CreateControllerSolution implements Solution
     {
         $controller = $this->getControllerPath();
 
-        return "You route is pointing to a controller that does not exist. You can create the controller using `php artisan make:controller $controller`.";
+        return "Your route is pointing to a controller that does not exist. You can create the controller using `php artisan make:controller $controller`.";
     }
 
     public function getDocumentationLinks(): array
