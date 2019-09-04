@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Facade\Ignition\Solutions\CreateControllerSolution;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Support\Str;
 use Throwable;
+use Illuminate\Support\Str;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Facade\Ignition\Solutions\CreateControllerSolution;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 class ControllerNotFoundSolutionProvider implements HasSolutionsForThrowable
 {
