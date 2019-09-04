@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.8 - 2019-09-04
+
+- pass an empty string to query if no connection name is available - fixes #86
+
 ## 1.4.7 - 2019-09-04
 
 - Match whoops minimum version constraint with Laravel 6
