@@ -51,7 +51,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
                     return false;
                 }
 
-                if (in_array($solutionClass, config('ignition.ignored_solution_providers'))) {
+                if (in_array($solutionClass, config('ignition.ignored_solution_providers', []))) {
                     return false;
                 }
 
