@@ -19,6 +19,7 @@ class RunMigrationsSolution implements RunnableSolution
         if (isset($this->customTitle)) {
             return $this->customTitle;
         }
+
         return 'A table was not found';
     }
 
