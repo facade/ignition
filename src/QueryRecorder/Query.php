@@ -26,7 +26,7 @@ class Query
         return new static(
             $queryExecuted->sql,
             $queryExecuted->time,
-            $queryExecuted->connectionName,
+            $queryExecuted->connectionName ?? '',
             $reportBindings ? $queryExecuted->bindings : null
         );
     }
