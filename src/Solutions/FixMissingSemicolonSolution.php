@@ -48,7 +48,7 @@ class FixMissingSemicolonSolution implements RunnableSolution
         return [
             'filePath' => $this->filePath,
             'lineNumber' => $this->lineNumber,
-            'unexpected' => $this->unexpected
+            'unexpected' => $this->unexpected,
         ];
     }
 
@@ -100,7 +100,7 @@ class FixMissingSemicolonSolution implements RunnableSolution
                 $output[] = ';';
             }
         }
-        $proposedFix = join('', array_reverse($output));
+        $proposedFix = implode('', array_reverse($output));
 
         $result = exec(sprintf('echo %s | php -l', escapeshellarg($proposedFix)), $output, $exit);
 
