@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.9 - 2019-09-04
+
+- Lookup the first exception when linking to Telescope
+
 ## 1.4.8 - 2019-09-04
 
 - pass an empty string to query if no connection name is available - fixes #86
