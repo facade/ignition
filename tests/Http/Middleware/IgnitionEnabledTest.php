@@ -17,7 +17,7 @@ class IgnitionEnabledTest extends TestCase
             return 'success';
         })->middleware([IgnitionEnabled::class]);
 
-        $this->get('middleware-test')->assertNotFound();
+        $this->get('middleware-test')->assertStatus(404);
     }
 
     /** @test */
@@ -29,6 +29,6 @@ class IgnitionEnabledTest extends TestCase
             return 'success';
         })->middleware([IgnitionEnabled::class]);
 
-        $this->get('middleware-test')->assertOk();
+        $this->get('middleware-test')->assertStatus(200);
     }
 }
