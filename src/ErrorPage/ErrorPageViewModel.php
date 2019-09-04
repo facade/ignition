@@ -10,6 +10,7 @@ use Facade\FlareClient\Report;
 use Laravel\Telescope\Telescope;
 use Facade\Ignition\IgnitionConfig;
 use Illuminate\Contracts\Support\Arrayable;
+use Laravel\Telescope\IncomingExceptionEntry;
 use Facade\Ignition\Solutions\SolutionTransformer;
 use Laravel\Telescope\Http\Controllers\HomeController;
 
@@ -54,18 +55,26 @@ class ErrorPageViewModel implements Arrayable
     {
         try {
             if (! class_exists(Telescope::class)) {
-                return '';
+                return null;
             }
 
             if (! count(Telescope::$entriesQueue)) {
-                return '';
+                return null;
             }
 
-            $telescopeEntryId = (string) Telescope::$entriesQueue[0]->uuid;
+            $telescopeEntry = collect(Telescope::$entriesQueue)->first(function ($entry) {
+                return $entry instanceof IncomingExceptionEntry;
+            });
+
+            if (is_null($telescopeEntry)) {
+                return null;
+            }
+
+            $telescopeEntryId = (string) $telescopeEntry->uuid;
 
             return url(action([HomeController::class, 'index'])."/exceptions/{$telescopeEntryId}");
         } catch (Exception $exception) {
-            return '';
+            return null;
         }
     }
 
