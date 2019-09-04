@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.11 - 2019-09-04
+
+- Use exception line number as fallbacks for view errors
+
 ## 1.4.10 - 2019-09-04
 
 - Wrap solution provider lookup in a try-catch block
