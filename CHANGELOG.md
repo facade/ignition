@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.10 - 2019-09-04
+
+- Wrap solution provider lookup in a try-catch block
+
 ## 1.4.9 - 2019-09-04
 
 - Lookup the first exception when linking to Telescope
