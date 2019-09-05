@@ -23,8 +23,11 @@ class FlareHandler extends AbstractProcessingHandler
 
     protected function write(array $report): void
     {
-        if ($this->shouldReport($report)) {
+        if (! $this->shouldReport($report)) {
+            return;
+        }
 
+        if ($this->hasException($report)) {
             /** @var Throwable $throwable */
             $throwable = $report['context']['exception'];
 
@@ -34,13 +37,29 @@ class FlareHandler extends AbstractProcessingHandler
                 });
 
             $this->flare->report($report['context']['exception']);
+
+            return;
+        }
+
+        if ($this->isErrorLog($report)) {
+            $this->flare->report();
         }
     }
 
     protected function shouldReport(array $report): bool
     {
+        return $this->hasException($report) || $this->isErrorLog($report);
+    }
+
+    protected function hasException(array $report): bool
+    {
         $context = $report['context'];
 
         return isset($context['exception']) && $context['exception'] instanceof Throwable;
+    }
+
+    protected function isErrorLog(array $report): bool
+    {
+        return true;
     }
 }
