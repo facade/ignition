@@ -7,10 +7,11 @@ return [
     | Editor
     |--------------------------------------------------------------------------
     |
-    | Here you can specify the editor that should be opened when clicking
-    | code links.
+    | Choose your preferred editor to use when clicking any edit button.
     |
-    | Possible values are 'phpstorm', 'vscode', 'vscode-insiders', 'sublime' and 'atom'.
+    | Supported: "phpstorm", "vscode", "vscode-insiders",
+    |            "sublime", "atom"
+    |
     */
 
     'editor' => env('IGNITION_EDITOR', 'phpstorm'),
@@ -20,7 +21,9 @@ return [
     | Theme
     |--------------------------------------------------------------------------
     |
-    | Specify which theme should be used. You can choose between 'light', 'dark' and 'auto'.
+    | Here you may specify which theme Ignition should use.
+    |
+    | Supported: "light", "dark", "auto"
     |
     */
 
@@ -31,9 +34,10 @@ return [
     | Sharing
     |--------------------------------------------------------------------------
     |
-    | Ignition allows you to manually share your local errors with colleagues or people around the world.
-    | Sharing errors is completely free and does not require an account on Flare.
-    | If you do not want to have the ability to share your local errors, you can disable it here.
+    | You can share local errors with colleagues or others around the world.
+    | Sharing is completely free and doesn't require an account on Flare.
+    |
+    | If necessary, you can completely disable sharing below.
     |
     */
 
@@ -41,11 +45,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Ignore solution providers
+    | Ignored Solution Providers
     |--------------------------------------------------------------------------
     |
-    | Here you can specify the fully qualified class names of solution providers
-    | that should not be used.
+    | You may specify a list of solution providers (as fully qualified class
+    | names) that shouldn't be loaded. Ignition will ignore these classes
+    | and possible solutions provided by them will never be displayed.
     |
     */
 
@@ -55,13 +60,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Runnable solutions
+    | Runnable Solutions
     |--------------------------------------------------------------------------
     |
-    | Some of the solutions that Ignition presents to you are runnable and can perform various
-    | tasks. By default this is only enabled if your application is running in debug mode.
-    | If you would rather disable this feature completely, you can do so using the
-    | enable_solution_execution configuration key.
+    | Some solutions that Ignition displays are runnable and can perform
+    | various tasks. Runnable solutions are enabled when your app has
+    | debug mode enabled. You may also fully disable this feature.
     |
     */
 
@@ -74,16 +78,20 @@ return [
     |
     | If you are using a remote dev server, like Laravel Homestead, Docker, or
     | even a remote VPS, it will be necessary to specify your path mapping.
-    | Leaving either one, or both of these, empty or null will not trigger the
-    | remote URL changes, and will treat your editor links as local files.
     |
-    | 'remote_sites_path' is the full base path of your sites or projects inside
-    |                     homestead, Docker, or remote dev servers, for example
-    |                     `/home/vagrant/Code`.
-    | 'local_sites_path'  is the full base path of your sites or projects on your
-    |                     local computer that your IDE or editor is running on,
-    |                     for example `/Users/<name>/Code` or
-    |                     `C:\Users\<name>\Documents\Code`.
+    | Leaving one, or both of these, empty or null will not trigger the remote
+    | URL changes and Ignition will treat your editor links as local files.
+    |
+    | "remote_sites_path" is an absolute base path for your sites or projects
+    | in Homestead, Vagrant, Docker, or another remote development server.
+    |
+    | Example value: "/home/vagrant/Code"
+    |
+    | "local_sites_path" is an absolute base path for your sites or projects
+    | on your local computer where your IDE or code editor is running on.
+    |
+    | Example values: "/Users/<name>/Code", "C:\Users\<name>\Documents\Code"
+    |
     */
 
     'remote_sites_path' => env('IGNITION_REMOTE_SITES_PATH', ''),
@@ -94,8 +102,8 @@ return [
     | Housekeeping Endpoint Prefix
     |--------------------------------------------------------------------------
     |
-    | Ignition registers a couple of routes if it is enabled. Here you can define
-    | the route prefix it should use.
+    | Ignition registers a couple of routes when it is enabled. Below you may
+    | specify a route prefix that will be used to host all internal links.
     |
     */
     'housekeeping_endpoint_prefix' => '_ignition',
