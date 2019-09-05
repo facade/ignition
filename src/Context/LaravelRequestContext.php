@@ -53,7 +53,7 @@ class LaravelRequestContext extends RequestContext
     protected function getRouteParameters(): array
     {
         try {
-            return collect(optional($route)->parameters ?? [])->toArray();
+            return collect(optional($this->request->route())->parameters ?? [])->toArray();
         } catch (\Throwable $e) {
             return [];
         }
