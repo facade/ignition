@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.13 - 2019-09-05
+
+- Use Laravel style comments
+
 ## 1.4.12 - 2019-09-04
 
 - Use a middleware to protect ignition routes (#93)
