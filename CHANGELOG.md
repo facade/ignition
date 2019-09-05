@@ -2,10 +2,6 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 1.4.14 - 2019-09-05
-
-- Use DIRECTORY_SEPARATOR to fix an issue with blade view lookups in Windows
-
 ## 1.4.15 - 2019-09-05
 
 - Use previous exception trace for view exceptions. Fixes #107
