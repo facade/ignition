@@ -66,8 +66,6 @@ matrix:
       env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-lowest'
     - php: 7.3
       env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-stable'
-  fast_finish: true
-  allow_failures:
     - php: 7.4snapshot
       env: LARAVEL='5.5.*' TESTBENCH='3.5.*' COMPOSER_FLAGS='--prefer-lowest'
     - php: 7.4snapshot
@@ -88,6 +86,9 @@ matrix:
       env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-lowest'
     - php: 7.4snapshot
       env: LARAVEL='6.*' TESTBENCH='4.*' COMPOSER_FLAGS='--prefer-stable'
+  fast_finish: true
+  allow_failures:
+    - php: 7.4snapshot
 
 before_install:
   - composer config discard-changes true
