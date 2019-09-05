@@ -2,7 +2,6 @@
 
 namespace Facade\Ignition;
 
-use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -31,6 +30,7 @@ use Facade\Ignition\Middleware\AddGitInformation;
 use Facade\Ignition\Views\Engines\CompilerEngine;
 use Facade\Ignition\Context\LaravelContextDetector;
 use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
+use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Facade\Ignition\Http\Controllers\StyleController;
 use Facade\Ignition\Http\Controllers\ScriptController;
 use Facade\Ignition\Middleware\AddEnvironmentInformation;

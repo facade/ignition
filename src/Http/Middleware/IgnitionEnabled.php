@@ -21,7 +21,6 @@ class IgnitionEnabled
         }
 
         return $next($request);
-
     }
 
     protected function ignitionEnabled(): bool
