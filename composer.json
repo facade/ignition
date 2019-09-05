@@ -1,6 +1,6 @@
 {
     "name": "facade/ignition",
-    "description": "A beautiful error page for Laravel apps",
+    "description": "A beautiful error page for Laravel applications.",
     "keywords": [
         "error",
         "page",
