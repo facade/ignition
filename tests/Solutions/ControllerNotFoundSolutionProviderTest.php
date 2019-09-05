@@ -3,6 +3,7 @@
 namespace Facade\Ignition\Tests\Solutions;
 
 use ReflectionException;
+use Illuminate\Support\Str;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Facade\Ignition\SolutionProviders\ControllerNotFoundSolutionProvider;
@@ -25,7 +26,7 @@ class ControllerNotFoundSolutionProviderTest extends TestCase
         $exception = new BindingResolutionException('Target class [App\Http\Controllers\Auth\LoginController] does not exist.');
         $solutions = $this->provider->getSolutions($exception);
 
-        $this->assertStringContainsString('`php artisan make:controller Auth/LoginController`', $solutions[0]->getSolutionDescription());
+        $this->assertTrue(Str::endsWith($solutions[0]->getSolutionDescription(), '`php artisan make:controller Auth/LoginController`.'));
     }
 
     /** @test */
@@ -34,6 +35,6 @@ class ControllerNotFoundSolutionProviderTest extends TestCase
         $exception = new ReflectionException('Class App\Http\Controllers\MissingController does not exist');
         $solutions = $this->provider->getSolutions($exception);
 
-        $this->assertStringContainsString('`php artisan make:controller MissingController`', $solutions[0]->getSolutionDescription());
+        $this->assertTrue(Str::endsWith($solutions[0]->getSolutionDescription(), '`php artisan make:controller MissingController`.'));
     }
 }
