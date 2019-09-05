@@ -1,4 +1,5 @@
 cache:
+  yarn: true
   directories:
     - $HOME/.composer/cache
 
@@ -97,6 +98,8 @@ before_install:
 
 install:
   - travis_retry composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction --no-suggest
+  - travis_retry yarn install --non-interactive
 
 script:
   - vendor/bin/phpunit --coverage-text
+  - yarn run jest
