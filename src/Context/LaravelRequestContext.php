@@ -23,12 +23,16 @@ class LaravelRequestContext extends RequestContext
             return [];
         }
 
-        if (method_exists($user, 'toFlare')) {
-            return $user->toFlare();
-        }
+        try {
+            if (method_exists($user, 'toFlare')) {
+                return $user->toFlare();
+            }
 
-        if (method_exists($user, 'toArray')) {
-            return $user->toArray();
+            if (method_exists($user, 'toArray')) {
+                return $user->toArray();
+            }
+        } catch (\Throwable $e) {
+            return [];
         }
 
         return [];
@@ -40,10 +44,19 @@ class LaravelRequestContext extends RequestContext
 
         return [
             'route' => optional($route)->getName(),
-            'routeParameters' => collect(optional($route)->parameters ?? [])->toArray(),
+            'routeParameters' => $this->getRouteParameters(),
             'controllerAction' => optional($route)->getActionName(),
             'middleware' => array_values(optional($route)->gatherMiddleware() ?? []),
         ];
+    }
+
+    protected function getRouteParameters(): array
+    {
+        try {
+            return collect(optional($route)->parameters ?? [])->toArray();
+        } catch (\Throwable $e) {
+            return [];
+        }
     }
 
     public function toArray(): array
