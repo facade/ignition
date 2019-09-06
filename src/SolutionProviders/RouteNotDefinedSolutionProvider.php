@@ -6,8 +6,8 @@ use Throwable;
 use InvalidArgumentException;
 use Illuminate\Support\Facades\Route;
 use Facade\IgnitionContracts\BaseSolution;
-use Facade\Ignition\Support\StringComparator;
 use Facade\Ignition\Exceptions\ViewException;
+use Facade\Ignition\Support\StringComparator;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 class RouteNotDefinedSolutionProvider implements HasSolutionsForThrowable
@@ -50,5 +50,4 @@ class RouteNotDefinedSolutionProvider implements HasSolutionsForThrowable
 
         return StringComparator::findClosestMatch(array_keys(Route::getRoutes()->getRoutesByName()), $missingRoute);
     }
-
 }

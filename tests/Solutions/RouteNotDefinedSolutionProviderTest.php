@@ -21,7 +21,7 @@ class RouteNotDefinedSolutionProviderTest extends TestCase
     /** @test */
     public function it_can_recommend_changing_the_route_name()
     {
-        Route::get('/test','TestController@typo')->name('test.typo');
+        Route::get('/test', 'TestController@typo')->name('test.typo');
 
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solution = app(RouteNotDefinedSolutionProvider::class)->getSolutions($this->getRouteNotDefinedException())[0];
@@ -32,7 +32,7 @@ class RouteNotDefinedSolutionProviderTest extends TestCase
     /** @test */
     public function it_wont_recommend_another_route_if_the_names_are_too_different()
     {
-        Route::get('/test','TestController@typo')->name('test.typo');
+        Route::get('/test', 'TestController@typo')->name('test.typo');
 
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solution = app(RouteNotDefinedSolutionProvider::class)->getSolutions($this->getRouteNotDefinedException('test.is-too-different'))[0];
