@@ -2,7 +2,7 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 1.4.16 - 2019-09-06
+## 1.4.17 - 2019-09-06
 
 -   Remove Inter, Operator from font stack. Fixes #74
 
