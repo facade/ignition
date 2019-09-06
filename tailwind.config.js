@@ -3,7 +3,6 @@ module.exports = {
     theme: {
         fontFamily: {
             sans: [
-                'Inter',
                 '-apple-system',
                 'BlinkMacSystemFont',
                 '"Segoe UI"',
@@ -18,8 +17,6 @@ module.exports = {
                 '"Noto Color Emoji"',
             ],
             mono: [
-                'Operator Mono SSm A',
-                'Operator Mono SSm B',
                 'SFMono-Regular',
                 'Menlo',
                 'Monaco',
