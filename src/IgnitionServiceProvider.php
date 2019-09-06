@@ -49,6 +49,7 @@ use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\RedisClientNotInstalledSolutionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 
@@ -302,6 +303,7 @@ class IgnitionServiceProvider extends ServiceProvider
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
             MergeConflictSolutionProvider::class,
+            RedisClientNotInstalledSolutionProvider::class,
         ];
     }
 
