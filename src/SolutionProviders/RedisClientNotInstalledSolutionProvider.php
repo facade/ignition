@@ -3,14 +3,8 @@
 namespace Facade\Ignition\SolutionProviders;
 
 use Throwable;
-use Illuminate\Support\Arr;
 use LogicException;
-use Illuminate\Support\Facades\View;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 use Facade\IgnitionContracts\BaseSolution;
-use Facade\Ignition\Exceptions\ViewException;
-use Facade\Ignition\Support\StringComparator;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 class RedisClientNotInstalledSolutionProvider implements HasSolutionsForThrowable
