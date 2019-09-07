@@ -18,11 +18,10 @@ class RedisClientNotInstalledSolutionProvider implements HasSolutionsForThrowabl
         return true;
     }
 
-
     public function getSolutions(Throwable $throwable): array
     {
         $client = config('database.redis.client');
-        list($message, $description) = $this->getSolutionMessage($client);
+        [$message, $description] = $this->getSolutionMessage($client);
 
         return [
             BaseSolution::create($message)
