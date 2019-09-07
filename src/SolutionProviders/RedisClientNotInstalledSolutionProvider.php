@@ -11,7 +11,7 @@ class RedisClientNotInstalledSolutionProvider implements HasSolutionsForThrowabl
 {
     public function canSolve(Throwable $throwable): bool
     {
-        if (! $throwable instanceof LogicException && ! $throwable instanceof ViewException) {
+        if (! $throwable instanceof LogicException) {
             return false;
         }
 
