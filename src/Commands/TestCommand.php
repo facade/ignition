@@ -55,7 +55,7 @@ class TestCommand extends Command
         }
 
         if (is_null($this->config->get('logging.channels.flare'))) {
-            $this->info('❌ There is no logging channel named `flare` in the `logging` confige file');
+            $this->info('❌ There is no logging channel named `flare` in the `logging` config file');
         }
 
         if ($this->config->get('logging.channels.flare.driver') !== 'flare') {
