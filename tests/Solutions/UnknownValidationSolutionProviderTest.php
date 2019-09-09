@@ -5,7 +5,6 @@ namespace Facade\Ignition\Tests\Solutions;
 use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class UnknownValidationSolutionProviderTest extends TestCase
 {
@@ -38,14 +37,14 @@ class UnknownValidationSolutionProviderTest extends TestCase
             return $value == 'foo';
         });
 
-        Validator::extendImplicit('bar', function ($attribute, $value, $parameters, $validator) {
+        Validator::extendImplicit('bar_a', function ($attribute, $value, $parameters, $validator) {
             return $value == 'bar';
         });
 
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solution = app(UnknownValidationSolutionProvider::class)->getSolutions($this->getBadMethodCallException($invalidRule))[0];
 
-        $this->assertTrue(Str::contains($solution->getSolutionDescription(), "Did you mean `{$recommendedRule}`"));
+        $this->assertEquals("Did you mean `{$recommendedRule}` ?", $solution->getSolutionDescription());
         $this->assertEquals('Unknown Validation Rule', $solution->getSolutionTitle());
     }
 
@@ -69,7 +68,7 @@ class UnknownValidationSolutionProviderTest extends TestCase
             ['number', 'numeric'],
             ['unik', 'unique'],
             ['fooo', 'foo'],
-            ['baar', 'bar'],
+            ['bar_b', 'bar_a'],
         ];
     }
 }

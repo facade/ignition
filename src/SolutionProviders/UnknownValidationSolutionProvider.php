@@ -6,6 +6,7 @@ use BadMethodCallException;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 use ReflectionClass;
 use ReflectionMethod;
@@ -37,7 +38,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
         $method = $this->getMethodFromExceptionMessage($throwable->getMessage());
 
         $possibleMethod = $this->findPossibleMethod($method);
-        $rule = lcfirst(str_replace('validate', '', $possibleMethod));
+        $rule = Str::snake(str_replace('validate', '', $possibleMethod));
 
         return "Did you mean `{$rule}` ?";
     }
@@ -68,7 +69,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
         $extensions = Collection::make((\Illuminate\Support\Facades\Validator::make([], []))->extensions)
             ->keys()
             ->map(function (string $extension) {
-                return 'validate' . ucfirst($extension);
+                return 'validate' . Str::studly($extension);
             });
 
         return Collection::make($class->getMethods())
