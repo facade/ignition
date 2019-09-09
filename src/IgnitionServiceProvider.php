@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition;
 
+use Throwable;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -9,7 +10,6 @@ use Illuminate\Log\LogManager;
 use Illuminate\Queue\QueueManager;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Log;
-use Throwable;
 use Whoops\Handler\HandlerInterface;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -45,6 +45,7 @@ use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
+use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
@@ -308,6 +309,7 @@ class IgnitionServiceProvider extends ServiceProvider
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
             MergeConflictSolutionProvider::class,
+            MissingColumnSolutionProvider::class,
             UnknownValidationSolutionProvider::class,
         ];
     }
