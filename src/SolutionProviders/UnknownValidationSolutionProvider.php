@@ -26,12 +26,6 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
             return false;
         }
 
-        extract($this->getClassAndMethodFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
-
-        if ($class !== Validator::class || ! Str::startsWith($method, 'validate')) {
-            return false;
-        }
-
         return true;
     }
 
@@ -52,7 +46,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
         extract($this->getClassAndMethodFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
 
         $possibleMethod = $this->findPossibleMethod($class, $method);
-        $rule           = strtolower(str_replace('validate', '', $possibleMethod->name));
+        $rule           = strtolower(str_replace('validate', '', $possibleMethod));
 
         return "Did you mean `{$rule}` ?";
     }
@@ -60,6 +54,14 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
     protected function getClassAndMethodFromExceptionMessage(string $message): ?array
     {
         if (! preg_match(self::REGEX, $message, $matches)) {
+            return null;
+        }
+
+        if ($matches[1] !== Validator::class) {
+            return null;
+        }
+
+        if (! Str::startsWith($matches[2], 'validate')) {
             return null;
         }
 
@@ -72,8 +74,8 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
     protected function findPossibleMethod(string $class, string $invalidMethodName)
     {
         return $this->getAvailableMethods($class)
-            ->sortByDesc(function (ReflectionMethod $method) use ($invalidMethodName) {
-                similar_text($invalidMethodName, $method->name, $percentage);
+            ->sortByDesc(function (string $method) use ($invalidMethodName) {
+                similar_text($invalidMethodName, $method, $percentage);
 
                 return $percentage;
             })->first();
@@ -83,9 +85,24 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
     {
         $class = new ReflectionClass($class);
 
+        $extensions = Collection::make((\Illuminate\Support\Facades\Validator::make([], []))->extensions)
+            ->keys()
+            ->map(function (string $extension) {
+                return 'validate' . ucfirst($extension);
+            });
+
         return Collection::make($class->getMethods())
             ->filter(function (ReflectionMethod $method) {
-                return Str::startsWith($method->name, 'validate');
-            });
+                return Str::startsWith($method->name, 'validate') && ! in_array($method->name, [
+                    'validate',
+                    'validated',
+                    'validateAttribute',
+                    'validateUsingCustomRule'
+                ]);
+            })
+            ->map(function (ReflectionMethod $method) {
+                return $method->name;
+            })
+            ->merge($extensions);
     }
 }

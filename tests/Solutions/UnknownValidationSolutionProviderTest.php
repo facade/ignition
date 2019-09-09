@@ -34,6 +34,14 @@ class UnknownValidationSolutionProviderTest extends TestCase
             $this->markTestSkipped('Laravel version < 5.6.3 do not support bad method call solutions');
         }
 
+        Validator::extend('foo', function ($attribute, $value, $parameters, $validator) {
+            return $value == 'foo';
+        });
+
+        Validator::extendImplicit('bar', function ($attribute, $value, $parameters, $validator) {
+            return $value == 'bar';
+        });
+
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solution = app(UnknownValidationSolutionProvider::class)->getSolutions($this->getBadMethodCallException($invalidRule))[0];
 
@@ -60,6 +68,8 @@ class UnknownValidationSolutionProviderTest extends TestCase
         return [
             ['number', 'numeric'],
             ['unik', 'unique'],
+            ['fooo', 'foo'],
+            ['baar', 'bar'],
         ];
     }
 }
