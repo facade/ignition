@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition;
 
+use Throwable;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -9,7 +10,6 @@ use Illuminate\Log\LogManager;
 use Illuminate\Queue\QueueManager;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Log;
-use Throwable;
 use Whoops\Handler\HandlerInterface;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
