@@ -6,7 +6,6 @@ use BadMethodCallException;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 use ReflectionClass;
 use ReflectionMethod;
@@ -14,7 +13,7 @@ use Throwable;
 
 class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
 {
-    protected const REGEX = '/([a-zA-Z\\\\]+)::([a-zA-Z]+)/m';
+    protected const REGEX = '/Illuminate\\\\Validation\\\\Validator::(?P<method>validate(?!(Attribute|UsingCustomRule))[A-Z][a-zA-Z]+)/m';
 
     public function canSolve(Throwable $throwable): bool
     {
@@ -22,11 +21,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
             return false;
         }
 
-        if (is_null($this->getClassAndMethodFromExceptionMessage($throwable->getMessage()))) {
-            return false;
-        }
-
-        return true;
+        return ! is_null($this->getMethodFromExceptionMessage($throwable->getMessage()));
     }
 
     public function getSolutions(Throwable $throwable): array
@@ -37,43 +32,28 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
         ];
     }
 
-    public function getSolutionDescription(Throwable $throwable): string
+    protected function getSolutionDescription(Throwable $throwable): string
     {
-        if (! $this->canSolve($throwable)) {
-            return '';
-        }
+        $method = $this->getMethodFromExceptionMessage($throwable->getMessage());
 
-        extract($this->getClassAndMethodFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
-
-        $possibleMethod = $this->findPossibleMethod($class, $method);
-        $rule           = lcfirst(str_replace('validate', '', $possibleMethod));
+        $possibleMethod = $this->findPossibleMethod($method);
+        $rule = lcfirst(str_replace('validate', '', $possibleMethod));
 
         return "Did you mean `{$rule}` ?";
     }
 
-    protected function getClassAndMethodFromExceptionMessage(string $message): ?array
+    protected function getMethodFromExceptionMessage(string $message): ?string
     {
         if (! preg_match(self::REGEX, $message, $matches)) {
             return null;
         }
 
-        if ($matches[1] !== Validator::class) {
-            return null;
-        }
-
-        if (! Str::startsWith($matches[2], 'validate')) {
-            return null;
-        }
-
-        return [
-            'class'  => $matches[1],
-            'method' => $matches[2],
-        ];
+        return $matches['method'];
     }
 
-    protected function findPossibleMethod(string $class, string $invalidMethodName)
+    protected function findPossibleMethod(string $invalidMethodName)
     {
-        return $this->getAvailableMethods($class)
+        return $this->getAvailableMethods()
             ->sortByDesc(function (string $method) use ($invalidMethodName) {
                 similar_text($invalidMethodName, $method, $percentage);
 
@@ -81,9 +61,9 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
             })->first();
     }
 
-    protected function getAvailableMethods($class): Collection
+    protected function getAvailableMethods(): Collection
     {
-        $class = new ReflectionClass($class);
+        $class = new ReflectionClass(Validator::class);
 
         $extensions = Collection::make((\Illuminate\Support\Facades\Validator::make([], []))->extensions)
             ->keys()
@@ -93,12 +73,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
 
         return Collection::make($class->getMethods())
             ->filter(function (ReflectionMethod $method) {
-                return Str::startsWith($method->name, 'validate') && ! in_array($method->name, [
-                    'validate',
-                    'validated',
-                    'validateAttribute',
-                    'validateUsingCustomRule'
-                ]);
+                return preg_match('/(validate(?!(Attribute|UsingCustomRule))[A-Z][a-zA-Z]+)/', $method->name);
             })
             ->map(function (ReflectionMethod $method) {
                 return $method->name;
