@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 class RouteNotDefinedSolutionProviderTest extends TestCase
 {
     /** @test */
-    public function it_can_solve_the_exception()
+    public function it_can_solve_a_route_not_defined_exception()
     {
         $canSolve = app(RouteNotDefinedSolutionProvider::class)->canSolve($this->getRouteNotDefinedException());
 
