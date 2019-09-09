@@ -9,6 +9,7 @@ use Illuminate\Log\LogManager;
 use Illuminate\Queue\QueueManager;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 use Whoops\Handler\HandlerInterface;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -30,6 +31,7 @@ use Facade\Ignition\Middleware\AddGitInformation;
 use Facade\Ignition\Views\Engines\CompilerEngine;
 use Facade\Ignition\Context\LaravelContextDetector;
 use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
+use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Facade\Ignition\Http\Controllers\StyleController;
 use Facade\Ignition\Http\Controllers\ScriptController;
 use Facade\Ignition\Middleware\AddEnvironmentInformation;
@@ -117,19 +119,17 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerHousekeepingRoutes()
     {
-        if (! config('app.debug')) {
-            return $this;
-        }
+        Route::group([
+            'prefix' => config('ignition.housekeeping_endpoint_prefix', '_ignition'),
+            'middleware' => [IgnitionEnabled::class],
+        ], function () {
+            Route::get('health-check', HealthCheckController::class);
+            Route::post('execute-solution', ExecuteSolutionController::class);
+            Route::post('share-report', ShareReportController::class);
 
-        Route::prefix(config('flare.housekeeping_endpoint_prefix', 'flare'))
-            ->group(function () {
-                Route::get('health-check', HealthCheckController::class);
-                Route::post('execute-solution', ExecuteSolutionController::class);
-                Route::post('share-report', ShareReportController::class);
-
-                Route::get('scripts/{script}', ScriptController::class);
-                Route::get('styles/{style}', StyleController::class);
-            });
+            Route::get('scripts/{script}', ScriptController::class);
+            Route::get('styles/{style}', StyleController::class);
+        });
 
         return $this;
     }
@@ -168,8 +168,12 @@ class IgnitionServiceProvider extends ServiceProvider
         $this->app->singleton(IgnitionConfig::class, function () {
             $options = [];
 
-            if ($configPath = $this->getConfigFileLocation()) {
-                $options = require $configPath;
+            try {
+                if ($configPath = $this->getConfigFileLocation()) {
+                    $options = require $configPath;
+                }
+            } catch (Throwable $e) {
+                // possible open_basedir restriction
             }
 
             return new IgnitionConfig($options);

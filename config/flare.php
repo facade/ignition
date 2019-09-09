@@ -7,8 +7,7 @@ return [
     | Flare API key
     |--------------------------------------------------------------------------
     |
-    | If you want to send your errors to the Flare service, you can specify
-    | the API key of your project here.
+    | Specify Flare's API key below to enable error reporting to the service.
     |
     | More info: https://flareapp.io/docs/general/projects
     |
@@ -18,11 +17,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Reporting options
+    | Reporting Options
     |--------------------------------------------------------------------------
     |
-    | These options determine which information is being transmitted
-    | to Flare.
+    | These options determine which information will be transmitted to Flare.
     |
     */
 
