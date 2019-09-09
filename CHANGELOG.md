@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.0 - 2019-09-09
+
+- add `RouteNotDefined` solution provider (#113)
+
 ## 1.5.0 - 2019-09-09
 
 - suggest running migrations when a column is missing (#83)
