@@ -46,7 +46,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
         extract($this->getClassAndMethodFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
 
         $possibleMethod = $this->findPossibleMethod($class, $method);
-        $rule           = strtolower(str_replace('validate', '', $possibleMethod));
+        $rule           = lcfirst(str_replace('validate', '', $possibleMethod));
 
         return "Did you mean `{$rule}` ?";
     }
