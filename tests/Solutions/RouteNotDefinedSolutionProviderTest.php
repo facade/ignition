@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Route;
 use Facade\Ignition\SolutionProviders\RouteNotDefinedSolutionProvider;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class RouteNotDefinedSolutionProviderTest extends TestCase
 {
@@ -40,8 +41,8 @@ class RouteNotDefinedSolutionProviderTest extends TestCase
         $this->assertFalse(Str::contains($solution->getSolutionDescription(), 'Did you mean'));
     }
 
-    protected function getRouteNotDefinedException(string $route = 'test.typoo'): InvalidArgumentException
+    protected function getRouteNotDefinedException(string $route = 'test.typoo'): RouteNotFoundException
     {
-        return new InvalidArgumentException("Route [{$route}] not defined.");
+        return new RouteNotFoundException("Route [{$route}] not defined.");
     }
 }
