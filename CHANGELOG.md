@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.18 - 2019-09-09
+
+- Fix open_basedir restriction when looking up config file. Fixes #120
+
 ## 1.4.17 - 2019-09-06
 
 -   Remove Inter, Operator from font stack. Fixes #74
