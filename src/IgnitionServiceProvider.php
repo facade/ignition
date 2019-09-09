@@ -9,6 +9,7 @@ use Illuminate\Log\LogManager;
 use Illuminate\Queue\QueueManager;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Log;
+use Throwable;
 use Whoops\Handler\HandlerInterface;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -167,8 +168,12 @@ class IgnitionServiceProvider extends ServiceProvider
         $this->app->singleton(IgnitionConfig::class, function () {
             $options = [];
 
-            if ($configPath = $this->getConfigFileLocation()) {
-                $options = require $configPath;
+            try {
+                if ($configPath = $this->getConfigFileLocation()) {
+                    $options = require $configPath;
+                }
+            } catch (Throwable $e) {
+                // possible open_basedir restriction
             }
 
             return new IgnitionConfig($options);
