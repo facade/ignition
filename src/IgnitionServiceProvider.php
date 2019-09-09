@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition;
 
+use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -307,6 +308,7 @@ class IgnitionServiceProvider extends ServiceProvider
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
             MergeConflictSolutionProvider::class,
+            UnknownValidationSolutionProvider::class,
         ];
     }
 
