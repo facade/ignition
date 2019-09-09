@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.4.19 - 2019-09-09
+
+- Remove quotation from git commit url #89 
+
 ## 1.4.18 - 2019-09-09
 
 - Fix open_basedir restriction when looking up config file. Fixes #120
