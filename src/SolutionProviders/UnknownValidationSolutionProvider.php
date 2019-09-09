@@ -2,15 +2,15 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Illuminate\Support\Str;
-use Illuminate\Validation\Validator;
-use Throwable;
-use ReflectionClass;
-use ReflectionMethod;
 use BadMethodCallException;
-use Illuminate\Support\Collection;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Validator;
+use ReflectionClass;
+use ReflectionMethod;
+use Throwable;
 
 class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
 {
@@ -39,7 +39,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
     {
         return [
             BaseSolution::create('Unknown Validation Rule')
-            ->setSolutionDescription($this->getSolutionDescription($throwable)),
+                ->setSolutionDescription($this->getSolutionDescription($throwable)),
         ];
     }
 
@@ -52,7 +52,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
         extract($this->getClassAndMethodFromExceptionMessage($throwable->getMessage()), EXTR_OVERWRITE);
 
         $possibleMethod = $this->findPossibleMethod($class, $method);
-        $rule = strtolower(str_replace('validate', '', $possibleMethod->name));
+        $rule           = strtolower(str_replace('validate', '', $possibleMethod->name));
 
         return "Did you mean `{$rule}` ?";
     }
@@ -64,7 +64,7 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
         }
 
         return [
-            'class' => $matches[1],
+            'class'  => $matches[1],
             'method' => $matches[2],
         ];
     }

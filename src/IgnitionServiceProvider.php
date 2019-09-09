@@ -2,7 +2,6 @@
 
 namespace Facade\Ignition;
 
-use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -48,6 +47,7 @@ use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
+use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;

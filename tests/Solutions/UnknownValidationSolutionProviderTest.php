@@ -12,6 +12,10 @@ class UnknownValidationSolutionProviderTest extends TestCase
     /** @test */
     public function it_can_solve_the_exception()
     {
+        if (version_compare($this->app->version(), '5.6.3', '<')) {
+            $this->markTestSkipped('Laravel version < 5.6.3 do not support bad method call solutions');
+        }
+
         $canSolve = app(UnknownValidationSolutionProvider::class)->canSolve($this->getBadMethodCallException());
 
         $this->assertTrue($canSolve);
@@ -26,6 +30,10 @@ class UnknownValidationSolutionProviderTest extends TestCase
      */
     public function it_can_recommend_changing_the_rule($invalidRule, $recommendedRule)
     {
+        if (version_compare($this->app->version(), '5.6.3', '<')) {
+            $this->markTestSkipped('Laravel version < 5.6.3 do not support bad method call solutions');
+        }
+
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solution = app(UnknownValidationSolutionProvider::class)->getSolutions($this->getBadMethodCallException($invalidRule))[0];
 
