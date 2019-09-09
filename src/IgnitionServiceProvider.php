@@ -45,6 +45,7 @@ use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
+use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
@@ -307,6 +308,7 @@ class IgnitionServiceProvider extends ServiceProvider
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
             MergeConflictSolutionProvider::class,
+            MissingColumnSolutionProvider::class,
         ];
     }
 
