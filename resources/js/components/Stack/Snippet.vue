@@ -43,7 +43,7 @@
                             'stack-code-line-selected': withinSelectedRange(parseInt(line_number)),
                         }"
                         class="stack-code-line"
-                    >{{ code || '&nbsp;' }}<a :href="editorUrl(line_number)" class="editor-link"><i class="fa fa-pencil-alt"></i></a></p>
+                ><span v-html="highlightedCode(code)"></span><a :href="editorUrl(line_number)" class="editor-link"><i class="fa fa-pencil-alt"></i></a></p>
                 </pre>
             </div>
         </div>
@@ -51,10 +51,15 @@
 </template>
 
 <script>
+import hljs from 'highlight.js/lib/highlight';
+hljs.registerLanguage('php', require('highlight.js/lib/languages/php'));
+
 import ExceptionClass from '../Shared/ExceptionClass.vue';
 import FilePath from '../Shared/FilePath.vue';
 import LineNumber from '../Shared/LineNumber.vue';
 import editorUrl from '../Shared/editorUrl';
+
+let highlightState = null;
 
 export default {
     inject: ['config'],
@@ -74,6 +79,12 @@ export default {
         return {
             firstSelectedLineNumber: null,
         };
+    },
+
+    watch: {
+        selectedFrame: value => {
+            highlightState = null;
+        },
     },
 
     methods: {
@@ -97,6 +108,13 @@ export default {
         },
         editorUrl(lineNumber) {
             return editorUrl(this.config, this.selectedFrame.file, lineNumber);
+        },
+        highlightedCode(code) {
+            const result = hljs.highlight('php', code || '', true, highlightState);
+
+            highlightState = result.top;
+
+            return result.value;
         },
     },
 };
