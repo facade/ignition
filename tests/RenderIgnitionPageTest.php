@@ -3,8 +3,8 @@
 namespace Facade\Ignition\Tests;
 
 use Exception;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
 
 class RenderIgnitionPageTest extends TestCase
 {
