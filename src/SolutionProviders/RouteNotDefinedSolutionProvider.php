@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
+use Illuminate\Foundation\Application;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 use InvalidArgumentException;
@@ -17,8 +18,16 @@ class RouteNotDefinedSolutionProvider implements HasSolutionsForThrowable
 
     public function canSolve(Throwable $throwable): bool
     {
-        if (! $throwable instanceof RouteNotFoundException) {
-            return false;
+        if (version_compare(Application::VERSION, '6.0.0', '>=')) {
+            if (!$throwable instanceof RouteNotFoundException) {
+                return false;
+            }
+        }
+
+        if (version_compare(Application::VERSION, '6.0.0', '<')) {
+            if (!$throwable instanceof InvalidArgumentException && !$throwable instanceof ViewException) {
+                return false;
+            }
         }
 
         return preg_match(self::REGEX, $throwable->getMessage(), $matches);
