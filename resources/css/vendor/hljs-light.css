@@ -1,0 +1,76 @@
+.light .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #383a42;
+    background: #fafafa;
+}
+
+.light .hljs-comment,
+.light .hljs-quote {
+    color: #a0a1a7;
+    font-style: italic;
+}
+
+.light .hljs-doctag,
+.light .hljs-keyword,
+.light .hljs-formula {
+    color: #a626a4;
+}
+
+.light .hljs-section,
+.light .hljs-name,
+.light .hljs-selector-tag,
+.light .hljs-deletion,
+.light .hljs-subst {
+    color: #e45649;
+}
+
+.light .hljs-literal {
+    color: #0184bb;
+}
+
+.light .hljs-string,
+.light .hljs-regexp,
+.light .hljs-addition,
+.light .hljs-attribute,
+.light .hljs-meta-string {
+    color: #50a14f;
+}
+
+.light .hljs-built_in,
+.light .hljs-class .light .hljs-title {
+    color: #c18401;
+}
+
+.light .hljs-attr,
+.light .hljs-variable,
+.light .hljs-template-variable,
+.light .hljs-type,
+.light .hljs-selector-class,
+.light .hljs-selector-attr,
+.light .hljs-selector-pseudo,
+.light .hljs-number {
+    color: #986801;
+}
+
+.light .hljs-symbol,
+.light .hljs-bullet,
+.light .hljs-link,
+.light .hljs-meta,
+.light .hljs-selector-id,
+.light .hljs-title {
+    color: #4078f2;
+}
+
+.light .hljs-emphasis {
+    font-style: italic;
+}
+
+.light .hljs-strong {
+    font-weight: bold;
+}
+
+.light .hljs-link {
+    text-decoration: underline;
+}
