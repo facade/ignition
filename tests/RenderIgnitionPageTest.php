@@ -4,6 +4,7 @@ namespace Facade\Ignition\Tests;
 
 use Exception;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class RenderIgnitionPageTest extends TestCase
 {
@@ -27,7 +28,7 @@ class RenderIgnitionPageTest extends TestCase
             ->baseResponse;
 
         $this->assertStringStartsWith('text/html', $response->headers->get('Content-Type'));
-        $this->assertStringStartsWith('<!doctype html>', trim($response->getContent()));
+        $this->assertTrue(Str::contains($response->getContent(), 'html'));
     }
 
     /** @test */
