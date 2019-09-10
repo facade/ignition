@@ -57,6 +57,7 @@ class UnknownValidationSolutionProviderTest extends TestCase
         try {
             $validator = Validator::make(['number' => 10], ['number' => "{$rule}"]);
             $validator->validate();
+
             return $default;
         } catch (BadMethodCallException $badMethodCallException) {
             return $badMethodCallException;
