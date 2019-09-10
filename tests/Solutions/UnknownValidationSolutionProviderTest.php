@@ -2,6 +2,8 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
+use BadMethodCallException;
+use Exception;
 use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
@@ -48,21 +50,27 @@ class UnknownValidationSolutionProviderTest extends TestCase
         $this->assertEquals('Unknown Validation Rule', $solution->getSolutionTitle());
     }
 
-    protected function getBadMethodCallException(string $rule = 'number'): \BadMethodCallException
+    protected function getBadMethodCallException(string $rule = 'number'): BadMethodCallException
     {
-        $default = new \BadMethodCallException('Not a validation rule exception!');
+        $default = new BadMethodCallException('Not a validation rule exception!');
+
         try {
             $validator = Validator::make(['number' => 10], ['number' => "{$rule}"]);
             $validator->validate();
             return $default;
-        } catch (\BadMethodCallException $badMethodCallException) {
+        } catch (BadMethodCallException $badMethodCallException) {
             return $badMethodCallException;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $default;
         }
     }
 
-    public function rulesProvider()
+    /**
+     * Return a data set.
+     *
+     * @return array
+     */
+    public function rulesProvider(): array
     {
         return [
             ['number', 'numeric'],
