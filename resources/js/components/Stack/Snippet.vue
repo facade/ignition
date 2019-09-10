@@ -59,10 +59,6 @@ import FilePath from '../Shared/FilePath.vue';
 import LineNumber from '../Shared/LineNumber.vue';
 import editorUrl from '../Shared/editorUrl';
 
-let highlightState = null;
-
-const mediaQuery = matchMedia('(prefers-color-scheme: dark)');
-
 export default {
     inject: ['config'],
 
@@ -78,20 +74,27 @@ export default {
     },
 
     data() {
+        const mediaQuery = matchMedia('(prefers-color-scheme: dark)');
+
         return {
+            mediaQuery,
             detectedTheme: mediaQuery.matches ? 'dark' : 'light',
             firstSelectedLineNumber: null,
         };
     },
 
+    created() {
+        this.highlightState = null;
+    },
+
     watch: {
         selectedFrame: value => {
-            highlightState = null;
+            this.highlightState = null;
         },
     },
 
     mounted() {
-        mediaQuery.addEventListener('change', e => {
+        this.mediaQuery.addEventListener('change', e => {
             this.detectedTheme = e.matches ? 'dark' : 'light';
         });
     },
@@ -128,9 +131,9 @@ export default {
             return editorUrl(this.config, this.selectedFrame.file, lineNumber);
         },
         highlightedCode(code) {
-            const result = hljs.highlight('php', code || '', true, highlightState);
+            const result = hljs.highlight('php', code || '', true, this.highlightState);
 
-            highlightState = result.top;
+            this.highlightState = result.top;
 
             return result.value;
         },
