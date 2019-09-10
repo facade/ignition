@@ -27,7 +27,7 @@ class RenderIgnitionPageTest extends TestCase
             ->baseResponse;
 
         $this->assertStringStartsWith('text/html', $response->headers->get('Content-Type'));
-        $this->assertStringStartsWith('<!doctype html>', trim($response->getContent()));
+        $this->assertStringContainsString('html', $response->getContent());
     }
 
     /** @test */
