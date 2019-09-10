@@ -35,7 +35,7 @@
                         </p>
                     </div>
                 </div>
-                <pre class="stack-code" ref="codeContainer"><p
+                <pre :class="highlightTheme" class="stack-code" ref="codeContainer"><p
                         v-for="(code, line_number) in selectedFrame.code_snippet"
                         :key="line_number"
                         :class="{
@@ -61,6 +61,8 @@ import editorUrl from '../Shared/editorUrl';
 
 let highlightState = null;
 
+const mediaQuery = matchMedia('(prefers-color-scheme: dark)');
+
 export default {
     inject: ['config'],
 
@@ -77,6 +79,7 @@ export default {
 
     data() {
         return {
+            detectedTheme: mediaQuery.matches ? 'dark' : 'light',
             firstSelectedLineNumber: null,
         };
     },
@@ -84,6 +87,21 @@ export default {
     watch: {
         selectedFrame: value => {
             highlightState = null;
+        },
+    },
+
+    mounted() {
+        mediaQuery.addEventListener('change', e => {
+            this.detectedTheme = e.matches ? 'dark' : 'light';
+        });
+    },
+
+    computed: {
+        highlightTheme() {
+            if (this.config.theme === 'auto') {
+                return this.detectedTheme;
+            }
+            return this.config.theme;
         },
     },
 
