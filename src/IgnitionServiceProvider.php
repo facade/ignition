@@ -61,11 +61,11 @@ class IgnitionServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/flare.php' => config_path('flare.php'),
-            ], 'config');
+            ], 'flare-config');
 
             $this->publishes([
                 __DIR__.'/../config/ignition.php' => config_path('ignition.php'),
-            ], 'config');
+            ], 'ignition-config');
         }
 
         $this
