@@ -8,6 +8,8 @@ use Throwable;
 use Illuminate\Support\Facades\Route;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\Ignition\Support\StringComparator;
+use Facade\Ignition\Exceptions\ViewException;
+use InvalidArgumentException;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 class RouteNotDefinedSolutionProvider implements HasSolutionsForThrowable
