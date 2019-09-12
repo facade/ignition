@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.3 - 2019-09-12
+
+- Fix `RouteNotDefinedSolutionProvider` in Laravel 5
+
 ## 1.6.2 - 2019-09-12
 
 - updated publishing tag from default config
