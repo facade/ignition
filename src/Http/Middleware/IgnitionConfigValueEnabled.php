@@ -6,9 +6,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Facade\Ignition\IgnitionConfig;
 
-class IgnitionRunnableSolutionsEnabled
+class IgnitionConfigValueEnabled
 {
-    /** @var IgnitionConfig */
+    /** @var \Facade\Ignition\IgnitionConfig */
     protected $ignitionConfig;
 
     public function __construct(IgnitionConfig $ignitionConfig)
@@ -16,16 +16,9 @@ class IgnitionRunnableSolutionsEnabled
         $this->ignitionConfig = $ignitionConfig;
     }
 
-    /**
-     * Handle an incoming request.
-     *
-     * @param  Request  $request
-     * @param  Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next, string $value)
     {
-        if (! $this->ignitionConfig->getEnableRunnableSolutions()) {
+        if (! $this->ignitionConfig->toArray()[$value]) {
             abort(404);
         }
 

@@ -50,7 +50,7 @@ use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
-use Facade\Ignition\Http\Middleware\IgnitionRunnableSolutionsEnabled;
+use Facade\Ignition\Http\Middleware\IgnitionConfigValueEnabled;
 use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
@@ -129,10 +129,10 @@ class IgnitionServiceProvider extends ServiceProvider
             Route::get('health-check', HealthCheckController::class);
 
             Route::post('execute-solution', ExecuteSolutionController::class)
-                ->middleware(IgnitionRunnableSolutionsEnabled::class);
+                ->middleware(IgnitionConfigValueEnabled::class.':enableRunnableSolutions');
 
             Route::post('share-report', ShareReportController::class)
-                ->middleware(IgnitionShareEnabled::class);
+                ->middleware(IgnitionConfigValueEnabled::class.':enableShareButton');
 
             Route::get('scripts/{script}', ScriptController::class);
             Route::get('styles/{style}', StyleController::class);
