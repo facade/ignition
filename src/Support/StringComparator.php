@@ -27,8 +27,8 @@ class StringComparator
 
         if ($closestDistance <= $sensitivity) {
             return $closestMatch;
-        } else {
-            return null;
         }
+
+        return null;
     }
 }
