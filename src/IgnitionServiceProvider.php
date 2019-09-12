@@ -2,6 +2,8 @@
 
 namespace Facade\Ignition;
 
+use Facade\Ignition\Http\Middleware\IgnitionRunnableSolutionsEnabled;
+use Facade\Ignition\Http\Middleware\IgnitionShareEnabled;
 use Throwable;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
@@ -125,8 +127,12 @@ class IgnitionServiceProvider extends ServiceProvider
             'middleware' => [IgnitionEnabled::class],
         ], function () {
             Route::get('health-check', HealthCheckController::class);
-            Route::post('execute-solution', ExecuteSolutionController::class);
-            Route::post('share-report', ShareReportController::class);
+
+            Route::post('execute-solution', ExecuteSolutionController::class)
+                ->middleware(IgnitionRunnableSolutionsEnabled::class);
+
+            Route::post('share-report', ShareReportController::class)
+                ->middleware(IgnitionShareEnabled::class);
 
             Route::get('scripts/{script}', ScriptController::class);
             Route::get('styles/{style}', StyleController::class);
