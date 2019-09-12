@@ -27,7 +27,7 @@ class QueryRecorder
 
     public function record(QueryExecuted $queryExecuted)
     {
-        $reportBindings = config('flare.reporting.report_query_bindings');
+        $reportBindings = $this->app['config']->get('flare.reporting.report_query_bindings');
 
         $this->queries[] = Query::fromQueryExecutedEvent($queryExecuted, $reportBindings);
     }

@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.1 - 2019-09-12
+
+- Resolve configuration from the injected application instead of the helper - Fixes #131
+
 ## 1.6.0 - 2019-09-09
 
 - add `RouteNotDefined` solution provider (#113)
