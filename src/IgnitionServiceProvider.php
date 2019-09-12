@@ -2,8 +2,6 @@
 
 namespace Facade\Ignition;
 
-use Facade\Ignition\Http\Middleware\IgnitionRunnableSolutionsEnabled;
-use Facade\Ignition\Http\Middleware\IgnitionShareEnabled;
 use Throwable;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
@@ -36,6 +34,7 @@ use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
 use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Facade\Ignition\Http\Controllers\StyleController;
 use Facade\Ignition\Http\Controllers\ScriptController;
+use Facade\Ignition\Http\Middleware\IgnitionShareEnabled;
 use Facade\Ignition\Middleware\AddEnvironmentInformation;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
 use Facade\Ignition\Http\Controllers\HealthCheckController;
@@ -51,6 +50,7 @@ use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
+use Facade\Ignition\Http\Middleware\IgnitionRunnableSolutionsEnabled;
 use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
