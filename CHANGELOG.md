@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.4 - 2019-09-13
+
+- add no-index on error page
+
 ## 1.6.3 - 2019-09-12
 
 - Fix `RouteNotDefinedSolutionProvider` in Laravel 5
