@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.5 - 2019-09-13
+
+- Ignore invalid characters in JSON encoding. Fixes #138
+
 ## 1.6.4 - 2019-09-13
 
 - add no-index on error page
