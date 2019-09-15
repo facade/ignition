@@ -1,7 +1,7 @@
 <template>
     <div>
         <Summary />
-        <div class="layout-col mt-12">
+        <div class="layout-col mt-12 mb-4">
             <div class="tabs">
                 <Tabs v-model="tab" v-bind="{ customTabs }" />
                 <div class="tab-main">
