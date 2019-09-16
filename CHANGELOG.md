@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.6 - 2019-09-16
+
+- Prevent undefined index exception in `TestCommand`
+
 ## 1.6.5 - 2019-09-13
 
 - Ignore invalid characters in JSON encoding. Fixes #138
