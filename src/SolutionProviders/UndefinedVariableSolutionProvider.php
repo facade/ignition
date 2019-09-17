@@ -11,6 +11,7 @@ use Facade\Ignition\Solutions\SuggestCorrectVariableNameSolution;
 
 class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 {
+
     private $variableName;
 
     private $viewFile;
@@ -58,10 +59,9 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         })->toArray();
     }
 
-    protected function findOptionalVariableSolution(string $variableName, string $viewFile): object
+    protected function findOptionalVariableSolution(string $variableName, string $viewFile)
     {
         $optionalSolution = new MakeViewVariableOptionalSolution($variableName, $viewFile);
-
         return $optionalSolution->isRunnable()
             ? $optionalSolution
             : BaseSolution::create($optionalSolution->getSolutionTitle())
