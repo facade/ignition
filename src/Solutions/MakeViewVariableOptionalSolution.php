@@ -7,7 +7,10 @@ use Facade\IgnitionContracts\RunnableSolution;
 
 class MakeViewVariableOptionalSolution implements RunnableSolution
 {
+    /** @var string */
     private $variableName;
+
+    /** @var string */
     private $viewFile;
 
     public function __construct($variableName = null, $viewFile = null)
@@ -18,7 +21,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function getSolutionTitle(): string
     {
-        return '$'.$this->variableName.' is undefined';
+        return "$$this->variableName is undefined";
     }
 
     public function getDocumentationLinks(): array
@@ -31,7 +34,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
         $path = str_replace(base_path().'/', '', $this->viewFile);
         $output = [
             'Make the variable optional in the blade template.',
-            'Replace `{{ $'.$this->variableName.' }}` with `{{ $'.$this->variableName.' ?? \'\' }}`',
+            "Replace `{{ $$this->variableName }}` with `{{ $$this->variableName ?? '' }}`",
         ];
 
         return implode(PHP_EOL, $output);
