@@ -61,6 +61,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
     protected function findOptionalVariableSolution(string $variableName, string $viewFile): object
     {
         $optionalSolution = new MakeViewVariableOptionalSolution($variableName, $viewFile);
+
         return $optionalSolution->isRunnable()
             ? $optionalSolution
             : BaseSolution::create($optionalSolution->getSolutionTitle())
