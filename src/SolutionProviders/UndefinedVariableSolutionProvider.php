@@ -42,6 +42,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 
     protected function findCorrectVariableSolutions(Throwable $throwable, string $variableName, string $viewFile): array
     {
+        return collect($throwable->getViewData())->map(function ($value, $key) use ($variableName) {
             similar_text($variableName, $key, $percentage);
 
             return ['match' => $percentage, 'value' => $value];
