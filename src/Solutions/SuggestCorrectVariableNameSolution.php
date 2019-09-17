@@ -7,7 +7,10 @@ use Facade\IgnitionContracts\RunnableSolution;
 
 class SuggestCorrectVariableNameSolution implements RunnableSolution
 {
+    /** @var string */
     private $variableName;
+
+    /** @var string */
     private $viewFile;
 
     public function __construct($variableName = null, $viewFile = null, $suggested = null)
@@ -30,11 +33,8 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
     public function getSolutionActionDescription(): string
     {
         $path = str_replace(base_path().'/', '', $this->viewFile);
-        $output = [
-            'Did you mean `$'.$this->suggested.'`?',
-        ];
 
-        return implode(PHP_EOL, $output);
+        return "Did you mean `$$this->suggested`?";
     }
 
     public function getRunButtonText(): string
@@ -56,23 +56,24 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
         ];
     }
 
-    public function isRunnable(array $parameters = [])
+    public function isRunnable(array $parameters = []): bool
     {
         return $this->fixTypo($this->getRunParameters()) !== false;
     }
 
-    public function run(array $parameters = [])
+    public function run(array $parameters = []): void
     {
         $output = $this->fixTypo($parameters);
-        if ($output !== false) {
-            file_put_contents($parameters['viewFile'], $output);
+        if ($output === false) {
+            return;
         }
+
+        file_put_contents($parameters['viewFile'], $output);
     }
 
     protected function fixTypo(array $parameters = [])
     {
-        // Make sure suggested variable is valid alpha-numeric with underscore, or return false
-        if (! preg_match('/^[a-zA-Z]+[a-zA-Z0-9_]+$/', $parameters['suggested'])) {
+        if (! $this->isAlphaNumericWithUnderscore($parameters['suggested'])) {
             return false;
         }
 
@@ -91,12 +92,17 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
         return $newContents;
     }
 
+    protected function isAlphaNumericWithUnderscore(string $input): bool
+    {
+        return preg_match('/^[a-zA-Z]+[a-zA-Z0-9_]+$/', $input);
+    }
+
     protected function generateExpectedTokens(array $originalTokens, string $variableName, string $suggested): array
     {
         $expectedTokens = $originalTokens;
         foreach ($expectedTokens as $key => $token) {
             if ($token[0] === T_VARIABLE && $token[1] === '$'.$variableName) {
-                $expectedTokens[$key][1] = '$'.$suggested;
+                $expectedTokens[$key][1] = "$$suggested";
             }
         }
 

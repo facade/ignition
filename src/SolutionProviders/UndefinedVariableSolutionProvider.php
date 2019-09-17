@@ -34,7 +34,14 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
             return [];
         }
 
-        $solutions = collect($throwable->getViewData())->map(function ($value, $key) use ($variableName) {
+        $solutions = $this->findCorrectVariableSolutions($throwable, $variableName, $viewFile);
+        $solutions[] = $this->findOptionalVariableSolution($variableName, $viewFile);
+
+        return $solutions;
+    }
+
+    protected function findCorrectVariableSolutions(Throwable $throwable, string $variableName, string $viewFile): array
+    {
             similar_text($variableName, $key, $percentage);
 
             return ['match' => $percentage, 'value' => $value];
@@ -48,14 +55,15 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
                 : BaseSolution::create($solution->getSolutionTitle())
                     ->setSolutionDescription($solution->getSolutionActionDescription());
         })->toArray();
+    }
 
+    protected function findOptionalVariableSolution(string $variableName, string $viewFile): object
+    {
         $optionalSolution = new MakeViewVariableOptionalSolution($variableName, $viewFile);
-        $solutions[] = $optionalSolution->isRunnable()
+        return $optionalSolution->isRunnable()
             ? $optionalSolution
             : BaseSolution::create($optionalSolution->getSolutionTitle())
                 ->setSolutionDescription($optionalSolution->getSolutionActionDescription());
-
-        return $solutions;
     }
 
     protected function getNameAndView(Throwable $throwable): ?array
