@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.7.1 - 2019-09-18
+
+- Use url helper to generate housekeeping endpoints
+
 ## 1.7.0 - 2019-09-18
 
 - Add the ability to define a query collector max value (#153)
