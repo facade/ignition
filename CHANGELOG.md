@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.7.0 - 2019-09-18
+
+- Add the ability to define a query collector max value (#153)
+
 ## 1.6.10 - 2019-09-18
 
 - fix `__invoke` method name in solution (#151)
