@@ -22,7 +22,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
-    <script src="<?= env('APP_URL') ?>/<?=$housekeepingEndpoint?>/assets"></script>
+    <script src="<?= config('app.url') ?>/<?=$housekeepingEndpoint?>/assets"></script>
 </head>
 <body class="scrollbar-lg">
 
