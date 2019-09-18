@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.10 - 2019-09-18
+
+- fix `__invoke` method name in solution (#151)
+
 ## 1.6.9 - 2019-09-18
 
 - Add noscript trace information - fixes #146
