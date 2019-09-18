@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.8 - 2019-09-18
+
+- Use javascript content type for asset response - fixes #149
+
 ## 1.6.7 - 2019-09-18
 
 - Load javascript assets via URL. Fixes #16
