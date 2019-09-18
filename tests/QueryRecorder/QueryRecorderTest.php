@@ -10,7 +10,7 @@ use Illuminate\Database\Events\QueryExecuted;
 class QueryRecorderTest extends TestCase
 {
     /** @test */
-    public function it_only_records_up_to_50_queries()
+    public function it_limits_the_amount_of_recorded_queries()
     {
         $recorder = new QueryRecorder($this->app);
         $connection = app(Connection::class);
