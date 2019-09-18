@@ -60,11 +60,18 @@ class LogTest extends TestCase
     {
         Log::info('this is a log message');
         Log::debug('this is a log message');
+
+        $this->fakeClient->assertRequestsSent(0);
+    }
+
+    /** @test */
+    public function it_reports_log_messages_above_the_specified_minimum_level()
+    {
         Log::error('this is a log message');
         Log::emergency('this is a log message');
         Log::critical('this is a log message');
 
-        $this->fakeClient->assertRequestsSent(0);
+        $this->fakeClient->assertRequestsSent(3);
     }
 
     /** @test */

@@ -191,7 +191,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $this->app->singleton('flare.client', function () {
             $client = new Flare($this->app->get('flare.http'), new LaravelContextDetector, $this->app);
-            $client->applicationPath(base_path());
+            $client->applicationPath(app_path());
             $client->stage(config('app.env'));
 
             return $client;
@@ -205,8 +205,11 @@ class IgnitionServiceProvider extends ServiceProvider
     protected function registerLogHandler()
     {
         $this->app->singleton('flare.logger', function ($app) {
+            $handler = new FlareHandler($app->make('flare.client'));
+            $handler->setMinimumReportLogLevel(config('flare.reporting.minimum_log_level', Logger::ERROR));
+
             $logger = new Logger('Flare');
-            $logger->pushHandler(new FlareHandler($app->make('flare.client')));
+            $logger->pushHandler($handler);
 
             return $logger;
         });
