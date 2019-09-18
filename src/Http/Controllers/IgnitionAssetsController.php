@@ -11,7 +11,7 @@ class IgnitionAssetsController
         $assetContent = file_get_contents(__DIR__.'/../../../resources/compiled/ignition.js');
 
         return Response::create($assetContent, 200, [
-            'Content-Type' => 'application/javascript'
+            'Content-Type' => 'application/javascript',
         ]);
     }
 }
