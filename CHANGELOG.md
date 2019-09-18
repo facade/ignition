@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.7 - 2019-09-18
+
+- Load javascript assets via URL. Fixes #16
+
 ## 1.6.6 - 2019-09-16
 
 - Prevent undefined index exception in `TestCommand`

@@ -38,6 +38,7 @@ use Facade\Ignition\Middleware\AddEnvironmentInformation;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
 use Facade\Ignition\Http\Controllers\HealthCheckController;
 use Facade\Ignition\Http\Controllers\ShareReportController;
+use Facade\Ignition\Http\Controllers\IgnitionAssetsController;
 use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
 use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
 use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
@@ -128,6 +129,7 @@ class IgnitionServiceProvider extends ServiceProvider
             Route::post('execute-solution', ExecuteSolutionController::class);
             Route::post('share-report', ShareReportController::class);
 
+            Route::get('assets', IgnitionAssetsController::class);
             Route::get('scripts/{script}', ScriptController::class);
             Route::get('styles/{style}', StyleController::class);
         });
