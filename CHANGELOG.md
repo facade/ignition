@@ -2,6 +2,11 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.8.0 - 2019-09-18
+
+- added solution for running Laravel Dusk in production (#121)
+- Automatically fix blade variable typos and optional variables (#38)
+
 ## 1.7.1 - 2019-09-18
 
 - Use url helper to generate housekeeping endpoints
