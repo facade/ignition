@@ -50,12 +50,12 @@ class TestCommand extends Command
             $this->info("❌ The default logging channel `{$defaultLogChannel}` is not configured in the `logging` config file");
         }
 
-        if (! in_array('flare', $activeStack['channels'])) {
+        if (! isset($activeStack['channels']) || ! in_array('flare', $activeStack['channels'])) {
             $this->info("❌ The logging channel `{$defaultLogChannel}` does not contain the 'flare' channel");
         }
 
         if (is_null($this->config->get('logging.channels.flare'))) {
-            $this->info('❌ There is no logging channel named `flare` in the `logging` confige file');
+            $this->info('❌ There is no logging channel named `flare` in the `logging` config file');
         }
 
         if ($this->config->get('logging.channels.flare.driver') !== 'flare') {
@@ -75,7 +75,7 @@ class TestCommand extends Command
             app('flare.client')->sendTestReport($testException);
             $this->info(PHP_EOL);
         } catch (Exception $exception) {
-            $this->warn('❌ We were unable to send an exception to Flare. Make sure that your key is correct and that you have a valid subscription. '.PHP_EOL.PHP_EOL.'For more info visit the docs on installing Flare in a Laravel project: http://flareapp.io/docs/flare-for-laravel/installation');
+            $this->warn('❌ We were unable to send an exception to Flare. Make sure that your key is correct and that you have a valid subscription. '.PHP_EOL.PHP_EOL.'For more info visit the docs on installing Flare in a Laravel project: https://flareapp.io/docs/ignition-for-laravel/introduction');
 
             return;
         }

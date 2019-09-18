@@ -22,12 +22,12 @@ class IgnitionConfig implements Arrayable
 
     public function getRemoteSitesPath(): ?string
     {
-        return Arr::get($this->options, 'remote-sites-path');
+        return Arr::get($this->options, 'remote_sites_path');
     }
 
     public function getLocalSitesPath(): ?string
     {
-        return Arr::get($this->options, 'local-sites-path');
+        return Arr::get($this->options, 'local_sites_path');
     }
 
     public function getTheme(): ?string
@@ -40,6 +40,17 @@ class IgnitionConfig implements Arrayable
         return Arr::get($this->options, 'enable_share_button', true);
     }
 
+    public function getEnableRunnableSolutions(): bool
+    {
+        $enabled = Arr::get($this->options, 'enable_runnable_solutions', null);
+
+        if ($enabled === null) {
+            $enabled = config('app.debug');
+        }
+
+        return $enabled ?? false;
+    }
+
     public function toArray(): array
     {
         return [
@@ -48,12 +59,13 @@ class IgnitionConfig implements Arrayable
             'localSitesPath' => $this->getLocalSitesPath(),
             'theme' => $this->getTheme(),
             'enableShareButton' => $this->getEnableShareButton(),
+            'enableRunnableSolutions' => $this->getEnableRunnableSolutions(),
             'directorySeparator' => DIRECTORY_SEPARATOR,
         ];
     }
 
     protected function mergeWithDefaultConfig(array $options = []): array
     {
-        return array_merge(config('ignition'), $options);
+        return array_merge(config('ignition') ?: include __DIR__.'/../config/ignition.php', $options);
     }
 }

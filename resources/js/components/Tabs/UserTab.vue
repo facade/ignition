@@ -46,7 +46,7 @@ export default {
 
             const size = 80;
 
-            return 'http://www.gravatar.com/avatar/' + md5(this.user.email) + '.jpg?s=' + size;
+            return 'https://www.gravatar.com/avatar/' + md5(this.user.email) + '.jpg?s=' + size;
         },
 
         stringifiedUserData() {

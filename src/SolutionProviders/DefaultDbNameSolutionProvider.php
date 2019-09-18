@@ -15,7 +15,7 @@ class DefaultDbNameSolutionProvider implements HasSolutionsForThrowable
             try {
                 DB::connection()->select('SELECT 1');
             } catch (\Exception $e) {
-                return env('DB_DATABASE') === 'homestead';
+                return in_array(env('DB_DATABASE'), ['homestead', 'laravel']);
             }
         }
 
