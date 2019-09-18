@@ -40,6 +40,8 @@
     window.tabs = <?=$tabs?>;
 </script>
 
+<noscript><pre><?=$throwableString?></pre></noscript>
+
 <div id="app"></div>
 
 <script>

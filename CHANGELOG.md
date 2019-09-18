@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.6.9 - 2019-09-18
+
+- Add noscript trace information - fixes #146
+
 ## 1.6.8 - 2019-09-18
 
 - Use javascript content type for asset response - fixes #149
