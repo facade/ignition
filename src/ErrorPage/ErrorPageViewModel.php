@@ -112,14 +112,13 @@ class ErrorPageViewModel implements Arrayable
 
     public function jsonEncode($data): string
     {
-        return json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
-    }
+        $jsonOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 
-    public function getAssetContents(string $asset): string
-    {
-        $assetPath = __DIR__."/../../resources/compiled/{$asset}";
+        if (version_compare(phpversion(), '7.2', '>=')) {
+            return json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR | $jsonOptions);
+        }
 
-        return file_get_contents($assetPath);
+        return json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR | $jsonOptions);
     }
 
     public function styles(): array
@@ -147,12 +146,11 @@ class ErrorPageViewModel implements Arrayable
             'config' => $this->config(),
             'solutions' => $this->solutions(),
             'report' => $this->report(),
-            'housekeepingEndpoint' => config('ignition.housekeeping_endpoint_prefix', '_ignition'),
+            'housekeepingEndpoint' => url(config('ignition.housekeeping_endpoint_prefix', '_ignition')),
             'styles' => $this->styles(),
             'scripts' => $this->scripts(),
             'tabs' => $this->tabs(),
             'jsonEncode' => Closure::fromCallable([$this, 'jsonEncode']),
-            'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
         ];
     }
 }

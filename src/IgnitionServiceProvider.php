@@ -38,6 +38,7 @@ use Facade\Ignition\Middleware\AddEnvironmentInformation;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
 use Facade\Ignition\Http\Controllers\HealthCheckController;
 use Facade\Ignition\Http\Controllers\ShareReportController;
+use Facade\Ignition\Http\Controllers\IgnitionAssetsController;
 use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
 use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
 use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
@@ -50,8 +51,10 @@ use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
+use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
 use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 
@@ -62,11 +65,11 @@ class IgnitionServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/flare.php' => config_path('flare.php'),
-            ], 'config');
+            ], 'flare-config');
 
             $this->publishes([
                 __DIR__.'/../config/ignition.php' => config_path('ignition.php'),
-            ], 'config');
+            ], 'ignition-config');
         }
 
         $this
@@ -129,6 +132,7 @@ class IgnitionServiceProvider extends ServiceProvider
             Route::post('execute-solution', ExecuteSolutionController::class);
             Route::post('share-report', ShareReportController::class);
 
+            Route::get('assets', IgnitionAssetsController::class);
             Route::get('scripts/{script}', ScriptController::class);
             Route::get('styles/{style}', StyleController::class);
         });
@@ -308,7 +312,9 @@ class IgnitionServiceProvider extends ServiceProvider
             MissingPackageSolutionProvider::class,
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
+            UndefinedVariableSolutionProvider::class,
             MergeConflictSolutionProvider::class,
+            RunningLaravelDuskInProductionProvider::class,
             MissingColumnSolutionProvider::class,
             UnknownValidationSolutionProvider::class,
         ];

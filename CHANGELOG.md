@@ -2,6 +2,55 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.8.0 - 2019-09-18
+
+- added solution for running Laravel Dusk in production (#121)
+- Automatically fix blade variable typos and optional variables (#38)
+
+## 1.7.1 - 2019-09-18
+
+- Use url helper to generate housekeeping endpoints
+
+## 1.7.0 - 2019-09-18
+
+- Add the ability to define a query collector max value (#153)
+
+## 1.6.10 - 2019-09-18
+
+- fix `__invoke` method name in solution (#151)
+
+## 1.6.9 - 2019-09-18
+
+- Add noscript trace information - fixes #146
+
+## 1.6.8 - 2019-09-18
+
+- Use javascript content type for asset response - fixes #149
+
+## 1.6.7 - 2019-09-18
+
+- Load javascript assets via URL. Fixes #16
+
+## 1.6.6 - 2019-09-16
+
+- Prevent undefined index exception in `TestCommand`
+
+## 1.6.5 - 2019-09-13
+
+- Ignore invalid characters in JSON encoding. Fixes #138
+
+## 1.6.4 - 2019-09-13
+
+- add no-index on error page
+
+## 1.6.3 - 2019-09-12
+
+- Fix `RouteNotDefinedSolutionProvider` in Laravel 5
+
+## 1.6.2 - 2019-09-12
+
+- updated publishing tag from default config
+
 ## 1.6.1 - 2019-09-12
 
 - Resolve configuration from the injected application instead of the helper - Fixes #131

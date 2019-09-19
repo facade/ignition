@@ -50,7 +50,7 @@ class TestCommand extends Command
             $this->info("❌ The default logging channel `{$defaultLogChannel}` is not configured in the `logging` config file");
         }
 
-        if (! in_array('flare', $activeStack['channels'])) {
+        if (! isset($activeStack['channels']) || ! in_array('flare', $activeStack['channels'])) {
             $this->info("❌ The logging channel `{$defaultLogChannel}` does not contain the 'flare' channel");
         }
 
