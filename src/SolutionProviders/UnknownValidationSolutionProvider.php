@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Validator;
 use Facade\IgnitionContracts\BaseSolution;
+use Facade\Ignition\Support\StringComparator;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
@@ -37,7 +38,15 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
     {
         $method = $this->getMethodFromExceptionMessage($throwable->getMessage());
 
-        $possibleMethod = $this->findPossibleMethod($method);
+        $possibleMethod = StringComparator::findSimilarText(
+            $this->getAvailableMethods()->toArray(),
+            $method
+        );
+
+        if (empty($possibleMethod)) {
+            return '';
+        }
+
         $rule = Str::snake(str_replace('validate', '', $possibleMethod));
 
         return "Did you mean `{$rule}` ?";
@@ -52,21 +61,11 @@ class UnknownValidationSolutionProvider implements HasSolutionsForThrowable
         return $matches['method'];
     }
 
-    protected function findPossibleMethod(string $invalidMethodName)
-    {
-        return $this->getAvailableMethods()
-            ->sortByDesc(function (string $method) use ($invalidMethodName) {
-                similar_text($invalidMethodName, $method, $percentage);
-
-                return $percentage;
-            })->first();
-    }
-
     protected function getAvailableMethods(): Collection
     {
         $class = new ReflectionClass(Validator::class);
 
-        $extensions = Collection::make((\Illuminate\Support\Facades\Validator::make([], []))->extensions)
+        $extensions = Collection::make((app('validator')->make([], []))->extensions)
             ->keys()
             ->map(function (string $extension) {
                 return 'validate'.Str::studly($extension);
