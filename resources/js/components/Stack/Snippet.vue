@@ -88,7 +88,7 @@ export default {
     },
 
     watch: {
-        selectedFrame(value) {
+        selectedFrame() {
             this.highlightState = null;
         },
     },
