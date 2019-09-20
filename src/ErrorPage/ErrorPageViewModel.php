@@ -121,6 +121,13 @@ class ErrorPageViewModel implements Arrayable
         return json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR | $jsonOptions);
     }
 
+    public function getAssetContents(string $asset): string
+    {
+        $assetPath = __DIR__."/../../resources/compiled/{$asset}";
+
+        return file_get_contents($assetPath);
+    }
+
     public function styles(): array
     {
         return array_keys(Ignition::styles());
@@ -151,6 +158,7 @@ class ErrorPageViewModel implements Arrayable
             'scripts' => $this->scripts(),
             'tabs' => $this->tabs(),
             'jsonEncode' => Closure::fromCallable([$this, 'jsonEncode']),
+            'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
         ];
     }
 }
