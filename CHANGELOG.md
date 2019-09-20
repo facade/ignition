@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.8.2 - 2019-09-20
+
+- fix for `TypeError: Cannot set property 'highlightState' of undefined`
+
 ## 1.8.1 - 2019-09-20
 
 - Revert javascript assets via URL - Fixes #161
