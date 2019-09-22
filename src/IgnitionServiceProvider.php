@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition;
 
+use Throwable;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -30,6 +31,7 @@ use Facade\Ignition\Middleware\AddGitInformation;
 use Facade\Ignition\Views\Engines\CompilerEngine;
 use Facade\Ignition\Context\LaravelContextDetector;
 use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
+use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Facade\Ignition\Http\Controllers\StyleController;
 use Facade\Ignition\Http\Controllers\ScriptController;
 use Facade\Ignition\Middleware\AddEnvironmentInformation;
@@ -43,12 +45,15 @@ use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
+use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
 use Facade\Ignition\SolutionProviders\ControllerNotFoundSolutionProvider;
+use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 
@@ -59,11 +64,11 @@ class IgnitionServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/flare.php' => config_path('flare.php'),
-            ], 'config');
+            ], 'flare-config');
 
             $this->publishes([
                 __DIR__.'/../config/ignition.php' => config_path('ignition.php'),
-            ], 'config');
+            ], 'ignition-config');
         }
 
         $this
@@ -118,19 +123,17 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerHousekeepingRoutes()
     {
-        if (! config('app.debug')) {
-            return $this;
-        }
+        Route::group([
+            'prefix' => config('ignition.housekeeping_endpoint_prefix', '_ignition'),
+            'middleware' => [IgnitionEnabled::class],
+        ], function () {
+            Route::get('health-check', HealthCheckController::class);
+            Route::post('execute-solution', ExecuteSolutionController::class);
+            Route::post('share-report', ShareReportController::class);
 
-        Route::prefix(config('flare.housekeeping_endpoint_prefix', 'flare'))
-            ->group(function () {
-                Route::get('health-check', HealthCheckController::class);
-                Route::post('execute-solution', ExecuteSolutionController::class);
-                Route::post('share-report', ShareReportController::class);
-
-                Route::get('scripts/{script}', ScriptController::class);
-                Route::get('styles/{style}', StyleController::class);
-            });
+            Route::get('scripts/{script}', ScriptController::class);
+            Route::get('styles/{style}', StyleController::class);
+        });
 
         return $this;
     }
@@ -169,8 +172,12 @@ class IgnitionServiceProvider extends ServiceProvider
         $this->app->singleton(IgnitionConfig::class, function () {
             $options = [];
 
-            if ($configPath = $this->getConfigFileLocation()) {
-                $options = require $configPath;
+            try {
+                if ($configPath = $this->getConfigFileLocation()) {
+                    $options = require $configPath;
+                }
+            } catch (Throwable $e) {
+                // possible open_basedir restriction
             }
 
             return new IgnitionConfig($options);
@@ -303,8 +310,11 @@ class IgnitionServiceProvider extends ServiceProvider
             MissingPackageSolutionProvider::class,
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
+            UndefinedVariableSolutionProvider::class,
             MergeConflictSolutionProvider::class,
             ControllerNotFoundSolutionProvider::class,
+            RunningLaravelDuskInProductionProvider::class,
+            MissingColumnSolutionProvider::class,
         ];
     }
 

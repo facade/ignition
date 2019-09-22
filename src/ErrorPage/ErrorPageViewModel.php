@@ -10,6 +10,7 @@ use Facade\FlareClient\Report;
 use Laravel\Telescope\Telescope;
 use Facade\Ignition\IgnitionConfig;
 use Illuminate\Contracts\Support\Arrayable;
+use Laravel\Telescope\IncomingExceptionEntry;
 use Facade\Ignition\Solutions\SolutionTransformer;
 use Laravel\Telescope\Http\Controllers\HomeController;
 
@@ -54,18 +55,26 @@ class ErrorPageViewModel implements Arrayable
     {
         try {
             if (! class_exists(Telescope::class)) {
-                return '';
+                return null;
             }
 
             if (! count(Telescope::$entriesQueue)) {
-                return '';
+                return null;
             }
 
-            $telescopeEntryId = (string) Telescope::$entriesQueue[0]->uuid;
+            $telescopeEntry = collect(Telescope::$entriesQueue)->first(function ($entry) {
+                return $entry instanceof IncomingExceptionEntry;
+            });
+
+            if (is_null($telescopeEntry)) {
+                return null;
+            }
+
+            $telescopeEntryId = (string) $telescopeEntry->uuid;
 
             return url(action([HomeController::class, 'index'])."/exceptions/{$telescopeEntryId}");
         } catch (Exception $exception) {
-            return '';
+            return null;
         }
     }
 
@@ -103,7 +112,13 @@ class ErrorPageViewModel implements Arrayable
 
     public function jsonEncode($data): string
     {
-        return json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
+        $jsonOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
+
+        if (version_compare(phpversion(), '7.2', '>=')) {
+            return json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR | $jsonOptions);
+        }
+
+        return json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR | $jsonOptions);
     }
 
     public function getAssetContents(string $asset): string
@@ -138,7 +153,7 @@ class ErrorPageViewModel implements Arrayable
             'config' => $this->config(),
             'solutions' => $this->solutions(),
             'report' => $this->report(),
-            'housekeepingEndpoint' => config('flare.housekeeping_endpoint_prefix', 'flare'),
+            'housekeepingEndpoint' => url(config('ignition.housekeeping_endpoint_prefix', '_ignition')),
             'styles' => $this->styles(),
             'scripts' => $this->scripts(),
             'tabs' => $this->tabs(),

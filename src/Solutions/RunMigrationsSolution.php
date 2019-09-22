@@ -7,9 +7,16 @@ use Facade\IgnitionContracts\RunnableSolution;
 
 class RunMigrationsSolution implements RunnableSolution
 {
+    private $customTitle;
+
+    public function __construct($customTitle = '')
+    {
+        $this->customTitle = $customTitle;
+    }
+
     public function getSolutionTitle(): string
     {
-        return 'A table was not found';
+        return $this->customTitle;
     }
 
     public function getSolutionDescription(): string

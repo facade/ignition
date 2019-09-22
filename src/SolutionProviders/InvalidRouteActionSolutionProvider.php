@@ -38,7 +38,7 @@ class InvalidRouteActionSolutionProvider implements HasSolutionsForThrowable
         if ($suggestedController === $invalidController) {
             return [
                 BaseSolution::create("`{$invalidController}` is not invokable.")
-                    ->setSolutionDescription("The controller class `{$invalidController}` is not invokable. Did you forget to add the `__invokable` method or is the controller's method missing in your routes file?"),
+                    ->setSolutionDescription("The controller class `{$invalidController}` is not invokable. Did you forget to add the `__invoke` method or is the controller's method missing in your routes file?"),
             ];
         }
 
