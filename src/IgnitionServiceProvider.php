@@ -191,7 +191,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $this->app->singleton('flare.client', function () {
             $client = new Flare($this->app->get('flare.http'), new LaravelContextDetector, $this->app);
-            $client->applicationPath(app_path());
+            $client->applicationPath(base_path());
             $client->stage(config('app.env'));
 
             return $client;
