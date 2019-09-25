@@ -39,6 +39,18 @@ class ErrorPageViewModel implements Arrayable
         $this->solutions = $solutions;
     }
 
+    public function throwableString(): string
+    {
+        return sprintf(
+            "%s: %s in file %s on line %d\n\n%s\n",
+            get_class($this->throwable),
+            $this->throwable->getMessage(),
+            $this->throwable->getFile(),
+            $this->throwable->getLine(),
+            $this->report->getThrowable()->getTraceAsString()
+        );
+    }
+
     public function telescopeUrl(): ?string
     {
         try {
@@ -134,6 +146,7 @@ class ErrorPageViewModel implements Arrayable
     public function toArray(): array
     {
         return [
+            'throwableString' => $this->throwableString(),
             'telescopeUrl' => $this->telescopeUrl(),
             'shareEndpoint' => $this->shareEndpoint(),
             'title' => $this->title(),
