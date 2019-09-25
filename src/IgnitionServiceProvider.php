@@ -39,6 +39,7 @@ use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
 use Facade\Ignition\Http\Controllers\HealthCheckController;
 use Facade\Ignition\Http\Controllers\ShareReportController;
 use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
+use Facade\Ignition\Http\Middleware\IgnitionConfigValueEnabled;
 use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
 use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
@@ -127,8 +128,12 @@ class IgnitionServiceProvider extends ServiceProvider
             'middleware' => [IgnitionEnabled::class],
         ], function () {
             Route::get('health-check', HealthCheckController::class);
-            Route::post('execute-solution', ExecuteSolutionController::class);
-            Route::post('share-report', ShareReportController::class);
+
+            Route::post('execute-solution', ExecuteSolutionController::class)
+                ->middleware(IgnitionConfigValueEnabled::class.':enableRunnableSolutions');
+
+            Route::post('share-report', ShareReportController::class)
+                ->middleware(IgnitionConfigValueEnabled::class.':enableShareButton');
 
             Route::get('scripts/{script}', ScriptController::class);
             Route::get('styles/{style}', StyleController::class);
