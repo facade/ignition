@@ -83,7 +83,7 @@ class LogTest extends TestCase
         Log::emergency(null);
         Log::critical(null);
 
-        $this->fakeClient->assertRequestsSent(0);
+        $this->fakeClient->assertRequestsSent(3);
     }
 
     /** @test */
@@ -92,10 +92,7 @@ class LogTest extends TestCase
         Route::get('exception', function () {
             Log::info('info log');
             Log::debug('debug log');
-            Log::error('error log');
             Log::notice('notice log');
-            Log::emergency('emergency log');
-            Log::critical('critical log');
 
             whoops();
         });
@@ -108,7 +105,7 @@ class LogTest extends TestCase
 
         $logs = $arguments['context']['logs'];
 
-        $this->assertCount(6, $logs);
+        $this->assertCount(3, $logs);
     }
 
     public function provideMessageLevels()
