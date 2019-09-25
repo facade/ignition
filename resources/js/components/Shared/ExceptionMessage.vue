@@ -21,7 +21,7 @@ export default {
     },
 
     methods: {
-        removeClamp(event) {
+        removeClamp() {
             if (!this.fullException) {
                 this.fullException = true;
             }
