@@ -9,3 +9,7 @@
 /.scrutinizer.yml   export-ignore
 /tests              export-ignore
 /.editorconfig      export-ignore
+/docs               export-ignore
+/yarn.lock          export-ignore
+/package-lock.json  export-ignore
+/CONTRIBUTING.md    export-ignore

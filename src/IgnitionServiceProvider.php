@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition;
 
+use Throwable;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
@@ -44,11 +45,14 @@ use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
+use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingImportSolutionProvider;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
+use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 
@@ -59,11 +63,11 @@ class IgnitionServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/flare.php' => config_path('flare.php'),
-            ], 'config');
+            ], 'flare-config');
 
             $this->publishes([
                 __DIR__.'/../config/ignition.php' => config_path('ignition.php'),
-            ], 'config');
+            ], 'ignition-config');
         }
 
         $this
@@ -167,8 +171,12 @@ class IgnitionServiceProvider extends ServiceProvider
         $this->app->singleton(IgnitionConfig::class, function () {
             $options = [];
 
-            if ($configPath = $this->getConfigFileLocation()) {
-                $options = require $configPath;
+            try {
+                if ($configPath = $this->getConfigFileLocation()) {
+                    $options = require $configPath;
+                }
+            } catch (Throwable $e) {
+                // possible open_basedir restriction
             }
 
             return new IgnitionConfig($options);
@@ -304,7 +312,10 @@ class IgnitionServiceProvider extends ServiceProvider
             MissingPackageSolutionProvider::class,
             InvalidRouteActionSolutionProvider::class,
             ViewNotFoundSolutionProvider::class,
+            UndefinedVariableSolutionProvider::class,
             MergeConflictSolutionProvider::class,
+            RunningLaravelDuskInProductionProvider::class,
+            MissingColumnSolutionProvider::class,
         ];
     }
 

@@ -1,6 +1,6 @@
 {
     "name": "facade/ignition",
-    "description": "A beautiful error page for Laravel apps",
+    "description": "A beautiful error page for Laravel applications.",
     "keywords": [
         "error",
         "page",
@@ -17,43 +17,24 @@
     ],
     "require": {
         "php": "^7.1",
-        "filp/whoops": "^2.4",
-        "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0",
-        "scrivo/highlight.php": "^9.15",
-        "symfony/var-dumper": "^3.4|^4.0",
-        "symfony/console": "^3.4|^4.0",
-        "monolog/monolog": "^1.12|^2.0",
-        "facade/flare-client-php": "dev-master",
-        "facade/ignition-contracts": "^1.0",
         "ext-json": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "facade/flare-client-php": "^1.0.4",
+        "facade/ignition-contracts": "^1.0",
+        "filp/whoops": "^2.4",
+        "illuminate/support": "~5.5.0 || ~5.6.0 || ~5.7.0 || ~5.8.0 || ^6.0",
+        "monolog/monolog": "^1.12 || ^2.0",
+        "scrivo/highlight.php": "^9.15",
+        "symfony/console": "^3.4 || ^4.0",
+        "symfony/var-dumper": "^3.4 || ^4.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.14",
         "mockery/mockery": "^1.2",
-        "orchestra/testbench": "^3.5|^3.6|^3.7|^3.8|^4.0"
+        "orchestra/testbench": "^3.5 || ^3.6 || ^3.7 || ^3.8 || ^4.0"
     },
     "suggest": {
         "laravel/telescope": "^2.0"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "Facade\\Ignition\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Facade\\Ignition\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "format": [
-            "vendor/bin/php-cs-fixer fix"
-        ],
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "config": {
         "sort-packages": true
@@ -70,5 +51,30 @@
                 "Flare": "Facade\\Ignition\\Facades\\Flare"
             }
         }
+    },
+    "autoload": {
+        "psr-4": {
+            "Facade\\Ignition\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Facade\\Ignition\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "format": [
+            "vendor/bin/php-cs-fixer fix"
+        ],
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "support": {
+        "issues": "https://github.com/facade/ignition/issues",
+        "forum": "https://twitter.com/flareappio",
+        "source": "https://github.com/facade/ignition",
+        "docs": "https://flareapp.io/docs/ignition-for-laravel/introduction"
     }
 }

@@ -28,7 +28,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
 
     public function registerSolutionProviders(array $solutionProviderClasses): SolutionProviderRepositoryContract
     {
-        $this->solutionProviders->merge($solutionProviderClasses);
+        $this->solutionProviders = $this->solutionProviders->merge($solutionProviderClasses);
 
         return $this;
     }
