@@ -2,82 +2,87 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.8.3 - 2019-09-25
+
+-   Remove `select-none` from error message
+-   Change line clamp behaviour for longer error messages
+
 ## 1.8.2 - 2019-09-20
 
-- fix for `TypeError: Cannot set property 'highlightState' of undefined`
+-   fix for `TypeError: Cannot set property 'highlightState' of undefined`
 
 ## 1.8.1 - 2019-09-20
 
-- Revert javascript assets via URL - Fixes #161
+-   Revert javascript assets via URL - Fixes #161
 
 ## 1.8.0 - 2019-09-18
 
-- added solution for running Laravel Dusk in production (#121)
-- Automatically fix blade variable typos and optional variables (#38)
+-   added solution for running Laravel Dusk in production (#121)
+-   Automatically fix blade variable typos and optional variables (#38)
 
 ## 1.7.1 - 2019-09-18
 
-- Use url helper to generate housekeeping endpoints
+-   Use url helper to generate housekeeping endpoints
 
 ## 1.7.0 - 2019-09-18
 
-- Add the ability to define a query collector max value (#153)
+-   Add the ability to define a query collector max value (#153)
 
 ## 1.6.10 - 2019-09-18
 
-- fix `__invoke` method name in solution (#151)
+-   fix `__invoke` method name in solution (#151)
 
 ## 1.6.9 - 2019-09-18
 
-- Add noscript trace information - fixes #146
+-   Add noscript trace information - fixes #146
 
 ## 1.6.8 - 2019-09-18
 
-- Use javascript content type for asset response - fixes #149
+-   Use javascript content type for asset response - fixes #149
 
 ## 1.6.7 - 2019-09-18
 
-- Load javascript assets via URL. Fixes #16
+-   Load javascript assets via URL. Fixes #16
 
 ## 1.6.6 - 2019-09-16
 
-- Prevent undefined index exception in `TestCommand`
+-   Prevent undefined index exception in `TestCommand`
 
 ## 1.6.5 - 2019-09-13
 
-- Ignore invalid characters in JSON encoding. Fixes #138
+-   Ignore invalid characters in JSON encoding. Fixes #138
 
 ## 1.6.4 - 2019-09-13
 
-- add no-index on error page
+-   add no-index on error page
 
 ## 1.6.3 - 2019-09-12
 
-- Fix `RouteNotDefinedSolutionProvider` in Laravel 5
+-   Fix `RouteNotDefinedSolutionProvider` in Laravel 5
 
 ## 1.6.2 - 2019-09-12
 
-- updated publishing tag from default config
+-   updated publishing tag from default config
 
 ## 1.6.1 - 2019-09-12
 
-- Resolve configuration from the injected application instead of the helper - Fixes #131
+-   Resolve configuration from the injected application instead of the helper - Fixes #131
 
 ## 1.6.0 - 2019-09-09
 
-- add `RouteNotDefined` solution provider (#113)
+-   add `RouteNotDefined` solution provider (#113)
 
 ## 1.5.0 - 2019-09-09
 
-- suggest running migrations when a column is missing (#83)
+-   suggest running migrations when a column is missing (#83)
 
 ## 1.4.19 - 2019-09-09
 
-- Remove quotation from git commit url #89 
+-   Remove quotation from git commit url #89
 
 ## 1.4.18 - 2019-09-09
 
-- Fix open_basedir restriction when looking up config file. Fixes #120
+-   Fix open_basedir restriction when looking up config file. Fixes #120
 
 ## 1.4.17 - 2019-09-06
 
