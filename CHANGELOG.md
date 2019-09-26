@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.8.4 - 2019-09-27
+
+-  Resolve configuration from the injected app instead of the helper (#168)
+
 ## 1.8.3 - 2019-09-25
 
 -   Remove `select-none` from error message
