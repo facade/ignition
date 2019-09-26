@@ -28,6 +28,12 @@ class ErrorPageViewModel implements Arrayable
     /** @var \Facade\FlareClient\Report */
     protected $report;
 
+    /** @var string */
+    protected $defaultTab;
+
+    /** @var array */
+    protected $defaultTabProps = [];
+
     public function __construct(Throwable $throwable, IgnitionConfig $ignitionConfig, Report $report, array $solutions)
     {
         $this->throwable = $throwable;
@@ -143,6 +149,15 @@ class ErrorPageViewModel implements Arrayable
         return json_encode(Ignition::$tabs);
     }
 
+    public function defaultTab(?string $defaultTab = null, ?array $defaultTabProps)
+    {
+        $this->defaultTab = $defaultTab ?? 'StackTab';
+
+        if ($defaultTabProps) {
+            $this->defaultTabProps = $defaultTabProps;
+        }
+    }
+
     public function toArray(): array
     {
         return [
@@ -159,6 +174,8 @@ class ErrorPageViewModel implements Arrayable
             'tabs' => $this->tabs(),
             'jsonEncode' => Closure::fromCallable([$this, 'jsonEncode']),
             'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
+            'defaultTab' => $this->defaultTab,
+            'defaultTabProps' => $this->defaultTabProps,
         ];
     }
 }

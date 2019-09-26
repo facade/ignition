@@ -33,7 +33,7 @@ class ErrorPageHandler
         $this->solutionProviderRepository = $solutionProviderRepository;
     }
 
-    public function handle(Throwable $throwable)
+    public function handle(Throwable $throwable, $defaultTab = null, $defaultTabProps = [])
     {
         $report = $this->flareClient->createReport($throwable);
 
@@ -45,6 +45,8 @@ class ErrorPageHandler
             $report,
             $solutions
         );
+
+        $viewModel->defaultTab($defaultTab, $defaultTabProps);
 
         $this->renderException($viewModel);
     }

@@ -32,6 +32,8 @@
             'solutions' => $solutions,
             'telescopeUrl' => $telescopeUrl,
             'shareEndpoint' => $shareEndpoint,
+            'defaultTab' => $defaultTab,
+            'defaultTabProps' => $defaultTabProps,
         ])
     ?>
 

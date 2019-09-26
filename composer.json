@@ -55,7 +55,10 @@
     "autoload": {
         "psr-4": {
             "Facade\\Ignition\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
