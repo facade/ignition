@@ -214,7 +214,7 @@ class IgnitionServiceProvider extends ServiceProvider
     {
         $this->app->singleton('flare.logger', function ($app) {
             $handler = new FlareHandler($app->make('flare.client'));
-            $handler->setMinimumReportLogLevel(config('flare.reporting.minimum_log_level', Logger::ERROR));
+            $handler->setMinimumReportLogLevel(config('logging.channels.flare.level', Logger::ERROR));
 
             $logger = new Logger('Flare');
             $logger->pushHandler($handler);
