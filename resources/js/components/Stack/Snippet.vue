@@ -135,7 +135,7 @@ export default {
 
             this.highlightState = result.top;
 
-            return result.value;
+            return result.value || '&nbsp;';
         },
     },
 };

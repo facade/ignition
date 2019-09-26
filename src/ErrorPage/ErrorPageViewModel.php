@@ -16,7 +16,7 @@ use Laravel\Telescope\Http\Controllers\HomeController;
 
 class ErrorPageViewModel implements Arrayable
 {
-    /** @var \Throwable */
+    /** @var \Throwable|null */
     protected $throwable;
 
     /** @var array */
@@ -34,7 +34,7 @@ class ErrorPageViewModel implements Arrayable
     /** @var array */
     protected $defaultTabProps = [];
 
-    public function __construct(Throwable $throwable, IgnitionConfig $ignitionConfig, Report $report, array $solutions)
+    public function __construct(?Throwable $throwable, IgnitionConfig $ignitionConfig, Report $report, array $solutions)
     {
         $this->throwable = $throwable;
 
@@ -47,6 +47,10 @@ class ErrorPageViewModel implements Arrayable
 
     public function throwableString(): string
     {
+        if (! $this->throwable) {
+            return '';
+        }
+
         return sprintf(
             "%s: %s in file %s on line %d\n\n%s\n",
             get_class($this->throwable),
