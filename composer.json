@@ -9,12 +9,6 @@
     ],
     "homepage": "https://github.com/facade/ignition",
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../Packages/flare-client-php"
-        }
-    ],
     "require": {
         "php": "^7.1",
         "ext-json": "*",
