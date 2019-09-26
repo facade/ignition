@@ -54,6 +54,5 @@
 <script>
     Ignition.start();
 </script>
-
 </body>
 </html>
