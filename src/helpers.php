@@ -9,7 +9,7 @@ if (! function_exists('ddd')) {
 
         $client = app()->make('flare.client');
 
-        $report = $client->createReportFromMessage('Debug, Dump, Die', 'info');
+        $report = $client->createReportFromMessage('Dump, Die, Debug', 'info');
 
         $handler->handleReport($report, 'DebugTab', [
             'dump' => true,
