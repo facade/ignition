@@ -75,6 +75,19 @@ class LogTest extends TestCase
     }
 
     /** @test */
+    public function it_reports_different_log_levels_when_configured()
+    {
+        $this->app['config']['logging.channels.flare.level'] = 'debug';
+
+        Log::debug('this is a log message');
+        Log::error('this is a log message');
+        Log::emergency('this is a log message');
+        Log::critical('this is a log message');
+
+        $this->fakeClient->assertRequestsSent(4);
+    }
+
+    /** @test */
     public function it_can_log_null_values()
     {
         Log::info(null);
