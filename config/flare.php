@@ -33,7 +33,6 @@ return [
         'report_view_data' => true,
     ],
 
-
     /*
     |--------------------------------------------------------------------------
     | Reporting Log statements
