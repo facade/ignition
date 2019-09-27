@@ -138,8 +138,10 @@ class LogTest extends TestCase
      * @test
      * @dataProvider provideMessageLevels
      */
-    public function it_can_report_logs($logLevel)
+    public function it_can_report_an_exception_with_logs($logLevel)
     {
+        $this->app['config']['flare.send_logs_as_events'] = false;
+
         Log::log($logLevel, 'log');
 
         Route::get('exception', function () {
@@ -159,8 +161,10 @@ class LogTest extends TestCase
     }
 
     /** @test */
-    public function it_can_report_logs_with_metadata()
+    public function it_can_report_an_exception_with_logs_with_metadata()
     {
+        $this->app['config']['flare.send_logs_as_events'] = false;
+
         Log::info('log', [
             'meta' => 'data',
         ]);
