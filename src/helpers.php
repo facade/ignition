@@ -1,7 +1,8 @@
 <?php
 
 if (! function_exists('ddd')) {
-    function ddd() {
+    function ddd()
+    {
         $args = func_get_args();
         call_user_func_array('dump', $args);
 
