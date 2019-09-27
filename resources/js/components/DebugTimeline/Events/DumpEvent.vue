@@ -28,7 +28,22 @@ export default {
 
     props: ['event'],
 
+    mounted() {
+        let dumpId = this.detectDumpId(this.event.label);
+
+        if (dumpId) {
+            window.Sfdump(dumpId);
+        }
+    },
+
     methods: {
+        detectDumpId(dumpHtml) {
+            const pattern = /sf-dump-([0-9]+)/gm;
+            const matches = pattern.exec(dumpHtml);
+
+            return matches[0] || null;
+        },
+
         openInStackTab() {
             this.setTab('StackTab', {
                 file: this.event.file,

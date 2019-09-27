@@ -60,11 +60,31 @@ class LogTest extends TestCase
     {
         Log::info('this is a log message');
         Log::debug('this is a log message');
+
+        $this->fakeClient->assertRequestsSent(0);
+    }
+
+    /** @test */
+    public function it_reports_log_messages_above_the_specified_minimum_level()
+    {
         Log::error('this is a log message');
         Log::emergency('this is a log message');
         Log::critical('this is a log message');
 
-        $this->fakeClient->assertRequestsSent(0);
+        $this->fakeClient->assertRequestsSent(3);
+    }
+
+    /** @test */
+    public function it_reports_different_log_levels_when_configured()
+    {
+        $this->app['config']['logging.channels.flare.level'] = 'debug';
+
+        Log::debug('this is a log message');
+        Log::error('this is a log message');
+        Log::emergency('this is a log message');
+        Log::critical('this is a log message');
+
+        $this->fakeClient->assertRequestsSent(4);
     }
 
     /** @test */
@@ -76,7 +96,7 @@ class LogTest extends TestCase
         Log::emergency(null);
         Log::critical(null);
 
-        $this->fakeClient->assertRequestsSent(0);
+        $this->fakeClient->assertRequestsSent(3);
     }
 
     /** @test */
@@ -85,10 +105,7 @@ class LogTest extends TestCase
         Route::get('exception', function () {
             Log::info('info log');
             Log::debug('debug log');
-            Log::error('error log');
             Log::notice('notice log');
-            Log::emergency('emergency log');
-            Log::critical('critical log');
 
             whoops();
         });
@@ -101,7 +118,7 @@ class LogTest extends TestCase
 
         $logs = $arguments['context']['logs'];
 
-        $this->assertCount(6, $logs);
+        $this->assertCount(3, $logs);
     }
 
     public function provideMessageLevels()
