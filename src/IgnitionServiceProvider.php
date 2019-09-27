@@ -2,7 +2,6 @@
 
 namespace Facade\Ignition;
 
-use Facade\Ignition\Exceptions\InvalidConfig;
 use Throwable;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
@@ -25,6 +24,7 @@ use Facade\Ignition\Middleware\AddQueries;
 use Facade\Ignition\LogRecorder\LogRecorder;
 use Facade\Ignition\Middleware\AddSolutions;
 use Facade\Ignition\Views\Engines\PhpEngine;
+use Facade\Ignition\Exceptions\InvalidConfig;
 use Facade\Ignition\DumpRecorder\DumpRecorder;
 use Facade\Ignition\Middleware\SetNotifierName;
 use Facade\Ignition\QueryRecorder\QueryRecorder;

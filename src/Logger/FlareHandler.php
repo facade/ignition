@@ -25,7 +25,7 @@ class FlareHandler extends AbstractProcessingHandler
 
     public function setMinimumReportLogLevel(int $level)
     {
-        if (!in_array($level, Logger::getLevels())) {
+        if (! in_array($level, Logger::getLevels())) {
             throw new \InvalidArgumentException('The given minimum log level is not supported.');
         }
 

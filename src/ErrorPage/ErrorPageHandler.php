@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\ErrorPage;
 
-use Facade\FlareClient\Report;
 use Throwable;
+use Facade\FlareClient\Report;
 use Facade\Ignition\IgnitionConfig;
 use Illuminate\Foundation\Application;
 use Facade\IgnitionContracts\SolutionProviderRepository;

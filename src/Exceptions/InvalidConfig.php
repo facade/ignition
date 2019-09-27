@@ -10,14 +10,14 @@ use Facade\IgnitionContracts\ProvidesSolution;
 
 class InvalidConfig extends Exception implements ProvidesSolution
 {
-    public static function  invalidLogLevel(string $logLevel)
+    public static function invalidLogLevel(string $logLevel)
     {
         return new static("Invalid log level `{$logLevel}` specified.");
     }
 
     public function getSolution(): Solution
     {
-        $validLogLevels = array_map(function(string $level) {
+        $validLogLevels = array_map(function (string $level) {
             return strtolower($level);
         }, array_keys(Logger::getLevels()));
 
@@ -27,4 +27,3 @@ class InvalidConfig extends Exception implements ProvidesSolution
             ->setSolutionDescription("Please change the log level in your `config/logging.php` file. Valid log levels are {$validLogLevelsString}.");
     }
 }
-

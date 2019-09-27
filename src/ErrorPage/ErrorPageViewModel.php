@@ -153,7 +153,7 @@ class ErrorPageViewModel implements Arrayable
         return json_encode(Ignition::$tabs);
     }
 
-    public function defaultTab(?string $defaultTab = null, ?array $defaultTabProps)
+    public function defaultTab(?string $defaultTab, ?array $defaultTabProps)
     {
         $this->defaultTab = $defaultTab ?? 'StackTab';
 
