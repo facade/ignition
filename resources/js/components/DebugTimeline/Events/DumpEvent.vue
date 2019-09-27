@@ -30,6 +30,7 @@ export default {
 
     mounted() {
         let dumpId = this.detectDumpId(this.event.label);
+
         if (dumpId) {
             window.Sfdump(dumpId);
         }
