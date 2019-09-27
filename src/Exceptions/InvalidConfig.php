@@ -4,10 +4,18 @@ namespace Facade\Ignition\Exceptions;
 
 use Exception;
 use Monolog\Logger;
+use Facade\IgnitionContracts\Solution;
+use Facade\IgnitionContracts\BaseSolution;
+use Facade\IgnitionContracts\ProvidesSolution;
 
-class InvalidConfig extends Exception
+class InvalidConfig extends Exception implements ProvidesSolution
 {
     public static function  invalidLogLevel(string $logLevel)
+    {
+        return new static("Invalid log level `{$logLevel}` specified.");
+    }
+
+    public function getSolution(): Solution
     {
         $validLogLevels = array_map(function(string $level) {
             return strtolower($level);
@@ -15,8 +23,8 @@ class InvalidConfig extends Exception
 
         $validLogLevelsString = implode(',', $validLogLevels);
 
-        return "You specify an invalid log level `{$logLevel}`. Valid log levels are {$validLogLevelsString}.";
+        return BaseSolution::create('You provided an invalid log level')
+            ->setSolutionDescription("Please change the log level in your `config/logging.php` file. Valid log levels are {$validLogLevelsString}.");
     }
-
 }
 
