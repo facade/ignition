@@ -4,7 +4,7 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.8.4 - 2019-09-27
 
--  Resolve configuration from the injected app instead of the helper (#168)
+-  Resolve configuration from the injected app instead of the helper ([#168](https://github.com/facade/ignition/pull/168))
 
 ## 1.8.3 - 2019-09-25
 
@@ -21,8 +21,8 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.8.0 - 2019-09-18
 
--   added solution for running Laravel Dusk in production (#121)
--   Automatically fix blade variable typos and optional variables (#38)
+-   added solution for running Laravel Dusk in production ([#121](https://github.com/facade/ignition/pull/121))
+-   Automatically fix blade variable typos and optional variables ([#38](https://github.com/facade/ignition/pull/38))
 
 ## 1.7.1 - 2019-09-18
 
@@ -30,23 +30,23 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.7.0 - 2019-09-18
 
--   Add the ability to define a query collector max value (#153)
+-   Add the ability to define a query collector max value ([#153](https://github.com/facade/ignition/pull/153))
 
 ## 1.6.10 - 2019-09-18
 
--   fix `__invoke` method name in solution (#151)
+-   fix `__invoke` method name in solution ([#151](https://github.com/facade/ignition/pull/151))
 
 ## 1.6.9 - 2019-09-18
 
--   Add noscript trace information - fixes #146
+-   Add noscript trace information - fixes [#146](https://github.com/facade/ignition/issues/146)
 
 ## 1.6.8 - 2019-09-18
 
--   Use javascript content type for asset response - fixes #149
+-   Use javascript content type for asset response - fixes [#149](https://github.com/facade/ignition/issues/149)
 
 ## 1.6.7 - 2019-09-18
 
--   Load javascript assets via URL. Fixes #16
+-   Load javascript assets via URL. Fixes [#16](https://github.com/facade/ignition/issues/16)
 
 ## 1.6.6 - 2019-09-16
 
@@ -54,7 +54,7 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.6.5 - 2019-09-13
 
--   Ignore invalid characters in JSON encoding. Fixes #138
+-   Ignore invalid characters in JSON encoding. Fixes [#138](https://github.com/facade/ignition/issues/138)
 
 ## 1.6.4 - 2019-09-13
 
@@ -70,31 +70,31 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.6.1 - 2019-09-12
 
--   Resolve configuration from the injected application instead of the helper - Fixes #131
+-   Resolve configuration from the injected application instead of the helper - Fixes [#131](https://github.com/facade/ignition/issues/131)
 
 ## 1.6.0 - 2019-09-09
 
--   add `RouteNotDefined` solution provider (#113)
+-   add `RouteNotDefined` solution provider ([#113](https://github.com/facade/ignition/pull/113))
 
 ## 1.5.0 - 2019-09-09
 
--   suggest running migrations when a column is missing (#83)
+-   suggest running migrations when a column is missing ([#83](https://github.com/facade/ignition/pull/83))
 
 ## 1.4.19 - 2019-09-09
 
--   Remove quotation from git commit url #89
+-   Remove quotation from git commit url ([#89](https://github.com/facade/ignition/pull/89))
 
 ## 1.4.18 - 2019-09-09
 
--   Fix open_basedir restriction when looking up config file. Fixes #120
+-   Fix open_basedir restriction when looking up config file. Fixes ([#120](https://github.com/facade/ignition/pull/120))
 
 ## 1.4.17 - 2019-09-06
 
--   Remove Inter, Operator from font stack. Fixes #74
+-   Remove Inter, Operator from font stack. Fixes [#74](https://github.com/facade/ignition/issues/74)
 
 ## 1.4.15 - 2019-09-05
 
--   Use previous exception trace for view exceptions. Fixes #107
+-   Use previous exception trace for view exceptions. Fixes [#107](https://github.com/facade/ignition/issues/107)
 
 ## 1.4.14 - 2019-09-05
 
@@ -106,7 +106,7 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.4.12 - 2019-09-04
 
--   Use a middleware to protect ignition routes (#93)
+-   Use a middleware to protect ignition routes ([#93](https://github.com/facade/ignition/pull/93))
 
 ## 1.4.11 - 2019-09-04
 
@@ -122,7 +122,7 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.4.8 - 2019-09-04
 
--   pass an empty string to query if no connection name is available - fixes #86
+-   pass an empty string to query if no connection name is available - fixes [#86](https://github.com/facade/ignition/issues/86)
 
 ## 1.4.7 - 2019-09-04
 
@@ -167,7 +167,7 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.1.1 - 2019-09-02
 
--   Fixed context tab crash when not using git (#24)
+-   Fixed context tab crash when not using git ([#24](https://github.com/facade/ignition/issues/24))
 
 ## 1.1.0 - 2019-09-02
 
@@ -190,7 +190,7 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.0.1 - 2019-08-31
 
--   add support for L5.5 & 5.6 (#21)
+-   add support for L5.5 & 5.6 ([#21](https://github.com/facade/ignition/pull/21))
 
 ## 1.0.0 - 2019-08-30
 
