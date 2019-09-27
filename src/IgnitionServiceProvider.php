@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition;
 
+use Facade\Ignition\Exceptions\InvalidConfig;
 use Throwable;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
@@ -214,7 +215,12 @@ class IgnitionServiceProvider extends ServiceProvider
     {
         $this->app->singleton('flare.logger', function ($app) {
             $handler = new FlareHandler($app->make('flare.client'));
-            $handler->setMinimumReportLogLevel(config('logging.channels.flare.level', Logger::ERROR));
+
+            $logLevelString = config('logging.channels.flare.level', 'error');
+
+            $logLevel = $this->getLogLevel($logLevelString);
+
+            $handler->setMinimumReportLogLevel($logLevel);
 
             $logger = new Logger('Flare');
             $logger->pushHandler($handler);
@@ -231,6 +237,17 @@ class IgnitionServiceProvider extends ServiceProvider
         }
 
         return $this;
+    }
+
+    protected function getLogLevel(string $logLevelString): int
+    {
+        $logLevel = Logger::getLevels()[strtoupper($logLevelString)] ?? null;
+
+        if (! $logLevel) {
+            throw InvalidConfig::invalidLogLevel($logLevelString);
+        }
+
+        return $logLevel;
     }
 
     protected function registerLogRecorder()
