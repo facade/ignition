@@ -2,6 +2,11 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.9.0 - 2019-09-27
+
+-  add ability to send logs to flare
+-  add `ddd` function
+
 ## 1.8.4 - 2019-09-27
 
 -  Resolve configuration from the injected app instead of the helper ([#168](https://github.com/facade/ignition/pull/168))
