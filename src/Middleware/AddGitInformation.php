@@ -47,7 +47,7 @@ class AddGitInformation
 
     protected function command($command)
     {
-        $process = new Process($command, base_path());
+        $process = Process::fromShellCommandline($command, base_path());
 
         $process->run();
 
