@@ -36,7 +36,7 @@ class SolutionMakeCommand extends GeneratorCommand
     protected function getStub()
     {
         return $this->option('runnable')
-            ? __DIR__.'/stubs/solution-runnable.stub'
+            ? __DIR__.'/stubs/runnable-solution.stub'
             : __DIR__.'/stubs/solution.stub';
     }
 
