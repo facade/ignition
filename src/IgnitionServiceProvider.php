@@ -8,6 +8,7 @@ use Facade\FlareClient\Flare;
 use Illuminate\Log\LogManager;
 use Illuminate\Queue\QueueManager;
 use Facade\FlareClient\Http\Client;
+use Facade\Ignition\Commands\SolutionMakeCommand;
 use Illuminate\Support\Facades\Log;
 use Whoops\Handler\HandlerInterface;
 use Illuminate\Support\Facades\Route;
@@ -247,9 +248,11 @@ class IgnitionServiceProvider extends ServiceProvider
     protected function registerCommands()
     {
         $this->app->bind('command.flare:test', TestCommand::class);
+        $this->app->bind('command.make:solution', SolutionMakeCommand::class);
 
         $this->commands([
             'command.flare:test',
+            'command.make:solution',
         ]);
     }
 
