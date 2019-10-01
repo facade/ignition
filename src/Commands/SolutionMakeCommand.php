@@ -19,7 +19,7 @@ class SolutionMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new custom solution class';
+    protected $description = 'Create a new custom Ignition solution class';
 
     /**
      * The type of class being generated.
