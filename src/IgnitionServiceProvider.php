@@ -74,7 +74,13 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $this
             ->registerViewEngines()
+            ->registerHousekeepingRoutes()
+            ->registerLogHandler()
             ->setupQueue($this->app->queue);
+
+        $this->app->make(QueryRecorder::class)->register();
+        $this->app->make(LogRecorder::class)->register();
+        $this->app->make(DumpRecorder::class)->register();
     }
 
     public function register()
@@ -83,13 +89,11 @@ class IgnitionServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/ignition.php', 'ignition');
 
         $this
-            ->registerHousekeepingRoutes()
             ->registerSolutionProviderRepository()
             ->registerExceptionRenderer()
             ->registerWhoopsHandler()
             ->registerIgnitionConfig()
             ->registerFlare()
-            ->registerLogHandler()
             ->registerLogRecorder()
             ->registerDumpCollector()
             ->registerCommands();
@@ -257,7 +261,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerLogRecorder()
     {
-        $logCollector = $this->app->make(LogRecorder::class)->register();
+        $logCollector = $this->app->make(LogRecorder::class);
 
         $this->app->singleton(LogRecorder::class);
 
@@ -268,7 +272,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerDumpCollector()
     {
-        $dumpCollector = $this->app->make(DumpRecorder::class)->register();
+        $dumpCollector = $this->app->make(DumpRecorder::class);
 
         $this->app->singleton(DumpRecorder::class);
 
@@ -288,7 +292,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerQueryRecorder()
     {
-        $queryCollector = $this->app->make(QueryRecorder::class)->register();
+        $queryCollector = $this->app->make(QueryRecorder::class);
 
         $this->app->singleton(QueryRecorder::class);
 
