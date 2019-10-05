@@ -9,7 +9,7 @@
                 :key="`file-${index}`"
                 :class="index === 0 ? 'font-semibold' : ''"
                 >{{ index > 0 ? '.' : '' }}{{ fileSegment }}</span
-            >
+            ><span v-if="lineNumber">:{{ lineNumber }}</span>
         </span>
         <slot></slot>
         <a
