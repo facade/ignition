@@ -28,6 +28,7 @@ use Facade\Ignition\Exceptions\InvalidConfig;
 use Facade\Ignition\DumpRecorder\DumpRecorder;
 use Facade\Ignition\Middleware\SetNotifierName;
 use Facade\Ignition\QueryRecorder\QueryRecorder;
+use Facade\Ignition\Commands\SolutionMakeCommand;
 use Facade\Ignition\Middleware\AddGitInformation;
 use Facade\Ignition\Views\Engines\CompilerEngine;
 use Facade\Ignition\Context\LaravelContextDetector;
@@ -284,9 +285,11 @@ class IgnitionServiceProvider extends ServiceProvider
     protected function registerCommands()
     {
         $this->app->bind('command.flare:test', TestCommand::class);
+        $this->app->bind('command.make:solution', SolutionMakeCommand::class);
 
         $this->commands([
             'command.flare:test',
+            'command.make:solution',
         ]);
     }
 
