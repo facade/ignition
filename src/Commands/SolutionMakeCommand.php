@@ -12,7 +12,7 @@ class SolutionMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:solution';
+    protected $name = 'ignition:solution';
 
     /**
      * The console command description.
