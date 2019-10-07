@@ -2,6 +2,11 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.10.0 - 2019-10-07
+
+- Add `ignition:make-solution` command
+- Add default for query binding option (Fixes #183)
+
 ## 1.9.2 - 2019-10-04
 
 - Fix service provider registration (Fixes #177)
