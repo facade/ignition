@@ -54,6 +54,7 @@ use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
 use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
+use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 use Facade\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
@@ -345,6 +346,7 @@ class IgnitionServiceProvider extends ServiceProvider
             MergeConflictSolutionProvider::class,
             RunningLaravelDuskInProductionProvider::class,
             MissingColumnSolutionProvider::class,
+            UnknownValidationSolutionProvider::class,
         ];
     }
 
