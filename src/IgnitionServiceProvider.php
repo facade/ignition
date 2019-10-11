@@ -37,6 +37,7 @@ use Facade\Ignition\Http\Middleware\IgnitionEnabled;
 use Facade\Ignition\Http\Controllers\StyleController;
 use Facade\Ignition\Http\Controllers\ScriptController;
 use Facade\Ignition\Middleware\AddEnvironmentInformation;
+use Facade\Ignition\Commands\SolutionProviderMakeCommand;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
 use Facade\Ignition\Http\Controllers\HealthCheckController;
 use Facade\Ignition\Http\Controllers\ShareReportController;
@@ -287,10 +288,12 @@ class IgnitionServiceProvider extends ServiceProvider
     {
         $this->app->bind('command.flare:test', TestCommand::class);
         $this->app->bind('command.make:solution', SolutionMakeCommand::class);
+        $this->app->bind('command.make:solution-provider', SolutionProviderMakeCommand::class);
 
         $this->commands([
             'command.flare:test',
             'command.make:solution',
+            'command.make:solution-provider',
         ]);
     }
 
