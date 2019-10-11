@@ -41,7 +41,9 @@
                 </div>
                 <div class="p-12">
                     <div class="solution-content ml-0">
-                        <h2 class="solution-title">{{ solution.title }}</h2>
+                        <h2 v-if="solution.title !== ''" class="solution-title">
+                            {{ solution.title }}
+                        </h2>
 
                         <div
                             v-if="solution.description"
