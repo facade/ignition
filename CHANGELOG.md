@@ -2,6 +2,14 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.11.1 - 2019-10-08
+
+- add conditional line number (#182)
+
+## 1.11.0 - 2019-10-08
+
+- add better error messages for missing validation rules (#125)
+
 ## 1.10.0 - 2019-10-07
 
 - Add `ignition:make-solution` command
