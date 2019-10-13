@@ -45,6 +45,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Register Ignition commands
+    |--------------------------------------------------------------------------
+    |
+    | Ignition comes with an additional make command that lets you create
+    | new solution classes more easily. To keep your default Laravel
+    | installation clean, this command is not registered by default.
+    |
+    | You can enable the command registration below.
+    |
+    */
+    'register_commands' => env('REGISTER_IGNITION_COMMANDS', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Ignored Solution Providers
     |--------------------------------------------------------------------------
     |
