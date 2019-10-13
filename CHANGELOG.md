@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.11.2 - 2019-10-13
+
+- simplify default Laravel installation (#198)
+
 ## 1.11.1 - 2019-10-08
 
 - add conditional line number (#182)
