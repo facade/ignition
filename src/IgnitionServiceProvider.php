@@ -98,8 +98,7 @@ class IgnitionServiceProvider extends ServiceProvider
             ->registerIgnitionConfig()
             ->registerFlare()
             ->registerLogRecorder()
-            ->registerDumpCollector()
-            ->registerCommands();
+            ->registerDumpCollector();
 
         if (config('flare.reporting.report_queries')) {
             $this->registerQueryRecorder();
