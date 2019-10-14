@@ -8,10 +8,12 @@ use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
 use Illuminate\Log\LogManager;
 use Illuminate\Queue\QueueManager;
+use Illuminate\Support\Collection;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Log;
 use Whoops\Handler\HandlerInterface;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Application;
 use Facade\Ignition\ErrorPage\Renderer;
 use Facade\Ignition\Middleware\AddLogs;
@@ -21,6 +23,7 @@ use Facade\Ignition\Middleware\AddDumps;
 use Illuminate\Log\Events\MessageLogged;
 use Facade\Ignition\Commands\TestCommand;
 use Facade\Ignition\Middleware\AddQueries;
+use Symfony\Component\VarDumper\VarDumper;
 use Facade\Ignition\LogRecorder\LogRecorder;
 use Facade\Ignition\Middleware\AddSolutions;
 use Facade\Ignition\Views\Engines\PhpEngine;
@@ -79,6 +82,7 @@ class IgnitionServiceProvider extends ServiceProvider
             ->registerHousekeepingRoutes()
             ->registerLogHandler()
             ->registerCommands()
+            ->registerMacros()
             ->setupQueue($this->app->queue);
 
         $this->app->make(QueryRecorder::class)->register();
@@ -299,6 +303,39 @@ class IgnitionServiceProvider extends ServiceProvider
         if ($this->app['config']->get('ignition.register_commands', false)) {
             $this->commands(['command.make:solution']);
         }
+
+        return $this;
+    }
+
+    protected function registerMacros()
+    {
+        return $this
+            ->registerBuilderMacro()
+            ->registerCollectionMacro();
+    }
+
+    protected function registerBuilderMacro()
+    {
+        Builder::macro('ddd', function () {
+            ddd($this->toSql(), $this->getBindings());
+        });
+
+        return $this;
+    }
+
+    protected function registerCollectionMacro()
+    {
+        Collection::macro('ddd', function () {
+            $items = (new static(func_get_args()))->push($this);
+
+            $last = $items->pop();
+
+            $items->each(function ($item) {
+                VarDumper::dump($item);
+            });
+
+            ddd($last);
+        });
 
         return $this;
     }
