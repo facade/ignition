@@ -56,6 +56,7 @@ use Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider;
 use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
 use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\MissingMixManifestSolutionProvider;
 use Facade\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
@@ -344,6 +345,7 @@ class IgnitionServiceProvider extends ServiceProvider
         return [
             IncorrectValetDbCredentialsSolutionProvider::class,
             MissingAppKeySolutionProvider::class,
+            MissingMixManifestSolutionProvider::class,
             DefaultDbNameSolutionProvider::class,
             BadMethodCallSolutionProvider::class,
             TableNotFoundSolutionProvider::class,
