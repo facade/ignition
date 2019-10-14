@@ -23,7 +23,10 @@ class MissingMixManifestSolutionProvider implements HasSolutionsForThrowable
     {
         return [
             BaseSolution::create('')
-                ->setSolutionDescription('Generate the Mix manifest by using `npm install && npm run dev`.')
+                ->setSolutionDescription('You should regenerate your assets')
+                ->setDocumentationLinks([
+                    'Running Mix' => 'https://laravel.com/docs/master/mix#running-mix'
+                ])
         ];
     }
 }
