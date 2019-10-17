@@ -30,7 +30,6 @@ class ErrorPageViewModelTest extends TestCase
     /** @test */
     public function it_disables_share_report_when_share_report_controller_action_is_not_defined()
     {
-        // given
         $flareClient = $this->app->make('flare.client');
 
         $exception = new \Exception('Test Exception');
@@ -40,10 +39,8 @@ class ErrorPageViewModelTest extends TestCase
 
         $model = new ErrorPageViewModel($exception, new IgnitionConfig([]), $report, []);
 
-        // when
         $result = $model->toArray();
 
-        // then
         $this->assertEquals('', $result['shareEndpoint']);
     }
 }
