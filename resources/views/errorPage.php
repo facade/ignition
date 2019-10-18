@@ -20,7 +20,6 @@
         <link rel="stylesheet" href="<?=$housekeepingEndpoint?>/styles/<?=$script?>">
     <?php endforeach; ?>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 </head>
 <body class="scrollbar-lg">
 

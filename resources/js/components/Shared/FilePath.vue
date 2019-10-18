@@ -16,8 +16,8 @@
             v-if="editable && editorUrl"
             :href="editorUrl"
             class="ml-2 inline-block text-sm text-purple-400 hover:text-purple-500"
-            ><i class="fas fa-pencil-alt"></i
-        ></a>
+            ><pencil-icon />
+        </a>
     </span>
 </template>
 

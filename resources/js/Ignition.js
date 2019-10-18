@@ -8,6 +8,16 @@ export default class Ignition {
         this.tabCallbacks = [];
     }
 
+    registerIcons() {
+        Vue.component('ArrowDownIcon', require('./components/Icons/ArrowDownIcon').default);
+        Vue.component('ArrowUpIcon', require('./components/Icons/ArrowUpIcon').default);
+        Vue.component('ClipboardIcon', require('./components/Icons/ClipboardIcon').default);
+        Vue.component('LightbulbIcon', require('./components/Icons/LightbulbIcon').default);
+        Vue.component('PencilIcon', require('./components/Icons/PencilIcon').default);
+        Vue.component('PlusIcon', require('./components/Icons/PlusIcon').default);
+        Vue.component('ShareIcon', require('./components/Icons/ShareIcon').default);
+    }
+
     registerBuiltinTabs() {
         Vue.component('AppTab', require('./components/Tabs/AppTab').default);
         Vue.component('ContextTab', require('./components/Tabs/ContextTab').default);
@@ -28,6 +38,8 @@ export default class Ignition {
     }
 
     start() {
+        this.registerIcons();
+
         this.registerBuiltinTabs();
 
         this.registerCustomTabs();

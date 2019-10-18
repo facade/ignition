@@ -8,14 +8,14 @@
                         title="Frame up (Key:K)"
                         class="stack-nav-arrow"
                     >
-                        <i class="fas fa-arrow-up" />
+                        <arrow-up-icon />
                     </button>
                     <button
                         @click="selectNextFrame"
                         title="Frame down (Key:J)"
                         class="stack-nav-arrow"
                     >
-                        <i class="fas fa-arrow-down" />
+                        <arrow-down-icon />
                     </button>
                 </div>
                 <div class="px-4">

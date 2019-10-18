@@ -6,7 +6,7 @@
     >
         <div class="stack-frame | cursor-pointer">
             <button class="stack-frame-number">
-                <i class="fas fa-plus-circle text-gray-500" />
+                <plus-icon class="align-middle text-gray-500" />
             </button>
             <div class="span-2 stack-frame-text">
                 <button class="text-left text-gray-500">
