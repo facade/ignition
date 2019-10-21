@@ -34,6 +34,8 @@
     left: 50%;
     @apply text-purple-500;
     font-size: 1.2em;
+    font-weight: 900;
+    line-height: 1;
     content: '✓';
     transition: transform 0.1s;
     transform: translate(-50%, -50%) scale(0);

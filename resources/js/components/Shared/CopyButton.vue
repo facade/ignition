@@ -1,8 +1,6 @@
 <template>
     <button title="Copy to clipboard" @click="copy(text)">
-        <clipboard-icon
-            :class="copied ? 'fill-green-300' : 'fill-gray-200 hover:fill-white'"
-        ></clipboard-icon>
+        <ClipboardIcon :class="copied ? 'fill-green-300' : 'fill-gray-200 hover:fill-white'" />
         <div v-if="copied" class="ml-2 absolute top-0 left-full text-green-300">
             Copied!
         </div>
