@@ -9,13 +9,7 @@ export default class Ignition {
     }
 
     registerIcons() {
-        Vue.component('ArrowDownIcon', require('./components/Icons/ArrowDownIcon').default);
-        Vue.component('ArrowUpIcon', require('./components/Icons/ArrowUpIcon').default);
-        Vue.component('ClipboardIcon', require('./components/Icons/ClipboardIcon').default);
-        Vue.component('LightbulbIcon', require('./components/Icons/LightbulbIcon').default);
-        Vue.component('PencilIcon', require('./components/Icons/PencilIcon').default);
-        Vue.component('PlusIcon', require('./components/Icons/PlusIcon').default);
-        Vue.component('ShareIcon', require('./components/Icons/ShareIcon').default);
+        Vue.component('Icon', require('./components/Icons/Icon').default);
     }
 
     registerBuiltinTabs() {

@@ -8,7 +8,7 @@
             }"
         >
             <a v-if="isHidingSolutions" class="link-solution" target="_blank"
-                ><LightbulbIcon class="text-xs mr-1" /> Show solutions</a
+                ><Icon name="lightbulb" class="text-xs mr-1" /> Show solutions</a
             >
             <a v-else class="link-solution" target="_blank">Hide solutions</a>
         </div>
