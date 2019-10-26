@@ -60,10 +60,12 @@
                                             canExecuteSolutions === true &&
                                             executionSuccessful === null
                                     "
+                                    :disabled="runningSolution"
                                     @click="execute"
                                     class="button-secondary button-lg bg-tint-300 hover:bg-tint-400"
                                 >
-                                    {{ solution.run_button_text }}
+                                    <span v-if="runningSolution">Running...</span>
+                                    <span v-if="! runningSolution">{{ solution.run_button_text }}</span>
                                 </button>
                                 <p v-if="executionSuccessful">
                                     <strong class="font-semibold"
@@ -122,6 +124,7 @@ export default {
         return {
             isHidingSolutions: this.hasHideSolutionsCookie(),
             canExecuteSolutions: null,
+            runningSolution: false,
             executionSuccessful: null,
         };
     },
@@ -168,7 +171,13 @@ export default {
         },
 
         async execute() {
+            if (this.runningSolution) {
+                return;
+            }
+
             try {
+                this.runningSolution = true;
+
                 const response = await fetch(this.solution.execute_endpoint, {
                     method: 'POST',
                     headers: {
@@ -185,6 +194,8 @@ export default {
             } catch (error) {
                 console.error(error);
                 this.executionSuccessful = false;
+            } finally {
+                this.runningSolution = false;
             }
         },
 
