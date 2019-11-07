@@ -13,4 +13,5 @@
 /yarn.lock          export-ignore
 /package-lock.json  export-ignore
 /CONTRIBUTING.md    export-ignore
-__tests__           export-ignore
+/resources/js       export-ignore
+/resources/css      export-ignore
