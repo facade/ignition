@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use Illuminate\Support\Str;
-use InvalidArgumentException;
+use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
-use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 class ViewNotFoundSolutionProviderTest extends TestCase
 {

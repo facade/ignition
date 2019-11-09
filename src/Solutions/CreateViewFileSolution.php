@@ -2,9 +2,9 @@
 
 namespace Facade\Ignition\Solutions;
 
+use Facade\IgnitionContracts\RunnableSolution;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\Filesystem\Filesystem;
-use Facade\IgnitionContracts\RunnableSolution;
 
 class CreateViewFileSolution implements RunnableSolution
 {
