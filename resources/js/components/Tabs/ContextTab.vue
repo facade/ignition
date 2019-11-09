@@ -1,12 +1,23 @@
 <template>
     <div class="tab-content">
         <div class="layout-col">
+            <DefinitionList
+                v-for="(contextGroup, groupTitle) in customContextGroups"
+                :key="groupTitle"
+                :title="groupTitle"
+                class="tab-content-section"
+            >
+                <DefinitionListRow v-for="(value, key) in contextGroup" :key="key" :label="key">{{
+                    value | upperFirst
+                }}</DefinitionListRow>
+            </DefinitionList>
+
             <section v-if="git" class="tab-content-section border-none">
                 <DefinitionList title="Git">
-                    <DefinitionListRow label="Repository">
+                    <DefinitionListRow v-if="repoUrl" label="Repository">
                         <a class="underline" :href="repoUrl" target="_blank">{{ repoUrl }}</a>
                     </DefinitionListRow>
-                    <DefinitionListRow label="Message">
+                    <DefinitionListRow v-if="git.message" label="Message">
                         <a :href="commitUrl" target="_blank">
                             “{{ git.message }}” –
                             <code class="code underline">{{ git.hash }}</code>
@@ -33,17 +44,6 @@
                     value
                 }}</DefinitionListRow>
             </DefinitionList>
-
-            <DefinitionList
-                v-for="(contextGroup, groupTitle) in customContextGroups"
-                :key="groupTitle"
-                :title="groupTitle"
-                class="tab-content-section"
-            >
-                <DefinitionListRow v-for="(value, key) in contextGroup" :key="key" :label="key">{{
-                    value
-                }}</DefinitionListRow>
-            </DefinitionList>
         </div>
     </div>
 </template>
@@ -51,6 +51,7 @@
 import gitUrlParse from 'git-url-parse';
 import DefinitionList from '../Shared/DefinitionList';
 import DefinitionListRow from '../Shared/DefinitionListRow.js';
+import upperFirst from 'lodash/upperFirst';
 
 const predefinedKeys = {
     laravel_version: 'Laravel version',
@@ -81,6 +82,10 @@ export default {
 
     components: { DefinitionListRow, DefinitionList },
 
+    filters: {
+        upperFirst,
+    },
+
     computed: {
         git() {
             return this.report.context.git;
@@ -99,6 +104,10 @@ export default {
         },
 
         repoUrl() {
+            if (!this.git.remote) {
+                return null;
+            }
+
             const git = {
                 ...this.repoInfo,
                 git_suffix: false,
@@ -108,7 +117,7 @@ export default {
         },
 
         commitUrl() {
-            return `${this.repoUrl}/commit/${this.git.hash}`;
+            return `${this.repoUrl}/commit/${this.git.hash.replace(/'/g, '')}`;
         },
 
         tagUrl() {

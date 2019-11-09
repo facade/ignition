@@ -11,8 +11,10 @@
                 </button>
             </li>
         </ul>
-        <div class="tab-delimiter" />
-        <ShareButton />
+        <template v-if="shareButtonEnabled">
+            <div class="tab-delimiter" />
+            <ShareButton />
+        </template>
     </nav>
 </template>
 
@@ -20,6 +22,7 @@
 import ShareButton from './Shared/ShareButton';
 
 export default {
+    inject: ['config'],
     components: { ShareButton },
     props: {
         value: { required: true },
@@ -54,10 +57,13 @@ export default {
                     title: 'Debug',
                 },
             ],
+            shareButtonEnabled: this.config.enableShareButton,
         };
     },
 
     mounted() {
+        this.applyDefaultTabProps();
+
         this.$emit('input', this.tabs[this.currentTabIndex]);
     },
 
@@ -86,6 +92,18 @@ export default {
             });
 
             return Object.values(tabs);
+        },
+    },
+
+    methods: {
+        applyDefaultTabProps() {
+            this.defaultTabs.map(tab => {
+                if (tab.component === this.value.component) {
+                    tab.props = this.value.props || {};
+                }
+
+                return tab;
+            });
         },
     },
 };

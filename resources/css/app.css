@@ -19,7 +19,8 @@
 @import './utilities/ui.css';
 @import './utilities/variant.css';
 
-@import './vendor/hljs.css';
+@import './vendor/hljs-dark.css';
+@import './vendor/hljs-light.css';
 @import './vendor/sf-dump.css';
 
 @tailwind utilities;

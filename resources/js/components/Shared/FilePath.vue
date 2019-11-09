@@ -9,7 +9,7 @@
                 :key="`file-${index}`"
                 :class="index === 0 ? 'font-semibold' : ''"
                 >{{ index > 0 ? '.' : '' }}{{ fileSegment }}</span
-            >
+            ><span v-if="lineNumber">:{{ lineNumber }}</span>
         </span>
         <slot></slot>
         <a
@@ -62,7 +62,7 @@ export default {
         },
 
         editorUrl() {
-            return editorUrl(this.config.editor, this.file, this.lineNumber);
+            return editorUrl(this.config, this.file, this.lineNumber);
         },
     },
 };

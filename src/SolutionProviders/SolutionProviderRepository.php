@@ -28,7 +28,7 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
 
     public function registerSolutionProviders(array $solutionProviderClasses): SolutionProviderRepositoryContract
     {
-        $this->solutionProviders->merge($solutionProviderClasses);
+        $this->solutionProviders = $this->solutionProviders->merge($solutionProviderClasses);
 
         return $this;
     }
@@ -45,22 +45,39 @@ class SolutionProviderRepository implements SolutionProviderRepositoryContract
             $solutions[] = $throwable->getSolution();
         }
 
-        $providerSolutions = $this->solutionProviders
+        $providedSolutions = $this->solutionProviders
             ->filter(function (string $solutionClass) {
-                return in_array(HasSolutionsForThrowable::class, class_implements($solutionClass));
+                if (! in_array(HasSolutionsForThrowable::class, class_implements($solutionClass))) {
+                    return false;
+                }
+
+                if (in_array($solutionClass, config('ignition.ignored_solution_providers', []))) {
+                    return false;
+                }
+
+                return true;
             })
             ->map(function (string $solutionClass) {
                 return app($solutionClass);
             })
-            ->filter
-            ->canSolve($throwable)
+            ->filter(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
+                try {
+                    return $solutionProvider->canSolve($throwable);
+                } catch (Throwable $e) {
+                    return false;
+                }
+            })
             ->map(function (HasSolutionsForThrowable $solutionProvider) use ($throwable) {
-                return $solutionProvider->getSolutions($throwable);
+                try {
+                    return $solutionProvider->getSolutions($throwable);
+                } catch (Throwable $e) {
+                    return [];
+                }
             })
             ->flatten()
             ->toArray();
 
-        return array_merge($solutions, $providerSolutions);
+        return array_merge($solutions, $providedSolutions);
     }
 
     public function getSolutionForClass(string $solutionClass): ?Solution

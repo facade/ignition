@@ -52,6 +52,8 @@ export default class Ignition {
                         solutions: this.solutions,
                         telescopeUrl: this.telescopeUrl,
                         shareEndpoint: this.shareEndpoint,
+                        defaultTab: this.defaultTab,
+                        defaultTabProps: this.defaultTabProps,
                     },
                 });
             },

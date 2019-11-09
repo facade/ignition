@@ -27,9 +27,13 @@ class QueryRecorder
 
     public function record(QueryExecuted $queryExecuted)
     {
-        $reportBindings = config('flare.reporting.report_query_bindings');
+        $maximumQueries = $this->app['config']->get('flare.reporting.maximum_number_of_collected_queries', 200);
+
+        $reportBindings = $this->app['config']->get('flare.reporting.report_query_bindings', true);
 
         $this->queries[] = Query::fromQueryExecutedEvent($queryExecuted, $reportBindings);
+
+        $this->queries = array_slice($this->queries, $maximumQueries * -1, $maximumQueries);
     }
 
     public function getQueries(): array

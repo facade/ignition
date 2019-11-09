@@ -5,7 +5,6 @@ namespace Facade\Ignition\Solutions;
 use Facade\IgnitionContracts\Solution;
 use Illuminate\Contracts\Support\Arrayable;
 use Facade\IgnitionContracts\RunnableSolution;
-use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
 
 class SolutionTransformer implements Arrayable
 {
@@ -30,7 +29,7 @@ class SolutionTransformer implements Arrayable
             'run_button_text' => $isRunnable ? $this->solution->getRunButtonText() : '',
             'run_parameters' => $isRunnable ? $this->solution->getRunParameters() : [],
             'action_description' => $isRunnable ? $this->solution->getSolutionActionDescription() : '',
-            'execute_endpoint' => action([ExecuteSolutionController::class]),
+            'execute_endpoint' => action('\Facade\Ignition\Http\Controllers\ExecuteSolutionController'),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
+use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
@@ -30,7 +31,7 @@ class ViewNotFoundSolutionProviderTest extends TestCase
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solution = app(ViewNotFoundSolutionProvider::class)->getSolutions($this->getViewNotFoundException())[0];
 
-        $this->assertStringContainsString('Did you mean `php-exception`?', $solution->getSolutionDescription());
+        $this->assertTrue(Str::contains($solution->getSolutionDescription(), 'Did you mean `php-exception`?'));
     }
 
     /** @test */
@@ -41,7 +42,7 @@ class ViewNotFoundSolutionProviderTest extends TestCase
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solution = app(ViewNotFoundSolutionProvider::class)->getSolutions($this->getViewNotFoundException($unknownView))[0];
 
-        $this->assertStringNotContainsString('Did you mean', $solution->getSolutionDescription());
+        $this->assertFalse(Str::contains($solution->getSolutionDescription(), 'Did you mean'));
     }
 
     protected function getViewNotFoundException(string $view = 'phpp-exceptionn'): InvalidArgumentException

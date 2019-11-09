@@ -43,7 +43,7 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
 
         return [
             BaseSolution::create("{$missingView} was not found.")
-                ->setSolutionDescription('Are you sure the view exist and is a `.blade.php` file?'),
+                ->setSolutionDescription('Are you sure the view exists and is a `.blade.php` file?'),
         ];
     }
 
@@ -95,8 +95,11 @@ class ViewNotFoundSolutionProvider implements HasSolutionsForThrowable
 
         $files = (new Finder())
             ->in($path)
-            ->files()
-            ->name($filePatterns);
+            ->files();
+
+        foreach ($filePatterns as $filePattern) {
+            $files->name($filePattern);
+        }
 
         $views = [];
 
