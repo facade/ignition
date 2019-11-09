@@ -78,8 +78,20 @@ class FixMissingSemicolonSolution implements RunnableSolution
         $contents = file_get_contents($file);
         $tokens = token_get_all($contents);
 
-        $reverseTokens = array_reverse($tokens);
+        $proposedFix = $this->generateProposedFileFromTokens($tokens, $parameters['lineNumber'], $parameters['unexpected']);
 
+        $result = exec(sprintf('echo %s | php -l', escapeshellarg($proposedFix)), $output, $exit);
+
+        if (! Str::contains($result, 'No syntax errors')) {
+            return false;
+        }
+
+        return $proposedFix;
+    }
+
+    protected function generateProposedFileFromTokens(array $tokens, int $lineNumber, string $unexpectedChar)
+    {
+        $reverseTokens = array_reverse($tokens);
         $output = [];
         $insertSemicolon = false;
         $line = 0;
@@ -91,7 +103,7 @@ class FixMissingSemicolonSolution implements RunnableSolution
             if (isset($token[2])) {
                 $line = $token[2];
             }
-            if (is_string($token) && $line == $parameters['lineNumber'] && $char == $parameters['unexpected']) {
+            if (is_string($token) && $line == $lineNumber && $char == $unexpectedChar) {
                 $insertSemicolon = true;
             }
             if ($insertSemicolon && isset($token[0]) && $token[0] == T_WHITESPACE) {
@@ -99,14 +111,6 @@ class FixMissingSemicolonSolution implements RunnableSolution
                 $output[] = ';';
             }
         }
-        $proposedFix = implode('', array_reverse($output));
-
-        $result = exec(sprintf('echo %s | php -l', escapeshellarg($proposedFix)), $output, $exit);
-
-        if (Str::contains($result, 'No syntax errors')) {
-            return $proposedFix;
-        }
-
-        return false;
+        return implode('', array_reverse($output));
     }
 }
