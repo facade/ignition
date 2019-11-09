@@ -4,9 +4,9 @@ namespace Facade\Ignition\SolutionProviders;
 
 use Facade\Ignition\Solutions\FixMissingSemicolonSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use ParseError;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Throwable;
-use ParseError;
 
 class MissingSemicolonSolutionProvider implements HasSolutionsForThrowable
 {

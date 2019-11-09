@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use ParseError;
+use Facade\Ignition\SolutionProviders\MissingSemicolonSolutionProvider;
+use Facade\Ignition\Tests\stubs\Controllers\MissingSemicolonController;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
-use Facade\Ignition\Tests\stubs\Controllers\MissingSemicolonController;
-use Facade\Ignition\SolutionProviders\MissingSemicolonSolutionProvider;
+use ParseError;
 
 class MissingSemicolonSolutionProviderTest extends TestCase
 {
