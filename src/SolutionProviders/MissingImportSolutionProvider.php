@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use Facade\Ignition\Support\ComposerClassMap;
 use Facade\Ignition\Solutions\SuggestImportSolution;
+use Facade\Ignition\Support\ComposerClassMap;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Throwable;
 
 class MissingImportSolutionProvider implements HasSolutionsForThrowable
 {
@@ -36,6 +36,7 @@ class MissingImportSolutionProvider implements HasSolutionsForThrowable
     {
         $path = $this->composerClassMap->listClasses()[$throwable->getTrace()[0]['class']];
         $fileRelative = str_replace(app_path(), '', $path);
+
         return [new SuggestImportSolution($this->foundClass, $fileRelative)];
     }
 

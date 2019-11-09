@@ -51,7 +51,7 @@ class SuggestImportSolution implements RunnableSolution
     {
         return [
             'class' => $this->class,
-            'file' => $this->file
+            'file' => $this->file,
         ];
     }
 
@@ -65,14 +65,15 @@ class SuggestImportSolution implements RunnableSolution
     {
         $output = $this->importClass($parameters);
         if ($output !== false) {
-            file_put_contents(app_path() . '/' . $parameters['file'], $output);
+            file_put_contents(app_path().'/'.$parameters['file'], $output);
         }
     }
 
     public function importClass(array $parameters = [])
     {
-        $originalContents = file_get_contents(app_path() . '/' . $parameters['file']);
-        $newContents = preg_replace('/use /', 'use ' . preg_quote($parameters['class']) . ";\nuse ", $originalContents, 1);
+        $originalContents = file_get_contents(app_path().'/'.$parameters['file']);
+        $newContents = preg_replace('/use /', 'use '.preg_quote($parameters['class']).";\nuse ", $originalContents, 1);
+
         return $newContents;
         // $originalContents = file_get_contents($parameters['viewFile']);
         // $newContents = str_replace('$'.$parameters['variableName'], '$'.$parameters['variableName']." ?? ''", $originalContents);
