@@ -25,7 +25,11 @@ class MissingImportSolutionProvider implements HasSolutionsForThrowable
 
         $class = $matches[1];
 
-        $this->composerClassMap = new ComposerClassMap();
+        if (strpos(base_path(), 'orchestra/testbench-core/laravel') !== false) {
+            $this->composerClassMap = new ComposerClassMap('../../../vendor/autoload.php');
+        } else {
+            $this->composerClassMap = new ComposerClassMap();
+        }
 
         $this->search($class);
 
