@@ -46,8 +46,7 @@ class ViewNotFoundSolutionProviderTest extends TestCase
         $solution = app(ViewNotFoundSolutionProvider::class)->getSolutions($e)[0];
 
         $this->assertTrue($solution->isRunnable());
-        $this->assertStringContainsString('Did you mean `blade-exception`?', $solution->getSolutionActionDescription());
-        $this->assertTrue(Str::contains($solution->getSolutionDescription(), 'Did you mean `php-exception`?'));
+        $this->assertTrue(Str::contains($solution->getSolutionActionDescription(), 'Did you mean `blade-exception`?'));
     }
 
     /** @test */
