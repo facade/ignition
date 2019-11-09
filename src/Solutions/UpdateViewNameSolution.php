@@ -58,14 +58,14 @@ class UpdateViewNameSolution implements RunnableSolution
     public function run(array $parameters = [])
     {
         $output = $this->updateViewName($parameters);
-        if ($output !== false) {
+        if ($output !== false && $output !== '') {
             file_put_contents(app_path().$parameters['controllerPath'], $output);
         }
     }
 
     public function updateViewName(array $parameters = [])
     {
-        if (strpos($parameters['controllerPath'], 'ignition/tests/Solutions') !== false) {
+        if (strpos($parameters['controllerPath'], 'ignition/tests/stubs') !== false) {
             $file = $parameters['controllerPath'];
         } else {
             $file = app_path().$parameters['controllerPath'];
@@ -91,17 +91,19 @@ class UpdateViewNameSolution implements RunnableSolution
 
     protected function getProposedFileFromTokens(array $tokens, string $missingView, string $suggestedView)
     {
-        $expectedTokens = collect($tokens)->map(function ($token) use ($missingView, $suggestedView) {
-            if ($token[0] === T_CONSTANT_ENCAPSED_STRING && (
+        $viewKey = 0;
+        $expectedTokens = collect($tokens)->map(function ($token, $key) use ($missingView, $suggestedView, &$viewKey) {
+            if ($token[0] == T_STRING && $token[1] == 'view') {
+                $viewKey = $key;
+            }
+            if ($token[0] === T_CONSTANT_ENCAPSED_STRING && ($viewKey == ($key - 2)) && (
                 $token[1] == "'$missingView'" ||
                 $token[1] == '"'.$missingView.'"'
             )) {
                 $token[1] = "'$suggestedView'";
             }
-
             return $token;
         })->toArray();
-
         $newContents = collect($expectedTokens)->map(function ($token) {
             return is_array($token) ? $token[1] : $token;
         })->implode('');
@@ -111,5 +113,7 @@ class UpdateViewNameSolution implements RunnableSolution
         if ($expectedTokens !== $newTokens) {
             return false;
         }
+
+        return $newContents;
     }
 }
