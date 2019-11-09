@@ -7,4 +7,5 @@ composer.lock
 .php_cs.cache
 .phpunit.result.cache
 tests/stubs/Controllers/GitConflictController.php
+tests/stubs/Controllers/MissingSemicolonController.php
 package-lock.json
