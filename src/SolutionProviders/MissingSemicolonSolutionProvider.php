@@ -6,6 +6,7 @@ use Facade\Ignition\Solutions\FixMissingSemicolonSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Throwable;
+use ParseError;
 
 class MissingSemicolonSolutionProvider implements HasSolutionsForThrowable
 {
@@ -13,7 +14,7 @@ class MissingSemicolonSolutionProvider implements HasSolutionsForThrowable
 
     public function canSolve(Throwable $throwable): bool
     {
-        if (! $throwable instanceof FatalThrowableError) {
+        if (! $throwable instanceof FatalThrowableError && ! $throwable instanceof ParseError) {
             return false;
         }
         preg_match(self::REGEX, $throwable->getMessage(), $matches);

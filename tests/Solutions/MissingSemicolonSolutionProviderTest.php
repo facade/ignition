@@ -1,0 +1,37 @@
+<?php
+
+namespace Facade\Ignition\Tests\Solutions;
+
+use ParseError;
+use Facade\Ignition\Tests\TestCase;
+use Illuminate\Support\Facades\View;
+use Facade\Ignition\Tests\stubs\Controllers\MissingSemicolonController;
+use Facade\Ignition\SolutionProviders\MissingSemicolonSolutionProvider;
+
+class MissingSemicolonSolutionProviderTest extends TestCase
+{
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        View::addLocation(__DIR__.'/../stubs/views');
+    }
+
+    /** @test */
+    public function it_can_solve_missing_semicolon_exception()
+    {
+        try {
+            app(MissingSemicolonController::class);
+        } catch (ParseError $error) {
+            $exception = $error;
+        }
+        $canSolve = app(MissingSemicolonSolutionProvider::class)->canSolve($exception);
+
+        $this->assertTrue($canSolve);
+
+        /** @var \Facade\IgnitionContracts\Solution $solution */
+        $solutions = app(MissingSemicolonSolutionProvider::class)->getSolutions($exception);
+        $parameters = $solutions[0]->getRunParameters();
+        $this->assertTrue($solutions[0]->isRunnable($parameters));
+    }
+}

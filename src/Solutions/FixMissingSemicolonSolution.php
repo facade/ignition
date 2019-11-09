@@ -67,12 +67,11 @@ class FixMissingSemicolonSolution implements RunnableSolution
 
     public function insertSemicolon(array $parameters = [])
     {
-        if (strpos($parameters['filePath'], 'ignition/tests/Solutions') !== false) {
+        if (strpos($parameters['filePath'], 'ignition/tests/stubs') !== false) {
             $file = $parameters['filePath'];
         } else {
             $file = app_path().$parameters['filePath'];
         }
-
         if (! is_file($file)) {
             return false;
         }
