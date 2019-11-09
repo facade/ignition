@@ -26,15 +26,6 @@ class ViewNotFoundSolutionProviderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_recommend_changing_a_typo_in_the_view_name()
-    {
-        /** @var \Facade\IgnitionContracts\Solution $solution */
-        $solution = app(ViewNotFoundSolutionProvider::class)->getSolutions($this->getViewNotFoundException())[0];
-
-        $this->assertStringContainsString('Did you mean `php-exception`?', $solution->getSolutionActionDescription());
-    }
-
-    /** @test */
     public function it_can_recommend_changing_a_view_typo_in_a_controller()
     {
         // Run an action within the controller
