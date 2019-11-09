@@ -35,7 +35,7 @@
                         </p>
                     </div>
                 </div>
-                <pre class="stack-code" ref="codeContainer"><p
+                <pre :class="highlightTheme" class="stack-code" ref="codeContainer"><p
                         v-for="(code, line_number) in selectedFrame.code_snippet"
                         :key="line_number"
                         :class="{
@@ -43,7 +43,7 @@
                             'stack-code-line-selected': withinSelectedRange(parseInt(line_number)),
                         }"
                         class="stack-code-line"
-                    >{{ code || '&nbsp;' }}<a :href="editorUrl(line_number)" class="editor-link"><i class="fa fa-pencil-alt"></i></a></p>
+                ><span v-html="highlightedCode(code)"></span><a :href="editorUrl(line_number)" class="editor-link"><i class="fa fa-pencil-alt"></i></a></p>
                 </pre>
             </div>
         </div>
@@ -51,6 +51,9 @@
 </template>
 
 <script>
+import hljs from 'highlight.js/lib/highlight';
+hljs.registerLanguage('php', require('highlight.js/lib/languages/php'));
+
 import ExceptionClass from '../Shared/ExceptionClass.vue';
 import FilePath from '../Shared/FilePath.vue';
 import LineNumber from '../Shared/LineNumber.vue';
@@ -71,9 +74,38 @@ export default {
     },
 
     data() {
+        const mediaQuery = matchMedia('(prefers-color-scheme: dark)');
+
         return {
+            mediaQuery,
+            detectedTheme: mediaQuery.matches ? 'dark' : 'light',
             firstSelectedLineNumber: null,
         };
+    },
+
+    created() {
+        this.highlightState = null;
+    },
+
+    watch: {
+        selectedFrame() {
+            this.highlightState = null;
+        },
+    },
+
+    mounted() {
+        this.mediaQuery.addEventListener('change', e => {
+            this.detectedTheme = e.matches ? 'dark' : 'light';
+        });
+    },
+
+    computed: {
+        highlightTheme() {
+            if (this.config.theme === 'auto') {
+                return this.detectedTheme;
+            }
+            return this.config.theme;
+        },
     },
 
     methods: {
@@ -97,6 +129,13 @@ export default {
         },
         editorUrl(lineNumber) {
             return editorUrl(this.config, this.selectedFrame.file, lineNumber);
+        },
+        highlightedCode(code) {
+            const result = hljs.highlight('php', code || '', true, this.highlightState);
+
+            this.highlightState = result.top;
+
+            return result.value || '&nbsp;';
         },
     },
 };

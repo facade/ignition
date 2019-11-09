@@ -3,6 +3,7 @@
 namespace Facade\Ignition\ErrorPage;
 
 use Throwable;
+use Facade\FlareClient\Report;
 use Facade\Ignition\IgnitionConfig;
 use Illuminate\Foundation\Application;
 use Facade\IgnitionContracts\SolutionProviderRepository;
@@ -33,7 +34,7 @@ class ErrorPageHandler
         $this->solutionProviderRepository = $solutionProviderRepository;
     }
 
-    public function handle(Throwable $throwable)
+    public function handle(Throwable $throwable, $defaultTab = null, $defaultTabProps = [])
     {
         $report = $this->flareClient->createReport($throwable);
 
@@ -45,6 +46,22 @@ class ErrorPageHandler
             $report,
             $solutions
         );
+
+        $viewModel->defaultTab($defaultTab, $defaultTabProps);
+
+        $this->renderException($viewModel);
+    }
+
+    public function handleReport(Report $report, $defaultTab = null, $defaultTabProps = [])
+    {
+        $viewModel = new ErrorPageViewModel(
+            $report->getThrowable(),
+            $this->ignitionConfig,
+            $report,
+            []
+        );
+
+        $viewModel->defaultTab($defaultTab, $defaultTabProps);
 
         $this->renderException($viewModel);
     }

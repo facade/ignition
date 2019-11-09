@@ -66,6 +66,6 @@ class IgnitionConfig implements Arrayable
 
     protected function mergeWithDefaultConfig(array $options = []): array
     {
-        return array_merge(config('ignition'), $options);
+        return array_merge(config('ignition') ?: include __DIR__.'/../config/ignition.php', $options);
     }
 }

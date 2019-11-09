@@ -98,7 +98,7 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
 
     protected function modifyViewsInTrace(ViewException $exception)
     {
-        $trace = Collection::make($exception->getTrace())
+        $trace = Collection::make($exception->getPrevious()->getTrace())
             ->map(function ($trace) {
                 if ($compiledData = $this->findCompiledView(Arr::get($trace, 'file', ''))) {
                     $trace['file'] = $compiledData['path'];

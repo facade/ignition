@@ -29,6 +29,23 @@ class ExceptionSolutionTest extends TestCase
     }
 
     /** @test */
+    public function it_returns_possible_solutions_when_registered_together()
+    {
+        $repository = new SolutionProviderRepository();
+
+        $repository->registerSolutionProviders([
+            AlwaysTrueSolutionProvider::class,
+            AlwaysFalseSolutionProvider::class,
+        ]);
+
+        $solutions = $repository->getSolutionsForThrowable(new \Exception());
+
+        $this->assertNotNull($solutions);
+        $this->assertCount(1, $solutions);
+        $this->assertTrue($solutions[0] instanceof BaseSolution);
+    }
+
+    /** @test */
     public function it_can_ignore_solution_providers()
     {
         $this->app->make('config')->set('ignition.ignored_solution_providers', [

@@ -117,7 +117,7 @@ export default {
         },
 
         commitUrl() {
-            return `${this.repoUrl}/commit/${this.git.hash}`;
+            return `${this.repoUrl}/commit/${this.git.hash.replace(/'/g, '')}`;
         },
 
         tagUrl() {

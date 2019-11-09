@@ -52,7 +52,7 @@ trait CollectsViewExceptions
             ->first(function ($compiledData) use ($compiledPath) {
                 $comparePath = $compiledData['compiledPath'];
 
-                return realpath(dirname($comparePath)).'/'.basename($comparePath) === $compiledPath;
+                return realpath(dirname($comparePath)).DIRECTORY_SEPARATOR.basename($comparePath) === $compiledPath;
             });
     }
 
