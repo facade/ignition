@@ -60,6 +60,24 @@ class ViewNotFoundSolutionProviderTest extends TestCase
         $this->assertFalse(Str::contains($solution->getSolutionDescription(), 'Did you mean'));
     }
 
+    /** @test */
+    public function it_can_recommend_creating_a_missing_view()
+    {
+        // Run an action within the controller
+        try {
+            app(\Facade\Ignition\Tests\stubs\Controllers\TestTypoController::class)->other();
+        } catch (InvalidArgumentException $e) {
+            $exception = $e;
+        }
+
+        $solution = app(ViewNotFoundSolutionProvider::class)->getSolutions($e)[0];
+        $this->assertEquals("Are you sure the view exist and is a `.blade.php` file?", $solution->getSolutionActionDescription());
+        $parameters = $solution->getRunParameters();
+        $solution->run($parameters);
+        unlink('./vendor/orchestra/testbench-core/laravel/resources/views/pages/missing_blade_file.blade.php');
+    }
+
+
     protected function getViewNotFoundException(string $view = 'phpp-exceptionn'): InvalidArgumentException
     {
         return new InvalidArgumentException("View [{$view}] not found.");

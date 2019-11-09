@@ -9,4 +9,9 @@ class TestTypoController
         // Intentional error
         return view('blade-exceptio');
     }
+
+    public function other()
+    {
+        return view('pages.missing_blade_file');
+    }
 }

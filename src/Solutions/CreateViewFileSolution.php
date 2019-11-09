@@ -56,6 +56,8 @@ class CreateViewFileSolution implements RunnableSolution
 
         $filesystem = new Filesystem();
         $filesystem->mkdir($fileViewFinder->getPaths()[0].'/'.$path.'/');
-        touch($fileViewFinder->getPaths()[0].'/'.$path.'/'.$file.'.blade.php');
+        $fullPath = $fileViewFinder->getPaths()[0].'/'.$path.'/'.$file.'.blade.php';
+
+        touch($fullPath);
     }
 }
