@@ -111,6 +111,7 @@ class FixMissingSemicolonSolution implements RunnableSolution
                 $output[] = ';';
             }
         }
+
         return implode('', array_reverse($output));
     }
 }
