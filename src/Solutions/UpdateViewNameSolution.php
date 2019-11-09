@@ -102,6 +102,7 @@ class UpdateViewNameSolution implements RunnableSolution
             )) {
                 $token[1] = "'$suggestedView'";
             }
+
             return $token;
         })->toArray();
         $newContents = collect($expectedTokens)->map(function ($token) {
