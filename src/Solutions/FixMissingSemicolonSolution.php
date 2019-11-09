@@ -61,7 +61,7 @@ class FixMissingSemicolonSolution implements RunnableSolution
     {
         $output = $this->insertSemicolon($parameters);
         if ($output !== false) {
-            file_put_contents(app_path().$parameters['filePath'], $output);
+            file_put_contents(base_path().$parameters['filePath'], $output);
         }
     }
 
@@ -70,7 +70,7 @@ class FixMissingSemicolonSolution implements RunnableSolution
         if (strpos($parameters['filePath'], 'ignition/tests/stubs') !== false) {
             $file = $parameters['filePath'];
         } else {
-            $file = app_path().$parameters['filePath'];
+            $file = base_path().$parameters['filePath'];
         }
         if (! is_file($file)) {
             return false;
@@ -79,7 +79,6 @@ class FixMissingSemicolonSolution implements RunnableSolution
         $tokens = token_get_all($contents);
 
         $proposedFix = $this->generateProposedFileFromTokens($tokens, $parameters['lineNumber'], $parameters['unexpected']);
-
         $result = exec(sprintf('echo %s | php -l', escapeshellarg($proposedFix)), $output, $exit);
 
         if (! Str::contains($result, 'No syntax errors')) {
@@ -89,7 +88,7 @@ class FixMissingSemicolonSolution implements RunnableSolution
         return $proposedFix;
     }
 
-    protected function generateProposedFileFromTokens(array $tokens, int $lineNumber, string $unexpectedChar)
+    protected function generateProposedFileFromTokens(array $tokens, int $lineNumber, string $unexpectedChar): string
     {
         $reverseTokens = array_reverse($tokens);
         $output = [];

@@ -26,7 +26,7 @@ class MissingSemicolonSolutionProvider implements HasSolutionsForThrowable
     {
         preg_match(self::REGEX, $throwable->getMessage(), $matches);
 
-        $filePath = str_replace(app_path(), '', $throwable->getFile());
+        $filePath = str_replace(base_path(), '', $throwable->getFile());
         $solution = new FixMissingSemicolonSolution($filePath, $throwable->getLine(), $matches[1]);
 
         return $solution->isRunnable()
