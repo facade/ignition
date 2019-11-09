@@ -62,6 +62,8 @@ export default {
     },
 
     mounted() {
+        this.applyDefaultTabProps();
+
         this.$emit('input', this.tabs[this.currentTabIndex]);
     },
 
@@ -90,6 +92,18 @@ export default {
             });
 
             return Object.values(tabs);
+        },
+    },
+
+    methods: {
+        applyDefaultTabProps() {
+            this.defaultTabs.map(tab => {
+                if (tab.component === this.value.component) {
+                    tab.props = this.value.props || {};
+                }
+
+                return tab;
+            });
         },
     },
 };

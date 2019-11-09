@@ -2,6 +2,8 @@
 
 namespace Facade\Ignition\Support;
 
+use Illuminate\Support\Collection;
+
 class StringComparator
 {
     public static function findClosestMatch(array $strings, string $input, int $sensitivity = 4): ?string
@@ -30,5 +32,20 @@ class StringComparator
         }
 
         return null;
+    }
+
+    public static function findSimilarText(array $strings, string $input): ?string
+    {
+        if (empty($strings)) {
+            return null;
+        }
+
+        return Collection::make($strings)
+            ->sortByDesc(function (string $string) use ($input) {
+                similar_text($input, $string, $percentage);
+
+                return $percentage;
+            })
+            ->first();
     }
 }
