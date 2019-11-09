@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Facade\Ignition\Solutions\FixMissingSemicolonSolution;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
+use Throwable;
 
 class MissingSemicolonSolutionProvider implements HasSolutionsForThrowable
 {
