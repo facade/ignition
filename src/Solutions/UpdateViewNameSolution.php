@@ -75,12 +75,28 @@ class UpdateViewNameSolution implements RunnableSolution
         }
         $contents = file_get_contents($file);
         $tokens = token_get_all($contents);
-        $expectedTokens = collect($tokens)->map(function ($token) use ($parameters) {
+
+        $contents = $this->getProposedFileFromTokens(
+            $tokens,
+            $parameters['missingView'],
+            $parameters['suggestedView']
+        );
+
+        if ($contents === false) {
+            return false;
+        }
+
+        return $contents;
+    }
+
+    protected function getProposedFileFromTokens(array $tokens, string $missingView, string $suggestedView)
+    {
+        $expectedTokens = collect($tokens)->map(function ($token) use ($missingView, $suggestedView) {
             if ($token[0] === T_CONSTANT_ENCAPSED_STRING && (
-                $token[1] == "'".$parameters['missingView']."'" ||
-                $token[1] == '"'.$parameters['missingView'].'"'
+                $token[1] == "'$missingView'" ||
+                $token[1] == '"'.$missingView.'"'
             )) {
-                $token[1] = "'".$parameters['suggestedView']."'";
+                $token[1] = "'$suggestedView'";
             }
 
             return $token;
@@ -92,11 +108,8 @@ class UpdateViewNameSolution implements RunnableSolution
 
         $newTokens = token_get_all($newContents);
 
-        // If we're generating a file that doesn't mean the same thing then don't allow
         if ($expectedTokens !== $newTokens) {
             return false;
         }
-
-        return $newContents;
     }
 }
