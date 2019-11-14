@@ -2,6 +2,13 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.12.0 - 2019-11-14
+
+- Add exception to html (#206)
+- Add a clear exception when passing no parameters to ddd (#205)
+- Ignore JS tests (#215)
+- Fix share report route bug
+
 ## 1.11.2 - 2019-10-13
 
 - simplify default Laravel installation (#198)
