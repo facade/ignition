@@ -38,6 +38,16 @@ class ViewTest extends TestCase
     }
 
     /** @test */
+    public function it_detects_the_original_line_number_in_view_exceptions_with_utf8_characters()
+    {
+        try {
+            view('blade-exception-utf8')->render();
+        } catch (ViewException $exception) {
+            $this->assertSame(12, $exception->getLine());
+        }
+    }
+
+    /** @test */
     public function it_adds_additional_blade_information_to_the_exception()
     {
         $viewData = [

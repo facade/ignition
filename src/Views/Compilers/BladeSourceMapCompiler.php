@@ -53,7 +53,9 @@ class BladeSourceMapCompiler extends BladeCompiler
 
         if (preg_match_all($pattern, $value, $matches, PREG_OFFSET_CAPTURE)) {
             foreach (array_reverse($matches[0]) as $match) {
-                $value = $this->insertLineNumberAtPosition($match[1], $value);
+                $position = mb_strlen(substr($value, 0, $match[1]));
+
+                $value = $this->insertLineNumberAtPosition($position, $value);
             }
         }
 
@@ -71,7 +73,9 @@ class BladeSourceMapCompiler extends BladeCompiler
 
         if ($shouldInsertLineNumbers) {
             foreach (array_reverse($matches[0]) as $match) {
-                $value = $this->insertLineNumberAtPosition($match[1], $value);
+                $position = mb_strlen(substr($value, 0, $match[1]));
+
+                $value = $this->insertLineNumberAtPosition($position, $value);
             }
         }
 
