@@ -43,7 +43,7 @@ class ViewTest extends TestCase
         try {
             view('blade-exception-utf8')->render();
         } catch (ViewException $exception) {
-            $this->assertSame(12, $exception->getLine());
+            $this->assertSame(11, $exception->getLine());
         }
     }
 

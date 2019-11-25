@@ -7,11 +7,9 @@
     <title>Laravel</title>
 </head>
 <body>
-Wäre es nicht schön, wenn die Tür schließt?
-@php
-    throw new Exception
-@endphp
-
+àààààààà
+{{ throw new Exception }}
+àààààààà
 <ul>
     @foreach ([1, 2, 3] as $i => $test)
         <li>{{ $test }}</li>

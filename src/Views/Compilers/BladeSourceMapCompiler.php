@@ -38,13 +38,17 @@ class BladeSourceMapCompiler extends BladeCompiler
 
     public function compileString($value)
     {
-        $value = $this->addEchoLineNumbers($value);
+        try {
+            $value = $this->addEchoLineNumbers($value);
 
-        $value = $this->addStatementLineNumbers($value);
+            $value = $this->addStatementLineNumbers($value);
 
-        $value = parent::compileString($value);
+            $value = parent::compileString($value);
 
-        return $this->trimEmptyLines($value);
+            return $this->trimEmptyLines($value);
+        } catch (\Exception $e) {
+            return $value;
+        }
     }
 
     protected function addEchoLineNumbers(string $value)
