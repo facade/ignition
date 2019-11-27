@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.13.0 - 2019-11-27
+
+- Allow custom grouping types
+
 ## 1.12.1 - 2019-11-25
 
 - Detect multibyte position offsets when adding linenumbers to the blade view - Fixes #193
