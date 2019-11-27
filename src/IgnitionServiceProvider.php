@@ -28,6 +28,7 @@ use Facade\Ignition\Exceptions\InvalidConfig;
 use Facade\Ignition\DumpRecorder\DumpRecorder;
 use Facade\Ignition\Middleware\SetNotifierName;
 use Facade\Ignition\QueryRecorder\QueryRecorder;
+use Facade\Ignition\Middleware\CustomizeGrouping;
 use Facade\Ignition\Commands\SolutionMakeCommand;
 use Facade\Ignition\Middleware\AddGitInformation;
 use Facade\Ignition\Views\Engines\CompilerEngine;
@@ -330,6 +331,10 @@ class IgnitionServiceProvider extends ServiceProvider
 
         if (config('flare.reporting.collect_git_information')) {
             $middleware[] = (new AddGitInformation());
+        }
+
+        if (! is_null(config('flare.reporting.grouping_type'))) {
+            $middleware[] = new CustomizeGrouping(config('flare.reporting.grouping_type'));
         }
 
         foreach ($middleware as $singleMiddleware) {
