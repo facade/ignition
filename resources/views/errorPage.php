@@ -1,5 +1,8 @@
 <!doctype html>
 <html class="theme-<?=$config['theme']?>">
+<!--
+<?=$throwableString?>
+-->
 <head>
     <!-- Hide dumps asap -->
     <style>
