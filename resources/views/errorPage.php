@@ -57,5 +57,8 @@
 <script>
     Ignition.start();
 </script>
+<!--
+<?=$throwableString?>
+-->
 </body>
 </html>
