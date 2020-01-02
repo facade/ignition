@@ -3,7 +3,7 @@ name: Run tests
 on:
   push:
   schedule:
-      - cron: '*/15 * * * * *'
+      - cron: '0 0 * * * *'
 
 jobs:
     php-tests:
