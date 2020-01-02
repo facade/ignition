@@ -3,8 +3,8 @@
 namespace Facade\Ignition\Exceptions;
 
 use ErrorException;
-use Facade\Ignition\DumpRecorder\HtmlDumper;
 use Facade\FlareClient\Contracts\ProvidesFlareContext;
+use Facade\Ignition\DumpRecorder\HtmlDumper;
 
 class ViewException extends ErrorException implements ProvidesFlareContext
 {

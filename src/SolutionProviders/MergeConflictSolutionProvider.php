@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use ParseError;
-use Illuminate\Support\Str;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Illuminate\Support\Str;
+use ParseError;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
+use Throwable;
 
 class MergeConflictSolutionProvider implements HasSolutionsForThrowable
 {

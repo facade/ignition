@@ -3,8 +3,8 @@
 namespace Facade\Ignition\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Facade\Ignition\IgnitionConfig;
+use Illuminate\Http\Request;
 
 class IgnitionConfigValueEnabled
 {

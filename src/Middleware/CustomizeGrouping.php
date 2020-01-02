@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Middleware;
 
-use Facade\FlareClient\Report;
 use Facade\FlareClient\Enums\GroupingTypes;
+use Facade\FlareClient\Report;
 
 class CustomizeGrouping
 {

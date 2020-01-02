@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use Illuminate\Support\Str;
+use Facade\Ignition\Exceptions\ViewException;
+use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
+use Facade\Ignition\Support\ComposerClassMap;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
-use Facade\Ignition\Exceptions\ViewException;
-use Facade\Ignition\Support\ComposerClassMap;
-use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
+use Illuminate\Support\Str;
 
 class UndefinedVariableSolutionProviderTest extends TestCase
 {

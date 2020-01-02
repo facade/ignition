@@ -2,13 +2,13 @@
 
 namespace Facade\Ignition\Tests\Actions;
 
-use Illuminate\Support\Arr;
 use Facade\FlareClient\Glows\Glow;
-use Facade\Ignition\Tests\TestCase;
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Database\Eloquent\Model;
-use Facade\Ignition\Tests\Mocks\FakeClient;
 use Facade\Ignition\Actions\ShareReportAction;
+use Facade\Ignition\Tests\Mocks\FakeClient;
+use Facade\Ignition\Tests\TestCase;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Arr;
 
 class ShareReportActionTest extends TestCase
 {
