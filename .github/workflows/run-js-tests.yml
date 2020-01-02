@@ -2,14 +2,16 @@ name: Run JS tests
 
 on: [push]
 
-runs-on: ubuntu-latest
+jobs:
+    test:
+        runs-on: ubuntu-latest
 
-steps:
-    - name: Checkout code
-      uses: actions/checkout@v1
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
 
-    - name: Install dependencies
-      run: yarn install --non-interactive
+            - name: Install dependencies
+              run: yarn install --non-interactive
 
-    - name: Execute tests
-      run: yarn run jest
+            - name: Execute tests
+              run: yarn run jest
