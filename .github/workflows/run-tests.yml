@@ -1,6 +1,9 @@
 name: Run tests
 
-on: [push]
+on:
+  push:
+  schedule:
+      - cron: '*/15 * * * *'
 
 jobs:
     php-tests:
