@@ -2,7 +2,7 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 1.13.1 - 2019-10-21
+## 1.13.1 - 2020-01-02
 
 -   Remove external reference for icons (#134)
 
