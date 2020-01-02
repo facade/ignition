@@ -1,4 +1,4 @@
-name: run-js-tests
+name: Run JS tests
 
 on: [push]
 

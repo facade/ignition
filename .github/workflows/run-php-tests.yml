@@ -1,4 +1,4 @@
-name: run-tests
+name: Run PHP tests
 
 on: [push]
 
