@@ -3,15 +3,9 @@ name: Run tests
 on: [push]
 
 jobs:
-    checkout-code:
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Checkout code
-                uses: actions/checkout@v1
-
     php-tests:
-        needs: checkout-code
         runs-on: ubuntu-latest
+
         strategy:
             matrix:
                 php: [7.4, 7.3, 7.2]
@@ -39,6 +33,9 @@ jobs:
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
         steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
+
             - name: Cache dependencies
               uses: actions/cache@v1
               with:
@@ -61,10 +58,12 @@ jobs:
               run: vendor/bin/phpunit
 
     js-tests:
-        needs: checkout-code
         runs-on: ubuntu-latest
 
         steps:
+            -   name: Checkout code
+                uses: actions/checkout@v1
+
             -   name: Install dependencies
                 run: yarn install --non-interactive
 
