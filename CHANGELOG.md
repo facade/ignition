@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.13.1 - 2019-10-21
+
+-   Remove external reference for icons (#134)
+
 ## 1.13.0 - 2019-11-27
 
 - Allow custom grouping types
@@ -19,37 +23,37 @@ All notable changes to `ignition` will be documented in this file
 
 ## 1.11.2 - 2019-10-13
 
-- simplify default Laravel installation (#198)
+-   simplify default Laravel installation (#198)
 
 ## 1.11.1 - 2019-10-08
 
-- add conditional line number (#182)
+-   add conditional line number (#182)
 
 ## 1.11.0 - 2019-10-08
 
-- add better error messages for missing validation rules (#125)
+-   add better error messages for missing validation rules (#125)
 
 ## 1.10.0 - 2019-10-07
 
-- Add `ignition:make-solution` command
-- Add default for query binding option (Fixes #183)
+-   Add `ignition:make-solution` command
+-   Add default for query binding option (Fixes #183)
 
 ## 1.9.2 - 2019-10-04
 
-- Fix service provider registration (Fixes #177)
+-   Fix service provider registration (Fixes #177)
 
 ## 1.9.1 - 2019-10-01
 
-- collapse vendor frames on windows fix (#176)
+-   collapse vendor frames on windows fix (#176)
 
 ## 1.9.0 - 2019-09-27
 
--  add ability to send logs to flare
--  add `ddd` function
+-   add ability to send logs to flare
+-   add `ddd` function
 
 ## 1.8.4 - 2019-09-27
 
--  Resolve configuration from the injected app instead of the helper ([#168](https://github.com/facade/ignition/pull/168))
+-   Resolve configuration from the injected app instead of the helper ([#168](https://github.com/facade/ignition/pull/168))
 
 ## 1.8.3 - 2019-09-25
 
