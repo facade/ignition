@@ -3,8 +3,8 @@
 namespace Facade\Ignition\LogRecorder;
 
 use Exception;
-use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Log\Events\MessageLogged;
 
 class LogRecorder
 {

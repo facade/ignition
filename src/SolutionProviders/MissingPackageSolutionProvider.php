@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use Illuminate\Support\Str;
+use Facade\Ignition\Solutions\MissingPackageSolution;
 use Facade\Ignition\Support\Packagist\Package;
 use Facade\Ignition\Support\Packagist\Packagist;
-use Facade\Ignition\Solutions\MissingPackageSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Illuminate\Support\Str;
+use Throwable;
 
 class MissingPackageSolutionProvider implements HasSolutionsForThrowable
 {

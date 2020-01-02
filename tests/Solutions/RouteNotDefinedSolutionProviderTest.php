@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use Illuminate\Support\Str;
+use Facade\Ignition\SolutionProviders\RouteNotDefinedSolutionProvider;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
-use Facade\Ignition\SolutionProviders\RouteNotDefinedSolutionProvider;
 
 class RouteNotDefinedSolutionProviderTest extends TestCase
 {

@@ -3,8 +3,8 @@
 namespace Facade\Ignition\Tests;
 
 use Facade\FlareClient\Report;
-use Facade\Ignition\IgnitionConfig;
 use Facade\Ignition\ErrorPage\ErrorPageViewModel;
+use Facade\Ignition\IgnitionConfig;
 
 class ErrorPageViewModelTest extends TestCase
 {

@@ -2,13 +2,13 @@
 
 namespace Facade\Ignition\DumpRecorder;
 
-use Illuminate\Support\Arr;
 use Illuminate\Foundation\Application;
-use Symfony\Component\VarDumper\VarDumper;
+use Illuminate\Support\Arr;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper as BaseHtmlDumper;
+use Symfony\Component\VarDumper\VarDumper;
 
 class DumpRecorder
 {

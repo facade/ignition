@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use Facade\IgnitionContracts\BaseSolution;
 use Facade\Ignition\Exceptions\ViewException;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Facade\Ignition\Solutions\MakeViewVariableOptionalSolution;
 use Facade\Ignition\Solutions\SuggestCorrectVariableNameSolution;
+use Facade\IgnitionContracts\BaseSolution;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Throwable;
 
 class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 {

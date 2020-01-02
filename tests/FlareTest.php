@@ -2,12 +2,12 @@
 
 namespace Facade\Ignition\Tests;
 
-use Illuminate\Support\Arr;
 use Facade\FlareClient\Flare;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use Facade\Ignition\Tests\Mocks\FakeClient;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 class FlareTest extends TestCase
 {

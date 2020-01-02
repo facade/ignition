@@ -2,9 +2,9 @@
 
 namespace Facade\Ignition\Tests\Http\Middleware;
 
+use Facade\Ignition\Http\Middleware\IgnitionConfigValueEnabled;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Route;
-use Facade\Ignition\Http\Middleware\IgnitionConfigValueEnabled;
 
 class IgnitionConfigValueEnabledTest extends TestCase
 {

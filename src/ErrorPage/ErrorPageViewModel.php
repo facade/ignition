@@ -4,15 +4,15 @@ namespace Facade\Ignition\ErrorPage;
 
 use Closure;
 use Exception;
-use Throwable;
-use Facade\Ignition\Ignition;
 use Facade\FlareClient\Report;
-use Laravel\Telescope\Telescope;
+use Facade\Ignition\Ignition;
 use Facade\Ignition\IgnitionConfig;
-use Illuminate\Contracts\Support\Arrayable;
-use Laravel\Telescope\IncomingExceptionEntry;
 use Facade\Ignition\Solutions\SolutionTransformer;
+use Illuminate\Contracts\Support\Arrayable;
 use Laravel\Telescope\Http\Controllers\HomeController;
+use Laravel\Telescope\IncomingExceptionEntry;
+use Laravel\Telescope\Telescope;
+use Throwable;
 
 class ErrorPageViewModel implements Arrayable
 {
