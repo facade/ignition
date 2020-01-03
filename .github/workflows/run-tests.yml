@@ -34,7 +34,7 @@ jobs:
                     - laravel: 5.5.*
                       php: 7.4
 
-        name: ${{ matrix.os }} - P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+        name: ${{ matrix.os[0] }} - P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
         steps:
             - name: Checkout code
