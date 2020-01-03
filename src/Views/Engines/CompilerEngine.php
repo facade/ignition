@@ -83,7 +83,7 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
         throw $exception;
     }
 
-    protected function getBladeLineNumber(string $compiledPath, int $exceptionLineNumber):int
+    protected function getBladeLineNumber(string $compiledPath, int $exceptionLineNumber): int
     {
         $viewPath = $this->getCompiledViewName($compiledPath);
 
