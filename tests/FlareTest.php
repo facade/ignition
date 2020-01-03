@@ -58,7 +58,7 @@ class FlareTest extends TestCase
 
         $lastRequest = $this->fakeClient->getLastRequest();
 
-        $this->assertNotNull(Arr::get($lastRequest, 'arguments.context.view.data.foo'));
+        $this->assertNull(Arr::get($lastRequest, 'arguments.context.view.data.foo'));
 
         $this->app['config']['flare.reporting.report_view_data'] = false;
 
