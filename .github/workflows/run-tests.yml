@@ -7,7 +7,7 @@ on:
 
 jobs:
     php-tests:
-        runs-on: ubuntu-latest
+        runs-on: [ubuntu-latest, windows-latest]
 
         strategy:
             matrix:
@@ -33,7 +33,7 @@ jobs:
                     - laravel: 5.5.*
                       php: 7.4
 
-        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+        name: {{ runner.os }} - P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
         steps:
             - name: Checkout code
