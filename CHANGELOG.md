@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.14.0 - 2020-01-06
+
+- add indicator that solution is running (#212)
+
 ## 1.13.1 - 2020-01-02
 
 -   Remove external reference for icons (#134)
