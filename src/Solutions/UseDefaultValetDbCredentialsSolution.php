@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Solutions;
 
-use Illuminate\Support\Str;
 use Facade\IgnitionContracts\RunnableSolution;
+use Illuminate\Support\Str;
 
 class UseDefaultValetDbCredentialsSolution implements RunnableSolution
 {

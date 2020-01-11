@@ -3,9 +3,9 @@
 namespace Facade\Ignition\Tests;
 
 use Facade\FlareClient\Flare;
+use Facade\Ignition\Tests\Mocks\FakeClient;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
-use Facade\Ignition\Tests\Mocks\FakeClient;
 
 class LogTest extends TestCase
 {

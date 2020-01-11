@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\QueryRecorder;
 
-use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Events\QueryExecuted;
 
 class QueryRecorder
 {

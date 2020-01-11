@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\ErrorPage;
 
-use Throwable;
 use Facade\FlareClient\Report;
 use Facade\Ignition\IgnitionConfig;
-use Illuminate\Foundation\Application;
 use Facade\IgnitionContracts\SolutionProviderRepository;
+use Illuminate\Foundation\Application;
+use Throwable;
 
 class ErrorPageHandler
 {

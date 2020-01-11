@@ -2,13 +2,13 @@
 
 namespace Facade\Ignition\Tests;
 
+use Facade\Ignition\Exceptions\ViewException;
+use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
+use Facade\IgnitionContracts\BaseSolution;
+use Facade\IgnitionContracts\ProvidesSolution;
+use Facade\IgnitionContracts\Solution;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\View;
-use Facade\IgnitionContracts\Solution;
-use Facade\IgnitionContracts\BaseSolution;
-use Facade\Ignition\Exceptions\ViewException;
-use Facade\IgnitionContracts\ProvidesSolution;
-use Facade\Ignition\Exceptions\ViewExceptionWithSolution;
 
 class ViewTest extends TestCase
 {
@@ -34,6 +34,16 @@ class ViewTest extends TestCase
             view('blade-exception')->render();
         } catch (ViewException $exception) {
             $this->assertSame(3, $exception->getLine());
+        }
+    }
+
+    /** @test */
+    public function it_detects_the_original_line_number_in_view_exceptions_with_utf8_characters()
+    {
+        try {
+            view('blade-exception-utf8')->render();
+        } catch (ViewException $exception) {
+            $this->assertSame(11, $exception->getLine());
         }
     }
 

@@ -3,10 +3,10 @@
 namespace Facade\Ignition\Exceptions;
 
 use Exception;
-use Monolog\Logger;
-use Facade\IgnitionContracts\Solution;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\ProvidesSolution;
+use Facade\IgnitionContracts\Solution;
+use Monolog\Logger;
 
 class InvalidConfig extends Exception implements ProvidesSolution
 {

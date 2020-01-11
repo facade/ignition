@@ -30,17 +30,15 @@
 
 .checkbox:after {
     @apply absolute;
-    width: 1.5em;
-    height: 1.5em;
-    @apply grid;
-    @apply place-center;
+    top: 50%;
+    left: 50%;
     @apply text-purple-500;
-    font-size: 1em;
-    font-family: 'Font Awesome 5 Free';
+    font-size: 1.2em;
     font-weight: 900;
-    content: '\f00c';
+    line-height: 1;
+    content: '✓';
     transition: transform 0.1s;
-    transform: scale(0);
+    transform: translate(-50%, -50%) scale(0);
 }
 
 .checkbox:focus,
@@ -58,7 +56,7 @@
 }
 
 .checkbox:checked:after {
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .checkbox:disabled {

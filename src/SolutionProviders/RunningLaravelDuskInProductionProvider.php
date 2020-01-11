@@ -3,9 +3,9 @@
 namespace Facade\Ignition\SolutionProviders;
 
 use Exception;
-use Throwable;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Throwable;
 
 class RunningLaravelDuskInProductionProvider implements HasSolutionsForThrowable
 {
