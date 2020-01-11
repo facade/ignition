@@ -4,7 +4,6 @@ namespace Facade\Ignition\Tests\Solutions;
 
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
 use Facade\Ignition\Support\ComposerClassMap;
-use Facade\Ignition\Tests\stubs\Controllers\TestTypoController;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
