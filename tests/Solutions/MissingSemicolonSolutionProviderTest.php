@@ -21,7 +21,7 @@ class MissingSemicolonSolutionProviderTest extends TestCase
     public function it_can_solve_missing_semicolon_exception()
     {
         try {
-            app(MissingSemicolonController::class);
+            require './tests/stubs/Controllers/MissingSemicolonController.stub';
         } catch (ParseError $error) {
             $exception = $error;
         }
