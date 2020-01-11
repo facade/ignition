@@ -1,5 +1,6 @@
 <template>
     <div>
+        <IconSymbols />
         <Summary />
         <div class="layout-col mt-12">
             <div class="tabs">
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+import IconSymbols from './Icons/IconSymbols.vue';
 import Summary from './Summary.vue';
 import Tabs from './Tabs.vue';
 import Details from './Details.vue';
@@ -53,6 +55,7 @@ export default {
         Summary,
         Tabs,
         Details,
+        IconSymbols,
     },
 
     methods: {

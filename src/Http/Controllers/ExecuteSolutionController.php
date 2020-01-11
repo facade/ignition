@@ -2,9 +2,9 @@
 
 namespace Facade\Ignition\Http\Controllers;
 
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Facade\IgnitionContracts\SolutionProviderRepository;
 use Facade\Ignition\Http\Requests\ExecuteSolutionRequest;
+use Facade\IgnitionContracts\SolutionProviderRepository;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class ExecuteSolutionController
 {

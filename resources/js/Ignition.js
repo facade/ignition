@@ -8,6 +8,10 @@ export default class Ignition {
         this.tabCallbacks = [];
     }
 
+    registerIcons() {
+        Vue.component('Icon', require('./components/Icons/Icon').default);
+    }
+
     registerBuiltinTabs() {
         Vue.component('AppTab', require('./components/Tabs/AppTab').default);
         Vue.component('ContextTab', require('./components/Tabs/ContextTab').default);
@@ -28,6 +32,8 @@ export default class Ignition {
     }
 
     start() {
+        this.registerIcons();
+
         this.registerBuiltinTabs();
 
         this.registerCustomTabs();

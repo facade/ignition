@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Views\Concerns;
 
-use Illuminate\Support\Collection;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Collection;
 use Illuminate\View\Engines\CompilerEngine;
 
 trait CollectsViewExceptions

@@ -3,8 +3,8 @@
 namespace Facade\Ignition\Tests;
 
 use Facade\FlareClient\Api;
-use Facade\FlareClient\Report;
 use Facade\FlareClient\Glows\Glow;
+use Facade\FlareClient\Report;
 use Facade\Ignition\Facades\Flare;
 use Facade\Ignition\IgnitionServiceProvider;
 use Facade\Ignition\Tests\TestClasses\FakeTime;

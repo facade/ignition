@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition;
 
-use Illuminate\Support\Arr;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
 
 class IgnitionConfig implements Arrayable
 {
@@ -37,6 +37,10 @@ class IgnitionConfig implements Arrayable
 
     public function getEnableShareButton(): bool
     {
+        if (! app()->isBooted()) {
+            return false;
+        }
+
         return Arr::get($this->options, 'enable_share_button', true);
     }
 

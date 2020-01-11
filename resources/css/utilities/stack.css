@@ -250,7 +250,7 @@
 
 .stack-code-line .editor-link {
     @apply inline-block;
-    @apply px-4;
+    @apply px-2;
     @apply opacity-0;
     @apply text-purple-400;
 }

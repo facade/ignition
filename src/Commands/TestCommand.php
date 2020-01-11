@@ -3,9 +3,9 @@
 namespace Facade\Ignition\Commands;
 
 use Exception;
-use Illuminate\Log\LogManager;
-use Illuminate\Console\Command;
 use Illuminate\Config\Repository;
+use Illuminate\Console\Command;
+use Illuminate\Log\LogManager;
 
 class TestCommand extends Command
 {

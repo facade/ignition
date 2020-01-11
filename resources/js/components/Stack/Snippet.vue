@@ -43,7 +43,7 @@
                             'stack-code-line-selected': withinSelectedRange(parseInt(line_number)),
                         }"
                         class="stack-code-line"
-                ><span v-html="highlightedCode(code)"></span><a :href="editorUrl(line_number)" class="editor-link"><i class="fa fa-pencil-alt"></i></a></p>
+                ><span v-html="highlightedCode(code)"></span><a :href="editorUrl(line_number)" class="editor-link"><Icon name="pencil" /></a></p>
                 </pre>
             </div>
         </div>
