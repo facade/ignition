@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use Exception;
 use BadMethodCallException;
+use Exception;
+use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\Validator;
-use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 
 class UnknownValidationSolutionProviderTest extends TestCase
 {

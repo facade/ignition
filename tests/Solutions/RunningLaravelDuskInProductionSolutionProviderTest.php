@@ -3,8 +3,8 @@
 namespace Facade\Ignition\Tests\Solutions;
 
 use Exception;
-use Facade\Ignition\Tests\TestCase;
 use Facade\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
+use Facade\Ignition\Tests\TestCase;
 
 class RunningLaravelDuskInProductionSolutionProviderTest extends TestCase
 {

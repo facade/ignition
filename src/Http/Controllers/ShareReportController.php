@@ -3,8 +3,8 @@
 namespace Facade\Ignition\Http\Controllers;
 
 use Facade\Ignition\Actions\ShareReportAction;
-use Facade\Ignition\Http\Requests\ShareReportRequest;
 use Facade\Ignition\Exceptions\UnableToShareErrorException;
+use Facade\Ignition\Http\Requests\ShareReportRequest;
 
 class ShareReportController
 {

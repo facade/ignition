@@ -3,6 +3,7 @@
 namespace Facade\Ignition\Tests;
 
 use Facade\Ignition\IgnitionConfig;
+use Illuminate\Container\Container;
 
 class IgnitionConfigTest extends TestCase
 {
@@ -36,5 +37,23 @@ class IgnitionConfigTest extends TestCase
         ]);
 
         $this->assertFalse($config->getEnableRunnableSolutions());
+    }
+
+    /** @test */
+    public function it_disables_share_report_when_app_has_not_finished_booting()
+    {
+        // Create an app but don't run the bootstrappers, so it is in booting state
+        $bootingApp = $this->resolveApplication();
+        $this->resolveApplicationBindings($bootingApp);
+        $this->resolveApplicationExceptionHandler($bootingApp);
+        $this->resolveApplicationCore($bootingApp);
+        $this->resolveApplicationConfiguration($bootingApp);
+        $this->resolveApplicationHttpKernel($bootingApp);
+        $this->resolveApplicationConsoleKernel($bootingApp);
+        Container::setInstance($bootingApp);
+
+        $config = new IgnitionConfig([]);
+
+        $this->assertFalse($config->getEnableShareButton());
     }
 }

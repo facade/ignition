@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Solutions;
 
-use Facade\IgnitionContracts\Solution;
 use Facade\Ignition\Support\Packagist\Package;
+use Facade\IgnitionContracts\Solution;
 
 class MissingPackageSolution implements Solution
 {

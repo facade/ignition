@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use RuntimeException;
 use Facade\Ignition\Solutions\GenerateAppKeySolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use RuntimeException;
+use Throwable;
 
 class MissingAppKeySolutionProvider implements HasSolutionsForThrowable
 {

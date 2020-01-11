@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Exceptions;
 
-use Facade\IgnitionContracts\Solution;
 use Facade\IgnitionContracts\ProvidesSolution;
+use Facade\IgnitionContracts\Solution;
 
 class ViewExceptionWithSolution extends ViewException implements ProvidesSolution
 {

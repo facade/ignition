@@ -2,7 +2,7 @@
     <div @click.stop>
         <button class="tab" :class="menuVisible ? 'tab-active' : ''" @click="toggleMenu">
             Share
-            <i class="ml-2 fas fa-share"></i>
+            <Icon name="share" class="ml-2" />
         </button>
         <div
             class="dropdown z-10 right-0 top-full p-4 overflow-visible"

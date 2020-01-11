@@ -2,10 +2,10 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
-use Illuminate\Database\QueryException;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Facade\Ignition\Solutions\UseDefaultValetDbCredentialsSolution;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Illuminate\Database\QueryException;
+use Throwable;
 
 class IncorrectValetDbCredentialsSolutionProvider implements HasSolutionsForThrowable
 {

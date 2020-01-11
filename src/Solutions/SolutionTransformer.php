@@ -2,9 +2,9 @@
 
 namespace Facade\Ignition\Solutions;
 
+use Facade\IgnitionContracts\RunnableSolution;
 use Facade\IgnitionContracts\Solution;
 use Illuminate\Contracts\Support\Arrayable;
-use Facade\IgnitionContracts\RunnableSolution;
 
 class SolutionTransformer implements Arrayable
 {
