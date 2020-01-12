@@ -6,4 +6,3 @@ disabled:
 finder:
   exclude:
     - "tests/stubs/Controllers/GitConflictController.php"
-    - "tests/stubs/Controllers/MissingSemicolonController.php"
