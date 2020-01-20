@@ -2,6 +2,7 @@ name: Run tests
 
 on:
   push:
+  pull_request:
   schedule:
       - cron: '0 0 * * *'
 
@@ -16,6 +17,8 @@ jobs:
                 dependency-version: [prefer-lowest, prefer-stable]
                 os: [ubuntu-latest, windows-latest]
                 include:
+                    - laravel: dev-master
+                      testbench: 5.0.x-dev
                     - laravel: 6.*
                       testbench: 4.*
                     - laravel: 5.8.*
@@ -79,7 +82,7 @@ jobs:
 
             -   name: Execute tests
                 run: yarn run jest
-                
+
             - name: Send Slack notification
               uses: 8398a7/action-slack@v2
               if: failure()
