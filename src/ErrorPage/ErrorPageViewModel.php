@@ -126,13 +126,9 @@ class ErrorPageViewModel implements Arrayable
 
     public function jsonEncode($data): string
     {
-        $jsonOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
+        $jsonOptions = JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 
-        if (version_compare(phpversion(), '7.2', '>=')) {
-            return json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR | $jsonOptions);
-        }
-
-        return json_encode($data, JSON_PARTIAL_OUTPUT_ON_ERROR | $jsonOptions);
+        return json_encode($data, $jsonOptions);
     }
 
     public function getAssetContents(string $asset): string
