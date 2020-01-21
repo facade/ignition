@@ -9,6 +9,10 @@ All notable changes to `ignition` will be documented in this file
 - git information won't be collected by default anymore (if you need this set `collect_git_information` to `true` in the `flare` config file)
 - `MissingPackageSolutionProvider` was added to the `ignored_solution_providers` because it potentially could be slow.
 
+## 1.16.0 - 2020-01-21
+
+- add named routes (#197)
+
 ## 1.15.0 - 2020-01-21
 
 - add exception to the bottom of the html (#230)
