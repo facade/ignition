@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.15.0 - 2020-01-21
+
+- add exception to the bottom of the html (#230)
+
 ## 1.14.0 - 2020-01-06
 
 - add indicator that solution is running (#212)
