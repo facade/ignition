@@ -93,7 +93,7 @@ class ComposerClassMap
                             $basename = basename($file->getRelativePathname(), '.php');
 
                             if ($basename === $missingClass) {
-                                return $namespace . basename($file->getRelativePathname(), '.php');
+                                return $namespace.basename($file->getRelativePathname(), '.php');
                             }
                         }
                     }
