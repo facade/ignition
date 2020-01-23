@@ -27,7 +27,7 @@ class RunMigrationsSolution implements RunnableSolution
     public function getDocumentationLinks(): array
     {
         return [
-            'Database: Running Migrations docs' => 'https://laravel.com/docs/5.8/migrations#running-migrations',
+            'Database: Running Migrations docs' => 'https://laravel.com/docs/master/migrations#running-migrations',
         ];
     }
 
