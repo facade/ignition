@@ -1,1 +1,1 @@
-require('ignition-ui');
+import '@flareapp/ignition-ui';
