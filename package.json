@@ -5,9 +5,10 @@
         "build": "NODE_ENV=production webpack --mode production"
     },
     "devDependencies": {
+        "@flareapp/ignition-ui": "^0.0.1",
+        "husky": "^4.2.1",
         "webpack": "^4.35.0",
-        "webpack-cli": "^3.3.5",
-        "@flareapp/ignition-ui": "^0.0.1"
+        "webpack-cli": "^3.3.5"
     },
     "husky": {
         "hooks": {
