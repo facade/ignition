@@ -44,7 +44,7 @@
 
 <noscript><pre><?=$throwableString?></pre></noscript>
 
-<div id="__ignition__container"></div>
+<div id="app"></div>
 
 <script><?= $getAssetContents('ignition.js') ?></script>
 <script>
