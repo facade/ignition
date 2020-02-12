@@ -1,1 +1,1 @@
-import '@flareapp/ignition-ui';
+import '@facadecompany/ignition-ui';

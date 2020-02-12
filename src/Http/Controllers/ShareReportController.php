@@ -11,7 +11,7 @@ class ShareReportController
     public function __invoke(ShareReportRequest $request, ShareReportAction $shareReportAction)
     {
         try {
-            return $shareReportAction->handle(json_decode($request->get('report'), true), $request->get('tabs'), $request->get('lineSelection'));
+            return $shareReportAction->handle($request->get('report'), $request->get('tabs'), $request->get('lineSelection'));
         } catch (UnableToShareErrorException $exception) {
             abort(500, 'Unable to share the error '.$exception->getMessage());
         }
