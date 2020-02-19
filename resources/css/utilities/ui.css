@@ -31,11 +31,11 @@
 .ui-exception-class {
     @apply inline-block;
     @apply leading-tight;
-    @apply text-gray-600;
+    @apply text-tint-600;
 }
 
 .ui-exception-method {
-    @apply text-gray-500;
+    @apply text-tint-500;
 }
 
 .ui-line-number {
@@ -43,8 +43,7 @@
     @apply px-1;
     @apply rounded-sm;
     @apply bg-tint-50;
-    @apply text-tint-500;
+    @apply text-tint-600;
     @apply text-xs;
     @apply leading-tight;
-    top: 0.15rem;
 }

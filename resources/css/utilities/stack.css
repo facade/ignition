@@ -10,7 +10,7 @@
 @screen sm {
     .stack {
         @apply items-stretch;
-        grid-template: var(--stack-height) / 20rem 1fr;
+        grid-template: var(--stack-height) / 22rem 1fr;
     }
 }
 
@@ -117,13 +117,13 @@
 .stack-frame-number {
     @apply px-2;
     @apply py-4;
-    @apply text-purple-400;
+    @apply text-purple-500;
     @apply variant-tabular;
     @apply text-center;
 }
 
 .stack-frame-group-vendor .stack-frame-number {
-    @apply text-gray-400;
+    @apply text-tint-500;
 }
 
 .stack-frame-header {
@@ -158,6 +158,7 @@
     @apply pr-1;
     @apply py-4;
     @apply text-right;
+    @apply leading-tight;
 }
 
 .stack-main {
@@ -216,7 +217,7 @@
 .stack-line {
     @apply px-2;
     @apply font-mono;
-    @apply text-gray-500;
+    @apply text-tint-600;
     @apply leading-loose;
     @apply select-none;
 }
