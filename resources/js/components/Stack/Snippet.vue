@@ -6,7 +6,6 @@
                     :name="selectedFrame.class || ''"
                     :method="selectedFrame.method || ''"
                 />
-                <LineNumber :line-number="selectedFrame.line_number" />
             </div>
             <FilePath
                 v-if="selectedFrame.file"

@@ -65,7 +65,9 @@
                                     class="button-secondary button-lg bg-tint-300 hover:bg-tint-400"
                                 >
                                     <span v-if="runningSolution">Running...</span>
-                                    <span v-if="! runningSolution">{{ solution.run_button_text }}</span>
+                                    <span v-if="!runningSolution">{{
+                                        solution.run_button_text
+                                    }}</span>
                                 </button>
                                 <p v-if="executionSuccessful">
                                     <strong class="font-semibold"
