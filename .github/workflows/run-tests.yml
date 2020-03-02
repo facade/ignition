@@ -13,12 +13,12 @@ jobs:
         strategy:
             matrix:
                 php: [7.4, 7.3, 7.2]
-                laravel: [dev-master]
+                laravel: [7.*]
                 dependency-version: [prefer-lowest, prefer-stable]
                 os: [ubuntu-latest, windows-latest]
                 include:
-                    - laravel: dev-master
-                      testbench: 5.0.x-dev
+                    - laravel: 7.*
+                      testbench: 5.*
 
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
