@@ -2,7 +2,7 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 2.0.0 - 2020-0X-XX
+## 2.0.0 - 2020-02-02
 
 - adds support for Laravel 7
 - drop support for Laravel 6 and below
