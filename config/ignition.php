@@ -69,7 +69,7 @@ return [
     */
 
     'ignored_solution_providers' => [
-        //
+        \Facade\Ignition\SolutionProviders\MissingPackageSolutionProvider::class,
     ],
 
     /*

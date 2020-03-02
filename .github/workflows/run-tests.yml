@@ -2,6 +2,7 @@ name: Run tests
 
 on:
   push:
+  pull_request:
   schedule:
       - cron: '0 0 * * *'
 
@@ -12,27 +13,12 @@ jobs:
         strategy:
             matrix:
                 php: [7.4, 7.3, 7.2]
-                laravel: [6.*, 5.8.*, 5.7.*, 5.6.*, 5.5.*]
+                laravel: [7.*]
                 dependency-version: [prefer-lowest, prefer-stable]
                 os: [ubuntu-latest, windows-latest]
                 include:
-                    - laravel: 6.*
-                      testbench: 4.*
-                    - laravel: 5.8.*
-                      testbench: 3.8.*
-                    - laravel: 5.7.*
-                      testbench: 3.7.*
-                    - laravel: 5.6.*
-                      testbench: 3.6.*
-                    - laravel: 5.5.*
-                      testbench: 3.5.*
-                exclude:
-                    - laravel: 5.7.*
-                      php: 7.4
-                    - laravel: 5.6.*
-                      php: 7.4
-                    - laravel: 5.5.*
-                      php: 7.4
+                    - laravel: 7.*
+                      testbench: 5.*
 
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
@@ -41,10 +27,10 @@ jobs:
               uses: actions/checkout@v1
 
             - name: Setup PHP
-              uses: shivammathur/setup-php@v1
+              uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php }}
-                  extension-csv: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
                   coverage: none
 
             - name: Install dependencies
@@ -79,7 +65,7 @@ jobs:
 
             -   name: Execute tests
                 run: yarn run jest
-                
+
             - name: Send Slack notification
               uses: 8398a7/action-slack@v2
               if: failure()

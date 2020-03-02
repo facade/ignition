@@ -2,6 +2,13 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.0.0 - 2020-0X-XX
+
+- adds support for Laravel 7
+- drop support for Laravel 6 and below
+- git information won't be collected by default anymore (if you need this set `collect_git_information` to `true` in the `flare` config file)
+- `MissingPackageSolutionProvider` was added to the `ignored_solution_providers` because it potentially could be slow.
+
 ## 1.16.0 - 2020-01-21
 
 - add named routes (#197)

@@ -12,6 +12,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use ReflectionProperty;
+use Throwable;
 
 class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
 {
@@ -46,7 +47,7 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
      *
      * @throws \Exception
      */
-    protected function handleViewException(Exception $baseException, $obLevel)
+    protected function handleViewException(Throwable $baseException, $obLevel)
     {
         while (ob_get_level() > $obLevel) {
             ob_end_clean();
