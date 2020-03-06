@@ -43,6 +43,7 @@ use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
 use Facade\Ignition\SolutionProviders\TableNotFoundSolutionProvider;
 use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
 use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
+use Facade\Ignition\SolutionProviders\UnsupportedCacheLockDriverProvider;
 use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 use Facade\Ignition\Views\Engines\CompilerEngine;
 use Facade\Ignition\Views\Engines\PhpEngine;
@@ -364,6 +365,7 @@ class IgnitionServiceProvider extends ServiceProvider
             RunningLaravelDuskInProductionProvider::class,
             MissingColumnSolutionProvider::class,
             UnknownValidationSolutionProvider::class,
+            UnsupportedCacheLockDriverProvider::class,
         ];
     }
 
