@@ -26,7 +26,7 @@ class UnsupportedCacheLockDriverProvider implements HasSolutionsForThrowable
     {
         return [
             BaseSolution::create('Your current cache driver does not support atomic locks.')
-                ->setSolutionDescription('Consider switching to a cache driver to `redis`, `memcached`, or `dynamodb`.')
+                ->setSolutionDescription('Consider switching your cache driver to `redis`, `memcached`, or `dynamodb`.')
                 ->setDocumentationLinks(['Cache: Atomic Locks docs' => 'https://laravel.com/docs/7.x/cache#atomic-locks']),
         ];
     }
