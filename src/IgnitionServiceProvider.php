@@ -365,7 +365,7 @@ class IgnitionServiceProvider extends ServiceProvider
             RunningLaravelDuskInProductionProvider::class,
             MissingColumnSolutionProvider::class,
             UnknownValidationSolutionProvider::class,
-            UndefinedPropertySolutionProvider::class
+            UndefinedPropertySolutionProvider::class,
         ];
     }
 

@@ -25,7 +25,7 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
             return false;
         }
 
-        if (!$this->similarPropertyExists($throwable)) {
+        if (! $this->similarPropertyExists($throwable)) {
             return false;
         }
 
@@ -42,7 +42,7 @@ class UndefinedPropertySolutionProvider implements HasSolutionsForThrowable
 
     public function getSolutionDescription(Throwable $throwable): string
     {
-        if (! $this->canSolve($throwable) || !$this->similarPropertyExists($throwable)) {
+        if (! $this->canSolve($throwable) || ! $this->similarPropertyExists($throwable)) {
             return '';
         }
 
