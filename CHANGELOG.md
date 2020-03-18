@@ -2,7 +2,7 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 2.0.1 - 2020-03-18
+## 2.0.2 - 2020-03-18
 
 - fix execute solution route not defined (#265)
 
