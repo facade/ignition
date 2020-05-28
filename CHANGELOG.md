@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.0.5 - 2020-05-29
+
+- blacklist certain variable names when fixing variable names
+
 ## 2.0.4 - 2020-05-18
 
 - handle exceptions in case the request doesn't have a user (#274)

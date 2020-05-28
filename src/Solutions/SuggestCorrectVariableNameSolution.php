@@ -121,7 +121,8 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
             'globals',
             '_get',
             '_post',
-            '_cookie'
+            '_cookie',
+            '_env',
         ]);
     }
 }
