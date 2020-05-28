@@ -73,6 +73,10 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
 
     protected function fixTypo(array $parameters = [])
     {
+        if ($this->isBlackListed($parameters['suggested'])) {
+            return false;
+        }
+
         if (! $this->isAlphaNumericWithUnderscore($parameters['suggested'])) {
             return false;
         }
@@ -107,5 +111,17 @@ class SuggestCorrectVariableNameSolution implements RunnableSolution
         }
 
         return $expectedTokens;
+    }
+
+    private function isBlackListed(string $suggested): bool
+    {
+        $suggested = strtolower($suggested);
+
+        return in_array($suggested, [
+            'globals',
+            '_get',
+            '_post',
+            '_cookie'
+        ]);
     }
 }
