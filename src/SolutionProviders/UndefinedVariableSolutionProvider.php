@@ -54,7 +54,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
             return $solution->isRunnable()
                 ? $solution
                 : BaseSolution::create($solution->getSolutionTitle())
-                    ->setSolutionDescription($solution->getSolutionActionDescription());
+                    ->setSolutionDescription($solution->getSolutionDescription());
         })->toArray();
     }
 
@@ -65,7 +65,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         return $optionalSolution->isRunnable()
             ? $optionalSolution
             : BaseSolution::create($optionalSolution->getSolutionTitle())
-                ->setSolutionDescription($optionalSolution->getSolutionActionDescription());
+                ->setSolutionDescription($optionalSolution->getSolutionDescription());
     }
 
     protected function getNameAndView(Throwable $throwable): ?array

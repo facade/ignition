@@ -51,32 +51,9 @@ class UndefinedVariableSolutionProviderTest extends TestCase
 
         /** @var \Facade\IgnitionContracts\Solution $solution */
         $solutions = app(UndefinedVariableSolutionProvider::class)->getSolutions($viewException);
-        $this->assertTrue(Str::contains($solutions[0]->getSolutionActionDescription(), 'Did you mean `$footerDescription`?'));
-        $this->assertTrue(Str::contains($solutions[1]->getSolutionActionDescription(), 'Replace `{{ $footerDescriptin }}` with `{{ $footerDescriptin ?? \'\' }}`'));
+        $this->assertTrue(Str::contains($solutions[0]->getSolutionDescription(), 'Did you mean `$footerDescription`?'));
     }
 
-    /** @test */
-    public function it_can_fix_a_variable_name_typo()
-    {
-        $viewData = [
-            'footerDescription' => 'foo',
-        ];
-
-        try {
-            view('undefined-variable-1', $viewData)->render();
-        } catch (ViewException $exception) {
-            $viewException = $exception;
-        }
-
-        $canSolve = app(UndefinedVariableSolutionProvider::class)->canSolve($viewException);
-        $this->assertTrue($canSolve);
-
-        /** @var \Facade\IgnitionContracts\Solution $solution */
-        $solutions = app(UndefinedVariableSolutionProvider::class)->getSolutions($viewException);
-        $parameters = $solutions[0]->getRunParameters();
-        $parameters['viewFile'] = tempnam(sys_get_temp_dir(), 'undefined-variable-blade');
-        $solutions[0]->run($parameters);
-    }
 
     protected function getUndefinedVariableException(): ViewException
     {
