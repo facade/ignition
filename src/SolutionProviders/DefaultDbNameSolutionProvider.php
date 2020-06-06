@@ -17,7 +17,6 @@ class DefaultDbNameSolutionProvider implements HasSolutionsForThrowable
             try {
                 DB::connection()->select('SELECT 1');
             } catch (\Exception $e) {
-
                 if ($this->isUnknownDatabaseCode($e->getCode())) {
                     return in_array(env('DB_DATABASE'), ['homestead', 'laravel']);
                 }
