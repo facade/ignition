@@ -54,7 +54,6 @@ class UndefinedVariableSolutionProviderTest extends TestCase
         $this->assertTrue(Str::contains($solutions[0]->getSolutionDescription(), 'Did you mean `$footerDescription`?'));
     }
 
-
     protected function getUndefinedVariableException(): ViewException
     {
         return new ViewException('Undefined variable: notSet (View: ./views/welcome.blade.php)');
