@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.0.7 - 2020-06-07
+
+- Fix `DefaultDbNameSolutionProvider` (#277)
+
 ## 2.0.6 - 2020-06-01
 
 - remove ability to fix variable names
