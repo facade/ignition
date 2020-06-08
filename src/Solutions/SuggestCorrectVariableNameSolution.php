@@ -2,9 +2,7 @@
 
 namespace Facade\Ignition\Solutions;
 
-use Facade\IgnitionContracts\RunnableSolution;
 use Facade\IgnitionContracts\Solution;
-use Illuminate\Support\Facades\Blade;
 
 class SuggestCorrectVariableNameSolution implements Solution
 {

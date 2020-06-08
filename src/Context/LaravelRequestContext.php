@@ -19,7 +19,7 @@ class LaravelRequestContext extends RequestContext
     {
         try {
             $user = $this->request->user();
-    
+
             if (! $user) {
                 return [];
             }
