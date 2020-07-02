@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\Tests;
 
+use BadMethodCallException;
 use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 use Facade\Ignition\SolutionProviders\SolutionProviderRepository;
@@ -123,5 +124,29 @@ class ExceptionSolutionTest extends TestCase
         $solution = new MissingAppKeySolutionProvider();
 
         $this->assertSame('Generate your application encryption key using `php artisan key:generate`.', $solution->getSolutions($exception)[0]->getSolutionActionDescription());
+    }
+
+    /** @test */
+    public function it_can_propose_doc_block_solutions_for_bad_method_call_exceptions()
+    {
+        try {
+            $user = new ClassWithDocBlock();
+            $user->teest();
+        } catch (\Exception $exception) {
+            $solution = new BadMethodCallSolutionProvider();
+
+            $this->assertSame('Did you mean Facade\Ignition\Tests\ClassWithDocBlock::test() ?', $solution->getSolutions($exception)[0]->getSolutionDescription());
+        }
+    }
+}
+
+/**
+ * @method void test()
+ */
+class ClassWithDocBlock
+{
+    public function __call($method, $parameters = [])
+    {
+        throw new BadMethodCallException(static::class.'::'.$method);
     }
 }

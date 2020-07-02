@@ -83,7 +83,11 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
 
     public function getAvailableMethodsFromClassDoc(ReflectionClass $class): Collection
     {
-        $doc = DocBlockFactory::createInstance()->create($class->getDocComment());
+        if (! $doc = $class->getDocComment()) {
+            return Collection::make([]);
+        }
+
+        $doc = DocBlockFactory::createInstance()->create($doc);
 
         $methods = [];
         foreach ($doc->getTagsByName('method') as $tag) {
