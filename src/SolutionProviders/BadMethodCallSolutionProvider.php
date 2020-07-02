@@ -2,14 +2,14 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Throwable;
+use BadMethodCallException;
+use Facade\IgnitionContracts\BaseSolution;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Illuminate\Support\Collection;
+use phpDocumentor\Reflection\DocBlockFactory;
 use ReflectionClass;
 use ReflectionMethod;
-use BadMethodCallException;
-use Illuminate\Support\Collection;
-use Facade\IgnitionContracts\BaseSolution;
-use phpDocumentor\Reflection\DocBlockFactory;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
+use Throwable;
 
 class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
 {
@@ -56,7 +56,7 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
         }
 
         return [
-            'class' => $matches[1],
+            'class'  => $matches[1],
             'method' => $matches[2],
         ];
     }
@@ -66,6 +66,7 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
         return $this->getAvailableMethods($class)
             ->sortByDesc(function ($method) use ($invalidMethodName) {
                 similar_text($invalidMethodName, $method, $percentage);
+
                 return $percentage;
             })->first();
     }
