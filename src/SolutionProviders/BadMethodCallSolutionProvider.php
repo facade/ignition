@@ -2,13 +2,14 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use BadMethodCallException;
-use Facade\IgnitionContracts\BaseSolution;
-use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Illuminate\Support\Collection;
+use Throwable;
 use ReflectionClass;
 use ReflectionMethod;
-use Throwable;
+use BadMethodCallException;
+use Illuminate\Support\Collection;
+use Facade\IgnitionContracts\BaseSolution;
+use phpDocumentor\Reflection\DocBlockFactory;
+use Facade\IgnitionContracts\HasSolutionsForThrowable;
 
 class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
 {
@@ -45,7 +46,7 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
 
         $possibleMethod = $this->findPossibleMethod($class, $method);
 
-        return "Did you mean {$class}::{$possibleMethod->name}() ?";
+        return "Did you mean {$class}::{$possibleMethod}() ?";
     }
 
     protected function getClassAndMethodFromExceptionMessage(string $message): ?array
@@ -63,9 +64,8 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
     protected function findPossibleMethod(string $class, string $invalidMethodName)
     {
         return $this->getAvailableMethods($class)
-            ->sortByDesc(function (ReflectionMethod $method) use ($invalidMethodName) {
-                similar_text($invalidMethodName, $method->name, $percentage);
-
+            ->sortByDesc(function ($method) use ($invalidMethodName) {
+                similar_text($invalidMethodName, $method, $percentage);
                 return $percentage;
             })->first();
     }
@@ -74,6 +74,21 @@ class BadMethodCallSolutionProvider implements HasSolutionsForThrowable
     {
         $class = new ReflectionClass($class);
 
-        return Collection::make($class->getMethods());
+        return Collection::make($class->getMethods())
+        ->map(function (ReflectionMethod $method) {
+            return $method->name;
+        })->merge($this->getAvailableMethodsFromClassDoc($class));
+    }
+
+    public function getAvailableMethodsFromClassDoc(ReflectionClass $class): Collection
+    {
+        $doc = DocBlockFactory::createInstance()->create($class->getDocComment());
+
+        $methods = [];
+        foreach ($doc->getTagsByName('method') as $tag) {
+            $methods[] = $tag->getMethodName();
+        }
+
+        return Collection::make($methods);
     }
 }
