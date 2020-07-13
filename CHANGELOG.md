@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.16.3 - 2020-07-13
+
+- do not use missing package solution provider by default (closes #179)
+
 ## 1.16.2 - 2020-07-12
 
 - remove ability to fix variable names
