@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.0.9 - 2020-07-13
+
+- use application contract instead of concrete class (#243)
+
 ## 2.0.8 - 2020-07-12
 
 - do not render solution title tag for empty titles
