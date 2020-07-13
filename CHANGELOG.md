@@ -2,7 +2,11 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 2.1.0 - 2020-07-013
+## 2.2.0 - 2020-07-13
+
+- add `ignition:make:solution-provider` command
+
+## 2.1.0 - 2020-07-13
 
 - add "Undefined Property" solution (#264)
 
