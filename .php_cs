@@ -10,6 +10,7 @@ $finder = Symfony\Component\Finder\Finder::create()
     ])
     ->name('*.php')
     ->notName('*.blade.php')
+    ->notName('GitConflictController.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
