@@ -2,10 +2,9 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Exception;
 use Facade\Ignition\Solutions\SuggestUsingCorrectDbNameSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 use Throwable;
 
 class DefaultDbNameSolutionProvider implements HasSolutionsForThrowable
@@ -14,24 +13,23 @@ class DefaultDbNameSolutionProvider implements HasSolutionsForThrowable
 
     public function canSolve(Throwable $throwable): bool
     {
-        try {
-            DB::connection()->select('SELECT 1');
-        } catch (Exception $exception) {
-            if ($this->isUnknownDatabaseCode($exception->getCode())) {
-                return in_array(env('DB_DATABASE'), ['homestead', 'laravel']);
-            }
+        if (! $throwable instanceof QueryException) {
+            return false;
         }
 
-        return false;
+        if ($throwable->getCode() !== self::MYSQL_UNKNOWN_DATABASE_CODE) {
+            return false;
+        }
+
+        if (! in_array(env('DB_DATABASE'), ['homestead', 'laravel'])) {
+            return false;
+        }
+
+        return true;
     }
 
     public function getSolutions(Throwable $throwable): array
     {
         return [new SuggestUsingCorrectDbNameSolution()];
-    }
-
-    protected function isUnknownDatabaseCode($code): bool
-    {
-        return $code === static::MYSQL_UNKNOWN_DATABASE_CODE;
     }
 }
