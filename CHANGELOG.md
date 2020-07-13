@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.3.1 - 2020-07-13
+
+- improve db name solution (#289)
+
 ## 2.3.0 - 2020-07-13
 
 - allow override of Dumper via `$_SERVER variable` (#271)
