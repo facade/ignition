@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.0.10 - 2020-07-13
+
+- correctly detect dump location from ddd (#216)
+
 ## 2.0.9 - 2020-07-13
 
 - use application contract instead of concrete class (#243)
