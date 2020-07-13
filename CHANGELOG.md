@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.1.0 - 2020-07-013
+
+- add "Undefined Property" solution (#264)
+
 ## 2.0.10 - 2020-07-13
 
 - correctly detect dump location from ddd (#216)
