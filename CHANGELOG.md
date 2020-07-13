@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.0.8 - 2020-07-12
+
+- do not render solution title tag for empty titles
+
 ## 2.0.7 - 2020-06-07
 
 - Fix `DefaultDbNameSolutionProvider` (#277)
