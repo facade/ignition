@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.16.1 - 2020-07-12
+
+- remove ability to fix variable names
+
 ## 1.16.0 - 2020-01-21
 
 - add named routes (#197)
