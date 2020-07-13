@@ -81,8 +81,11 @@ class IgnitionServiceProvider extends ServiceProvider
             ->registerViewEngines()
             ->registerHousekeepingRoutes()
             ->registerLogHandler()
-            ->registerCommands()
-            ->setupQueue($this->app->queue);
+            ->registerCommands();
+
+        if ($this->app->bound('queue')) {
+            $this->setupQueue($this->app->queue);
+        }
 
         $this->app->make(QueryRecorder::class)->register();
         $this->app->make(LogRecorder::class)->register();
