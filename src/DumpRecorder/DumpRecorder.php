@@ -87,7 +87,11 @@ class DumpRecorder
         return function ($value) {
             $data = (new VarCloner)->cloneVar($value);
 
-            $dumper = in_array(PHP_SAPI, ['cli', 'phpdbg']) ? new CliDumper : new BaseHtmlDumper;
+            if (isset($_SERVER['VAR_DUMPER_FORMAT'])) {
+                $dumper = 'html' === $_SERVER['VAR_DUMPER_FORMAT'] ? new BaseHtmlDumper : new CliDumper;
+            } else {
+                $dumper = in_array(PHP_SAPI, ['cli', 'phpdbg']) ? new CliDumper : new BaseHtmlDumper;
+            }
             $dumper->dump($data);
         };
     }
