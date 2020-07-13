@@ -2,7 +2,7 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 1.16.1 - 2020-07-12
+## 1.16.2 - 2020-07-12
 
 - remove ability to fix variable names
 
