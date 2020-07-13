@@ -39,7 +39,7 @@ class DumpRecorder
         }
 
         $multiDumpHandler->addHandler(function ($var) {
-            $this->app->make(DumpHandler::class)->dump($var);
+            (new DumpHandler($this))->dump($var);
         });
 
         return $this;
