@@ -2,7 +2,7 @@
 
 namespace Facade\Ignition\DumpRecorder;
 
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Arr;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
@@ -14,7 +14,7 @@ class DumpRecorder
 {
     protected $dumps = [];
 
-    /** @var \Illuminate\Foundation\Application */
+    /** @var \Illuminate\Contracts\Foundation\Application */
     protected $app;
 
     public function __construct(Application $app)
