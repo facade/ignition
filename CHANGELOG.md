@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.3.0 - 2020-07-13
+
+- allow override of Dumper via `$_SERVER variable` (#271)
+- make DumpHandler instance manually in DumpRecorder (#286)
+- only setup queues when queue is available (#287)
+
 ## 2.2.0 - 2020-07-13
 
 - add `ignition:make:solution-provider` command
