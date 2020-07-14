@@ -26,7 +26,9 @@ class DumpRecorder
     {
         $multiDumpHandler = new MultiDumpHandler();
 
-        $this->app->singleton(MultiDumpHandler::class, $multiDumpHandler);
+        $this->app->singleton(MultiDumpHandler::class, function () use ($multiDumpHandler) {
+            return $multiDumpHandler;
+        });
 
         $previousHandler = VarDumper::setHandler(function ($var) use ($multiDumpHandler) {
             $multiDumpHandler->dump($var);
