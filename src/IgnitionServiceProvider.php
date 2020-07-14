@@ -111,7 +111,6 @@ class IgnitionServiceProvider extends ServiceProvider
         }
 
         if (config('flare.reporting.anonymize_ips')) {
-
             $this->app->get(Flare::class)->anonymizeIp();
         }
 
@@ -231,7 +230,7 @@ class IgnitionServiceProvider extends ServiceProvider
             return $client;
         });
 
-       // $this->app->alias('flare.client', Flare::class);
+        // $this->app->alias('flare.client', Flare::class);
 
         return $this;
     }
