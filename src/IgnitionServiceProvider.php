@@ -84,7 +84,7 @@ class IgnitionServiceProvider extends ServiceProvider
             ->registerCommands();
 
         if ($this->app->bound('queue')) {
-            $this->setupQueue($this->app->queue);
+            $this->setupQueue($this->app->get('queue'));
         }
 
         $this->app->make(QueryRecorder::class)->register();
@@ -229,8 +229,6 @@ class IgnitionServiceProvider extends ServiceProvider
 
             return $client;
         });
-
-        // $this->app->alias('flare.client', Flare::class);
 
         return $this;
     }

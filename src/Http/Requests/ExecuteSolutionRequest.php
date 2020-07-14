@@ -24,6 +24,7 @@ class ExecuteSolutionRequest extends FormRequest
 
         abort_if(is_null($solution), 404, 'Solution could not be found');
 
+        /** @var Solution */
         return $solution;
     }
 

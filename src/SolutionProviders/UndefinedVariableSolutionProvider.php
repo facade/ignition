@@ -73,10 +73,13 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         $pattern = '/Undefined variable: (.*?) \(View: (.*?)\)/';
 
         preg_match($pattern, $throwable->getMessage(), $matches);
+
         if (count($matches) === 3) {
             [$string, $variableName, $viewFile] = $matches;
 
             return compact('variableName', 'viewFile');
         }
+
+        return null;
     }
 }
