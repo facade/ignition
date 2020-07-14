@@ -14,7 +14,7 @@ class ErrorPageHandler
     /** @var \Facade\Ignition\IgnitionConfig */
     protected $ignitionConfig;
 
-    /** @var \Facade\Ignition\Facades\Flare */
+    /** @var \Facade\FlareClient\Flare */
     protected $flareClient;
 
     /** @var \Facade\Ignition\ErrorPage\Renderer */

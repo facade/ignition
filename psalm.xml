@@ -26,6 +26,16 @@
                 <file name="src/SolutionProviders/MergeConflictSolutionProvider.php" />
             </errorLevel>
         </ForbiddenCode>
+        <InvalidCast>
+            <errorLevel type="suppress">
+                <file name="src/DumpRecorder/DumpRecorder.php" />
+            </errorLevel>
+        </InvalidCast>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <file name="src/ErrorPage/ErrorPageViewModel.php" />
+            </errorLevel>
+        </UndefinedClass>
     </issueHandlers>
 
     <plugins>
