@@ -30,7 +30,7 @@ class FlareTest extends TestCase
 
         $this->fakeClient = new FakeClient();
 
-        $this->app->singleton('flare.client', function () {
+        $this->app->singleton(Flare::class, function () {
             return new Flare($this->fakeClient);
         });
 

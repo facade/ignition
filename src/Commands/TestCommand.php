@@ -3,6 +3,7 @@
 namespace Facade\Ignition\Commands;
 
 use Exception;
+use Facade\FlareClient\Flare;
 use Illuminate\Config\Repository;
 use Illuminate\Console\Command;
 use Illuminate\Log\LogManager;
@@ -72,7 +73,7 @@ class TestCommand extends Command
         $testException = new Exception('This is an exception to test if the integration with Flare works.');
 
         try {
-            app('flare.client')->sendTestReport($testException);
+            app(Flare::class)->sendTestReport($testException);
             $this->info(PHP_EOL);
         } catch (Exception $exception) {
             $this->warn('❌ We were unable to send an exception to Flare. Make sure that your key is correct and that you have a valid subscription. '.PHP_EOL.PHP_EOL.'For more info visit the docs on installing Flare in a Laravel project: https://flareapp.io/docs/ignition-for-laravel/introduction');

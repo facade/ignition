@@ -28,12 +28,12 @@ class PhpEngine extends \Illuminate\View\Engines\PhpEngine
     /**
      * Handle a view exception.
      *
-     * @param  \Exception  $baseException
+     * @param  \Throwable  $baseException
      * @param  int  $obLevel
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws \Throwable
      */
     protected function handleViewException(Throwable $baseException, $obLevel)
     {

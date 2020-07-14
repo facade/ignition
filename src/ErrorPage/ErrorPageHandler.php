@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\ErrorPage;
 
+use Facade\FlareClient\Flare;
 use Facade\FlareClient\Report;
 use Facade\Ignition\IgnitionConfig;
 use Facade\IgnitionContracts\SolutionProviderRepository;
@@ -13,7 +14,7 @@ class ErrorPageHandler
     /** @var \Facade\Ignition\IgnitionConfig */
     protected $ignitionConfig;
 
-    /** @var \Facade\Ignition\Facades\Flare */
+    /** @var \Facade\FlareClient\Flare */
     protected $flareClient;
 
     /** @var \Facade\Ignition\ErrorPage\Renderer */
@@ -28,7 +29,7 @@ class ErrorPageHandler
         Renderer $renderer,
         SolutionProviderRepository $solutionProviderRepository
     ) {
-        $this->flareClient = $app->make('flare.client');
+        $this->flareClient = $app->make(Flare::class);
         $this->ignitionConfig = $ignitionConfig;
         $this->renderer = $renderer;
         $this->solutionProviderRepository = $solutionProviderRepository;

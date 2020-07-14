@@ -23,8 +23,8 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
     /**
      * Get the evaluated contents of the view.
      *
-     * @param  string $path
-     * @param  array $data
+     * @param string $path
+     * @param array $data
      *
      * @return string
      */
@@ -40,12 +40,12 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
     /**
      * Handle a view exception.
      *
-     * @param  \Exception $baseException
-     * @param  int $obLevel
+     * @param \Throwable $baseException
+     * @param int $obLevel
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws \Throwable
      */
     protected function handleViewException(Throwable $baseException, $obLevel)
     {
@@ -59,7 +59,7 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
 
         $viewExceptionClass = ViewException::class;
 
-        if (in_array(ProvidesSolution::class, class_implements($baseException))) {
+        if ($baseException instanceof ProvidesSolution) {
             $viewExceptionClass = ViewExceptionWithSolution::class;
         }
 
@@ -72,9 +72,10 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
             $baseException
         );
 
-        if ($viewExceptionClass === ViewExceptionWithSolution::class) {
+        if ($baseException instanceof ProvidesSolution) {
             $exception->setSolution($baseException->getSolution());
         }
+
 
         $this->modifyViewsInTrace($exception);
 

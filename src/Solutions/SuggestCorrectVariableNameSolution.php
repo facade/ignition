@@ -12,6 +12,9 @@ class SuggestCorrectVariableNameSolution implements Solution
     /** @var string */
     private $viewFile;
 
+    /** @var string|null */
+    private $suggested;
+
     public function __construct($variableName = null, $viewFile = null, $suggested = null)
     {
         $this->variableName = $variableName;
@@ -31,8 +34,6 @@ class SuggestCorrectVariableNameSolution implements Solution
 
     public function getSolutionDescription(): string
     {
-        $path = str_replace(base_path().'/', '', $this->viewFile);
-
         return "Did you mean `$$this->suggested`?";
     }
 

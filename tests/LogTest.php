@@ -26,11 +26,11 @@ class LogTest extends TestCase
 
         $this->fakeClient = new FakeClient();
 
-        $currentClient = $this->app->make('flare.client');
+        $currentClient = $this->app->make(Flare::class);
 
         $middleware = $currentClient->getMiddleware();
 
-        $this->app->singleton('flare.client', function () use ($middleware) {
+        $this->app->singleton(Flare::class, function () use ($middleware) {
             $flare = new Flare($this->fakeClient, null, null);
 
             foreach ($middleware as $singleMiddleware) {

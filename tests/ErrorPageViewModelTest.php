@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\Tests;
 
+use Facade\FlareClient\Flare;
 use Facade\FlareClient\Report;
 use Facade\Ignition\ErrorPage\ErrorPageViewModel;
 use Facade\Ignition\IgnitionConfig;
@@ -11,7 +12,7 @@ class ErrorPageViewModelTest extends TestCase
     /** @test */
     public function it_can_encode_invalid_user_data()
     {
-        $flareClient = $this->app->make('flare.client');
+        $flareClient = $this->app->make(Flare::class);
 
         $exception = new \Exception('Test Exception');
 
@@ -30,7 +31,7 @@ class ErrorPageViewModelTest extends TestCase
     /** @test */
     public function it_disables_share_report_when_share_report_controller_action_is_not_defined()
     {
-        $flareClient = $this->app->make('flare.client');
+        $flareClient = $this->app->make(Flare::class);
 
         $exception = new \Exception('Test Exception');
 

@@ -14,8 +14,8 @@ class BladeSourceMapCompiler extends BladeCompiler
         $line = $map[$exceptionLineNumber - 1] ?? $exceptionLineNumber;
         $pattern = '/\|---LINE:([0-9]+)---\|/m';
 
-        if (preg_match($pattern, $line, $matches)) {
-            return $matches[1];
+        if (preg_match($pattern, (string)$line, $matches)) {
+            return (int)$matches[1];
         }
 
         return $exceptionLineNumber;
