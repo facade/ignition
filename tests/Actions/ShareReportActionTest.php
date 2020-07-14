@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\Tests\Actions;
 
+use Facade\FlareClient\Flare;
 use Facade\FlareClient\Glows\Glow;
 use Facade\Ignition\Actions\ShareReportAction;
 use Facade\Ignition\Tests\Mocks\FakeClient;
@@ -172,7 +173,7 @@ class ShareReportActionTest extends TestCase
         Model::unguard();
 
         /** @var \Facade\Flare\Flare $flareClient */
-        $flareClient = $this->app->make('flare.client');
+        $flareClient = $this->app->make(Flare::class);
 
         $report = $flareClient->createReport(new \BadMethodCallException('Test Exception'));
 

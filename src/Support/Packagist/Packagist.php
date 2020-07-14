@@ -7,7 +7,7 @@ class Packagist
     /**
      * @param string $className
      *
-     * @return \Facade\Flare\Support\Packagist\Package[]
+     * @return \Facade\Ignition\Support\Packagist\Package[]
      */
     public static function findPackagesForClassName(string $className): array
     {

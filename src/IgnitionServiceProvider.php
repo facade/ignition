@@ -111,7 +111,8 @@ class IgnitionServiceProvider extends ServiceProvider
         }
 
         if (config('flare.reporting.anonymize_ips')) {
-            $this->app->get('flare.client')->anonymizeIp();
+
+            $this->app->get(Flare::class)->anonymizeIp();
         }
 
         $this->registerBuiltInMiddleware();
@@ -222,7 +223,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $this->app->alias('flare.http', Client::class);
 
-        $this->app->singleton('flare.client', function () {
+        $this->app->singleton(Flare::class, function () {
             $client = new Flare($this->app->get('flare.http'), new LaravelContextDetector, $this->app);
             $client->applicationPath(base_path());
             $client->stage(config('app.env'));
@@ -230,7 +231,7 @@ class IgnitionServiceProvider extends ServiceProvider
             return $client;
         });
 
-        $this->app->alias('flare.client', Flare::class);
+       // $this->app->alias('flare.client', Flare::class);
 
         return $this;
     }
@@ -238,7 +239,7 @@ class IgnitionServiceProvider extends ServiceProvider
     protected function registerLogHandler()
     {
         $this->app->singleton('flare.logger', function ($app) {
-            $handler = new FlareHandler($app->make('flare.client'));
+            $handler = new FlareHandler($app->make(Flare::class));
 
             $logLevelString = config('logging.channels.flare.level', 'error');
 
@@ -348,7 +349,7 @@ class IgnitionServiceProvider extends ServiceProvider
         }
 
         foreach ($middleware as $singleMiddleware) {
-            $this->app->get('flare.client')->registerMiddleware($singleMiddleware);
+            $this->app->get(Flare::class)->registerMiddleware($singleMiddleware);
         }
 
         return $this;
@@ -427,7 +428,7 @@ class IgnitionServiceProvider extends ServiceProvider
     protected function setupQueue(QueueManager $queue)
     {
         $queue->looping(function () {
-            $this->app->get('flare.client')->reset();
+            $this->app->get(Flare::class)->reset();
 
             if (config('flare.reporting.report_queries')) {
                 $this->app->make(QueryRecorder::class)->reset();

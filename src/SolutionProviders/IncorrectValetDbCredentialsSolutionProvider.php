@@ -13,7 +13,7 @@ class IncorrectValetDbCredentialsSolutionProvider implements HasSolutionsForThro
 
     public function canSolve(Throwable $throwable): bool
     {
-        if (! PHP_OS === 'Darwin') {
+        if (PHP_OS !== 'Darwin') {
             return false;
         }
 

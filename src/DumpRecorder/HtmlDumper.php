@@ -21,7 +21,7 @@ class HtmlDumper extends BaseHtmlDumper
 
     public function dump(Data $data, $output = null, array $extraDisplayOptions = []): string
     {
-        return parent::dump($data, true, [
+        return (string)parent::dump($data, true, [
             'maxDepth' => 3,
             'maxStringLength' => 160,
         ]);
