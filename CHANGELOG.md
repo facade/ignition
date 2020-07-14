@@ -2,9 +2,13 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.3.3 -2020-07-14
+
+- fix all psalm related issues
+
 ## 2.3.2 - 2020-07-14
 
-- fix: properly bind singleton (#291)
+- properly bind singleton (#291)
 
 ## 2.3.1 - 2020-07-13
 
