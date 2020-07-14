@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition;
 
+use Exception;
 use Facade\FlareClient\Flare;
 use Facade\FlareClient\Http\Client;
 use Facade\Ignition\Commands\SolutionMakeCommand;

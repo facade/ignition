@@ -8,7 +8,7 @@ use Throwable;
 
 class LogRecorder
 {
-    /** @var \Facade\Flare\LogRecorder\LogMessage[] */
+    /** @var \Facade\Ignition\LogRecorder\LogMessage[] */
     protected $logMessages = [];
 
     /** @var \Illuminate\Contracts\Foundation\Application */

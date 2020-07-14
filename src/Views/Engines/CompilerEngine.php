@@ -40,12 +40,12 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
     /**
      * Handle a view exception.
      *
-     * @param  \Exception $baseException
+     * @param  \Throwable $baseException
      * @param  int $obLevel
      *
      * @return void
      *
-     * @throws \Exception
+     * @throws \Throwable
      */
     protected function handleViewException(Throwable $baseException, $obLevel)
     {
@@ -73,6 +73,7 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
         );
 
         if ($viewExceptionClass === ViewExceptionWithSolution::class) {
+            /** @var ProvidesSolution $baseException */
             $exception->setSolution($baseException->getSolution());
         }
 

@@ -18,6 +18,7 @@ class AddSolutions
     public function handle(Report $report, $next)
     {
         if ($throwable = $report->getThrowable()) {
+            /** @var \Facade\IgnitionContracts\Solution[] $solutions */
             $solutions = $this->solutionProviderRepository->getSolutionsForThrowable($throwable);
 
             foreach ($solutions as $solution) {

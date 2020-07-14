@@ -40,8 +40,11 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         return $solutions;
     }
 
-    protected function findCorrectVariableSolutions(Throwable $throwable, string $variableName, string $viewFile): array
-    {
+    protected function findCorrectVariableSolutions(
+        ViewException $throwable,
+        string $variableName,
+        string $viewFile
+    ): array {
         return collect($throwable->getViewData())->map(function ($value, $key) use ($variableName) {
             similar_text($variableName, $key, $percentage);
 
@@ -75,7 +78,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
         preg_match($pattern, $throwable->getMessage(), $matches);
 
         if (count($matches) === 3) {
-            [$string, $variableName, $viewFile] = $matches;
+            [, $variableName, $viewFile] = $matches;
 
             return compact('variableName', 'viewFile');
         }

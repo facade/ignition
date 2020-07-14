@@ -36,6 +36,11 @@
                 <file name="src/ErrorPage/ErrorPageViewModel.php" />
             </errorLevel>
         </UndefinedClass>
+        <UnusedClosureParam>
+            <errorLevel type="suppress">
+                <file name="src/SolutionProviders/InvalidRouteActionSolutionProvider.php" />
+            </errorLevel>
+        </UnusedClosureParam>
     </issueHandlers>
 
     <plugins>
