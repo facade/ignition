@@ -89,7 +89,7 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
     {
         $viewPath = $this->getCompiledViewName($compiledPath);
 
-        if (!$viewPath) {
+        if (! $viewPath) {
             return $exceptionLineNumber;
         }
 
