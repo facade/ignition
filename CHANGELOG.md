@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.3.4 -2020-07-27
+
+- fix an error that would throw a blank page when using third party extensions
+
 ## 2.3.3 -2020-07-14
 
 - fix all psalm related issues
