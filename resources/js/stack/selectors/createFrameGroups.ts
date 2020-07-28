@@ -73,7 +73,10 @@ function parseExpandedFrame(context: IterationContext): Array<FrameGroup> {
 function parseCollapsedFrame(context: IterationContext): Array<FrameGroup> {
     const type = getFrameType(context.current);
 
-    if (!context.previous.expanded && type === context.previous.type) {
+    if (
+        (!context.previous.expanded && type === context.previous.type) ||
+        context.previous.relative_file === context.current.relative_file
+    ) {
         // Mutate the previous result. It's not pretty, makes the general flow of the program less
         // complex because we kan keep the result list append-only.
         context.previous.frames.push({
