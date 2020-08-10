@@ -2,10 +2,14 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.3.6 - 2020-08-10
+
+- possible security vulnerability: bump elliptic version (#300)
+- possible XSS vulnerability: escape characters in stacktrace and exception title
+
 ## 2.3.5 - 2020-08-01
 
 - catch exception in detectLineNumber for not existing blade files (#299)
-
 
 ## 2.3.4 - 2020-07-27
 
