@@ -46,7 +46,12 @@
                     :ownerUrl="sharedErrorUrls.owner_url"
                 />
             </div>
-            <ShareForm v-else @share="shareError" :error="shareHadError" />
+            <ShareForm
+                v-else
+                :error="shareHadError"
+                :is-loading="isShareLoading"
+                @share="shareError"
+            />
         </div>
     </div>
 </template>
@@ -64,6 +69,7 @@ export default {
             shareHadError: false,
             sharedErrorUrls: null,
             menuVisible: false,
+            isShareLoading: false,
         };
     },
 
@@ -83,6 +89,8 @@ export default {
         },
 
         async shareError(selectedTabs) {
+            this.isShareLoading = true;
+
             try {
                 const response = await fetch(this.shareEndpoint, {
                     method: 'POST',
@@ -106,6 +114,8 @@ export default {
             } catch (error) {
                 this.shareHadError = true;
             }
+
+            this.isShareLoading = false;
         },
     },
 };

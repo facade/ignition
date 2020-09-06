@@ -18,8 +18,12 @@
                 Please try again later.
             </div>
 
-            <button @click="shareError" class="button-secondary button-sm bg-tint-600 text-white">
-                Share
+            <button
+                class="button-secondary button-sm text-white bg-tint-600"
+                :disabled="isLoading"
+                @click="shareError"
+            >
+                {{ isLoading ? 'Sharing…' : 'Share' }}
             </button>
         </div>
     </div>
@@ -31,7 +35,7 @@ import CheckboxField from './CheckboxField';
 export default {
     components: { CheckboxField },
 
-    props: ['error'],
+    props: ['error', 'isLoading'],
 
     computed: {
         selectedTabs() {
@@ -54,7 +58,9 @@ export default {
 
     methods: {
         shareError() {
-            this.$emit('share', this.selectedTabs);
+            if (!this.isLoading) {
+                this.$emit('share', this.selectedTabs);
+            }
         },
     },
 };
