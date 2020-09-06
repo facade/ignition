@@ -125,7 +125,7 @@ class IgnitionServiceProvider extends ServiceProvider
         }
 
         $this->app->make('view.engine.resolver')->register('php', function () {
-            return new PhpEngine();
+            return new PhpEngine($this->app['files']);
         });
 
         $this->app->make('view.engine.resolver')->register('blade', function () {
