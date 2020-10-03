@@ -5,13 +5,14 @@ namespace Facade\Ignition\SolutionProviders;
 use Facade\Ignition\Solutions\LivewireDiscoverSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Illuminate\Database\QueryException;
+use Livewire\Exceptions\ComponentNotFoundException;
 use Throwable;
 
 class MissingLivewireComponentSolutionProvider implements HasSolutionsForThrowable
 {
     public function canSolve(Throwable $throwable): bool
     {
-        if (! class_exists('ComponentNotFoundException') {
+        if (! class_exists(ComponentNotFoundException::class)) {
             return false;
         }
         if (! $throwable instanceof \Livewire\Exceptions\ComponentNotFoundException) {
