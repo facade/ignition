@@ -3,7 +3,7 @@
 namespace Facade\Ignition\Solutions;
 
 use Facade\IgnitionContracts\RunnableSolution;
-use Illuminate\Support\Facades\Artisan;
+use Livewire\LivewireComponentsFinder;
 
 class LivewireDiscoverSolution implements RunnableSolution
 {
@@ -48,6 +48,6 @@ class LivewireDiscoverSolution implements RunnableSolution
 
     public function run(array $parameters = [])
     {
-        Artisan::call('livewire:discover');
+        app(LivewireComponentsFinder::class)->build();
     }
 }
