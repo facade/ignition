@@ -6,6 +6,7 @@ use Facade\Ignition\Solutions\LivewireDiscoverSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
 use Illuminate\Database\QueryException;
 use Livewire\Exceptions\ComponentNotFoundException;
+use Livewire\LivewireComponentsFinder;
 use Throwable;
 
 class MissingLivewireComponentSolutionProvider implements HasSolutionsForThrowable
@@ -15,7 +16,10 @@ class MissingLivewireComponentSolutionProvider implements HasSolutionsForThrowab
         if (! class_exists(ComponentNotFoundException::class)) {
             return false;
         }
-        if (! $throwable instanceof \Livewire\Exceptions\ComponentNotFoundException) {
+        if (! class_exists(LivewireComponentsFinder::class)) {
+            return false;
+        }
+        if (! $throwable instanceof ComponentNotFoundException) {
             return false;
         }
 
