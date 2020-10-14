@@ -25,7 +25,7 @@ class MissingLivewireComponentSolutionProvider implements HasSolutionsForThrowab
 
     public function getSolutions(Throwable $throwable): array
     {
-        return [new LivewireDiscoverSolution('A livewire component was not found')];
+        return [new LivewireDiscoverSolution('A Livewire component was not found')];
     }
 
     public function livewireIsInstalled(): bool

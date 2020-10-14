@@ -43,7 +43,7 @@ class LivewireDiscoverSolution implements RunnableSolution
 
     public function getRunButtonText(): string
     {
-        return 'Run livewire components discover';
+        return 'Run livewire:discover';
     }
 
     public function run(array $parameters = [])
