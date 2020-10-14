@@ -4,7 +4,6 @@ namespace Facade\Ignition\SolutionProviders;
 
 use Facade\Ignition\Solutions\LivewireDiscoverSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Illuminate\Database\QueryException;
 use Livewire\Exceptions\ComponentNotFoundException;
 use Livewire\LivewireComponentsFinder;
 use Throwable;
