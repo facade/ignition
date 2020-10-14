@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.4.1 - 2020-10-14
+
+- fix copy casing
+
 ## 2.4.0 - 2020-10-14
 
 - add livewire component discovery solution
