@@ -21,7 +21,7 @@ class LivewireDiscoverSolution implements RunnableSolution
 
     public function getSolutionDescription(): string
     {
-        return 'You might have forgotten to discover your livewire components. You can discover your livewire components using `php artisan livewire:discover`.';
+        return 'You might have forgotten to discover your Livewire components. You can discover your Livewire components using `php artisan livewire:discover`.';
     }
 
     public function getDocumentationLinks(): array
@@ -38,7 +38,7 @@ class LivewireDiscoverSolution implements RunnableSolution
 
     public function getSolutionActionDescription(): string
     {
-        return 'Pressing the button below will try to discover your components.';
+        return 'Pressing the button below will try to discover your Livewire components.';
     }
 
     public function getRunButtonText(): string
