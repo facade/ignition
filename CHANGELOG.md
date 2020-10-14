@@ -17,7 +17,7 @@ All notable changes to `ignition` will be documented in this file
 ## 2.3.7 - 2020-09-06
 
 - add loading state on share button (#309)
-- compatiblity fix for L8
+- compatibility fix for L8
 
 ## 2.3.6 - 2020-08-10
 
