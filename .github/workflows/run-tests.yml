@@ -35,10 +35,15 @@ jobs:
                   extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
                   coverage: none
 
-            - name: Install dependencies
+            - name: Install PHP 7 dependencies
               run: |
-                  composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+                composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
+              if: "matrix.php < 8"
+
+            - name: Install PHP 8 dependencies
+              run: composer update --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
+              if: "matrix.php >= 8"
 
             - name: Execute tests
               run: vendor/bin/phpunit
