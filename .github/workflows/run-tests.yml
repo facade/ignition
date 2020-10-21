@@ -36,7 +36,7 @@ jobs:
                   coverage: none
                   tools: composer:v2
 
-                - name: Install PHP 7 dependencies
+            - name: Install PHP 7 dependencies
               run: |
                 composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                 composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
