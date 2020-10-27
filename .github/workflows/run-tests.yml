@@ -12,13 +12,15 @@ jobs:
 
         strategy:
             matrix:
-                php: [7.4, 7.3, 7.2]
-                laravel: [7.*]
-                dependency-version: [prefer-lowest, prefer-stable]
+                php: [7.4, 8.0]
+                laravel: [7.*, 8.*]
+                dependency-version: [prefer-stable]
                 os: [ubuntu-latest, windows-latest]
                 include:
                     - laravel: 7.*
                       testbench: 5.*
+                    - laravel: 8.*
+                      testbench: 6.*
 
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
@@ -32,11 +34,17 @@ jobs:
                   php-version: ${{ matrix.php }}
                   extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
                   coverage: none
+                  tools: composer:v2
 
-            - name: Install dependencies
+            - name: Install PHP 7 dependencies
               run: |
-                  composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+                composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
+              if: "matrix.php < 8"
+
+            - name: Install PHP 8 dependencies
+              run: composer update --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
+              if: "matrix.php >= 8"
 
             - name: Execute tests
               run: vendor/bin/phpunit

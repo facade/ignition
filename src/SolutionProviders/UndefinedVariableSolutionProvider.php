@@ -73,7 +73,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 
     protected function getNameAndView(Throwable $throwable): ?array
     {
-        $pattern = '/Undefined variable: (.*?) \(View: (.*?)\)/';
+        $pattern = '/Undefined variable:? (.*?) \(View: (.*?)\)/';
 
         preg_match($pattern, $throwable->getMessage(), $matches);
 
