@@ -2,6 +2,11 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.0 - 2020-10-27
+
+- add PHP 8.0-dev support
+- remove unnecessary `scrivo/highlight.php` dependency
+
 ## 2.4.1 - 2020-10-14
 
 - fix copy casing
