@@ -25,6 +25,7 @@ class MergeConflictSolutionProviderTest extends TestCase
         } catch (ParseError $error) {
             $exception = $error;
         }
+
         $canSolve = app(MergeConflictSolutionProvider::class)->canSolve($exception);
 
         $this->assertTrue($canSolve);
