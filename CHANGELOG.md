@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.1 - 2020-11-13
+
+- add support for LiveWire component urls
+
 ## 2.5.0 - 2020-10-27
 
 - add PHP 8.0-dev support

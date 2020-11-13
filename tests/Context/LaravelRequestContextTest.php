@@ -86,6 +86,21 @@ class LaravelRequestContextTest extends TestCase
     }
 
     /** @test */
+    public function it_returns_the_referer_url_if_it_is_an_livewire_request()
+    {
+        $request = $this->createRequest('GET', '/route', []);
+
+        $request->headers->set('x-livewire', true);
+        $request->headers->set('referer', 'http://localhost/referred');
+
+        $context = new LaravelRequestContext($request);
+
+        $request = $context->getRequest();
+
+        $this->assertSame('http://localhost/referred', $request['url']);
+    }
+
+    /** @test */
     public function it_returns_the_cookies()
     {
         $request = $this->createRequest('GET', '/route', [], ['cookie' => 'noms']);
