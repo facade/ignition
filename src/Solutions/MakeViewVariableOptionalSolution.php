@@ -73,7 +73,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function makeOptional(array $parameters = [])
     {
-        # Disregard schemed paths such as ftp://, phar://, etc.
+        # Only allow full or relative paths, and paths that end in .blade.php
         if (!Str::startsWith($parameters['viewFile'], ['/', './']) || !Str::endsWith($parameters['viewFile'], '.blade.php')) {
             return false;
         }
