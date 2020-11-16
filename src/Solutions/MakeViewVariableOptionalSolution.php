@@ -4,6 +4,7 @@ namespace Facade\Ignition\Solutions;
 
 use Facade\IgnitionContracts\RunnableSolution;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Str;
 
 class MakeViewVariableOptionalSolution implements RunnableSolution
 {
@@ -72,6 +73,11 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function makeOptional(array $parameters = [])
     {
+        # Disregard schemed paths such as ftp://, phar://, etc.
+        if (!Str::startsWith($parameters['viewFile'], ['/', './']) || !Str::endsWith($parameters['viewFile'], '.blade.php')) {
+            return false;
+        }
+
         $originalContents = file_get_contents($parameters['viewFile']);
         $newContents = str_replace('$'.$parameters['variableName'], '$'.$parameters['variableName']." ?? ''", $originalContents);
 
