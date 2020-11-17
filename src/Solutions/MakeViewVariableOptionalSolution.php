@@ -71,12 +71,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
         }
     }
 
-    /**
-     * Verifies that $path is either an absolute or a relative path, and ends with .blade.php
-     * @param string $path
-     * @return bool
-     */
-    protected function isSafePath(string $path)
+    protected function isSafePath(string $path): bool
     {
         if (!Str::startsWith($path, ['/', './'])) {
             return false;
