@@ -71,10 +71,26 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
         }
     }
 
+    /**
+     * Verifies that $path is either an absolute or a relative path, and ends with .blade.php
+     * @param string $path
+     * @return bool
+     */
+    protected function isSafePath(string $path)
+    {
+        if (!Str::startsWith($path, ['/', './'])) {
+            return false;
+        }
+        if (!Str::endsWith($path, '.blade.php')) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function makeOptional(array $parameters = [])
     {
-        # Only allow full or relative paths, and paths that end in .blade.php
-        if (!Str::startsWith($parameters['viewFile'], ['/', './']) || !Str::endsWith($parameters['viewFile'], '.blade.php')) {
+        if (!$this->isSafePath($parameters['viewFile'])) {
             return false;
         }
 
