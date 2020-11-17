@@ -2,12 +2,10 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use Facade\Ignition\Exceptions\ViewException;
 use Facade\Ignition\Solutions\MakeViewVariableOptionalSolution;
 use Facade\Ignition\Support\ComposerClassMap;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 
 class MakeViewVariableOptionalSolutionTest extends TestCase
 {
