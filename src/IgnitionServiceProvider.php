@@ -83,16 +83,32 @@ class IgnitionServiceProvider extends ServiceProvider
         $this
             ->registerViewEngines()
             ->registerHousekeepingRoutes()
-            ->registerLogHandler()
             ->registerCommands();
 
         if ($this->app->bound('queue')) {
             $this->setupQueue($this->app->get('queue'));
         }
 
-        $this->app->make(QueryRecorder::class)->register();
-        $this->app->make(LogRecorder::class)->register();
-        $this->app->make(DumpRecorder::class)->register();
+        if (config('flare.key')) {
+            $this->registerFlare()
+                ->registerLogRecorder()
+                ->registerDumpCollector();
+
+            if (config('flare.reporting.report_queries')) {
+                $this->registerQueryRecorder();
+            }
+
+            if (config('flare.reporting.anonymize_ips')) {
+                $this->app->get(Flare::class)->anonymizeIp();
+            }
+
+            $this->registerBuiltInMiddleware();
+
+            $this->registerLogHandler();
+            $this->app->make(QueryRecorder::class)->register();
+            $this->app->make(LogRecorder::class)->register();
+            $this->app->make(DumpRecorder::class)->register();
+        }
     }
 
     public function register()
@@ -104,20 +120,7 @@ class IgnitionServiceProvider extends ServiceProvider
             ->registerSolutionProviderRepository()
             ->registerExceptionRenderer()
             ->registerWhoopsHandler()
-            ->registerIgnitionConfig()
-            ->registerFlare()
-            ->registerLogRecorder()
-            ->registerDumpCollector();
-
-        if (config('flare.reporting.report_queries')) {
-            $this->registerQueryRecorder();
-        }
-
-        if (config('flare.reporting.anonymize_ips')) {
-            $this->app->get(Flare::class)->anonymizeIp();
-        }
-
-        $this->registerBuiltInMiddleware();
+            ->registerIgnitionConfig();
     }
 
     protected function registerViewEngines()

@@ -18,6 +18,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         Api::$sendInBatches = false;
     }
 
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']['flare.key'] = 'some-key';
+    }
+
     protected function getPackageProviders($app)
     {
         return [IgnitionServiceProvider::class];
