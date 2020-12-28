@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.4 - 2020-12-29
+
+- added support for Nova text editor (#343)
+
 ## 2.5.3 - 2020-12-08
 
 - Use Livewire compatible compiler engine when using Livewire (#340)
