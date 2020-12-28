@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.5 - 2020-12-29
+
+- added compiled js of previous release
+
 ## 2.5.4 - 2020-12-29
 
 - added support for Nova text editor (#343)
