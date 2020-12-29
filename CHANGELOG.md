@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.8 - 2020-12-29
+
+- fix double `$` on PHP 8 (#338)
+
 ## 2.5.7 - 2020-12-29
 
 - fix for breaking change in highlight.js (fixes 2.5.5)
