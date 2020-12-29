@@ -42,7 +42,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": "lint-staged && yarn build && git add resources/compiled/ignition.js"
         }
     },
     "lint-staged": {
