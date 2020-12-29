@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.6 - 2020-12-30
+
+- revert to compiled js of 2.5.3
+
 ## 2.5.5 - 2020-12-29
 
 - added compiled js of previous release
