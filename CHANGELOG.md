@@ -2,7 +2,19 @@
 
 All notable changes to `ignition` will be documented in this file
 
-## 2.5.6 - 2020-12-30
+## 2.5.9 - 2021-01-26
+
+- fix logged context not being sent to Flare
+
+## 2.5.8 - 2020-12-29
+
+- fix double `$` on PHP 8 (#338)
+
+## 2.5.7 - 2020-12-29
+
+- fix for breaking change in highlight.js (fixes 2.5.5)
+
+## 2.5.6 - 2020-12-29
 
 - revert to compiled js of 2.5.3
 
