@@ -3,6 +3,7 @@
 namespace Facade\Ignition;
 
 use Exception;
+use Facade\FlareClient\Api;
 use Facade\FlareClient\Flare;
 use Facade\FlareClient\Http\Client;
 use Facade\Ignition\Commands\SolutionMakeCommand;
@@ -78,6 +79,10 @@ class IgnitionServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/ignition.php' => config_path('ignition.php'),
             ], 'ignition-config');
+
+            if(['artisan', 'tinker'] === $_SERVER['argv']) {
+                Api::sendReportsInBatches(false);
+            }
         }
 
         $this
