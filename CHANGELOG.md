@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.16.4 - 2021-02-13
+
+- fix CVE-2021-3129 for facade/ignition 1.16.x (Laravel 6) (#351)
+
 ## 1.16.3 - 2020-07-13
 
 - do not use missing package solution provider by default (closes #179)
