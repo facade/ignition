@@ -340,7 +340,7 @@ class IgnitionServiceProvider extends ServiceProvider
             return new QueryRecorder(
                 $app,
                 $app->get('config')->get('flare.reporting.report_query_bindings'),
-                $app->get('config')->get('flare.reporting.maximum_number_of_collected_logs')
+                $app->get('config')->get('flare.reporting.maximum_number_of_collected_queries')
             );
         });
 
