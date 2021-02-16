@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.13 - 2021-02-16
+
+- remove custom grouping
+
 ## 2.5.12 - 2021-02-15
 
 - fix wrong config usage (#354)
