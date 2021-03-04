@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.13 - 2021-03-03
+
+- fix ignition not working when there is no argv
+
 ## 2.5.13 - 2021-02-16
 
 - remove custom grouping

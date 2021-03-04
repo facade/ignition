@@ -79,7 +79,7 @@ class IgnitionServiceProvider extends ServiceProvider
                 __DIR__.'/../config/ignition.php' => config_path('ignition.php'),
             ], 'ignition-config');
 
-            if (['artisan', 'tinker'] === $_SERVER['argv']) {
+            if (isset($_SERVER['argv']) && ['artisan', 'tinker'] === $_SERVER['argv']) {
                 Api::sendReportsInBatches(false);
             }
         }
