@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.4.2 - 2021-03-08
+
+- fix `MakeViewVariableOptionalSolution` to disallow stream wrappers and files that do not end in .blade.php (#356)
+
 ## 2.4.1 - 2020-10-14
 
 - fix copy casing
