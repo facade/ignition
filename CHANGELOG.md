@@ -2,6 +2,67 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.5.14 - 2021-03-03
+
+- fix ignition not working when there is no argv
+
+## 2.5.13 - 2021-02-16
+
+- remove custom grouping
+
+## 2.5.12 - 2021-02-15
+
+- fix wrong config usage (#354)
+
+## 2.5.11 - 2021-02-05
+
+- fix memory leaks caused by log and query recorder (#344)
+
+## 2.5.10 - 2021-02-02
+
+- fix tinker logs not being sent to Flare
+
+## 2.5.9 - 2021-01-26
+
+- fix logged context not being sent to Flare
+
+## 2.5.8 - 2020-12-29
+
+- fix double `$` on PHP 8 (#338)
+
+## 2.5.7 - 2020-12-29
+
+- fix for breaking change in highlight.js (fixes 2.5.5)
+
+## 2.5.6 - 2020-12-29
+
+- revert to compiled js of 2.5.3
+
+## 2.5.5 - 2020-12-29
+
+- added compiled js of previous release
+
+## 2.5.4 - 2020-12-29
+
+- added support for Nova text editor (#343)
+
+## 2.5.3 - 2020-12-08
+
+- Use Livewire compatible compiler engine when using Livewire (#340)
+
+## 2.5.2 - 2020-11-14
+
+- fix `MakeViewVariableOptionalSolution` to disallow stream wrappers and files that do not end in ".blade.php" (#334)
+
+## 2.5.1 - 2020-11-13
+
+- add support for LiveWire component urls
+
+## 2.5.0 - 2020-10-27
+
+- add PHP 8.0-dev support
+- remove unnecessary `scrivo/highlight.php` dependency
+
 ## 2.4.1 - 2020-10-14
 
 - fix copy casing
@@ -17,7 +78,7 @@ All notable changes to `ignition` will be documented in this file
 ## 2.3.7 - 2020-09-06
 
 - add loading state on share button (#309)
-- compatiblity fix for L8
+- compatibility fix for L8
 
 ## 2.3.6 - 2020-08-10
 

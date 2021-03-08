@@ -73,7 +73,7 @@
                                 </button>
                                 <p v-if="executionSuccessful">
                                     <strong class="font-semibold"
-                                        >The solution was executed succesfully.</strong
+                                        >The solution was executed successfully.</strong
                                     >
                                     <a href="#" @click.prevent="refresh" class="link-solution"
                                         >Refresh now.</a
@@ -81,7 +81,7 @@
                                 </p>
                                 <p v-if="executionSuccessful === false">
                                     Something went wrong when executing the solution. Please try
-                                    refresh the page and try again.
+                                    refreshing the page and try again.
                                 </p>
                             </div>
                         </div>
