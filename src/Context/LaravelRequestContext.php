@@ -54,6 +54,18 @@ class LaravelRequestContext extends RequestContext
         ];
     }
 
+    public function getRequest(): array
+    {
+        $properties = parent::getRequest();
+
+
+        if ($this->request->hasHeader('x-livewire') && $this->request->hasHeader('referer')) {
+            $properties['url'] = $this->request->header('referer');
+        }
+
+        return $properties;
+    }
+
     protected function getRouteParameters(): array
     {
         try {

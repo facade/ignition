@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import hljs from 'highlight.js/lib/highlight';
+import hljs from 'highlight.js/lib/core';
 hljs.registerLanguage('php', require('highlight.js/lib/languages/php'));
 
 import ExceptionClass from '../Shared/ExceptionClass.vue';
