@@ -86,7 +86,11 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
 
     public function makeOptional(array $parameters = [])
     {
-        if (!$this->isSafePath($parameters['viewFile'])) {
+        if (
+            !empty($parameters['viewFile']) &&
+            is_string($parameters['viewFile']) &&
+            !$this->isSafePath($parameters['viewFile'])
+        ) {
             return false;
         }
 
