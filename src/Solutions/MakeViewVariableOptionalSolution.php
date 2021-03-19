@@ -76,6 +76,7 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
         if (! Str::startsWith($path, ['/', './'])) {
             return false;
         }
+
         if (! Str::endsWith($path, '.blade.php')) {
             return false;
         }
@@ -86,8 +87,8 @@ class MakeViewVariableOptionalSolution implements RunnableSolution
     public function makeOptional(array $parameters = [])
     {
         if (
-            !empty($parameters['viewFile']) &&
-            is_string($parameters['viewFile']) &&
+            !is_string($parameters['variableName']) ||
+            !is_string($parameters['viewFile']) ||
             !$this->isSafePath($parameters['viewFile'])
         ) {
             return false;
