@@ -78,6 +78,10 @@ class TestCommand extends Command
         } catch (Exception $exception) {
             $this->warn('❌ We were unable to send an exception to Flare. Make sure that your key is correct and that you have a valid subscription. '.PHP_EOL.PHP_EOL.'For more info visit the docs on installing Flare in a Laravel project: https://flareapp.io/docs/ignition-for-laravel/introduction');
 
+            if ($this->output->isVerbose()) {
+                throw $exception;
+            }
+
             return;
         }
 
