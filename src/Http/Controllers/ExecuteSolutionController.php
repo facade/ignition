@@ -27,7 +27,7 @@ class ExecuteSolutionController
     public function ensureLocalEnvironment()
     {
         if (! app()->environment('local')) {
-            abort(403, "Runnable solutions are disabled non-local environments. Please make sure `APP_ENV` is set correctly. Additionally please make sure `APP_DEBUG` is set to false on ANY production environment!");
+            abort(403, "Runnable solutions are disabled in non-local environments. Please make sure `APP_ENV` is set correctly. Additionally please make sure `APP_DEBUG` is set to false on ANY production environment!");
         }
     }
 
