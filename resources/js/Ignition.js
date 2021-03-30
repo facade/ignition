@@ -60,8 +60,8 @@ export default class Ignition {
                         shareEndpoint: this.shareEndpoint,
                         defaultTab: this.defaultTab,
                         defaultTabProps: this.defaultTabProps,
-                        app_env: this.app_env,
-                        app_debug: this.app_debug,
+                        appEnv: this.appEnv,
+                        appDebug: this.appDebug,
                     },
                 });
             },

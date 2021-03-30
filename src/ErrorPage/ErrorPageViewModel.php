@@ -35,10 +35,10 @@ class ErrorPageViewModel implements Arrayable
     protected $defaultTabProps = [];
 
     /** @var string */
-    protected $app_env;
+    protected $appEnv;
 
     /** @var bool */
-    protected $app_debug;
+    protected $appDebug;
 
     public function __construct(?Throwable $throwable, IgnitionConfig $ignitionConfig, Report $report, array $solutions)
     {
@@ -50,8 +50,8 @@ class ErrorPageViewModel implements Arrayable
 
         $this->solutions = $solutions;
 
-        $this->app_env = app()->environment();
-        $this->app_debug = config('app.debug');
+        $this->appEnv = app()->environment();
+        $this->appDebug = config('app.debug');
     }
 
     public function throwableString(): string
@@ -193,8 +193,8 @@ class ErrorPageViewModel implements Arrayable
             'getAssetContents' => Closure::fromCallable([$this, 'getAssetContents']),
             'defaultTab' => $this->defaultTab,
             'defaultTabProps' => $this->defaultTabProps,
-            'app_env' => $this->app_env,
-            'app_debug' => $this->app_debug,
+            'appEnv' => $this->appEnv,
+            'appDebug' => $this->appDebug,
         ];
     }
 }

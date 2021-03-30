@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="layout-col z-10">
-            <DangerCard v-if="this.app_env !== 'local' && this.app_debug === true">
+            <DangerCard v-if="this.appEnv !== 'local' && this.appDebug === true">
                 <p>
                     <code>APP_DEBUG</code> is set to <code>true</code> while <code>APP_ENV</code> is
                     not <code>local</code>
@@ -63,7 +63,7 @@ export default {
         FilePath,
     },
 
-    inject: ['report', 'solutions', 'app_env', 'app_debug'],
+    inject: ['report', 'solutions', 'appEnv', 'appDebug'],
 
     data() {
         return {
