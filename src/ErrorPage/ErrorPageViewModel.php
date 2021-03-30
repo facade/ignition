@@ -50,7 +50,7 @@ class ErrorPageViewModel implements Arrayable
 
         $this->solutions = $solutions;
 
-        $this->appEnv = app()->environment();
+        $this->appEnv = config('app.env');
         $this->appDebug = config('app.debug');
     }
 
