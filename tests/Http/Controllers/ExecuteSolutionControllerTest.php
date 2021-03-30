@@ -2,10 +2,7 @@
 
 namespace Facade\Ignition\Tests\Http\Controllers;
 
-use Facade\Ignition\Http\Controllers\ExecuteSolutionController;
-use Facade\Ignition\IgnitionServiceProvider;
 use Facade\Ignition\Tests\TestCase;
-use Illuminate\Support\Env;
 
 class ExecuteSolutionControllerTest extends TestCase
 {
