@@ -37,7 +37,7 @@ class ErrorPageViewModel implements Arrayable
     /** @var string */
     protected $app_env;
 
-    /** @var boolean */
+    /** @var bool */
     protected $app_debug;
 
     public function __construct(?Throwable $throwable, IgnitionConfig $ignitionConfig, Report $report, array $solutions)
@@ -50,8 +50,8 @@ class ErrorPageViewModel implements Arrayable
 
         $this->solutions = $solutions;
 
-        $this->app_env =  app()->environment();
-        $this->app_debug =  config('app.debug');
+        $this->app_env = app()->environment();
+        $this->app_debug = config('app.debug');
     }
 
     public function throwableString(): string
