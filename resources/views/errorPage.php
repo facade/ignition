@@ -36,6 +36,8 @@
             'shareEndpoint' => $shareEndpoint,
             'defaultTab' => $defaultTab,
             'defaultTabProps' => $defaultTabProps,
+            'app_env' => $app_env,
+            'app_debug' => $app_debug,
         ])
     ?>;
 
