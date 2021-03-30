@@ -20,6 +20,10 @@
     @apply overflow-x-auto;
 }
 
+.card-danger {
+    @apply bg-red-400 text-white;
+}
+
 @screen md {
     .card {
         grid-template-columns: 16rem 1fr;

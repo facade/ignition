@@ -28,6 +28,8 @@ export default {
         shareEndpoint: { required: true },
         defaultTab: { required: true },
         defaultTabProps: { required: false },
+        appEnv: { required: true },
+        appDebug: { required: true },
     },
 
     data() {
@@ -48,6 +50,8 @@ export default {
             telescopeUrl: this.telescopeUrl,
             shareEndpoint: this.shareEndpoint,
             setTab: this.setTab,
+            appEnv: this.appEnv,
+            appDebug: this.appDebug,
         };
     },
 

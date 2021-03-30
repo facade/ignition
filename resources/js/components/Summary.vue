@@ -1,6 +1,22 @@
 <template>
     <div>
         <div class="layout-col z-10">
+            <DangerCard v-if="this.appEnv !== 'local' && this.appDebug === true">
+                <p>
+                    <code>APP_DEBUG</code> is set to <code>true</code> while <code>APP_ENV</code> is
+                    not <code>local</code>
+                </p>
+                <p class="text-base">
+                    This could make your application vulnerable to remote execution.
+                    <a
+                        class="underline"
+                        target="_blank"
+                        rel="noopener"
+                        href="https://flareapp.io/docs/ignition-for-laravel/security"
+                        >Read more about Ignition security.</a
+                    >
+                </p>
+            </DangerCard>
             <ErrorCard />
         </div>
 
@@ -35,17 +51,19 @@
 
 <script>
 import FilePath from './Shared/FilePath.vue';
+import DangerCard from './Shared/DangerCard';
 import ErrorCard from './Shared/ErrorCard';
 import SolutionCard from './Solutions/SolutionCard';
 
 export default {
     components: {
+        DangerCard,
         SolutionCard,
         ErrorCard,
         FilePath,
     },
 
-    inject: ['report', 'solutions'],
+    inject: ['report', 'solutions', 'appEnv', 'appDebug'],
 
     data() {
         return {
