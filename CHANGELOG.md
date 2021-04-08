@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.8.1 - 2021-04-08
+
+- add `censor_request_body_fields` default config option
+
 ## 2.8.0 - 2021-04-08
 
 - add `censor_request_body_fields` config option
