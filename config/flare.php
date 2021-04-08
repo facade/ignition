@@ -48,4 +48,15 @@ return [
     */
 
     'send_logs_as_events' => true,
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Censor request body fields
+    |--------------------------------------------------------------------------
+    |
+    | These fields will be censored from your request when sent to Flare. 
+    |
+    */
+    
+    'censor_request_body_fields' => ['password'],
 ];
