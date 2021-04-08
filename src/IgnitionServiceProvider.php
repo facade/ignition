@@ -131,6 +131,8 @@ class IgnitionServiceProvider extends ServiceProvider
             $this->app->get(Flare::class)->anonymizeIp();
         }
 
+        $this->app->get(Flare::class)->censorRequestBodyFields(config('flare.reporting.censor_request_body_fields'));
+
         $this->registerBuiltInMiddleware();
     }
 
