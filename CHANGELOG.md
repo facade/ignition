@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.8.3 - 2021-04-09
+
+- support Octane (#379)
+
 ## 2.8.2 - 2021-04-08
 
 - censor passwords by default (#377)
