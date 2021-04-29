@@ -258,10 +258,6 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerLogHandler()
     {
-        if (! config('flare.key')) {
-            return $this;
-        }
-
         $this->app->singleton('flare.logger', function ($app) {
             $handler = new FlareHandler($app->make(Flare::class));
 
