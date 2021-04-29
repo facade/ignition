@@ -70,6 +70,10 @@ class FlareHandler extends AbstractProcessingHandler
 
     protected function shouldReport(array $report): bool
     {
+        if (! config('flare.key')) {
+            return false;
+        }
+
         return $this->hasException($report) || $this->hasValidLogLevel($report);
     }
 

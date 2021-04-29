@@ -20,6 +20,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getPackageProviders($app)
     {
+        config()->set('flare.key', 'dummy-key');
+
         return [IgnitionServiceProvider::class];
     }
 
