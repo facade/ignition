@@ -3,7 +3,6 @@
 namespace Facade\Ignition\Tests\Commands;
 
 use Facade\Ignition\Tests\TestCase;
-use Symfony\Component\Console\Exception\CommandNotFoundException;
 
 class TestCommandTest extends TestCase
 {
