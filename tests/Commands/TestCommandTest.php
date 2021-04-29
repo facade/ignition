@@ -24,13 +24,6 @@ class TestCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_can_not_find_the_test_command_without_a_flare_key()
-    {
-        $this->expectException(CommandNotFoundException::class);
-        $testResult = $this->artisan('flare:test');
-    }
-
-    /** @test */
     public function it_can_execute_the_test_command_when_a_flare_key_is_present()
     {
         $this->withFlareKey();
