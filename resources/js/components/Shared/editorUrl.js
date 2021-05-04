@@ -11,6 +11,8 @@ export default function editorUrl(config, file, lineNumber) {
         'vscode-insiders': 'vscode-insiders://file/%path:%line',
         atom: 'atom://core/open/file?filename=%path&line=%line',
         nova: 'nova://core/open/file?filename=%path&line=%line',
+        netbeans: "netbeans://open/?f=%path:%line",
+        xdebug: "xdebug://%path@%line",
     };
 
     file =
