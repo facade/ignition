@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.9.0 - 2021-05-05
+
+- add Xdebug format links for editor (#383)
+
 ## 2.8.4 - 2021-04-29
 
 - avoid making call to Flare when no API key is specified
