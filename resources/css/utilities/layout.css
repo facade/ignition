@@ -1,5 +1,4 @@
 .layout-col {
-    @apply max-w-7xl;
     @apply px-4;
     @apply mx-auto;
 }
