@@ -207,13 +207,13 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerExceptionRenderer()
     {
-        if (class_exists(\Whoops\Handler\HandlerInterface::class)) {
+        if (interface_exists(\Whoops\Handler\HandlerInterface::class)) {
             $this->app->bind(\Whoops\Handler\HandlerInterface::class, function (Application $app) {
                 return $app->make(IgnitionWhoopsHandler::class);
             });
         }
 
-        if (class_exists(\Illuminate\Contracts\Foundation\ExceptionRenderer::class)) {
+        if (interface_exists(\Illuminate\Contracts\Foundation\ExceptionRenderer::class)) {
             $this->app->bind(\Illuminate\Contracts\Foundation\ExceptionRenderer::class, function (Application $app) {
                 return $app->make(IgnitionExceptionRenderer::class);
             });
