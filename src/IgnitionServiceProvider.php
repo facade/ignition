@@ -11,6 +11,7 @@ use Facade\Ignition\Commands\SolutionProviderMakeCommand;
 use Facade\Ignition\Commands\TestCommand;
 use Facade\Ignition\Context\LaravelContextDetector;
 use Facade\Ignition\DumpRecorder\DumpRecorder;
+use Facade\Ignition\ErrorPage\IgnitionExceptionRenderer;
 use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
 use Facade\Ignition\ErrorPage\Renderer;
 use Facade\Ignition\Exceptions\InvalidConfig;
@@ -213,10 +214,10 @@ class IgnitionServiceProvider extends ServiceProvider
         }
 
         if (class_exists(\Illuminate\Contracts\Foundation\ExceptionRenderer::class)) {
-        $this->app->bind(\Illuminate\Contracts\Foundation\ExceptionRenderer::class, function (Application $app) {
-            return $app->make(IgnitionWhoopsHandler::class);
-        });
-    }
+            $this->app->bind(\Illuminate\Contracts\Foundation\ExceptionRenderer::class, function (Application $app) {
+                return $app->make(IgnitionExceptionRenderer::class);
+            });
+        }
 
         return $this;
     }

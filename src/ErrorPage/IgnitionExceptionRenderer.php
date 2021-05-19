@@ -4,7 +4,7 @@ namespace Facade\Ignition\ErrorPage;
 
 use Illuminate\Contracts\Foundation\ExceptionRenderer;
 
-class IgnitionExceptionHandler implements ExceptionRenderer
+class IgnitionExceptionRenderer implements ExceptionRenderer
 {
     /** @var \Facade\Ignition\ErrorPage\ErrorPageHandler */
     protected $errorPageHandler;
