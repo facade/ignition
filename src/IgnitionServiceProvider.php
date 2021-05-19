@@ -65,7 +65,6 @@ use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
 use Livewire\CompilerEngineForIgnition;
 use Monolog\Logger;
 use Throwable;
-use Whoops\Handler\HandlerInterface;
 
 class IgnitionServiceProvider extends ServiceProvider
 {
@@ -113,8 +112,8 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $this
             ->registerSolutionProviderRepository()
+            ->registerRenderer()
             ->registerExceptionRenderer()
-            ->registerWhoopsHandler()
             ->registerIgnitionConfig()
             ->registerFlare()
             ->registerDumpCollector();
@@ -196,7 +195,7 @@ class IgnitionServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function registerExceptionRenderer()
+    protected function registerRenderer()
     {
         $this->app->bind(Renderer::class, function () {
             return new Renderer(__DIR__.'/../resources/views/');
@@ -205,11 +204,19 @@ class IgnitionServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function registerWhoopsHandler()
+    protected function registerExceptionRenderer()
     {
-        $this->app->bind(HandlerInterface::class, function (Application $app) {
+        if (class_exists(\Whoops\Handler\HandlerInterface::class)) {
+            $this->app->bind(\Whoops\Handler\HandlerInterface::class, function (Application $app) {
+                return $app->make(IgnitionWhoopsHandler::class);
+            });
+        }
+
+        if (class_exists(\Illuminate\Contracts\Foundation\ExceptionRenderer::class)) {
+        $this->app->bind(\Illuminate\Contracts\Foundation\ExceptionRenderer::class, function (Application $app) {
             return $app->make(IgnitionWhoopsHandler::class);
         });
+    }
 
         return $this;
     }
