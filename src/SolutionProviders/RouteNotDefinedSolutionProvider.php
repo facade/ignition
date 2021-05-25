@@ -2,11 +2,11 @@
 
 namespace Facade\Ignition\SolutionProviders;
 
-use Facade\Ignition\Exceptions\ViewException;
-use Facade\Ignition\Support\StringComparator;
 use Facade\IgnitionContracts\BaseSolution;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Illuminate\Foundation\Application;
+use Facade\Ignition\Exceptions\ViewException;
+use Facade\Ignition\Support\StringComparator;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use InvalidArgumentException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
