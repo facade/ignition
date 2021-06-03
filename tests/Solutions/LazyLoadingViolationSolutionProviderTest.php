@@ -12,6 +12,15 @@ use Illuminate\Foundation\Auth\User;
 
 class LazyLoadingViolationSolutionProviderTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        if (version_compare($this->app->version(), '8.0.0', '<')) {
+            $this->markTestSkipped();
+        }
+    }
+
     /** @test */
     public function it_can_solve_lazy_loading_violations()
     {
