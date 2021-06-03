@@ -35,6 +35,7 @@ use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\LazyLoadingViolationSolutionProvider;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
@@ -52,6 +53,7 @@ use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
 use Facade\Ignition\Views\Engines\CompilerEngine;
 use Facade\Ignition\Views\Engines\PhpEngine;
 use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
+use Illuminate\Database\LazyLoadingViolationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Log\LogManager;
@@ -404,6 +406,7 @@ class IgnitionServiceProvider extends ServiceProvider
             UndefinedPropertySolutionProvider::class,
             MissingMixManifestSolutionProvider::class,
             MissingLivewireComponentSolutionProvider::class,
+            LazyLoadingViolationSolutionProvider::class,
         ];
     }
 
