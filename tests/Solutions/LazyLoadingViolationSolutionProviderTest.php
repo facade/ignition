@@ -14,7 +14,7 @@ class LazyLoadingViolationSolutionProviderTest extends TestCase
     {
         parent::setUp();
 
-        if (version_compare($this->app->version(), '8.0.0', '<')) {
+        if (version_compare($this->app->version(), '8.43.0', '<')) {
             $this->markTestSkipped();
         }
     }
