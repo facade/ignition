@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.10.0 - 2021-06-03
+
+- add a solution for lazy loading violations (#392)
+
 ## 2.9.0 - 2021-05-05
 
 - add Xdebug format links for editor (#383)
