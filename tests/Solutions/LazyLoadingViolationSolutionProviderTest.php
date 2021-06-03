@@ -4,9 +4,7 @@ namespace Facade\Ignition\Tests\Solutions;
 
 use Exception;
 use Facade\Ignition\SolutionProviders\LazyLoadingViolationSolutionProvider;
-use Facade\Ignition\SolutionProviders\MissingMixManifestSolutionProvider;
 use Facade\Ignition\Tests\TestCase;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\LazyLoadingViolationException;
 use Illuminate\Foundation\Auth\User;
 
