@@ -63,6 +63,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
+use Laravel\Octane\Events\RequestReceived;
+use Laravel\Octane\Events\TaskReceived;
+use Laravel\Octane\Events\TickReceived;
 use Livewire\CompilerEngineForIgnition;
 use Monolog\Logger;
 use Throwable;
@@ -486,6 +489,14 @@ class IgnitionServiceProvider extends ServiceProvider
     protected function setupOctane()
     {
         $this->app['events']->listen(RequestReceived::class, function(){
+            $this->resetFlare();
+        });
+
+        $this->app['events']->listen(TaskReceived::class, function(){
+            $this->resetFlare();
+        });
+
+        $this->app['events']->listen(TickReceived::class, function(){
             $this->resetFlare();
         });
     }
