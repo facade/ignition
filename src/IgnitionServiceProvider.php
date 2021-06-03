@@ -462,7 +462,8 @@ class IgnitionServiceProvider extends ServiceProvider
         return null;
     }
 
-    protected function resetFlare(){
+    protected function resetFlare()
+    {
         $this->app->get(Flare::class)->reset();
 
         if (config('flare.reporting.report_logs')) {
@@ -485,7 +486,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function setupOctane()
     {
-        $this->app['events']->listen(RequestReceived::class, function(){
+        $this->app['events']->listen(RequestReceived::class, function () {
             $this->resetFlare();
         });
     }
