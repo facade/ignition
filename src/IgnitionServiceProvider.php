@@ -63,6 +63,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
+use Laravel\Octane\Events\RequestReceived;
+use Laravel\Octane\Events\TaskReceived;
+use Laravel\Octane\Events\TickReceived;
 use Livewire\CompilerEngineForIgnition;
 use Monolog\Logger;
 use Throwable;
@@ -94,6 +97,10 @@ class IgnitionServiceProvider extends ServiceProvider
 
         if ($this->app->bound('queue')) {
             $this->setupQueue($this->app->get('queue'));
+        }
+
+        if (isset($_SERVER['LARAVEL_OCTANE'])) {
+            $this->setupOctane();
         }
 
         if (config('flare.reporting.report_logs')) {
@@ -458,20 +465,40 @@ class IgnitionServiceProvider extends ServiceProvider
         return null;
     }
 
+    protected function resetFlare()
+    {
+        $this->app->get(Flare::class)->reset();
+
+        if (config('flare.reporting.report_logs')) {
+            $this->app->make(LogRecorder::class)->reset();
+        }
+
+        if (config('flare.reporting.report_queries')) {
+            $this->app->make(QueryRecorder::class)->reset();
+        }
+
+        $this->app->make(DumpRecorder::class)->reset();
+    }
+
     protected function setupQueue(QueueManager $queue)
     {
         $queue->looping(function () {
-            $this->app->get(Flare::class)->reset();
+            $this->resetFlare();
+        });
+    }
 
-            if (config('flare.reporting.report_logs')) {
-                $this->app->make(LogRecorder::class)->reset();
-            }
+    protected function setupOctane()
+    {
+        $this->app['events']->listen(RequestReceived::class, function () {
+            $this->resetFlare();
+        });
 
-            if (config('flare.reporting.report_queries')) {
-                $this->app->make(QueryRecorder::class)->reset();
-            }
+        $this->app['events']->listen(TaskReceived::class, function () {
+            $this->resetFlare();
+        });
 
-            $this->app->make(DumpRecorder::class)->reset();
+        $this->app['events']->listen(TickReceived::class, function () {
+            $this->resetFlare();
         });
     }
 }
