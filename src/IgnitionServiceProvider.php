@@ -493,11 +493,11 @@ class IgnitionServiceProvider extends ServiceProvider
             $this->resetFlare();
         });
 
-        $this->app['events']->listen(TaskReceived::class, function(){
+        $this->app['events']->listen(TaskReceived::class, function () {
             $this->resetFlare();
         });
 
-        $this->app['events']->listen(TickReceived::class, function(){
+        $this->app['events']->listen(TickReceived::class, function () {
             $this->resetFlare();
         });
     }
