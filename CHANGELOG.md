@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.11.0 - 2021-07-12
+
+- prepare Laravel 9 support
+- remove filp/whoops dependency
+- update front-end dependencies
+
 ## 2.10.2 - 2021-06-11
 
 - fix typo in config/flare.php (#395)
