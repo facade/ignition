@@ -55,6 +55,8 @@ use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepos
 use Illuminate\Foundation\Application;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Log\LogManager;
+use Illuminate\Queue\Events\JobProcessed;
+use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\QueueManager;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -458,18 +460,26 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function setupQueue(QueueManager $queue)
     {
-        $queue->looping(function () {
-            $this->app->get(Flare::class)->reset();
+        // Reset before executing a queue job to make sure the job's log/query/dump recorders are empty.
+        $queue->before([$this, 'resetIgnitionContext']);
 
-            if (config('flare.reporting.report_logs')) {
-                $this->app->make(LogRecorder::class)->reset();
-            }
+        // Send queued reports (and reset) after executing a queue job.
+        $queue->after([$this, 'resetIgnitionContext']);
 
-            if (config('flare.reporting.report_queries')) {
-                $this->app->make(QueryRecorder::class)->reset();
-            }
+        // Note: the $queue->looping() event can't be used because it's not triggered on Vapor
+    }
 
-            $this->app->make(DumpRecorder::class)->reset();
-        });
+    public function resetIgnitionContext($event = null) {
+        $this->app->make(Flare::class)->reset();
+
+        if (config('flare.reporting.report_logs')) {
+            $this->app->make(LogRecorder::class)->reset();
+        }
+
+        if (config('flare.reporting.report_queries')) {
+            $this->app->make(QueryRecorder::class)->reset();
+        }
+
+        $this->app->make(DumpRecorder::class)->reset();
     }
 }
