@@ -484,41 +484,20 @@ class IgnitionServiceProvider extends ServiceProvider
     {
         // Reset before executing a queue job to make sure the job's log/query/dump recorders are empty.
         // When using a sync queue this also reports the queued reports from previous exceptions.
-        $queue->before([$this, 'resetIgnitionContext']);
+        $queue->before([$this, 'resetFlare']);
 
         // Send queued reports (and reset) after executing a queue job.
-        $queue->after([$this, 'resetIgnitionContext']);
+        $queue->after([$this, 'resetFlare']);
 
         // Note: the $queue->looping() event can't be used because it's not triggered on Vapor
     }
 
-    public function resetIgnitionContext($event = null)
-    {
-        $this->app->make(Flare::class)->reset();
-
-        if (config('flare.reporting.report_logs')) {
-            $this->app->make(LogRecorder::class)->reset();
-        }
-
-        if (config('flare.reporting.report_queries')) {
-            $this->app->make(QueryRecorder::class)->reset();
-        }
-
-        $this->app->make(DumpRecorder::class)->reset();
-    }
-
     protected function setupOctane()
     {
-        $this->app['events']->listen(RequestReceived::class, function () {
-            $this->resetFlare();
-        });
+        $this->app['events']->listen(RequestReceived::class, [$this, 'resetFlare']);
 
-        $this->app['events']->listen(TaskReceived::class, function () {
-            $this->resetFlare();
-        });
+        $this->app['events']->listen(TaskReceived::class, [$this, 'resetFlare']);
 
-        $this->app['events']->listen(TickReceived::class, function () {
-            $this->resetFlare();
-        });
+        $this->app['events']->listen(TickReceived::class, [$this, 'resetFlare']);
     }
 }
