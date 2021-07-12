@@ -56,8 +56,6 @@ use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepos
 use Illuminate\Foundation\Application;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Log\LogManager;
-use Illuminate\Queue\Events\JobProcessed;
-use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Queue\QueueManager;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -494,7 +492,8 @@ class IgnitionServiceProvider extends ServiceProvider
         // Note: the $queue->looping() event can't be used because it's not triggered on Vapor
     }
 
-    public function resetIgnitionContext($event = null) {
+    public function resetIgnitionContext($event = null)
+    {
         $this->app->make(Flare::class)->reset();
 
         if (config('flare.reporting.report_logs')) {
