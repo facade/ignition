@@ -11,6 +11,7 @@ use Facade\Ignition\Commands\SolutionProviderMakeCommand;
 use Facade\Ignition\Commands\TestCommand;
 use Facade\Ignition\Context\LaravelContextDetector;
 use Facade\Ignition\DumpRecorder\DumpRecorder;
+use Facade\Ignition\ErrorPage\IgnitionExceptionRenderer;
 use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
 use Facade\Ignition\ErrorPage\Renderer;
 use Facade\Ignition\Exceptions\InvalidConfig;
@@ -69,7 +70,6 @@ use Laravel\Octane\Events\TickReceived;
 use Livewire\CompilerEngineForIgnition;
 use Monolog\Logger;
 use Throwable;
-use Whoops\Handler\HandlerInterface;
 
 class IgnitionServiceProvider extends ServiceProvider
 {
@@ -121,8 +121,8 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $this
             ->registerSolutionProviderRepository()
+            ->registerRenderer()
             ->registerExceptionRenderer()
-            ->registerWhoopsHandler()
             ->registerIgnitionConfig()
             ->registerFlare()
             ->registerDumpCollector();
@@ -204,7 +204,7 @@ class IgnitionServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function registerExceptionRenderer()
+    protected function registerRenderer()
     {
         $this->app->bind(Renderer::class, function () {
             return new Renderer(__DIR__.'/../resources/views/');
@@ -213,11 +213,19 @@ class IgnitionServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function registerWhoopsHandler()
+    protected function registerExceptionRenderer()
     {
-        $this->app->bind(HandlerInterface::class, function (Application $app) {
-            return $app->make(IgnitionWhoopsHandler::class);
-        });
+        if (interface_exists(\Whoops\Handler\HandlerInterface::class)) {
+            $this->app->bind(\Whoops\Handler\HandlerInterface::class, function (Application $app) {
+                return $app->make(IgnitionWhoopsHandler::class);
+            });
+        }
+
+        if (interface_exists(\Illuminate\Contracts\Foundation\ExceptionRenderer::class)) {
+            $this->app->bind(\Illuminate\Contracts\Foundation\ExceptionRenderer::class, function (Application $app) {
+                return $app->make(IgnitionExceptionRenderer::class);
+            });
+        }
 
         return $this;
     }
