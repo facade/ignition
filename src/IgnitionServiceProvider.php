@@ -35,6 +35,7 @@ use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\LazyLoadingViolationSolutionProvider;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
@@ -64,6 +65,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
+use Laravel\Octane\Events\RequestReceived;
+use Laravel\Octane\Events\TaskReceived;
+use Laravel\Octane\Events\TickReceived;
 use Livewire\CompilerEngineForIgnition;
 use Monolog\Logger;
 use Throwable;
@@ -95,6 +99,10 @@ class IgnitionServiceProvider extends ServiceProvider
 
         if ($this->app->bound('queue')) {
             $this->setupQueue($this->app->get('queue'));
+        }
+
+        if (isset($_SERVER['LARAVEL_OCTANE'])) {
+            $this->setupOctane();
         }
 
         if (config('flare.reporting.report_logs')) {
@@ -406,6 +414,7 @@ class IgnitionServiceProvider extends ServiceProvider
             UndefinedPropertySolutionProvider::class,
             MissingMixManifestSolutionProvider::class,
             MissingLivewireComponentSolutionProvider::class,
+            LazyLoadingViolationSolutionProvider::class,
         ];
     }
 
@@ -458,6 +467,21 @@ class IgnitionServiceProvider extends ServiceProvider
         return null;
     }
 
+    protected function resetFlare()
+    {
+        $this->app->get(Flare::class)->reset();
+
+        if (config('flare.reporting.report_logs')) {
+            $this->app->make(LogRecorder::class)->reset();
+        }
+
+        if (config('flare.reporting.report_queries')) {
+            $this->app->make(QueryRecorder::class)->reset();
+        }
+
+        $this->app->make(DumpRecorder::class)->reset();
+    }
+
     protected function setupQueue(QueueManager $queue)
     {
         // Reset before executing a queue job to make sure the job's log/query/dump recorders are empty.
@@ -482,5 +506,20 @@ class IgnitionServiceProvider extends ServiceProvider
         }
 
         $this->app->make(DumpRecorder::class)->reset();
+    }
+
+    protected function setupOctane()
+    {
+        $this->app['events']->listen(RequestReceived::class, function () {
+            $this->resetFlare();
+        });
+
+        $this->app['events']->listen(TaskReceived::class, function () {
+            $this->resetFlare();
+        });
+
+        $this->app['events']->listen(TickReceived::class, function () {
+            $this->resetFlare();
+        });
     }
 }
