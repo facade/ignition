@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.11.1 - 2021-07-20
+
+- fix sending queued reports on Laravel Vapor queues (#398)
+
 ## 2.11.0 - 2021-07-12
 
 - prepare Laravel 9 support
