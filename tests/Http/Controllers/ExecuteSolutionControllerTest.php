@@ -17,6 +17,10 @@ class ExecuteSolutionControllerTest extends TestCase
     /** @test */
     public function it_can_execute_solutions_on_a_local_environment_with_debugging_enabled()
     {
+        if (version_compare($this->app->version(), '5.7.14', '<')) {
+            $this->markTestSkipped('Laravel version < 5.7.14 does not support setting the environment to running in console');
+        }
+
         $this->app['env'] = 'local';
         $this->app['config']->set('app.debug', true);
 
@@ -27,6 +31,10 @@ class ExecuteSolutionControllerTest extends TestCase
     /** @test */
     public function it_wont_execute_solutions_on_a_production_environment()
     {
+        if (version_compare($this->app->version(), '5.7.14', '<')) {
+            $this->markTestSkipped('Laravel version < 5.7.14 does not support setting the environment to running in console');
+        }
+
         $this->app['env'] = 'production';
         $this->app['config']->set('app.debug', true);
 
@@ -37,6 +45,10 @@ class ExecuteSolutionControllerTest extends TestCase
     /** @test */
     public function it_wont_execute_solutions_when_debugging_is_disabled()
     {
+        if (version_compare($this->app->version(), '5.7.14', '<')) {
+            $this->markTestSkipped('Laravel version < 5.7.14 does not support setting the environment to running in console');
+        }
+
         $this->app['env'] = 'local';
         $this->app['config']->set('app.debug', false);
 
@@ -47,6 +59,10 @@ class ExecuteSolutionControllerTest extends TestCase
     /** @test */
     public function it_wont_execute_solutions_for_a_non_local_ip()
     {
+        if (version_compare($this->app->version(), '5.7.14', '<')) {
+            $this->markTestSkipped('Laravel version < 5.7.14 does not support setting the environment to running in console');
+        }
+
         $this->app['env'] = 'local';
         $this->app['config']->set('app.debug', true);
         $this->withServerVariables(['REMOTE_ADDR' => '138.197.187.74']);
