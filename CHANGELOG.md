@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.9.1 - 2021-07-30
+
+- wrap `AddGitInformation` middleware in try-catch
+
 ## 2.9.0 - 2021-05-05
 
 - add Xdebug format links for editor (#383)
