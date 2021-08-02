@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 1.18.0 - 2021-08-02
+
+- disable executing solutions on non-local environments or from non-local IP addresses on version 1.x (#404)
+
 ## 1.17.0
 
 - add extra editors (#389)
