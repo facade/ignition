@@ -426,6 +426,10 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function hasCustomViewEnginesRegistered()
     {
+        if (! $this->app->resolved('view.engine.resolver')) {
+            return false;
+        }
+        
         $resolver = $this->app->make('view.engine.resolver');
 
         if (! $resolver->resolve('php') instanceof LaravelPhpEngine) {
