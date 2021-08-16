@@ -17,7 +17,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 
     public function canSolve(Throwable $throwable): bool
     {
-        if (!$throwable instanceof ViewException) {
+        if (! $throwable instanceof ViewException) {
             return false;
         }
 
@@ -30,7 +30,7 @@ class UndefinedVariableSolutionProvider implements HasSolutionsForThrowable
 
         extract($this->getNameAndView($throwable));
 
-        if (!isset($variableName)) {
+        if (! isset($variableName)) {
             return [];
         }
 
