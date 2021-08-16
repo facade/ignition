@@ -11,6 +11,7 @@ use Facade\Ignition\Commands\SolutionProviderMakeCommand;
 use Facade\Ignition\Commands\TestCommand;
 use Facade\Ignition\Context\LaravelContextDetector;
 use Facade\Ignition\DumpRecorder\DumpRecorder;
+use Facade\Ignition\ErrorPage\IgnitionExceptionRenderer;
 use Facade\Ignition\ErrorPage\IgnitionWhoopsHandler;
 use Facade\Ignition\ErrorPage\Renderer;
 use Facade\Ignition\Exceptions\InvalidConfig;
@@ -35,6 +36,7 @@ use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
 use Facade\Ignition\SolutionProviders\DefaultDbNameSolutionProvider;
 use Facade\Ignition\SolutionProviders\IncorrectValetDbCredentialsSolutionProvider;
 use Facade\Ignition\SolutionProviders\InvalidRouteActionSolutionProvider;
+use Facade\Ignition\SolutionProviders\LazyLoadingViolationSolutionProvider;
 use Facade\Ignition\SolutionProviders\MergeConflictSolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingAppKeySolutionProvider;
 use Facade\Ignition\SolutionProviders\MissingColumnSolutionProvider;
@@ -62,10 +64,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Engines\CompilerEngine as LaravelCompilerEngine;
 use Illuminate\View\Engines\PhpEngine as LaravelPhpEngine;
+use Laravel\Octane\Events\RequestReceived;
+use Laravel\Octane\Events\TaskReceived;
+use Laravel\Octane\Events\TickReceived;
 use Livewire\CompilerEngineForIgnition;
 use Monolog\Logger;
 use Throwable;
-use Whoops\Handler\HandlerInterface;
 
 class IgnitionServiceProvider extends ServiceProvider
 {
@@ -95,6 +99,10 @@ class IgnitionServiceProvider extends ServiceProvider
             $this->setupQueue($this->app->get('queue'));
         }
 
+        if (isset($_SERVER['LARAVEL_OCTANE'])) {
+            $this->setupOctane();
+        }
+
         if (config('flare.reporting.report_logs')) {
             $this->app->make(LogRecorder::class)->register();
         }
@@ -113,8 +121,8 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $this
             ->registerSolutionProviderRepository()
+            ->registerRenderer()
             ->registerExceptionRenderer()
-            ->registerWhoopsHandler()
             ->registerIgnitionConfig()
             ->registerFlare()
             ->registerDumpCollector();
@@ -196,7 +204,7 @@ class IgnitionServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function registerExceptionRenderer()
+    protected function registerRenderer()
     {
         $this->app->bind(Renderer::class, function () {
             return new Renderer(__DIR__.'/../resources/views/');
@@ -205,11 +213,19 @@ class IgnitionServiceProvider extends ServiceProvider
         return $this;
     }
 
-    protected function registerWhoopsHandler()
+    protected function registerExceptionRenderer()
     {
-        $this->app->bind(HandlerInterface::class, function (Application $app) {
-            return $app->make(IgnitionWhoopsHandler::class);
-        });
+        if (interface_exists(\Whoops\Handler\HandlerInterface::class)) {
+            $this->app->bind(\Whoops\Handler\HandlerInterface::class, function (Application $app) {
+                return $app->make(IgnitionWhoopsHandler::class);
+            });
+        }
+
+        if (interface_exists(\Illuminate\Contracts\Foundation\ExceptionRenderer::class)) {
+            $this->app->bind(\Illuminate\Contracts\Foundation\ExceptionRenderer::class, function (Application $app) {
+                return $app->make(IgnitionExceptionRenderer::class);
+            });
+        }
 
         return $this;
     }
@@ -404,6 +420,7 @@ class IgnitionServiceProvider extends ServiceProvider
             UndefinedPropertySolutionProvider::class,
             MissingMixManifestSolutionProvider::class,
             MissingLivewireComponentSolutionProvider::class,
+            LazyLoadingViolationSolutionProvider::class,
         ];
     }
 
@@ -456,20 +473,49 @@ class IgnitionServiceProvider extends ServiceProvider
         return null;
     }
 
+    protected function resetFlare()
+    {
+        $this->app->get(Flare::class)->reset();
+
+        if (config('flare.reporting.report_logs')) {
+            $this->app->make(LogRecorder::class)->reset();
+        }
+
+        if (config('flare.reporting.report_queries')) {
+            $this->app->make(QueryRecorder::class)->reset();
+        }
+
+        $this->app->make(DumpRecorder::class)->reset();
+    }
+
     protected function setupQueue(QueueManager $queue)
     {
-        $queue->looping(function () {
-            $this->app->get(Flare::class)->reset();
+        // Reset before executing a queue job to make sure the job's log/query/dump recorders are empty.
+        // When using a sync queue this also reports the queued reports from previous exceptions.
+        $queue->before(function () {
+            $this->resetFlare();
+        });
 
-            if (config('flare.reporting.report_logs')) {
-                $this->app->make(LogRecorder::class)->reset();
-            }
+        // Send queued reports (and reset) after executing a queue job.
+        $queue->after(function () {
+            $this->resetFlare();
+        });
 
-            if (config('flare.reporting.report_queries')) {
-                $this->app->make(QueryRecorder::class)->reset();
-            }
+        // Note: the $queue->looping() event can't be used because it's not triggered on Vapor
+    }
 
-            $this->app->make(DumpRecorder::class)->reset();
+    protected function setupOctane()
+    {
+        $this->app['events']->listen(RequestReceived::class, function () {
+            $this->resetFlare();
+        });
+
+        $this->app['events']->listen(TaskReceived::class, function () {
+            $this->resetFlare();
+        });
+
+        $this->app['events']->listen(TickReceived::class, function () {
+            $this->resetFlare();
         });
     }
 }
