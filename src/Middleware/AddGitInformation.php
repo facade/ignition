@@ -17,7 +17,6 @@ class AddGitInformation
                 'message' => $this->message(),
                 'tag' => $this->tag(),
                 'remote' => $this->remote(),
-                'isDirty' => !$this->isClean(),
             ]);
         } catch (RuntimeException $exception) {
         }
@@ -43,11 +42,6 @@ class AddGitInformation
     public function remote(): ?string
     {
         return $this->command('git config --get remote.origin.url');
-    }
-
-    public function isClean(): bool
-    {
-        return empty($this->command('git status -s'));
     }
 
     protected function command($command)

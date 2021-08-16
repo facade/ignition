@@ -24,12 +24,6 @@
                         </a>
                     </DefinitionListRow>
                     <DefinitionListRow v-if="git.tag" label="Tag">{{ git.tag }}</DefinitionListRow>
-                    <div class="mt-4 sm:start-2" v-if="git.isDirty">
-                        <div class="inline-block alert alert-warning min-h-0">
-                            This commit is dirty. (Un)staged changes have been made since this
-                            commit.
-                        </div>
-                    </div>
                 </DefinitionList>
             </section>
 
