@@ -2,6 +2,12 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.11.3 - 2021-08-16
+
+- fix issues with circular dependencies in model route parameters (#408)
+- remove notice about dirty git state in context
+- wrap `AddGitInformation` middleware in try-catch
+
 ## 2.11.2 - 2021-07-20
 
 - fix issues introduced in 2.11.1 (#403)
