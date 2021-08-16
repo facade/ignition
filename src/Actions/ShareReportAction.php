@@ -153,7 +153,7 @@ class ShareReportAction
         ];
 
         return Collection::make($contextItems)
-            ->reject(function ($value, $group) use ($predefinedContextItemGroups) {
+            ->reject(function ($_value, $group) use ($predefinedContextItemGroups) {
                 return in_array($group, $predefinedContextItemGroups);
             })
             ->keys()

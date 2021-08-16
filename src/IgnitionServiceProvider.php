@@ -504,6 +504,7 @@ class IgnitionServiceProvider extends ServiceProvider
         // Note: the $queue->looping() event can't be used because it's not triggered on Vapor
     }
 
+    /** @psalm-suppress UndefinedClass */
     protected function setupOctane()
     {
         $this->app['events']->listen(RequestReceived::class, function () {

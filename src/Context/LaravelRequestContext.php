@@ -72,7 +72,9 @@ class LaravelRequestContext extends RequestContext
     {
         try {
             return collect(optional($this->request->route())->parameters ?? [])
-                ->map(fn ($parameter) => $parameter instanceof Model ? $parameter->withoutRelations() : $parameter)
+                ->map(function ($parameter) {
+                    return $parameter instanceof Model ? $parameter->withoutRelations() : $parameter;
+                })
                 ->toArray();
         } catch (Throwable $e) {
             return [];

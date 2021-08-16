@@ -51,7 +51,7 @@ class MergeConflictSolutionProvider implements HasSolutionsForThrowable
     {
         $branch = "'".trim(shell_exec("cd ${directory}; git branch | grep \\* | cut -d ' ' -f2"))."'";
 
-        if (! isset($branch) || $branch === "''") {
+        if ($branch === "''") {
             $branch = 'current branch';
         }
 
