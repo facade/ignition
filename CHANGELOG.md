@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.11.4 - 2021-08-16
+
+- Use npm ci instead of install (#411)
+
 ## 2.11.3 - 2021-08-16
 
 - fix issues with circular dependencies in model route parameters (#408)
