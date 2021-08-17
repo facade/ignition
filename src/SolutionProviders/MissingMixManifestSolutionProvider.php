@@ -19,7 +19,7 @@ class MissingMixManifestSolutionProvider implements HasSolutionsForThrowable
     {
         return [
             BaseSolution::create('Missing Mix Manifest File')
-                ->setSolutionDescription('Did you forget to run `npm install && npm run dev`?'),
+                ->setSolutionDescription('Did you forget to run `npm ci && npm run dev`?'),
         ];
     }
 }
