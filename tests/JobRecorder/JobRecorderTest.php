@@ -27,7 +27,7 @@ class JobRecorderTest extends TestCase
             $job
         ));
 
-        $this->assertEquals([
+        $this->assertEqualsCanonicalizing([
             'name' => 'Facade\Ignition\Tests\stubs\jobs\QueueableJob',
             'connection' => 'redis',
             'queue' => 'default',
@@ -60,7 +60,7 @@ class JobRecorderTest extends TestCase
             $job
         ));
 
-        $this->assertEquals([
+        $this->assertEqualsCanonicalizing([
             'name' => 'Facade\Ignition\Tests\stubs\jobs\QueueableJob',
             'connection' => 'redis',
             'queue' => 'default',
@@ -99,7 +99,7 @@ class JobRecorderTest extends TestCase
             $job
         ));
 
-        $this->assertEquals([
+        $this->assertEqualsCanonicalizing([
             'name' => 'Closure (JobRecorderTest.php:93)',
             'connection' => 'redis',
             'queue' => 'default',
@@ -142,7 +142,7 @@ class JobRecorderTest extends TestCase
 
         $recorder->record($event);
 
-        $this->assertEquals([
+        $this->assertEqualsCanonicalizing([
             'name' => 'Fake Job Name',
             'connection' => 'redis',
             'queue' => 'default',
