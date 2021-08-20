@@ -37,6 +37,9 @@ class JobRecorderTest extends TestCase
                 'afterCommit' => null,
                 'middleware' => [],
                 'chained' => [],
+                'chainConnection' => null,
+                'chainQueue' => null,
+                'chainCatchCallbacks' => null,
             ],
         ], $recorder->toArray());
     }
@@ -70,6 +73,9 @@ class JobRecorderTest extends TestCase
                 'afterCommit' => null,
                 'middleware' => [],
                 'chained' => [],
+                'chainConnection' => null,
+                'chainQueue' => null,
+                'chainCatchCallbacks' => null,
             ],
         ], $recorder->toArray());
     }
@@ -94,7 +100,7 @@ class JobRecorderTest extends TestCase
         ));
 
         $this->assertEquals([
-            'name' => 'Closure (JobRecorderTest.php:87)',
+            'name' => 'Closure (JobRecorderTest.php:93)',
             'connection' => 'redis',
             'queue' => 'default',
             'properties' => [
@@ -104,7 +110,42 @@ class JobRecorderTest extends TestCase
                 'chained' => [],
                 'deleteWhenMissingModels' => true,
                 'batchId' => null,
+                'failureCallbacks' => [],
+                'chainConnection' => null,
+                'chainQueue' => null,
+                'chainCatchCallbacks' => null,
             ],
+        ], $recorder->toArray());
+    }
+
+    /** @test */
+    public function it_can_handle_a_job_with_an_unserializeable_payload()
+    {
+        $recorder = (new JobRecorder($this->app));
+
+        $payload = json_encode([
+            'job' => 'Fake Job Name',
+        ]);
+
+        $event = new JobExceptionOccurred(
+            'redis',
+            new RedisJob(
+                app(Container::class),
+                app(RedisQueue::class),
+                $payload,
+                $payload,
+                'redis',
+                'default'
+            ),
+            new Exception()
+        );
+
+        $recorder->record($event);
+
+        $this->assertEquals([
+            'name' => 'Fake Job Name',
+            'connection' => 'redis',
+            'queue' => 'default',
         ], $recorder->toArray());
     }
 

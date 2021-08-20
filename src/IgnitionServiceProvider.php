@@ -341,11 +341,11 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function registerJobRecorder()
     {
-        $jobRecorder = $this->app->make(JobRecorder::class);
+        if (! $this->app->runningInConsole()) {
+            return $this;
+        }
 
         $this->app->singleton(JobRecorder::class);
-
-        $this->app->instance(JobRecorder::class, $jobRecorder);
 
         return $this;
     }

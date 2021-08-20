@@ -80,10 +80,6 @@ class JobRecorder
             'closure',
             'connection',
             'queue',
-            'chainConnection',
-            'chainQueue',
-            'chainCatchCallbacks',
-            'failureCallbacks',
         ];
 
         return collect((new ReflectionClass($job))->getProperties())
