@@ -47,7 +47,7 @@ class JobRecorder
             'name' => $this->job->resolveName(),
             'connection' => $this->job->getConnectionName(),
             'queue' => $this->job->getQueue(),
-            'properties' => $this->getJobProperties()
+            'properties' => $this->getJobProperties(),
         ]);
     }
 
@@ -83,7 +83,7 @@ class JobRecorder
             'chainConnection',
             'chainQueue',
             'chainCatchCallbacks',
-            'failureCallbacks'
+            'failureCallbacks',
         ];
 
         return collect((new ReflectionClass($job))->getProperties())

@@ -400,7 +400,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
         $middlewares[] = AddSolutions::class;
 
-        if($this->app->runningInConsole()){
+        if ($this->app->runningInConsole()) {
             $middlewares[] = AddJobInformation::class;
         }
 
@@ -505,7 +505,7 @@ class IgnitionServiceProvider extends ServiceProvider
             $this->app->make(QueryRecorder::class)->reset();
         }
 
-        if($this->app->runningInConsole()){
+        if ($this->app->runningInConsole()) {
             $this->app->make(JobRecorder::class)->reset();
         }
 

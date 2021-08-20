@@ -85,7 +85,6 @@ class JobRecorderTest extends TestCase
         ];
 
         $job = function () use ($data) {
-
         };
 
         $recorder->record($this->createEvent(
@@ -142,5 +141,4 @@ class JobRecorderTest extends TestCase
             new Exception()
         );
     }
-
 }

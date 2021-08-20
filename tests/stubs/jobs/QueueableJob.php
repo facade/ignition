@@ -11,9 +11,12 @@ use Illuminate\Queue\SerializesModels;
 
 class QueueableJob implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
-    /** @var array  */
+    /** @var array */
     private $data;
 
     /**
@@ -36,4 +39,3 @@ class QueueableJob implements ShouldQueue
         throw new Exception("Die");
     }
 }
-
