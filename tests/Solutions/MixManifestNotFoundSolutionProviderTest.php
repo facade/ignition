@@ -26,6 +26,6 @@ class MixManifestNotFoundSolutionProviderTest extends TestCase
         $solution = app(MissingMixManifestSolutionProvider::class)
             ->getSolutions(new Exception('The Mix manifest does not exist.'))[0];
 
-        $this->assertTrue(Str::contains($solution->getSolutionDescription(), 'Did you forget to run `npm install && npm run dev`?'));
+        $this->assertTrue(Str::contains($solution->getSolutionDescription(), 'Did you forget to run `npm ci && npm run dev`?'));
     }
 }
