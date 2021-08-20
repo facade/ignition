@@ -27,21 +27,13 @@ class JobRecorderTest extends TestCase
             $job
         ));
 
-        $this->assertEqualsCanonicalizing([
-            'name' => 'Facade\Ignition\Tests\stubs\jobs\QueueableJob',
-            'connection' => 'redis',
-            'queue' => 'default',
-            'properties' => [
-                'data' => [],
-                'delay' => null,
-                'afterCommit' => null,
-                'middleware' => [],
-                'chained' => [],
-                'chainConnection' => null,
-                'chainQueue' => null,
-                'chainCatchCallbacks' => null,
-            ],
-        ], $recorder->toArray());
+        $recorded = $recorder->toArray();
+
+        $this->assertEquals('Facade\Ignition\Tests\stubs\jobs\QueueableJob', $recorded['name']);
+        $this->assertEquals('redis', $recorded['connection']);
+        $this->assertEquals('default', $recorded['queue']);
+        $this->assertNotEmpty($recorded['properties']);
+        $this->assertEquals([], $recorded['properties']['data']);
     }
 
     /** @test */
@@ -60,24 +52,16 @@ class JobRecorderTest extends TestCase
             $job
         ));
 
-        $this->assertEqualsCanonicalizing([
-            'name' => 'Facade\Ignition\Tests\stubs\jobs\QueueableJob',
-            'connection' => 'redis',
-            'queue' => 'default',
-            'properties' => [
-                'data' => [
-                    'int' => 42,
-                    'boolean' => true,
-                ],
-                'delay' => null,
-                'afterCommit' => null,
-                'middleware' => [],
-                'chained' => [],
-                'chainConnection' => null,
-                'chainQueue' => null,
-                'chainCatchCallbacks' => null,
-            ],
-        ], $recorder->toArray());
+        $recorded = $recorder->toArray();
+
+        $this->assertEquals('Facade\Ignition\Tests\stubs\jobs\QueueableJob', $recorded['name']);
+        $this->assertEquals('redis', $recorded['connection']);
+        $this->assertEquals('default', $recorded['queue']);
+        $this->assertNotEmpty($recorded['properties']);
+        $this->assertEquals([
+            'int' => 42,
+            'boolean' => true,
+        ], $recorded['properties']['data']);
     }
 
     /** @test */
@@ -99,23 +83,12 @@ class JobRecorderTest extends TestCase
             $job
         ));
 
-        $this->assertEqualsCanonicalizing([
-            'name' => 'Closure (JobRecorderTest.php:93)',
-            'connection' => 'redis',
-            'queue' => 'default',
-            'properties' => [
-                'delay' => null,
-                'afterCommit' => null,
-                'middleware' => [],
-                'chained' => [],
-                'deleteWhenMissingModels' => true,
-                'batchId' => null,
-                'failureCallbacks' => [],
-                'chainConnection' => null,
-                'chainQueue' => null,
-                'chainCatchCallbacks' => null,
-            ],
-        ], $recorder->toArray());
+        $recorded = $recorder->toArray();
+
+        $this->assertEquals('Closure (JobRecorderTest.php:77)', $recorded['name']);
+        $this->assertEquals('redis', $recorded['connection']);
+        $this->assertEquals('default', $recorded['queue']);
+        $this->assertNotEmpty($recorded['properties']);
     }
 
     /** @test */
@@ -142,11 +115,11 @@ class JobRecorderTest extends TestCase
 
         $recorder->record($event);
 
-        $this->assertEqualsCanonicalizing([
-            'name' => 'Fake Job Name',
-            'connection' => 'redis',
-            'queue' => 'default',
-        ], $recorder->toArray());
+        $recorded = $recorder->toArray();
+
+        $this->assertEquals('Fake Job Name', $recorded['name']);
+        $this->assertEquals('redis', $recorded['connection']);
+        $this->assertEquals('default', $recorded['queue']);
     }
 
     /**
