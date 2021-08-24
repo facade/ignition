@@ -22,11 +22,13 @@ use Facade\Ignition\Http\Controllers\ShareReportController;
 use Facade\Ignition\Http\Controllers\StyleController;
 use Facade\Ignition\Http\Middleware\IgnitionConfigValueEnabled;
 use Facade\Ignition\Http\Middleware\IgnitionEnabled;
+use Facade\Ignition\JobRecorder\JobRecorder;
 use Facade\Ignition\Logger\FlareHandler;
 use Facade\Ignition\LogRecorder\LogRecorder;
 use Facade\Ignition\Middleware\AddDumps;
 use Facade\Ignition\Middleware\AddEnvironmentInformation;
 use Facade\Ignition\Middleware\AddGitInformation;
+use Facade\Ignition\Middleware\AddJobInformation;
 use Facade\Ignition\Middleware\AddLogs;
 use Facade\Ignition\Middleware\AddQueries;
 use Facade\Ignition\Middleware\AddSolutions;
@@ -87,6 +89,8 @@ class IgnitionServiceProvider extends ServiceProvider
             if (isset($_SERVER['argv']) && ['artisan', 'tinker'] === $_SERVER['argv']) {
                 Api::sendReportsInBatches(false);
             }
+
+            $this->app->make(JobRecorder::class)->register();
         }
 
         $this
@@ -125,7 +129,8 @@ class IgnitionServiceProvider extends ServiceProvider
             ->registerExceptionRenderer()
             ->registerIgnitionConfig()
             ->registerFlare()
-            ->registerDumpCollector();
+            ->registerDumpCollector()
+            ->registerJobRecorder();
 
         if (config('flare.reporting.report_logs')) {
             $this->registerLogRecorder();
@@ -334,6 +339,17 @@ class IgnitionServiceProvider extends ServiceProvider
         return $this;
     }
 
+    protected function registerJobRecorder()
+    {
+        if (! $this->app->runningInConsole()) {
+            return $this;
+        }
+
+        $this->app->singleton(JobRecorder::class);
+
+        return $this;
+    }
+
     protected function registerCommands()
     {
         $this->app->bind('command.flare:test', TestCommand::class);
@@ -383,6 +399,10 @@ class IgnitionServiceProvider extends ServiceProvider
         }
 
         $middlewares[] = AddSolutions::class;
+
+        if ($this->app->runningInConsole()) {
+            $middlewares[] = AddJobInformation::class;
+        }
 
         $middleware = collect($middlewares)
             ->map(function (string $middlewareClass) {
@@ -483,6 +503,10 @@ class IgnitionServiceProvider extends ServiceProvider
 
         if (config('flare.reporting.report_queries')) {
             $this->app->make(QueryRecorder::class)->reset();
+        }
+
+        if ($this->app->runningInConsole()) {
+            $this->app->make(JobRecorder::class)->reset();
         }
 
         $this->app->make(DumpRecorder::class)->reset();
