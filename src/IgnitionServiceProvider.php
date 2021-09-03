@@ -30,6 +30,7 @@ use Facade\Ignition\Middleware\AddEnvironmentInformation;
 use Facade\Ignition\Middleware\AddExceptionInformation;
 use Facade\Ignition\Middleware\AddGitInformation;
 use Facade\Ignition\Middleware\AddJobInformation;
+use Facade\Ignition\Middleware\AddLiveWireInformation;
 use Facade\Ignition\Middleware\AddLogs;
 use Facade\Ignition\Middleware\AddQueries;
 use Facade\Ignition\Middleware\AddSolutions;
