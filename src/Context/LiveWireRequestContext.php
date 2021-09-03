@@ -13,8 +13,7 @@ class LiveWireRequestContext extends LaravelRequestContext
     public function __construct(
         Request $request,
         LivewireManager $livewireManager
-    )
-    {
+    ) {
         parent::__construct($request);
 
         $this->livewireManager = $livewireManager;
@@ -32,10 +31,10 @@ class LiveWireRequestContext extends LaravelRequestContext
 
     public function getLiveWireInformation(): array
     {
-        $componentId =  $this->request->input('fingerprint.id');
-        $componentAlias =  $this->request->input('fingerprint.name');
+        $componentId = $this->request->input('fingerprint.id');
+        $componentAlias = $this->request->input('fingerprint.name');
 
-        if($componentAlias === null){
+        if ($componentAlias === null) {
             return [];
         }
 

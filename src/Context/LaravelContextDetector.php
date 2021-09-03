@@ -17,7 +17,7 @@ class LaravelContextDetector implements ContextDetectorInterface
 
         $request = app(Request::class);
 
-        if($this->isRunningLiveWire($request)){
+        if ($this->isRunningLiveWire($request)) {
             return new LiveWireRequestContext($request, app(LivewireManager::class));
         }
 
