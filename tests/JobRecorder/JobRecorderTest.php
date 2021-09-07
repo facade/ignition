@@ -9,7 +9,6 @@ use Facade\Ignition\JobRecorder\JobRecorder;
 use Facade\Ignition\Tests\stubs\jobs\QueueableJob;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Container\Container;
-use Illuminate\Queue\CallQueuedClosure;
 use Illuminate\Queue\Events\JobExceptionOccurred;
 use Illuminate\Queue\Jobs\RedisJob;
 use Illuminate\Queue\RedisQueue;
