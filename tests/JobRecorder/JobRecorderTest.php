@@ -86,7 +86,7 @@ class JobRecorderTest extends TestCase
 
 
 
-        if((int) Str::before(Application::VERSION, '.') > 7){
+        if ((int) Str::before(Application::VERSION, '.') > 7) {
             $this->assertEquals($date->unix(), $recorded['retryUntil']);
         }
 
