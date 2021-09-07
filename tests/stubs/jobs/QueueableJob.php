@@ -27,7 +27,7 @@ class QueueableJob implements ShouldQueue
         ?CarbonImmutable $retryUntilValue = null,
         ?int $tries = null,
         ?int $maxExceptions = null,
-        ?int $timeout = null,
+        ?int $timeout = null
     ) {
         $this->property = $property;
         $this->retryUntilValue = $retryUntilValue;
