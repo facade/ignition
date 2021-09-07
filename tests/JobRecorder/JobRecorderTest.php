@@ -82,6 +82,8 @@ class JobRecorderTest extends TestCase
 
         $recorded = $recorder->toArray();
 
+        dump($recorded);
+
         $this->assertEquals($date->unix(), $recorded['retryUntil']);
         $this->assertEquals(5, $recorded['maxTries']);
         $this->assertEquals(10, $recorded['maxExceptions']);
