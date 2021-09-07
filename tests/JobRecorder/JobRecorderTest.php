@@ -84,9 +84,7 @@ class JobRecorderTest extends TestCase
 
         $recorded = $recorder->toArray();
 
-
-
-        if ((int) Str::before(Application::VERSION, '.') > 7) {
+        if((int) Str::before(Application::VERSION, '.') > 7){
             $this->assertEquals($date->unix(), $recorded['retryUntil']);
         }
 
@@ -114,7 +112,7 @@ class JobRecorderTest extends TestCase
 
         $recorded = $recorder->toArray();
 
-        $this->assertEquals('Closure (JobRecorderTest.php:100)', $recorded['name']);
+        $this->assertEquals('Closure (JobRecorderTest.php:105)', $recorded['name']);
     }
 
     /** @test */
