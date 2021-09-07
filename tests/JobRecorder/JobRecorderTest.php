@@ -107,7 +107,7 @@ class JobRecorderTest extends TestCase
 
         $recorded = $recorder->toArray();
 
-        $this->assertEquals('Closure (JobRecorderTest.php:101)', $recorded['name']);
+        $this->assertEquals('Closure (JobRecorderTest.php:100)', $recorded['name']);
     }
 
     /** @test */
