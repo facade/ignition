@@ -87,6 +87,7 @@ class JobRecorderTest extends TestCase
         if ((int) Str::before(Application::VERSION, '.') > 7) {
             $this->assertEquals($date->unix(), $recorded['retryUntil']);
             $this->assertFalse($recorded['data']['afterCommit']);
+            $this->assertEquals($date, $recorded['data']['delay']);
         }
 
         $this->assertEquals(5, $recorded['maxTries']);
@@ -94,7 +95,6 @@ class JobRecorderTest extends TestCase
         $this->assertEquals(120, $recorded['timeout']);
         $this->assertNotEmpty($recorded['data']);
         $this->assertEquals('default', $recorded['data']['queue']);
-        $this->assertEquals($date, $recorded['data']['delay']);
     }
 
     /** @test */
