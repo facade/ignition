@@ -9,10 +9,12 @@ use Facade\Ignition\JobRecorder\JobRecorder;
 use Facade\Ignition\Tests\stubs\jobs\QueueableJob;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Container\Container;
+use Illuminate\Foundation\Application;
 use Illuminate\Queue\Events\JobExceptionOccurred;
 use Illuminate\Queue\Jobs\RedisJob;
 use Illuminate\Queue\RedisQueue;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 
 class JobRecorderTest extends TestCase
 {
@@ -82,9 +84,12 @@ class JobRecorderTest extends TestCase
 
         $recorded = $recorder->toArray();
 
-        dump($recorded);
 
-        $this->assertEquals($date->unix(), $recorded['retryUntil']);
+
+        if((int) Str::before(Application::VERSION, '.') > 7){
+            $this->assertEquals($date->unix(), $recorded['retryUntil']);
+        }
+
         $this->assertEquals(5, $recorded['maxTries']);
         $this->assertEquals(10, $recorded['maxExceptions']);
         $this->assertEquals(120, $recorded['timeout']);
