@@ -16,7 +16,7 @@ class DumpHandler
 
     public function dump($value)
     {
-        $data = (new VarCloner)->cloneVar($value);
+        $data = (new VarCloner())->cloneVar($value);
 
         $this->dumpRecorder->record($data);
     }

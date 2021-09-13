@@ -14,7 +14,7 @@ class BladeSourceMapCompiler extends BladeCompiler
         } catch (ErrorException $e) {
             return 1;
         }
-        
+
         $map = explode("\n", $map);
 
         $line = $map[$exceptionLineNumber - 1] ?? $exceptionLineNumber;

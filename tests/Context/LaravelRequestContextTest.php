@@ -133,7 +133,7 @@ class LaravelRequestContextTest extends TestCase
     /** @test */
     public function it_the_authenticated_user_model_has_a_toFlare_method_it_will_be_used_to_collect_user_data()
     {
-        $user = new class extends User {
+        $user = new class() extends User {
             public function toFlare()
             {
                 return ['id' => $this->id];
@@ -159,7 +159,7 @@ class LaravelRequestContextTest extends TestCase
     /** @test */
     public function it_the_authenticated_user_model_has_no_matching_method_it_will_return_no_user_data()
     {
-        $user = new class {
+        $user = new class() {
         };
 
         $request = $this->createRequest('GET', '/route', [], ['cookie' => 'noms']);
@@ -176,7 +176,7 @@ class LaravelRequestContextTest extends TestCase
     /** @test */
     public function it_the_authenticated_user_model_is_broken_it_will_return_no_user_data()
     {
-        $user = new class extends User {
+        $user = new class() extends User {
             protected $appends = ['invalid'];
         };
 

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Facade\Ignition\SolutionProviders;
 
 use Facade\IgnitionContracts\BaseSolution;

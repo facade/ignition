@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Facade\Ignition\Tests\Solutions;
 
 use Exception;
