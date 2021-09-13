@@ -2,8 +2,8 @@
 
 namespace Facade\Ignition\Facades;
 
+use Facade\Ignition\Support\SentReports;
 use Illuminate\Support\Facades\Facade;
-use Spatie\LaravelIgnition\Support\SentReports;
 
 /**
  * Class Flare.
