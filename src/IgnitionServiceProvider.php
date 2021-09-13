@@ -53,6 +53,7 @@ use Facade\Ignition\SolutionProviders\UndefinedPropertySolutionProvider;
 use Facade\Ignition\SolutionProviders\UndefinedVariableSolutionProvider;
 use Facade\Ignition\SolutionProviders\UnknownValidationSolutionProvider;
 use Facade\Ignition\SolutionProviders\ViewNotFoundSolutionProvider;
+use Facade\Ignition\Support\SentReports;
 use Facade\Ignition\Views\Engines\CompilerEngine;
 use Facade\Ignition\Views\Engines\PhpEngine;
 use Facade\IgnitionContracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
@@ -264,6 +265,8 @@ class IgnitionServiceProvider extends ServiceProvider
             );
         });
 
+        $this->app->singleton(SentReports::class);
+
         $this->app->alias('flare.http', Client::class);
 
         $this->app->singleton(Flare::class, function () {
@@ -280,7 +283,10 @@ class IgnitionServiceProvider extends ServiceProvider
     protected function registerLogHandler()
     {
         $this->app->singleton('flare.logger', function ($app) {
-            $handler = new FlareHandler($app->make(Flare::class));
+            $handler = new FlareHandler(
+                $app->make(Flare::class),
+                $app->make(SentReports::class)
+            );
 
             $logLevelString = config('logging.channels.flare.level', 'error');
 
@@ -495,6 +501,7 @@ class IgnitionServiceProvider extends ServiceProvider
 
     protected function resetFlare()
     {
+        $this->app->get(SentReports::class)->clear();
         $this->app->get(Flare::class)->reset();
 
         if (config('flare.reporting.report_logs')) {
