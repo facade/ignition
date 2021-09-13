@@ -67,7 +67,7 @@ class ViewTest extends TestCase
     public function it_adds_base_exception_solution_to_view_exception()
     {
         try {
-            $exception = new ExceptionWithSolution;
+            $exception = new ExceptionWithSolution();
             view('solution-exception', ['exception' => $exception])->render();
         } catch (ViewException $exception) {
             $this->assertTrue($exception instanceof ViewExceptionWithSolution);

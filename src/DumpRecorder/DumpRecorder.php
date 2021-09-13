@@ -87,7 +87,7 @@ class DumpRecorder
     protected function getDefaultHandler()
     {
         return function ($value) {
-            $data = (new VarCloner)->cloneVar($value);
+            $data = (new VarCloner())->cloneVar($value);
 
             $this->getDumper()->dump($data);
         };
