@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this fil
 
+## 2.13.0 - 2021-09-13
+
+- add tracking uuid (#418)
+
 ## 2.12.1 - 2021-09-08
 
 - add support for VS Codium editor (#417)
