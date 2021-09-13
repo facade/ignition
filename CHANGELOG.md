@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this fil
 
+## 2.13.1 - 2021-09-13
+
+- fix namespace of `SentReports` in facade
+
 ## 2.13.0 - 2021-09-13
 
 - add tracking uuid (#418)
