@@ -6,7 +6,7 @@ use Facade\FlareClient\Report;
 
 class SetNotifierName
 {
-    const NOTIFIER_NAME = 'Laravel Client';
+    public const NOTIFIER_NAME = 'Laravel Client';
 
     public function handle(Report $report, $next)
     {

@@ -12,7 +12,7 @@ class TableNotFoundSolutionProvider implements HasSolutionsForThrowable
     /**
      * See https://dev.mysql.com/doc/refman/8.0/en/server-error-reference.html#error_er_bad_table_error.
      */
-    const MYSQL_BAD_TABLE_CODE = '42S02';
+    public const MYSQL_BAD_TABLE_CODE = '42S02';
 
     public function canSolve(Throwable $throwable): bool
     {
