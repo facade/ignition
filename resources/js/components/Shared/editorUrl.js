@@ -9,6 +9,8 @@ export default function editorUrl(config, file, lineNumber) {
         idea: 'idea://open?file=%path&line=%line',
         vscode: 'vscode://file/%path:%line',
         'vscode-insiders': 'vscode-insiders://file/%path:%line',
+        'vscode-remote': 'vscode://vscode-remote/%path:%line',
+        'vscode-insiders-remote': 'vscode-insiders://vscode-remote/%path:%line',
         vscodium: 'vscodium://file/%path:%line',
         atom: 'atom://core/open/file?filename=%path&line=%line',
         nova: 'nova://core/open/file?filename=%path&line=%line',
