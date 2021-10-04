@@ -40,11 +40,11 @@ jobs:
               run: |
                 composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                 composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
-              if: "matrix.php < 8.1"
+              if: "matrix.php < 8"
 
-            - name: Install PHP 8.1 dependencies
+            - name: Install PHP 8 dependencies
               run: composer update --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
-              if: "matrix.php >= 8.1"
+              if: "matrix.php >= 8"
 
             - name: Execute tests
               run: vendor/bin/phpunit
