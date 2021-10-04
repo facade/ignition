@@ -36,15 +36,10 @@ jobs:
                   coverage: none
                   tools: composer:v2
 
-            - name: Install PHP 7 dependencies
+            - name: Install dependencies
               run: |
                 composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
                 composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
-              if: "matrix.php < 8"
-
-            - name: Install PHP 8 dependencies
-              run: composer update --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
-              if: "matrix.php >= 8"
 
             - name: Execute tests
               run: vendor/bin/phpunit
