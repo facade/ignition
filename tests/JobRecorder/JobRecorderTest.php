@@ -133,7 +133,7 @@ class JobRecorderTest extends TestCase
         string $queue,
         $job
     ): JobExceptionOccurred {
-        $fakeQueue = new class() extends Queue {
+        $fakeQueue = new class () extends Queue {
             public function getPayload($job, $connection): string
             {
                 return $this->createPayload($job, $connection);
