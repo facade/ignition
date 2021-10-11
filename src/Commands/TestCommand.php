@@ -105,11 +105,11 @@ class TestCommand extends Command
             $this->line('');
             $this->line('Extra info');
             $this->table([], [
-                ['PHP version', phpversion()],
+                ['Platform', PHP_OS],
+                ['PHP', phpversion()],
+                ['Laravel', app()->version()],
                 ['facade/ignition', InstalledVersions::getVersion('facade/ignition')],
                 ['facade/flare-client-php', InstalledVersions::getVersion('facade/flare-client-php')],
-                ['Laravel version', app()->version()],
-                ['Platform', PHP_OS],
                 ['Curl', curl_version()['version']],
                 ['SSL', curl_version()['ssl_version']],
             ]);
