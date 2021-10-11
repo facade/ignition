@@ -5,7 +5,6 @@ namespace Facade\Ignition\Commands;
 use Composer\InstalledVersions;
 use Exception;
 use Facade\FlareClient\Flare;
-use Facade\FlareClient\Http\Exceptions\BadResponse;
 use Facade\FlareClient\Http\Exceptions\BadResponseCode;
 use Illuminate\Config\Repository;
 use Illuminate\Console\Command;
@@ -79,7 +78,7 @@ class TestCommand extends Command
             app(Flare::class)->sendTestReport($testException);
             $this->info('');
         } catch (Exception $exception) {
-            $this->warn( '❌ We were unable to send an exception to Flare. ');
+            $this->warn('❌ We were unable to send an exception to Flare. ');
 
             if ($exception instanceof BadResponseCode) {
                 $this->info('');
