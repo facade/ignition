@@ -78,7 +78,7 @@ class JobRecorder
             }
         }
 
-        if ($pushedAt = DateTime::createFromFormat('U.u', $payload->get('pushedAt'))) {
+        if ($pushedAt = DateTime::createFromFormat('U.u', $payload->get('pushedAt', ''))) {
             $properties['pushedAt'] = $pushedAt->format(DATE_ATOM);
         }
 
