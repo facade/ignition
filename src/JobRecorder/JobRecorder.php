@@ -2,12 +2,14 @@
 
 namespace Facade\Ignition\JobRecorder;
 
+use DateTime;
 use Exception;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\CallQueuedClosure;
 use Illuminate\Queue\Events\JobExceptionOccurred;
+use Illuminate\Queue\Jobs\RedisJob;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionProperty;
@@ -66,7 +68,7 @@ class JobRecorder
 
     protected function getJobProperties(): array
     {
-        $payload = collect($this->job->payload());
+        $payload = collect($this->resolveJobPayload());
 
         $properties = [];
 
@@ -74,6 +76,10 @@ class JobRecorder
             if (! in_array($key, ['job', 'data', 'displayName'])) {
                 $properties[$key] = $value;
             }
+        }
+
+        if ($pushedAt = DateTime::createFromFormat('U.u', $payload->get('pushedAt'))) {
+            $properties['pushedAt'] = $pushedAt->format(DATE_ATOM);
         }
 
         try {
@@ -85,6 +91,19 @@ class JobRecorder
         }
 
         return $properties;
+    }
+
+    protected function resolveJobPayload(): array
+    {
+        if (! $this->job instanceof RedisJob) {
+            return $this->job->payload();
+        }
+
+        try {
+            return json_decode($this->job->getReservedJob(), true, 512, JSON_THROW_ON_ERROR);
+        } catch (Exception $e) {
+            return $this->job->payload();
+        }
     }
 
     protected function resolveCommandProperties(object $command, int $maxChainDepth): array
