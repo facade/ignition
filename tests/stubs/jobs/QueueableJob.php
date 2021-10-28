@@ -2,6 +2,7 @@
 
 namespace Facade\Ignition\Tests\stubs\jobs;
 
+use Carbon\CarbonImmutable;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -17,16 +18,20 @@ class QueueableJob implements ShouldQueue
     use SerializesModels;
 
     /** @var array */
-    private $data;
+    private $property;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(array $data)
-    {
-        $this->data = $data;
+    public function __construct(
+        array $property,
+        ?CarbonImmutable $retryUntilValue = null,
+        ?int $tries = null,
+        ?int $maxExceptions = null,
+        ?int $timeout = null
+    ) {
+        $this->property = $property;
+        $this->retryUntilValue = $retryUntilValue;
+        $this->tries = $tries;
+        $this->maxExceptions = $maxExceptions;
+        $this->timeout = $timeout;
     }
 
     /**
@@ -37,5 +42,10 @@ class QueueableJob implements ShouldQueue
     public function handle()
     {
         throw new Exception("Die");
+    }
+
+    public function retryUntil()
+    {
+        return $this->retryUntilValue;
     }
 }
