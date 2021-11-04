@@ -53,6 +53,10 @@ export default {
                     title: 'Context',
                 },
                 {
+                    component: 'LivewireTab',
+                    title: 'Livewire',
+                },
+                {
                     component: 'DebugTab',
                     title: 'Debug',
                 },

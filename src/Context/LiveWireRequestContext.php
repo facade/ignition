@@ -2,7 +2,9 @@
 
 namespace Facade\Ignition\Context;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Livewire\LivewireManager;
 
 class LiveWireRequestContext extends LaravelRequestContext
@@ -29,7 +31,16 @@ class LiveWireRequestContext extends LaravelRequestContext
         return $properties;
     }
 
-    public function getLiveWireInformation(): array
+    public function toArray(): array
+    {
+        $properties = parent::toArray();
+
+        $properties['livewire'] = $this->getLiveWireInformation();
+
+        return $properties;
+    }
+
+    protected function getLiveWireInformation(): array
     {
         $componentId = $this->request->input('fingerprint.id');
         $componentAlias = $this->request->input('fingerprint.name');
@@ -38,21 +49,46 @@ class LiveWireRequestContext extends LaravelRequestContext
             return [];
         }
 
+        try {
+            $componentClass = $this->livewireManager->getClass($componentAlias);
+        } catch (Exception $e) {
+            $componentClass = null;
+        }
+
         return [
+            'component_class' => $componentClass,
             'component_alias' => $componentAlias,
             'component_id' => $componentId,
-            'component_class' => $this->livewireManager->getClass($componentAlias),
-            'data' => json_encode($this->request->input('serverMemo.data')),
-            'updates' => json_encode($this->request->input('updates')),
+            'data' => $this->resolveData(),
+            'updates' => $this->resolveUpdates(),
         ];
     }
 
-    public function toArray(): array
+    protected function resolveData(): array
     {
-        $properties = parent::toArray();
+        $data = $this->request->input('serverMemo.data');
 
-        $properties['livewire'] = $this->getLiveWireInformation();
+        $dataMeta = $this->request->input('serverMemo.dataMeta');
 
-        return $properties;
+        foreach ($dataMeta['modelCollections'] ?? [] as $key => $value) {
+            $data[$key] = array_merge($data[$key] ?? [], $value);
+        }
+
+        foreach ($dataMeta['models'] ?? [] as $key => $value) {
+            $data[$key] = array_merge($data[$key] ?? [], $value);
+        }
+
+        return $data;
+    }
+
+    protected function resolveUpdates()
+    {
+        $updates = $this->request->input('updates');
+
+        return array_map(function (array $update) {
+            $update['payload'] = Arr::except($update['payload'] ?? [], ['id']);
+
+            return $update;
+        }, $updates);
     }
 }

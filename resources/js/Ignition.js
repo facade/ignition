@@ -15,6 +15,7 @@ export default class Ignition {
     registerBuiltinTabs() {
         Vue.component('AppTab', require('./components/Tabs/AppTab').default);
         Vue.component('ContextTab', require('./components/Tabs/ContextTab').default);
+        Vue.component('LivewireTab', require('./components/Tabs/LivewireTab').default);
         Vue.component('DebugTab', require('./components/Tabs/DebugTab').default);
         Vue.component('RequestTab', require('./components/Tabs/RequestTab').default);
         Vue.component('StackTab', require('./components/Tabs/StackTab').default);
