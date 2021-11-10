@@ -11,7 +11,7 @@ class AddExceptionInformation
     {
         $throwable = $report->getThrowable();
 
-        if(! $throwable instanceof QueryException){
+        if (! $throwable instanceof QueryException) {
             return $next($report);
         }
 
