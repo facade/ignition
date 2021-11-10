@@ -32,6 +32,7 @@ use Facade\Ignition\Middleware\AddJobInformation;
 use Facade\Ignition\Middleware\AddLogs;
 use Facade\Ignition\Middleware\AddQueries;
 use Facade\Ignition\Middleware\AddSolutions;
+use Facade\Ignition\Middleware\AddExceptionInformation;
 use Facade\Ignition\Middleware\SetNotifierName;
 use Facade\Ignition\QueryRecorder\QueryRecorder;
 use Facade\Ignition\SolutionProviders\BadMethodCallSolutionProvider;
@@ -392,6 +393,7 @@ class IgnitionServiceProvider extends ServiceProvider
         $middlewares = [
             SetNotifierName::class,
             AddEnvironmentInformation::class,
+            AddExceptionInformation::class,
         ];
 
         if (config('flare.reporting.report_logs')) {
