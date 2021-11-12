@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Livewire\LivewireManager;
 
-class LiveWireRequestContext extends LaravelRequestContext
+class LivewireRequestContext extends LaravelRequestContext
 {
     /** @var \Livewire\LivewireManager */
     protected $livewireManager;
@@ -66,9 +66,9 @@ class LiveWireRequestContext extends LaravelRequestContext
 
     protected function resolveData(): array
     {
-        $data = $this->request->input('serverMemo.data');
+        $data = $this->request->input('serverMemo.data') ?? [];
 
-        $dataMeta = $this->request->input('serverMemo.dataMeta');
+        $dataMeta = $this->request->input('serverMemo.dataMeta') ?? [];
 
         foreach ($dataMeta['modelCollections'] ?? [] as $key => $value) {
             $data[$key] = array_merge($data[$key] ?? [], $value);
@@ -83,7 +83,7 @@ class LiveWireRequestContext extends LaravelRequestContext
 
     protected function resolveUpdates()
     {
-        $updates = $this->request->input('updates');
+        $updates = $this->request->input('updates') ?? [];
 
         return array_map(function (array $update) {
             $update['payload'] = Arr::except($update['payload'] ?? [], ['id']);
