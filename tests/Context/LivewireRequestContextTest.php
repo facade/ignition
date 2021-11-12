@@ -6,9 +6,7 @@ use Facade\Ignition\Context\LivewireRequestContext;
 use Facade\Ignition\Tests\TestCase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Livewire\Component;
 use Livewire\LivewireManager;
-use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 class LivewireRequestContextTest extends TestCase
 {
@@ -19,7 +17,7 @@ class LivewireRequestContextTest extends TestCase
     {
         parent::setUp();
 
-        $this->livewireManager = new class extends LivewireManager {
+        $this->livewireManager = new class() extends LivewireManager {
             public $fakeAliases = [];
 
             public function isDefinitelyLivewireRequest()
