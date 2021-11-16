@@ -2,12 +2,6 @@
 
 namespace Facade\Ignition\Tests\stubs\Components;
 
-use App\CustomProp;
-use App\Models\User;
-use Carbon\CarbonImmutable;
-use Exception;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Stringable;
 use Livewire\Component;
 
 class TestLivewireComponent extends Component

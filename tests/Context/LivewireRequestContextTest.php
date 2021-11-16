@@ -7,7 +7,6 @@ use Facade\Ignition\Tests\TestCase;
 use Facade\Ignition\Tests\TestClasses\FakeLivewireManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Livewire\LivewireManager;
 
 class LivewireRequestContextTest extends TestCase
 {

@@ -2,16 +2,11 @@
 
 namespace Facade\Ignition\Tests\Solutions;
 
-use Exception;
-use Facade\Ignition\SolutionProviders\RunningLaravelDuskInProductionProvider;
 use Facade\Ignition\SolutionProviders\UndefinedLivewireMethodSolutionProvider;
-use Facade\Ignition\SolutionProviders\UndefinedLivewirePropertySolutionProvider;
 use Facade\Ignition\Tests\stubs\Components\TestLivewireComponent;
 use Facade\Ignition\Tests\TestCase;
 use Facade\Ignition\Tests\TestClasses\FakeLivewireManager;
 use Livewire\Exceptions\MethodNotFoundException;
-use Livewire\Exceptions\PropertyNotFoundException;
-use Livewire\LivewireManager;
 
 class UndefinedLivewireMethodSolutionProviderTest extends TestCase
 {

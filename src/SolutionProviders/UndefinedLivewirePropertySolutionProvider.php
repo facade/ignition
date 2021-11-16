@@ -5,7 +5,6 @@ namespace Facade\Ignition\SolutionProviders;
 use Facade\Ignition\Solutions\SuggestLivewirePropertyNameSolution;
 use Facade\Ignition\Support\LivewireComponentParser;
 use Facade\IgnitionContracts\HasSolutionsForThrowable;
-use Illuminate\Support\Str;
 use Livewire\Exceptions\PropertyNotFoundException;
 use Livewire\Exceptions\PublicPropertyNotFoundException;
 use Throwable;
@@ -36,7 +35,6 @@ class UndefinedLivewirePropertySolutionProvider implements HasSolutionsForThrowa
                 );
             })
             ->toArray();
-
     }
 
     protected function getMethodAndComponent(Throwable $throwable): array
