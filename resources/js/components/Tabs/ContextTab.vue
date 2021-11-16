@@ -69,6 +69,7 @@ const predefinedContextItemGroups = [
     'context',
     'logs',
     'dumps',
+    'exception',
 ];
 
 export default {
