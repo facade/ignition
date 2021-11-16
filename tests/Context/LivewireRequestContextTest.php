@@ -93,6 +93,15 @@ class LivewireRequestContextTest extends TestCase
             'method' => 'GET',
             'id' => $id = uniqid(),
             'name' => $name = 'fake-component',
+        ], [
+            [
+                'type' => 'callMethod',
+                'payload' => [
+                    'id' => 'remove-me',
+                    'method' => 'chang',
+                    'params' => ['a'],
+                ],
+            ],
         ]);
 
         $livewire = $context->toArray()['livewire'];
@@ -102,7 +111,82 @@ class LivewireRequestContextTest extends TestCase
         $this->assertNull($livewire['component_class']);
     }
 
-    protected function createRequestContext(array $fingerprint): LivewireRequestContext
+    /** @test */
+    public function it_combines_data_into_one_payload()
+    {
+        $context = $this->createRequestContext([
+            'path' => 'http://localhost/referred',
+            'method' => 'GET',
+            'id' => uniqid(),
+            'name' => 'fake-component',
+        ], [], [
+            'data' => [
+                'string' => 'Ruben',
+                'array' => ['a', 'b'],
+                'modelCollection' => [],
+                'model' => [],
+                'date' => '2021-11-10T14:20:36+0000',
+                'collection' => ['a', 'b'],
+                'stringable' => 'Test',
+                'wireable' => ['a', 'b'],
+            ],
+            'dataMeta' => [
+                'modelCollections' => [
+                    'modelCollection' => [
+                        'class' => 'App\\\\Models\\\\User',
+                        'id' => [1, 2, 3, 4],
+                        'relations' => [],
+                        'connection' => 'mysql',
+                    ],
+                ],
+                'models' => [
+                    'model' => [
+                        'class' => 'App\\\\Models\\\\User',
+                        'id' => 1,
+                        'relations' => [],
+                        'connection' => 'mysql',
+                    ],
+                ],
+                'dates' => [
+                    'date' => 'carbonImmutable',
+                ],
+                'collections' => [
+                    'collection',
+                ],
+                'stringables' => [
+                    'stringable',
+                ],
+                'wireables' => [
+                    'wireable',
+                ],
+            ],
+        ]);
+
+        $livewire = $context->toArray()['livewire'];
+
+        $this->assertEquals([
+            "string" => "Ruben",
+            "array" => ['a', 'b'],
+            "modelCollection" => [
+                "class" => "App\\\\Models\\\\User",
+                "id" => [1, 2, 3, 4],
+                "relations" => [],
+                "connection" => "mysql",
+            ],
+            "model" => [
+                "class" => "App\\\\Models\\\\User",
+                "id" => 1,
+                "relations" => [],
+                "connection" => "mysql",
+            ],
+            "date" => "2021-11-10T14:20:36+0000",
+            "collection" => ['a', 'b'],
+            "stringable" => "Test",
+            "wireable" => ['a', 'b'],
+        ], $livewire['data']);
+    }
+
+    protected function createRequestContext(array $fingerprint, array $updates = [], array $serverMemo = []): LivewireRequestContext
     {
         $providedRequest = null;
 
@@ -110,10 +194,11 @@ class LivewireRequestContextTest extends TestCase
             $providedRequest = $request;
         })->name('livewire.message');
 
-        $componentPayload = '{"fingerprint":{"id":"SUnhW5UiFCcEC5xjt4zb","name":"test-component","locale":"en","path":"","method":"GET"},"serverMemo":{"children":{"1ANGhqH":{"id":"qwuf6BvvSeRDkH3ZQbrD","tag":"div"},"Ep3Zi4H":{"id":"PC69TcCIs9f3x4ffRrPK","tag":"div"}},"errors":[],"htmlHash":"80b854ba","data":{"title":"Ruben","other":"Jah","array":["a","b"],"modelCollection":[],"model":[],"date":"2021-11-10T14:20:36+0000","collection":["a","b"],"stringable":"Test","wireable":"[\"a\",\"b\"]"},"dataMeta":{"modelCollections":{"modelCollection":{"class":"App\\Models\\User","id":[1,2,3,4,5],"relations":[],"connection":"mysql"}},"models":{"model":{"class":"App\\Models\\User","id":1,"relations":[],"connection":"mysql"}},"dates":{"date":"carbonImmutable"},"collections":["collection"],"stringables":["stringable"],"wireables":["wireable"]},"checksum":"d6ec201251c66428c4f57939747d190b425d264857e70406aa39107dd6f1da38"},"updates":[{"type":"callMethod","payload":{"id":"zyjb","method":"chang","params":[]}}]}';
-
-
-        $this->postJson('livewire', json_decode($componentPayload, true));
+        $this->postJson('livewire', [
+            'fingerprint' => $fingerprint,
+            'serverMemo' => $serverMemo,
+            'updates' => $updates,
+        ]);
 
         return new LivewireRequestContext($providedRequest, $this->livewireManager);
     }
