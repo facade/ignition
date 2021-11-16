@@ -4,6 +4,7 @@ namespace Facade\Ignition\Tests\Context;
 
 use Facade\Ignition\Context\LivewireRequestContext;
 use Facade\Ignition\Tests\TestCase;
+use Facade\Ignition\Tests\TestClasses\FakeLivewireManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Livewire\LivewireManager;
@@ -17,19 +18,7 @@ class LivewireRequestContextTest extends TestCase
     {
         parent::setUp();
 
-        $this->livewireManager = new class() extends LivewireManager {
-            public $fakeAliases = [];
-
-            public function isDefinitelyLivewireRequest()
-            {
-                return true;
-            }
-
-            public function getClass($alias)
-            {
-                return $this->fakeAliases[$alias] ?? parent::getClass($alias);
-            }
-        };
+        $this->livewireManager = FakeLivewireManager::setUp();
     }
 
     /** @test */
