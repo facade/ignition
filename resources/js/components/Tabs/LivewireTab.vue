@@ -43,7 +43,6 @@
     </div>
 </template>
 <script>
-import gitUrlParse from 'git-url-parse';
 import DefinitionList from '../Shared/DefinitionList';
 import DefinitionListRow from '../Shared/DefinitionListRow.js';
 import upperFirst from 'lodash/upperFirst';

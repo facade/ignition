@@ -41,6 +41,10 @@ export default {
                     title: 'Request',
                 },
                 {
+                    component: 'LivewireTab',
+                    title: 'Livewire',
+                },
+                {
                     component: 'AppTab',
                     title: 'App',
                 },
@@ -51,10 +55,6 @@ export default {
                 {
                     component: 'ContextTab',
                     title: 'Context',
-                },
-                {
-                    component: 'LivewireTab',
-                    title: 'Livewire',
                 },
                 {
                     component: 'DebugTab',
