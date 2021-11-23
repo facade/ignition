@@ -40,10 +40,10 @@ export default {
                     component: 'RequestTab',
                     title: 'Request',
                 },
-                {
+                ...(this.report.context.livewire ? [{
                     component: 'LivewireTab',
                     title: 'Livewire',
-                },
+                }] : []),
                 {
                     component: 'AppTab',
                     title: 'App',
