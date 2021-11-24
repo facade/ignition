@@ -70,6 +70,7 @@ const predefinedContextItemGroups = [
     'logs',
     'dumps',
     'exception',
+    'livewire',
 ];
 
 export default {

@@ -22,7 +22,7 @@
 import ShareButton from './Shared/ShareButton';
 
 export default {
-    inject: ['config'],
+    inject: ['config', 'report'],
     components: { ShareButton },
     props: {
         value: { required: true },
@@ -40,6 +40,14 @@ export default {
                     component: 'RequestTab',
                     title: 'Request',
                 },
+                ...(this.report.context.livewire
+                    ? [
+                          {
+                              component: 'LivewireTab',
+                              title: 'Livewire',
+                          },
+                      ]
+                    : []),
                 {
                     component: 'AppTab',
                     title: 'App',
