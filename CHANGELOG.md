@@ -1,6 +1,10 @@
 # Changelog
 
-All notable changes to `ignition` will be documented in this fil
+All notable changes to `ignition` will be documented in this file
+
+## 2.17.0 - 2021-11-24
+
+- improve recording of Livewire data
 
 ## 2.16.1 - 2021-11-16
 
