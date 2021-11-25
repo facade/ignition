@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.17.1 - 2021-11-25
+
+- streamline Livewire solutions
+
 ## 2.17.0 - 2021-11-24
 
 - improve recording of Livewire data
