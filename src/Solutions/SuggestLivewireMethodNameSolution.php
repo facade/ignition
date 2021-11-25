@@ -24,7 +24,7 @@ class SuggestLivewireMethodNameSolution implements Solution
 
     public function getSolutionTitle(): string
     {
-        return "Possible typo `{$this->componentClass}::{$this->methodName}`";
+        return "Possible typo `{$this->componentClass}::{$this->methodName}()`";
     }
 
     public function getDocumentationLinks(): array
@@ -34,7 +34,7 @@ class SuggestLivewireMethodNameSolution implements Solution
 
     public function getSolutionDescription(): string
     {
-        return "Did you mean `{$this->componentClass}::{$this->suggested}`?";
+        return "Did you mean `{$this->suggested}()`?";
     }
 
     public function isRunnable(): bool

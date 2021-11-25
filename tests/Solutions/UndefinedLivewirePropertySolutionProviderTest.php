@@ -22,10 +22,10 @@ class UndefinedLivewirePropertySolutionProviderTest extends TestCase
 
         $this->assertTrue($canSolve);
 
-        $this->assertSame('Possible typo $strng', $firstSolution->getSolutionTitle());
+        $this->assertSame('Possible typo Facade\Ignition\Tests\stubs\Components\TestLivewireComponent::$strng', $firstSolution->getSolutionTitle());
         $this->assertSame('Did you mean `$string`?', $firstSolution->getSolutionDescription());
 
-        $this->assertSame('Possible typo $strng', $secondSolution->getSolutionTitle());
+        $this->assertSame('Possible typo Facade\Ignition\Tests\stubs\Components\TestLivewireComponent::$strng', $secondSolution->getSolutionTitle());
         $this->assertSame('Did you mean `$stringable`?', $secondSolution->getSolutionDescription());
     }
 
@@ -41,7 +41,7 @@ class UndefinedLivewirePropertySolutionProviderTest extends TestCase
 
         $this->assertTrue($canSolve);
 
-        $this->assertSame('Possible typo $compted', $solution->getSolutionTitle());
+        $this->assertSame('Possible typo Facade\Ignition\Tests\stubs\Components\TestLivewireComponent::$compted', $solution->getSolutionTitle());
         $this->assertSame('Did you mean `$computed`?', $solution->getSolutionDescription());
     }
 }

@@ -24,7 +24,7 @@ class SuggestLivewirePropertyNameSolution implements Solution
 
     public function getSolutionTitle(): string
     {
-        return "Possible typo {$this->variableName}";
+        return "Possible typo {$this->componentClass}::{$this->variableName}";
     }
 
     public function getDocumentationLinks(): array

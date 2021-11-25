@@ -22,7 +22,7 @@ class UndefinedLivewireMethodSolutionProviderTest extends TestCase
 
         $this->assertTrue($canSolve);
 
-        $this->assertSame('Possible typo `Facade\Ignition\Tests\stubs\Components\TestLivewireComponent::chnge`', $solution->getSolutionTitle());
-        $this->assertSame('Did you mean `Facade\Ignition\Tests\stubs\Components\TestLivewireComponent::change`?', $solution->getSolutionDescription());
+        $this->assertSame('Possible typo `Facade\Ignition\Tests\stubs\Components\TestLivewireComponent::chnge()`', $solution->getSolutionTitle());
+        $this->assertSame('Did you mean `change()`?', $solution->getSolutionDescription());
     }
 }
