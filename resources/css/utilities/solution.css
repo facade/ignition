@@ -64,10 +64,7 @@
     @apply text-2xl;
     @apply leading-tight;
     @apply mb-4;
-}
-
-.solution-content {
-    @apply max-w-4xl;
+    @apply overflow-x-auto;
 }
 
 @screen md {
