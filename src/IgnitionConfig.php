@@ -53,7 +53,7 @@ class IgnitionConfig implements Arrayable {
 
         if ( $editor === 'phpstorm' ) {
             $projectName  = self::phpStormProjectNameInDir();
-            $phpstormLink = $projectName ? "jetbrains://php-storm/navigate/reference?project=$projectName&path=%path:%line" : "http://localhost:63342/api/file?file=%path&line=%line";
+            $phpstormLink = $projectName ? "jetbrains://php-storm/navigate/reference?project=$projectName&path=%path:%line:0" : "http://localhost:63342/api/file?file=%path&line=%line";
         }
 
         return $phpstormLink;

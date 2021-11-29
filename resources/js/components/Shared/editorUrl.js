@@ -40,7 +40,7 @@ export default function editorUrl(config, file, lineNumber) {
     //     line = lineNumber - 1;
     // }
 
-    if (!Number.isInteger(line) || line < 0) {
+    if (!Number.isInteger(+line) || line < 0) {
         line = 0; // <---
     }
     return editors[editor]
