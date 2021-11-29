@@ -5,7 +5,7 @@ export default function editorUrl(config, file, lineNumber) {
         textmate: 'txmt://open?url=file://%path&line=%line',
         emacs: 'emacs://open?url=file://%path&line=%line',
         macvim: 'mvim://open/?url=file://%path&line=%line',
-        phpstorm: 'phpstorm://open?file=%path&line=%line',
+        phpstorm: config.phpstormLink || 'http://localhost:63342/api/file?file=%path&line=%line',
         idea: 'idea://open?file=%path&line=%line',
         vscode: 'vscode://file/%path:%line',
         'vscode-insiders': 'vscode-insiders://file/%path:%line',
