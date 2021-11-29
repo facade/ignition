@@ -66,6 +66,11 @@
     @apply mb-4;
 }
 
+.solution-content-wrapper {
+    @apply p-12;
+    @apply overflow-x-auto;
+}
+
 .solution-content {
     @apply max-w-4xl;
 }

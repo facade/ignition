@@ -39,7 +39,7 @@
                         </g>
                     </svg>
                 </div>
-                <div class="p-12">
+                <div class="solution-content-wrapper scrollbar">
                     <div class="solution-content ml-0">
                         <h2 v-if="solution.title !== ''" class="solution-title">
                             {{ solution.title }}
