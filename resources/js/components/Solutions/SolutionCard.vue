@@ -51,7 +51,10 @@
                         ></div>
 
                         <div v-if="solution.is_runnable">
-                            <p v-html="markdown(solution.action_description)"></p>
+                            <p
+                                v-html="markdown(solution.action_description)"
+                                class="solution-description"
+                            ></p>
                             <p v-if="canExecuteSolutions === null" class="py-4 text-sm italic">
                                 Loading...
                             </p>
