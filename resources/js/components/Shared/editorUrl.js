@@ -31,7 +31,19 @@ export default function editorUrl(config, file, lineNumber) {
         return null;
     }
 
+    let line = lineNumber;
+
+    /** TODO check if lineNumber is always off by 1 in all platform, for example instead of line 1 it will open in line 2
+     //*If that is the case uncomment the function below
+     */
+    // if (editor === 'phpstorm') { // or any JetBrain
+    //     line = lineNumber - 1;
+    // }
+
+    if (!Number.isInteger(line) || line < 0) {
+        line = 0; // <---
+    }
     return editors[editor]
         .replace('%path', encodeURIComponent(file))
-        .replace('%line', encodeURIComponent(lineNumber));
+        .replace('%line', encodeURIComponent(line));
 }
