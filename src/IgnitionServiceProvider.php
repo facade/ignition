@@ -111,11 +111,11 @@ class IgnitionServiceProvider extends ServiceProvider
             $this->setupOctane();
         }
 
-        if (config('flare.reporting.report_logs')) {
+        if (config('flare.reporting.report_logs', true)) {
             $this->app->make(LogRecorder::class)->register();
         }
 
-        if (config('flare.reporting.report_queries')) {
+        if (config('flare.reporting.report_queries', true)) {
             $this->app->make(QueryRecorder::class)->register();
         }
 
@@ -136,11 +136,11 @@ class IgnitionServiceProvider extends ServiceProvider
             ->registerDumpCollector()
             ->registerJobRecorder();
 
-        if (config('flare.reporting.report_logs')) {
+        if (config('flare.reporting.report_logs', true)) {
             $this->registerLogRecorder();
         }
 
-        if (config('flare.reporting.report_queries')) {
+        if (config('flare.reporting.report_queries', true)) {
             $this->registerQueryRecorder();
         }
 
@@ -398,13 +398,13 @@ class IgnitionServiceProvider extends ServiceProvider
             AddExceptionInformation::class,
         ];
 
-        if (config('flare.reporting.report_logs')) {
+        if (config('flare.reporting.report_logs', true)) {
             $middlewares[] = AddLogs::class;
         }
 
         $middlewares[] = AddDumps::class;
 
-        if (config('flare.reporting.report_queries')) {
+        if (config('flare.reporting.report_queries', true)) {
             $middlewares[] = AddQueries::class;
         }
 
@@ -510,11 +510,11 @@ class IgnitionServiceProvider extends ServiceProvider
         $this->app->get(SentReports::class)->clear();
         $this->app->get(Flare::class)->reset();
 
-        if (config('flare.reporting.report_logs')) {
+        if (config('flare.reporting.report_logs', true)) {
             $this->app->make(LogRecorder::class)->reset();
         }
 
-        if (config('flare.reporting.report_queries')) {
+        if (config('flare.reporting.report_queries', true)) {
             $this->app->make(QueryRecorder::class)->reset();
         }
 

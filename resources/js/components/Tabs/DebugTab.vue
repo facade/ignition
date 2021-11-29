@@ -90,7 +90,7 @@ export default {
             return this.report.context.dumps;
         },
         logs() {
-            return this.report.context.logs;
+            return this.report.context.logs || [];
         },
         glows() {
             return this.report.glows;
