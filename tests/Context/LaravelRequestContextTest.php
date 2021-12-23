@@ -84,14 +84,14 @@ class LaravelRequestContextTest extends TestCase
         $route->bind($request);
 
         $request->setRouteResolver(function () use ($route) {
-             $route->setParameter('user', new class{
+            $route->setParameter('user', new class () {
                 public function toFlare(): array
                 {
                     return ['stripped'];
                 }
             });
 
-             return $route;
+            return $route;
         });
 
         $context = new LaravelRequestContext($request);
