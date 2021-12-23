@@ -74,6 +74,36 @@ class LaravelRequestContextTest extends TestCase
     }
 
     /** @test */
+    public function it_will_call_the_to_flare_method_on_route_parameters_when_it_exists()
+    {
+        $route = Route::get('/route/{user}', function ($user) {
+        });
+
+        $request = $this->createRequest('GET', '/route/1');
+
+        $route->bind($request);
+
+        $request->setRouteResolver(function () use ($route) {
+             $route->setParameter('user', new class{
+                public function toFlare(): array
+                {
+                    return ['stripped'];
+                }
+            });
+
+             return $route;
+        });
+
+        $context = new LaravelRequestContext($request);
+
+        $contextData = $context->toArray();
+
+        $this->assertSame([
+            'user' => ['stripped'],
+        ], $contextData['route']['routeParameters']);
+    }
+
+    /** @test */
     public function it_returns_the_url()
     {
         $request = $this->createRequest('GET', '/route', []);
