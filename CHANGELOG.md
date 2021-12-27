@@ -2,6 +2,10 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.17.4 - 2021-12-27
+
+- fix bug where uninitialized property within a job could break Ignition
+
 ## 2.17.3 - 2021-12-23
 
 - allow filtering route parameters using a `toFlare` method
