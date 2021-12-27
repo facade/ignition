@@ -11,7 +11,6 @@ use Illuminate\Contracts\Queue\Job;
 use Illuminate\Queue\CallQueuedClosure;
 use Illuminate\Queue\Events\JobExceptionOccurred;
 use Illuminate\Queue\Jobs\RedisJob;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionProperty;
@@ -117,11 +116,11 @@ class JobRecorder
                 return in_array($property->name, $propertiesToIgnore);
             })
             ->mapWithKeys(function (ReflectionProperty $property) use ($command) {
-                try{
+                try {
                     $property->setAccessible(true);
 
                     return [$property->name => $property->getValue($command)];
-                }catch(Error $error) {
+                } catch (Error $error) {
                     return [$property->name => 'uninitialized'];
                 }
             });
