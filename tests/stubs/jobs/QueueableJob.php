@@ -20,6 +20,8 @@ class QueueableJob implements ShouldQueue
     /** @var array */
     private $property;
 
+    private string $uninitializedProperty;
+
     public function __construct(
         array $property,
         ?CarbonImmutable $retryUntilValue = null,
