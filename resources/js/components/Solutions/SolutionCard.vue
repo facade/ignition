@@ -48,6 +48,7 @@
                         <div
                             v-if="solution.description"
                             v-html="markdown(solution.description)"
+                            class="solution-description"
                         ></div>
 
                         <div v-if="solution.is_runnable">
