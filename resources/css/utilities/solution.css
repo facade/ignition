@@ -69,9 +69,10 @@
 .solution-content-wrapper {
     @apply p-12;
     @apply overflow-x-auto;
+    @apply grid;
 }
 
-.solution-content {
+.solution-description {
     @apply max-w-4xl;
 }
 
