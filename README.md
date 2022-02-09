@@ -8,9 +8,10 @@
 
 ## Using Laravel 8 or above?
 
-If you're on Laravel 8 or above, you can switch to [spatie/laravel-ignition](https://github.com/spatie/laravel-ignition), which is a drop in replacement.
+If you're on Laravel 8 or above, you can switch to [spatie/laravel-ignition](https://github.com/spatie/laravel-ignition), which is a drop-in replacement.
+Replace `facade/ignition` with `"spatie/laravel-ignition": "^1.0"` in your application's `composer.json` file.
 
-To do so replace `facade/ignition` with `"spatie/laravel-ignition": "^1.0"` in your application's `composer.json` file.
+Going forward, we'll only add security fixes to facade/ignition and highly encourage you to switch to spatie/laravel-ignition.
 
 ## Official Documentation
 
