@@ -6,8 +6,6 @@
 
 [Ignition](https://flareapp.io/docs/ignition-for-laravel/introduction) is a beautiful and customizable error page for Laravel applications running on Laravel 5.5 up Laravel 8. It is the default error page for all Laravel 6 applications. It also allows to publicly share your errors on [Flare](https://flareapp.io). If configured with a valid Flare API key, your errors in production applications will be tracked, and you'll get notified when they happen.
 
-![Screenshot of ignition](https://facade.github.io/ignition/screenshot.png)
-
 ## Using Laravel 8 or above?
 
 If you're on Laravel 8 or above, you can switch to [spatie/laravel-ignition](https://github.com/spatie/laravel-ignition), which is a drop in replacement.
