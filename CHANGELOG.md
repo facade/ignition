@@ -2,6 +2,22 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.17.5 - 2022-02-23
+
+## What's Changed
+
+- fix solutions section padding by @faissaloux in https://github.com/facade/ignition/pull/433
+- Bump markdown-it from 9.1.0 to 12.3.2 by @dependabot in https://github.com/facade/ignition/pull/446
+- Bump ajv from 6.10.2 to 6.12.6 by @dependabot in https://github.com/facade/ignition/pull/448
+- Fix E_NOTICE when requesting invalid script by @cweiske in https://github.com/facade/ignition/pull/449
+
+## New Contributors
+
+- @faissaloux made their first contribution in https://github.com/facade/ignition/pull/433
+- @cweiske made their first contribution in https://github.com/facade/ignition/pull/449
+
+**Full Changelog**: https://github.com/facade/ignition/compare/2.17.4...2.17.5
+
 ## 2.17.4 - 2021-12-27
 
 - fix bug where uninitialized property within a job could break Ignition
