@@ -18,6 +18,11 @@ trait CollectsViewExceptions
             'data' => $this->filterViewData($data),
         ];
     }
+    
+    public function flushViewData(): void
+    {
+        $this->lastCompiledData = [];
+    }
 
     public function filterViewData(array $data): array
     {
