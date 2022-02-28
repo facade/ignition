@@ -21,6 +21,9 @@ trait CollectsViewExceptions
     
     public function flushViewData(): void
     {
+        // If we need to render multiple views at the same time, 
+        // $lastCompiledData will hold all the view data, which can lead to excessive memory usage.
+        // We can flush the view data so that we can prevent memory transitions and also improve retrieval efficiency.
         $this->lastCompiledData = [];
     }
 
