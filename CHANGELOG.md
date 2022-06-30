@@ -2,6 +2,18 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.17.6 - 2022-06-30
+
+### What's Changed
+
+- notice if dots have been used in the view name by @WebPajooh in https://github.com/facade/ignition/pull/457
+
+### New Contributors
+
+- @WebPajooh made their first contribution in https://github.com/facade/ignition/pull/457
+
+**Full Changelog**: https://github.com/facade/ignition/compare/2.17.5...2.17.6
+
 ## 2.17.5 - 2022-02-23
 
 ## What's Changed
