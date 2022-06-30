@@ -35,6 +35,15 @@ class ViewNotFoundSolutionProviderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_notice_if_the_view_name_contains_dots()
+    {
+        /** @var \Facade\IgnitionContracts\Solution $solution */
+        $solution = app(ViewNotFoundSolutionProvider::class)->getSolutions($this->getViewNotFoundException('foo.bar'))[0];
+
+        $this->assertTrue(Str::contains($solution->getSolutionDescription(), 'the . character'));
+    }
+
+    /** @test */
     public function it_wont_recommend_another_controller_class_if_the_names_are_too_different()
     {
         $unknownView = 'a-view-that-doesnt-exist-and-is-not-a-typo';
