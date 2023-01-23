@@ -43,12 +43,13 @@ class CompilerEngine extends \Illuminate\View\Engines\CompilerEngine
      * @param \Throwable $baseException
      * @param int $obLevel
      *
-     * @return void
+     * @return never
      *
      * @throws \Throwable
      */
-    protected function handleViewException(Throwable $baseException, $obLevel)
+    protected function handleViewException(Throwable $e, $obLevel)
     {
+        $baseException = $e; // just to prevent any named params issues
         while (ob_get_level() > $obLevel) {
             ob_end_clean();
         }
