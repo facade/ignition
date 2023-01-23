@@ -1,0 +1,56 @@
+name: Psalm
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**.php'
+      - 'composer.*'
+      - 'psalm*'
+
+jobs:
+  psalm:
+    name: Psalm
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      # mtime needs to be restored for Psalm cache to work correctly
+      - name: Restore mtimes
+        uses: chetan/git-restore-mtime-action@v1
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          coverage: none
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: |
+          echo "composer_dir={$(composer config cache-files-dir)}" >> $GITHUB_OUTPUT
+
+      - name: Retrieve Composer‘s cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.composer_dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install composer dependencies
+        run: "composer install --no-interaction --no-progress --no-scripts"
+
+      # the way cache keys are set up will always cause a cache miss
+      # but will restore the cache generated during the previous run based on partial match
+      - name: Retrieve Psalm’s cache
+        uses: actions/cache@v3
+        with:
+          path: ./cache/psalm
+          key: ${{ runner.os }}-psalm-cache-${{ hashFiles('psalm.xml.dist', 'psalm-baseline.xml', './composer.lock') }}
+
+      - name: Run Psalm
+        run: ./vendor/bin/psalm --find-unused-psalm-suppress --output-format=github
