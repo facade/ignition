@@ -2,6 +2,20 @@
 
 All notable changes to `ignition` will be documented in this file
 
+## 2.17.7 - 2023-01-26
+
+### What's Changed
+
+- Bump minimist from 1.2.5 to 1.2.6 by @dependabot in https://github.com/facade/ignition/pull/455
+- Bump json5 from 1.0.1 to 1.0.2 by @dependabot in https://github.com/facade/ignition/pull/467
+- fix: template literals deprecation for php 8.2.1 by @Mane-Olawale in https://github.com/facade/ignition/pull/471
+
+### New Contributors
+
+- @Mane-Olawale made their first contribution in https://github.com/facade/ignition/pull/471
+
+**Full Changelog**: https://github.com/facade/ignition/compare/2.17.6...2.17.7
+
 ## 2.17.6 - 2022-06-30
 
 ### What's Changed
